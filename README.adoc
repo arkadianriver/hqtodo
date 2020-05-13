@@ -15,7 +15,7 @@ endif::[]
 pass:[<p align="center"><img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/>]
 
 A li'l web app (page) to display todo items that are created with
-the Todo+ extension for VS Code or the Plaintasks plugin for Sublime Text.
+the Todo+ extension for VS Code or the Plaintasks package for Sublime Text.
 The open items are shown as a
 https://mermaid-js.github.io/mermaid/#/gantt[Mermaid]
 Gantt chart with completed items in a list underneath.
