@@ -1,0 +1,3 @@
+#!/bin/bash
+#DEBUG=express:* npm start
+DEBUG=hqtodo:* npm start

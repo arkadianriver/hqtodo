@@ -1,0 +1,32 @@
+{
+  "name": "hqtodo",
+  "version": "0.1.0",
+  "author": "Gary Faircloth",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "main": "bin/www",
+  "description": "Visualize your Todo list",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arkadianriver/hqtodo.git"
+  },
+  "keywords": [
+    "todo+",
+    "plaintasks",
+    "mermaid",
+    "gantt"
+  ],
+  "dependencies": {
+    "config": "^3.3.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "^3.0.1",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "moment": "^2.25.3",
+    "moment-business": "^3.0.1",
+    "morgan": "~1.9.0"
+  }
+}

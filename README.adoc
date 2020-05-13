@@ -1,0 +1,106 @@
+= hqtodo
+:toc:
+:toc-placement!:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+ifndef::env-github[]
+:icons: font
+endif::[]
+
+pass:[<p align="center"><img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/>]
+
+A li'l web app (page) to display todo items that are created with
+the Todo+ extension for VS Code or the Plaintasks plugin for Sublime Text.
+The open items are shown as a
+https://mermaid-js.github.io/mermaid/#/gantt[Mermaid]
+Gantt chart with completed items in a list underneath.
+Tasks always shift with time, starting from now into the future.
+It's meant for todos knocked out at a regular story point velocity per day
+and labeled in a particular way.
+
+[.thumb]
+image:readme.png[image]
+
+== Run
+
+Requires NodeJS v12. (It uses the relatively new Map Object type).
+
+Edit the `config/default.json` file with your information.
+You can put the TODO file anywhere on the file system the app can access
+such as a shared Cloud or Network mounted folder.
+
+Then, install and launch:
+
+[source, bash]
+----
+npm install
+npm start
+----
+
+////
+== Deploy
+
+For example with `systemd` on Linux:
+
+[source,bash]
+----
+vi misc/hqtodo.service # change the absolute paths and user
+sudo cp misc/hqtodo.service /etc/systemd/system/
+sudo systemctl start hqtodo
+sudo journalctl -f # to verify. Also test in a browser
+sudo systemctl enable hqtodo
+----
+////
+
+== Use
+
+Everything in the TODO file is ignored except what's between the `Todos:` project and the `Notes:`
+project. (See the sample `TODO` file.)
+
+For the app to work, there's a simple pattern to follow for the Todo items:
+
+[source,bash]
+----
+☐ [@today|@high|@low] <title text> [@Nh] [@customtag ]*
+----
+
+* Priority tagging:
+** `@today` items are placed in order in the "`In Progress`" section.
+** Items with no priority label are listed in order in the "`Backlog`" section.
+** `@high` items are colored red.
+** `@low` items are not displayed. (This is your Icebox.)
+* The optional `@Nh` tag indicates your estimated N hours. No tag gets the default of 2 hours.
+* You can provide any number of `@customtag` for your own custom filtering.
+  They're simply displayed with the title.
+* When you press `Ctrl-D` to mark a task with a checkmark and a `@done` tag, it's listed
+  in the "`Recently closed todos`" section of the web page.
+
+Example:
+
+[source,bash]
+----
+☐ @high Work with so-and-so on such-and-such @4h @prja @prjb
+----
+
+Away for a few days?
+
+You can let folks know about vacations and other "`interruptions to your steady velocity.`"
+Those items have a really special format.
+
+[source,bash]
+----
+☐ [Nd starting YYYY-MM-DD] <title>
+----
+
+Example:
+
+[source,bash]
+----
+☐ [5d starting 2020-05-18] Whiz-Bang-Boom conference
+----
+
