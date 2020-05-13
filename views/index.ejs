@@ -62,13 +62,13 @@
     excludes weekends
 
     section In Progress
-    <% issues['open']['active'].forEach( t => { %>
-    <%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
-    <% }); %>
+    <% issues['open']['active'].forEach( t => { -%>
+<%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
+    <% }); -%>
 
     section Backlog
-    <% issues['open']['pending'].forEach( t => { %>
-    <%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
+    <% issues['open']['pending'].forEach( t => { -%>
+<%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
     <% }); %>
 
   </div>
