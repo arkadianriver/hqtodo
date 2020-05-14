@@ -140,8 +140,9 @@ const parseRawTodos = () => {
         j++;
       }
     }
-    // sort interrupts before returning
+    // sort interrupts and closed before returning
     if (issues.interrupts) issues.interrupts.sort( (a,b) => a.startdate < b.startdate ? -1 : 1 );
+    if (issues.closed) issues.closed.sort( (a,b) => a.closed_on > b.closed_on ? -1 : 1 );
     res.locals.issues = issues;
     next();
   }
