@@ -1,6 +1,7 @@
 {
   "yourName": "<Your Name>",
   "workHoursPerDay": 8,
+  "storyPointsPerDay": 2,
   "todoFile": "TODO",
   "linkmeLinks": [
     {

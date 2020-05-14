@@ -7,7 +7,9 @@ const router = express.Router();
 
 const WHOAMI = config.get('yourName');
 const LINKPATTERNS = config.get('linkmeLinks');
-const HOURADJUST = (24 / config.get('workHoursPerDay')).toFixed(); // 24hr day / 8hr workday
+const WH = config.get('workHoursPerDay');
+const HOURADJUST = (24 / WH).toFixed(2); // 24hr day / 8hr workday
+const STORYPOINTFACTOR = (config.get('storyPointsPerDay') / 24).toFixed(2);
 
 const A_DAY = moment.duration(1, 'd');
 
@@ -23,7 +25,7 @@ const pp = data => '<pre>'+JSON.stringify(data, null, 2)+'</pre>';
  * @param {Object[]} tags - list of \@tags
  */
 const _handleTags = (tags) => {
-  if (!tags || tags.length == 0) return [Math.round(2 * HOURADJUST).toString() + 'h', ''];
+  if (!tags || tags.length == 0) return [2 * HOURADJUST, ''];
   let est = 2;
   let tagstring = '';
   for (let i = 0; i < tags.length; i++) {
@@ -36,7 +38,7 @@ const _handleTags = (tags) => {
       tagstring += `${tags[i]} `;
     }
   }
-  const estimate = Math.round(est * HOURADJUST).toString() + 'h';
+  const estimate = est * HOURADJUST;
   return [estimate, tagstring.trimRight()];
 }
 
@@ -99,13 +101,13 @@ const parseRawTodos = () => {
         const taggy = _handleTags(m1.flat());
         let title = m[3].trim();
         let tagstring = taggy[1];
-        let est = taggy[0];
+        let est = Math.ceil(taggy[0]).toString() + 'h';
         if (m[1] === '✔') {  // the Dones
           issues['closed'].push({
             closed_on: m2[1],
             title: title,
             tagstring: tagstring,
-            est: est
+            est: Math.ceil(taggy[0] * STORYPOINTFACTOR)
           });
         } else {            // the Opens
           switch (m[2]) {
