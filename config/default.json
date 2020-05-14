@@ -1,5 +1,15 @@
 {
   "yourName": "<Your Name>",
   "workHoursPerDay": 8,
-  "todoFile": "TODO"
+  "todoFile": "TODO",
+  "linkmeLinks": [
+    {
+      "pattern": "ghihq•(\\d+)",
+      "url": "https://github.com/arkadianriver/hqtodo/issues/$1"  
+    },
+    {
+      "pattern": "ghi•([^•]+)•(\\d+)",
+      "url": "https://github.com/$1/issues/$2"
+    }
+  ]
 }

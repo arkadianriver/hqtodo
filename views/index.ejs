@@ -62,21 +62,22 @@
     excludes weekends
 
     section In Progress
-    <% issues['open']['active'].forEach( t => { -%>
+    <% issues.open.active && issues.open.active.forEach( t => { -%>
 <%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
     <% }); -%>
 
     section Backlog
-    <% issues['open']['pending'].forEach( t => { -%>
+    <% issues.open.pending && issues.open.pending.forEach( t => { -%>
 <%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
     <% }); %>
 
+    <% issues.links && issues.links.forEach( l => { -%>
+click <%= l.id %> call linkTo("<%= l.url %>")
+    <% }); %>
   </div>
-  <!--
   <div style="display:flex;justify-content:space-around;width:100%">
-    <p style="font-size:smaller">Tasks with issue numbers link to GitHub.</p>
+    <p style="font-size:smaller">Todos with issue numbers link to GitHub.</p>
   </div>
-  -->
   <h2>Recently closed todos</h2>
   <ul style="list-style-type:none;">
     <% issues['closed'].forEach( t => { %>

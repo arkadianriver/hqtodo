@@ -6,6 +6,7 @@ const config = require('config');
 const router = express.Router();
 
 const WHOAMI = config.get('yourName');
+const LINKPATTERNS = config.get('linkmeLinks');
 const HOURADJUST = (24 / config.get('workHoursPerDay')).toFixed(); // 24hr day / 8hr workday
 
 const A_DAY = moment.duration(1, 'd');
@@ -39,6 +40,18 @@ const _handleTags = (tags) => {
   return [estimate, tagstring.trimRight()];
 }
 
+const _getLinkUrl = (str) => {
+  for (pat of LINKPATTERNS) {
+    // assist https://stackoverflow.com/a/494046
+    const searchpat = new RegExp(`\\b${pat.pattern}\\b`);
+    const matched = str.match(searchpat);
+    if (matched) {
+      return matched[0].replace(searchpat, pat.url);
+    }
+  }
+  return null;
+}
+
 /**
  * A process in the pipeline that takes an array of todo strings and
  * breaks it up into the initial `issues` data structure.
@@ -52,7 +65,8 @@ const parseRawTodos = () => {
         pending: []
       },
       closed: [],
-      interrupts: []
+      interrupts: [],
+      links: []
     }
     // parse each line and push the data record to the right place in the structure
     for (let i = 0, j = 1; i < res.locals.rawTodos.length; i++) {
@@ -64,6 +78,9 @@ const parseRawTodos = () => {
       if (m) {
         // skip Frozens
         if (m[2] && m[2] == '@low') continue;
+        // quickly grab linkUrl if any
+        let linkUrl = m[3] ? _getLinkUrl(m[3]) : null;
+        if (linkUrl) issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
         // quickly add interrupts
         if (m[3].match(/^\[/)) {
           const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/);
