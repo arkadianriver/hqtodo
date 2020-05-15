@@ -1,3 +1,5 @@
 node_modules/
 
 *lock.json
+config/
+!config/default.json

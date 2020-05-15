@@ -1,3 +1,7 @@
 #!/bin/bash
-#DEBUG=express:* npm start
-DEBUG=hqtodo:* npm start
+
+case $1 in
+  --debug) DEBUG=express:* npm start ;;
+    --dev) DEBUG=hqtodo:* npm start ;;
+        *) NODE_ENV=production DEBUG=hqtodo:* npm start ;;
+esac

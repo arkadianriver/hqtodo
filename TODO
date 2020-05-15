@@ -29,3 +29,6 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 Programming Todos:
   ☐ Weekday calculations between interrupts needs a little tweaking.
+  ☐ support an archive section
+  ☐ better error handling
+  ✔ custom config @done(2020-05-14 21:16)
