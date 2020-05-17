@@ -37,11 +37,11 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 Programming Todos:
-  ☐ Weekday calculations between interrupts needs a little tweaking.
-  ☐ support an archive section
+  ✔ Weekday calculations between interrupts needs a little tweaking. @done(2020-05-16 20:44)
+  ✔ support an archive section @done(2020-05-16 20:44)
   ☐ better error handling
-  ☐ when displaying archive, don't display anything but "Todos" project stufff
-  ☐ add :active color to linked items
+  ✔ when displaying archive, don't display anything but "Todos" project stufff @done(2020-05-16 20:44)
+  ✔ add :active color to linked items @done(2020-05-16 20:44)
   ✔ custom config @done(2020-05-14 21:16)
 
 Archive:
