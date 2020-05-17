@@ -116,6 +116,7 @@ const parseRawTodos = () => {
                 number: j,
                 title: title,
                 tagstring: tagstring,
+                link: linkUrl,
                 est: est
               });
               break;
@@ -125,6 +126,7 @@ const parseRawTodos = () => {
                 title: title,
                 tagstring: tagstring,
                 est: est,
+                link: linkUrl,
                 color: "crit, "
               })
               break;
@@ -133,6 +135,7 @@ const parseRawTodos = () => {
                 number: j,
                 title: title,
                 tagstring: tagstring,
+                link: linkUrl,
                 est: est
               });
           }
@@ -206,15 +209,15 @@ const prevnumsForGantt = () => {
         if (todo.startdate) { // interrupt found
           todo.prevtask = todo.startdate;
           delete todo.startdate;
-          todo.color = 'active, ';
+          todo.color = 'done, ';
         } else {
           todo.prevtask = prevnum[s] ? 'after k' + prevnum[s] : moment().format('YYYY-MM-DD');
-          if (!todo.color) todo.color = '';
+          if (!todo.color) todo.color = todo.link ? 'active, ' : '';
         }
         prevnum[s] = todo.number.toString();
       });
     }
-    if (res.locals.issues.open.pending[0].color == '') {
+    if (res.locals.issues.open.pending[0].color !== 'done, ') {
       res.locals.issues.open.pending[0].prevtask = `after k${prevnum.active}`;
     }
     next();
