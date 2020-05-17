@@ -260,8 +260,8 @@ const getArchive = () => {
  */
 const getArchiveByWeek = () => {
   return (req, res, next) => {
-    // 0. If empty provided, return empty
-    if (!res.locals.entries) {
+    // 0. If empty provided, return empty - assist https://stackoverflow.com/a/24403771/5360420
+    if (!Array.isArray(res.locals.entries) || !res.locals.entries.length) {
       res.locals.archive = [];
       next();
     }
