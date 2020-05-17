@@ -58,21 +58,6 @@
   <h1>What <%= whoami %> is up to ...</h1>
 </header>
 <main>
-  <!-- {{ i['title'] }} {{ i['p'] }} :{{i['color']}}k{{i['number']}}, {{i['prevtask']}}, {{ i['estimate'] }}h
-  
-    section Milestones
-    {%- for m in mdata %}
-    {{ m['title'] }} :crit, m{{m['number']}}, {{m['due_on']}}, 2h
-    {%- endfor %}
-
-    {% for l in linknums -%}
-    click k{{l}} call linkTo("{{githost}}/{{reponm}}/issues/{{l}}")
-    {% endfor -%}
-    {% for l in milenums -%}
-    click m{{l}} call linkTo("{{githost}}/{{reponm}}/milestone/{{l}}")
-    {% endfor -%}
-  
-  -->
   <div id="ourgantt" class="mermaid">
   gantt
     excludes weekends
@@ -96,9 +81,9 @@ click <%= l.id %> call linkTo("<%= l.url %>")
   </div>
   <h2>Recently closed todos</h2>
   <ul style="list-style-type:none;">
-    <% issues['closed'].forEach( t => { %>
-      <%- include('partials/closed_entry.ejs', {t: t} ); %>
-    <% }); %>
+    <%_ issues['closed'].forEach( t => { _%>
+<%- include('partials/closed_entry.ejs', {t: t} ); %>
+    <%_ }); _%>
   </ul>
   <% if (archive) { %>
     <input type="checkbox" id="display-toggle"/>
@@ -106,15 +91,16 @@ click <%= l.id %> call linkTo("<%= l.url %>")
     <label for="display-toggle" id="hide-button"><span>▿ see less</span></label>
     <div id="archive">
       <ul>
-        <% archive.forEach( (w, wi) => { %>
+        <%_ archive.forEach( (w, wi) => { _%>
         <li>
           <div style="background-color: #ccc;padding:1px 0 1px 6px">Week ending: <%= w.weekEnding %></div>
           <ul id="<%= wi %>" style="margin-left: 0">
-            <% w.entries.forEach( e => { %>
-              <%- include('partials/closed_entry', {t: e }) %>
-            <% }); %>
-          </ul><span>&nbsp;</span></li>
-        <% }); %>
+            <%_ w.entries.forEach( e => { _%>
+<%- include('partials/closed_entry', {t: e }) %>
+            <%_ }); _%>
+          </ul><span>&nbsp;</span>
+        </li>
+        <%_ }); _%>
       </ul>
     </div>
   <% } %>
