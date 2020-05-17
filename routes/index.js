@@ -15,7 +15,7 @@ const A_DAY = moment.duration(1, 'd');
 
 // debug helpers
 const lg = data => console.log(data);
-const pp = data => '<pre>'+JSON.stringify(data, null, 2)+'</pre>';
+const pp = data => '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
 
 /**
  * returns all tags in a tag array as a string, except "time estimate tags,"
@@ -141,8 +141,8 @@ const parseRawTodos = () => {
       }
     }
     // sort interrupts and closed before returning
-    if (issues.interrupts) issues.interrupts.sort( (a,b) => a.startdate < b.startdate ? -1 : 1 );
-    if (issues.closed) issues.closed.sort( (a,b) => a.closed_on > b.closed_on ? -1 : 1 );
+    if (issues.interrupts) issues.interrupts.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
+    if (issues.closed) issues.closed.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.issues = issues;
     next();
   }
@@ -170,9 +170,9 @@ const injectInterrupts = () => {
         const interruptstart = moment(res.locals.issues['interrupts'][i]['startdate'], 'YYYY-MM-DD');
         const biz_duration = moment.duration(business.weekDays(endoflastinterrupt, interruptstart), 'days');
         openpipes: for (const pipeidx of ['active', 'pending']) {
-          pipetodos: for (let tidx=0; tidx < res.locals.issues['open'][pipeidx].length; tidx++) {
+          pipetodos: for (let tidx = 0; tidx < res.locals.issues['open'][pipeidx].length; tidx++) {
             if (!res.locals.issues['open'][pipeidx][tidx]['startdate']) {
-              const estStr = res.locals.issues['open'][pipeidx][tidx]['est'].slice(0,-1);
+              const estStr = res.locals.issues['open'][pipeidx][tidx]['est'].slice(0, -1);
               const est = parseInt(estStr, 10);
               if (biz_duration.subtract(est, 'hours') < A_DAY) {
                 // found the insert spot!
@@ -183,7 +183,7 @@ const injectInterrupts = () => {
           }
         }
         // calculate new endoflastinterrupt
-        const estStr = res.locals.issues['interrupts'][i]['est'].slice(0,-1);
+        const estStr = res.locals.issues['interrupts'][i]['est'].slice(0, -1);
         const est = parseInt(estStr, 10);
         endoflastinterrupt = interruptstart.add(moment.duration(est, 'days'));
       }
@@ -202,13 +202,13 @@ const prevnumsForGantt = () => {
   return (req, res, next) => {
     const prevnum = {};
     for (const s of ['active', 'pending']) {
-      res.locals.issues.open[s].forEach( (todo, i) => {
+      res.locals.issues.open[s].forEach((todo, i) => {
         if (todo.startdate) { // interrupt found
           todo.prevtask = todo.startdate;
           delete todo.startdate;
           todo.color = 'active, ';
         } else {
-          todo.prevtask = prevnum[s] ? 'after k'+prevnum[s] : moment().format('YYYY-MM-DD');
+          todo.prevtask = prevnum[s] ? 'after k' + prevnum[s] : moment().format('YYYY-MM-DD');
           if (!todo.color) todo.color = '';
         }
         prevnum[s] = todo.number.toString();
@@ -221,12 +221,90 @@ const prevnumsForGantt = () => {
   }
 }
 
+/**
+ * Put rawArchive into usable JSON and sort it
+ */
+const getArchive = () => {
+  return (req, res, next) => {
+    // define the desired structure
+    const entries = [];
+    // go through each rawArchive entry and add to entries entry
+    for (let i = 0; i < res.locals.rawArchive.length; i++) {
+      let mTitle = res.locals.rawArchive[i].match(/\s*✔\s([^\@]+)@?/);
+      let mTags = [...res.locals.rawArchive[i].matchAll(/@\w+/g)];
+      let mDone = res.locals.rawArchive[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d(\s*\d\d:\d\d)?)\)(?:\s+@project\(Todos\))?\s*$/);
+      if (!mDone) continue;
+      const taggy = _handleTags(mTags.flat());
+      const doneStr = mDone[2] ? mDone[1] : `${mDone[1]} 17:00`;
+      let title = mTitle[1].trim();
+      let tagstring = taggy[1];
+      entries.push({
+        closed_on: doneStr,
+        title: title,
+        tagstring: tagstring,
+        est: Math.ceil(taggy[0] * STORYPOINTFACTOR)
+      });
+    }
+    // sort entries, descending
+    entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
+    res.locals.entries = entries;
+    next();
+  }
+}
+
+/**
+ * take sorted JSON archive and swizzle it into weekly chunks
+ */
+const getArchiveByWeek = () => {
+  return (req, res, next) => {
+    // 0. If empty provided, return empty
+    if (!res.locals.entries) {
+      res.locals.archive = [];
+      next();
+    }
+    // 1. initialize things
+    const archive = [];
+    const entries = res.locals.entries;
+    const firstDate = entries[0].closed_on.slice(0, 10);
+    // 2. init weekN and weekN-1, where weekN is the most recent Sunday before the first entry
+    let weekN = moment(firstDate).isoWeekday() === 7
+      ? firstDate
+      : moment(firstDate).isoWeekday(7).format('YYYY-MM-DD');
+    let weekNminusOne = moment(weekN).subtract(7, 'd').format('YYYY-MM-DD');
+    // 3. cycle through weeks, adding entries for each.
+    //    Note: ends in the middle while iterating through entries, so the for loop's while condition
+    //          must include the _last case_ where entries.length == 0
+    weekIterations:
+    for (let e = entries.shift(), w = 0; entries.length >= 0; w++) {
+      archive[w] = { weekEnding: weekN, entries: [] };
+      entriesPerWeek:
+      while (e.closed_on.slice(0, 10) > weekNminusOne) {
+        archive[w].entries.push(e);
+        if (entries.length !== 0) {
+          e = entries.shift();
+        } else {
+          break weekIterations;
+        }
+      }
+      weekN = weekNminusOne;
+      weekNminusOne = moment(weekNminusOne).subtract(7, 'days').format('YYYY-MM-DD');
+    }
+    // 4. Return the results
+    res.locals.archive = archive;
+    next();
+  }
+}
+
+/**
+ * Takes resulting data structure from all the things and renders it to the page view
+ */
 const renderIt = () => {
   return (req, res, next) => {
     let fileupdated = moment(res.locals.todoFileUpdated).utc().format();
     let pageupdated = moment().utc().format();
     res.render('index', {
       issues: res.locals.issues,
+      archive: res.locals.archive,
       fileupdated: fileupdated,
       pageupdated: pageupdated,
       whoami: WHOAMI
@@ -234,24 +312,45 @@ const renderIt = () => {
   }
 }
 
-router.get('/rawtodos', (req, res, next) => {
-  res.json(res.locals.rawTodos);
+/**
+ * All the routes, which are currently for debugging purposes except the default
+ * '/', which renders the view. The JSON might be useful to other views, such as
+ * a burndown chart, which I want to provide eventually
+ */
+
+router.get('/todos/raw', (req, res, next) => {
+  res.json({ rawTodos: res.locals.rawTodos, rawArchive: res.locals.rawArchive });
 });
 
-router.get('/unordered', parseRawTodos(), (req, res, next) => {
-  res.send(pp(res.locals.issues));
+router.get('/todos/unordered', parseRawTodos(), (req, res, next) => {
+  res.json(res.locals.issues);
 });
 
-router.get('/interruptsadded', parseRawTodos(), injectInterrupts(), (req, res, next) => {
-  res.send(pp(res.locals.issues));
+router.get('/todos/withinterrupts', parseRawTodos(), injectInterrupts(), (req, res, next) => {
+  res.json(res.locals.issues);
 });
 
-router.get('/issues', parseRawTodos(), injectInterrupts(), prevnumsForGantt(),
-(req, res, next) => {
-  res.send(pp(res.locals.issues));
+router.get('/todos', parseRawTodos(), injectInterrupts(), prevnumsForGantt(),
+  (req, res, next) => {
+    res.json(res.locals.issues);
+  });
+
+router.get('/todos/archived', getArchive(), (req, res, next) => {
+  res.json(res.locals.entries);
 });
 
-router.get('/', parseRawTodos(), injectInterrupts(), prevnumsForGantt(), renderIt());
+router.get('/todos/archivedbyweek', getArchive(), getArchiveByWeek(), (req, res, next) => {
+  res.json(res.locals.archive);
+});
+
+router.get('/',
+  parseRawTodos(),
+  injectInterrupts(),
+  prevnumsForGantt(),
+  getArchive(),
+  getArchiveByWeek(),
+  renderIt()
+);
 
 
 module.exports = router;

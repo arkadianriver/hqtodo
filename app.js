@@ -35,22 +35,32 @@ app.use((req, res, next) => {
 
   if (fileData) {
     const rawTodos = [];
-    inTodos = false;
+    const rawArchive = [];
+    inTodos = inArchive = false;
     fileArray = fileData.split("\n");
     for (i=0; i < fileArray.length; i++) {
-      if (fileArray[i].match(/^\s*Todos:/)) {
+      if (fileArray[i].match(/^Todos:\s*$/)) {
         inTodos = true;
         continue;
       }
-      if (fileArray[i].match(/^\s*Notes:/)) {
-        break;
+      if (fileArray[i].match(/^\S.+:\s*$/)) {
+        inTodos = false;
+      }
+      if (fileArray[i].match(/^Archive:\s*$/)) {
+        inArchive = true;
+        inTodos = false;
       }
       if (inTodos) {
         let m = fileArray[i].match(/^\s*([☐✔].*)$/);
         if (m) rawTodos.push(m[1].trim());
       }
+      if (inArchive) {
+        let m = fileArray[i].match(/^\s*(✔.*)$/);
+        if (m) rawArchive.push(m[1].trim());
+      }
     }
     res.locals.rawTodos = rawTodos;
+    res.locals.rawArchive = rawArchive;
     next();
   } else {
     next(Error('Server error. Could not retrieve the todo list file.'));

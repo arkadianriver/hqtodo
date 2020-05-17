@@ -25,6 +25,7 @@
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: 12pt;
       margin: 16px;
+      overflow-y: scroll;
     }
     #ourgantt > svg[id^="mermaid-"] .grid .tick {
       stroke: grey;
@@ -35,6 +36,21 @@
       stroke: black;
       opacity: 1;
     }
+    #archive {
+      background-color: blanchedalmond;
+      padding-top: 1rem;
+      padding-right: 2rem;
+    }
+    /* assist https://stackoverflow.com/a/44297341 */
+    label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.2em;
+      color: blue;
+    }
+    input, label#hide-button, #archive { display:none; }
+    input#display-toggle:checked ~ label#display-button { display: none; }
+    input#display-toggle:checked ~ label#hide-button { display: block; }
+    input#display-toggle:checked ~ #archive { display: block; }
   </style>
 </head>
 <body>
@@ -81,13 +97,27 @@ click <%= l.id %> call linkTo("<%= l.url %>")
   <h2>Recently closed todos</h2>
   <ul style="list-style-type:none;">
     <% issues['closed'].forEach( t => { %>
-    <li><span style="color:#aaa"><%= t['closed_on'] %></span>
-      <span style="font-style:italic;color:#555"><%= t['title'] %></span>
-      <span style="color:#aaa"><%= t['tagstring'] %></span>
-      <span style="color:#037">(<%= t['est'] %>)</span>
-    </li>
+      <%- include('partials/closed_entry.ejs', {t: t} ); %>
     <% }); %>
   </ul>
+  <% if (archive) { %>
+    <input type="checkbox" id="display-toggle"/>
+    <label for="display-toggle" id="display-button"><span>▹ see more</span></label>
+    <label for="display-toggle" id="hide-button"><span>▿ see less</span></label>
+    <div id="archive">
+      <ul>
+        <% archive.forEach( (w, wi) => { %>
+        <li>
+          <div style="background-color: #ccc;padding:1px 0 1px 6px">Week ending: <%= w.weekEnding %></div>
+          <ul id="<%= wi %>" style="margin-left: 0">
+            <% w.entries.forEach( e => { %>
+              <%- include('partials/closed_entry', {t: e }) %>
+            <% }); %>
+          </ul><span>&nbsp;</span></li>
+        <% }); %>
+      </ul>
+    </div>
+  <% } %>
 </main>
 
   <hr/>
