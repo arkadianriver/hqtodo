@@ -185,7 +185,7 @@ const injectInterrupts = () => {
         // calculate new endoflastinterrupt
         const estStr = res.locals.issues['interrupts'][i]['est'].slice(0, -1);
         const est = parseInt(estStr, 10);
-        endoflastinterrupt = interruptstart.add(moment.duration(est, 'days'));
+        endoflastinterrupt = business.addWeekDays(interruptstart, est);
       }
     }
     delete res.locals.issues.interrupts;
