@@ -275,6 +275,7 @@ const getArchiveByWeek = () => {
     if (!Array.isArray(res.locals.entries) || !res.locals.entries.length) {
       res.locals.archive = [];
       next();
+      return;
     }
     // 1. initialize things
     const archive = [];

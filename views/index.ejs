@@ -85,7 +85,7 @@ click <%= l.id %> call linkTo("<%= l.url %>")
 <%- include('partials/closed_entry.ejs', {t: t} ); %>
     <%_ }); _%>
   </ul>
-  <% if (archive) { %>
+  <% if (archive.length) { %>
     <input type="checkbox" id="display-toggle"/>
     <label for="display-toggle" id="display-button"><span>▹ see more</span></label>
     <label for="display-toggle" id="hide-button"><span>▿ see less</span></label>
@@ -103,10 +103,10 @@ click <%= l.id %> call linkTo("<%= l.url %>")
         <%_ }); _%>
       </ul>
     </div>
-  <% } %>
+
   <h2>Cumulative flow</h2>
   <div id="chart"></div>
-
+  <% } %>
 </main>
 
   <hr/>
