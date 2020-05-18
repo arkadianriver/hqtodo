@@ -248,9 +248,20 @@ const getArchive = () => {
         est: Math.ceil(taggy[0] * STORYPOINTFACTOR)
       });
     }
-    // sort entries, descending
+    // sort entries, descending for archive
     entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.entries = entries;
+    // prepare data, ascending for cumulative flow chart
+    const chartdata = [];
+    let spTotal = 0;
+    Array.from(entries).reverse().forEach( t => {
+      spTotal += t.est;
+      chartdata.push({
+        x: t.closed_on,
+        y: spTotal
+      });
+    });
+    res.locals.chartdata = chartdata;
     next();
   }
 }
@@ -308,6 +319,7 @@ const renderIt = () => {
     res.render('index', {
       issues: res.locals.issues,
       archive: res.locals.archive,
+      jsonchartdata: JSON.stringify(res.locals.chartdata),
       fileupdated: fileupdated,
       pageupdated: pageupdated,
       whoami: WHOAMI

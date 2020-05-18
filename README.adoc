@@ -18,7 +18,7 @@ A li'l web app (page) to display todo items that are created with
 the Todo+ extension for VS Code or the Plaintasks package for Sublime Text.
 The open items are shown as a
 https://mermaid-js.github.io/mermaid/#/gantt[Mermaid]
-Gantt chart with completed items in a list underneath.
+Gantt chart.
 Tasks always shift with time, starting from now into the future.
 It's meant for todos knocked out at a regular story point velocity per day
 and labeled in a particular way.
@@ -26,11 +26,27 @@ and labeled in a particular way.
 [.thumb]
 image:readme.png[image]
 
+{empty} +
+
+Completed items are displayed underneath, with _Archived_ items available.
+
+[.thumb]
+image:readme2.png[image]
+
+{empty} +
+
+An https://apexcharts.com/[ApexFlow] chart shows the cumulative story points
+you've knocked out.
+
+[.thumb]
+image:readme3.png[image]
+
 == Run
 
 Currently requires NodeJS v12.
 
-Edit the `config/default.json` file with your information.
+Copy the `config/default.json` file to `config/production.json`
+and add your info to the new file.
 You can put the TODO file anywhere on the file system the app can access
 such as a shared Cloud or Network mounted folder.
 
@@ -39,7 +55,7 @@ Then, install and launch:
 [source, bash]
 ----
 npm install
-npm start
+./run
 ----
 
 ////
@@ -59,25 +75,29 @@ sudo systemctl enable hqtodo
 
 == Use
 
-Everything in the TODO file is ignored except what's between the `Todos:` project and the `Notes:`
-project. (See the sample `TODO` file.)
+Everything in the TODO file is ignored except:
+
+- the _Todo items_ between the `Todos:` project and the `Notes:` project.
+- the _Todo items_ after `Archive:`
+
+See the sample `TODO` file.
 
 For the app to work, there's a simple pattern to follow for the Todo items:
 
 [source,bash]
 ----
-☐ [@today|@high|@low] <title text> [@Nh] [@customtag ]*
+☐ [@today|@high|@low] <todo description> [@Nh] [@custom ]*
 ----
 
 * Priority tagging:
-** `@today` items are placed in order in the "`In Progress`" section.
+** Items prefixed with `@today` are placed in order in the "`In Progress`" section.
 ** Items with no priority label are listed in order in the "`Backlog`" section.
-** `@high` items are colored red.
-** `@low` items are not displayed. (This is your Icebox.)
+** Items prefixed with `@high` are colored red.
+** Items prefixed with `@low` are not displayed. (This is your Icebox.)
 * The optional `@Nh` tag indicates your estimated N hours. No tag gets the default of 2 hours.
-* You can provide any number of `@customtag` for your own custom filtering.
+* You can provide any number of `@custom` tags for your own custom filtering.
   They're simply displayed with the title.
-* When you press `Ctrl-D` to mark a task with a checkmark and a `@done` tag, it's listed
+* When you press `Super-D` to mark a task with a checkmark and a `@done` tag, it's listed
   in the "`Recently closed todos`" section of the web page.
 
 Example:
