@@ -8,8 +8,8 @@ const router = express.Router();
 const WHOAMI = config.get('yourName');
 const LINKPATTERNS = config.get('linkmeLinks');
 const WH = config.get('workHoursPerDay');
-const HOURADJUST = (24 / WH).toFixed(2); // 24hr day / 8hr workday
-const STORYPOINTFACTOR = (config.get('storyPointsPerDay') / 24).toFixed(2);
+const HOURADJUST = 24 / WH; // 24hr day / 8hr workday
+const STORYPOINTFACTOR = config.get('storyPointsPerDay') / 24;
 
 const A_DAY = moment.duration(1, 'd');
 
@@ -33,7 +33,7 @@ const _handleTags = (tags) => {
       continue;
     } else if (tags[i].match(/@\d/)) {
       est = parseInt(tags[i].slice(1, -1), 10);
-      if (tags[i].slice(-1) === 'd') est = 8 * est; // conv days to hours
+      if (tags[i].slice(-1) === 'd') est = WH * est; // conv days to hours
     } else {
       tagstring += `${tags[i]} `;
     }
@@ -107,7 +107,7 @@ const parseRawTodos = () => {
             closed_on: m2[1],
             title: title,
             tagstring: tagstring,
-            est: Math.ceil(taggy[0] * STORYPOINTFACTOR)
+            est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
           });
         } else {            // the Opens
           switch (m[2]) {
@@ -245,7 +245,7 @@ const getArchive = () => {
         closed_on: doneStr,
         title: title,
         tagstring: tagstring,
-        est: Math.ceil(taggy[0] * STORYPOINTFACTOR)
+        est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
       });
     }
     // sort entries, descending for archive
@@ -255,10 +255,10 @@ const getArchive = () => {
     const chartdata = [];
     let spTotal = 0;
     Array.from(entries).reverse().forEach( t => {
-      spTotal += t.est;
+      spTotal += Number.parseFloat(t.est);
       chartdata.push({
         x: t.closed_on,
-        y: spTotal
+        y: (spTotal).toFixed(2)
       });
     });
     res.locals.chartdata = chartdata;
