@@ -29,7 +29,7 @@ const _handleTags = (tags) => {
   let est = 2;
   let tagstring = '';
   for (let i = 0; i < tags.length; i++) {
-    if (tags[i].match(/(?:@low|@today|@high|@done)/)) {
+    if (tags[i].match(/(?:@low|@today|@high|@done|@project)/)) {
       continue;
     } else if (tags[i].match(/@\d/)) {
       est = parseInt(tags[i].slice(1, -1), 10);
