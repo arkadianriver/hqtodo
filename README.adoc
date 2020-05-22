@@ -114,14 +114,14 @@ Those items have a really special format.
 
 [source,bash]
 ----
-☐ [Nd starting YYYY-MM-DD] <title>
+☐ [Nd starting YYYY-MM-DD]: <title>
 ----
 
 Example:
 
 [source,bash]
 ----
-☐ [5d starting 2020-05-18] Whiz-Bang-Boom conference
+☐ [5d starting 2020-05-18]: Whiz-Bang-Boom conference
 ----
 
 === Referencing a GitHub repo
