@@ -36,17 +36,29 @@
       stroke: black;
       opacity: 1;
     }
-    #archive {
-      background-color: blanchedalmond;
-      padding-top: 1rem;
-      padding-right: 2rem;
-    }
-    /* assist https://stackoverflow.com/a/44297341 */
+
+    #closed .bullet { color: #555 }
+    #closed .date { color: #aaa } /* aaa */
+    #closed .title { color: #555 } /* 555 */
+    #closed .tagstring { color: #aaa } /* aaa */
+    #closed .estimate { color: #037 } /* 037 */
+
+    /* starttheme:plaintasksdefault */
+    #archive { background-color: #efe9b7; }
+    #archive .divider { background-color: #00000010; color: #bc644a }
+    #archive .bullet { color: #00723e }
+    #archive .date { color: #B1A68FBF } /* aaa */
+    #archive .title { color: #858266 } /* 555 */
+    #archive .tagstring { color: #B1A68FBF } /* aaa */
+    #archive .estimate { color: #00723e } /* 037 */
+    /* endtheme:plaintasksdefault */
+
     label {
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: 1.2em;
       color: blue;
     }
+    /* show/hide assist https://stackoverflow.com/a/44297341 */
     input, label#hide-button, #archive { display:none; }
     input#display-toggle:checked ~ label#display-button { display: none; }
     input#display-toggle:checked ~ label#hide-button { display: block; }
@@ -80,7 +92,7 @@ click <%= l.id %> call linkTo("<%= l.url %>")
     <p style="font-size:smaller">Todos with issue numbers link to GitHub.</p>
   </div>
   <h2>Recently closed todos</h2>
-  <ul style="list-style-type:none;">
+  <ul id="closed" style="list-style-type:none;">
     <%_ issues['closed'].forEach( t => { _%>
 <%- include('partials/closed_entry.ejs', {t: t} ); %>
     <%_ }); _%>
@@ -89,11 +101,11 @@ click <%= l.id %> call linkTo("<%= l.url %>")
     <input type="checkbox" id="display-toggle"/>
     <label for="display-toggle" id="display-button"><span>▹ see more</span></label>
     <label for="display-toggle" id="hide-button"><span>▿ see less</span></label>
-    <div id="archive">
+    <div id="archive" style="padding-top:1rem;padding-right:2rem">
       <ul>
         <%_ archive.forEach( (w, wi) => { _%>
         <li>
-          <div style="background-color: #ccc;padding:1px 0 1px 6px">Week ending: <%= w.weekEnding %></div>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: <%= w.weekEnding %></div>
           <ul id="<%= wi %>" style="margin-left: 0">
             <%_ w.entries.forEach( e => { _%>
 <%- include('partials/closed_entry', {t: e }) %>
