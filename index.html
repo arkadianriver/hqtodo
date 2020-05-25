@@ -57,6 +57,8 @@
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: 1.2em;
       color: blue;
+      display: block;
+      padding: 0.8em 0 1em 0;
     }
     /* show/hide assist https://stackoverflow.com/a/44297341 */
     input, label#hide-button, #archive { display:none; }
@@ -73,6 +75,7 @@
   <div id="ourgantt" class="mermaid">
   gantt
     excludes weekends
+    todayMarker off
 
     section In Progress
     vacation  :done, k7, 2020-05-11, 5d
@@ -98,8 +101,9 @@
   <div style="display:flex;justify-content:space-around;width:100%">
     <p style="font-size:smaller">Todos with issue numbers link to GitHub.</p>
   </div>
+
   <h2>Recently closed todos</h2>
-  <ul id="closed" style="list-style-type:none;">
+  <ul id="closed" style="list-style-type:none;">    
             <li><span class="bullet">✔</span> <span class="date">2020-05-12</span>
               <span class="title" style="font-style:italic">decide organization requirements</span>
               <span class="tagstring">@prja @woot</span>
@@ -110,11 +114,15 @@
               <span class="tagstring"></span>
               <span class="estimate">(0.75)</span>
             </li>
+
   </ul>
   
+    <h2>Archived todos</h2>
+    <div id="chart"></div>
+  
     <input type="checkbox" id="display-toggle"/>
-    <label for="display-toggle" id="display-button"><span>▹ see more</span></label>
-    <label for="display-toggle" id="hide-button"><span>▿ see less</span></label>
+    <label for="display-toggle" id="display-button"><span>▹ show the archive</span></label>
+    <label for="display-toggle" id="hide-button"><span>▿ hide the archive</span></label>
     <div id="archive" style="padding-top:1rem;padding-right:2rem">
       <ul>
         <li>
@@ -194,9 +202,6 @@
         </li>
       </ul>
     </div>
-
-  <h2>Cumulative flow</h2>
-  <div id="chart"></div>
   
 </main>
 
@@ -206,10 +211,10 @@
   href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
   with ♥ from Mermaid and ApexCharts
   </p>
-  <p style="font-size:smaller">Page last updated 2020-05-25T06:25:56Z<br/>Task file last updated 2020-05-25T06:25:50Z</p>
+  <p style="font-size:smaller">Page last updated 2020-05-25T16:58:35Z<br/>Task file last updated 2020-05-25T16:58:30Z</p>
   </div>
 
-  <script src="https://unpkg.com/mermaid@8.5.0/dist/mermaid.min.js"></script>
+  <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script>
     var linkTo = url => window.open(url, "_blank");
@@ -229,7 +234,7 @@
     var chartOptions = {
       series: [
         {
-          name: 'Story points conquered',
+          name: 'Cumulative points conquered',
           data: [{"x":"2020-03-29 07:00","y":"0.25"},{"x":"2020-04-01 07:00","y":"0.50"},{"x":"2020-04-12 07:00","y":"2.50"},{"x":"2020-05-02 21:00","y":"2.75"},{"x":"2020-05-02 22:00","y":"3.00"},{"x":"2020-05-03 23:45","y":"4.00"},{"x":"2020-05-06 21:37","y":"4.25"},{"x":"2020-05-08 22:45","y":"9.50"}]
         }
       ],
