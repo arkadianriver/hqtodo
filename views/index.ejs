@@ -57,6 +57,8 @@
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: 1.2em;
       color: blue;
+      display: block;
+      padding: 0.8em 0 1em 0;
     }
     /* show/hide assist https://stackoverflow.com/a/44297341 */
     input, label#hide-button, #archive { display:none; }
@@ -73,6 +75,7 @@
   <div id="ourgantt" class="mermaid">
   gantt
     excludes weekends
+    todayMarker off
 
     section In Progress
     <% issues.open.active && issues.open.active.forEach( t => { -%>
@@ -91,16 +94,21 @@ click <%= l.id %> call linkTo("<%= l.url %>")
   <div style="display:flex;justify-content:space-around;width:100%">
     <p style="font-size:smaller">Todos with issue numbers link to GitHub.</p>
   </div>
+  <%_ if (issues['closed'] && issues['closed'].length !== 0) { %>
   <h2>Recently closed todos</h2>
-  <ul id="closed" style="list-style-type:none;">
+  <ul id="closed" style="list-style-type:none;">    
     <%_ issues['closed'].forEach( t => { _%>
 <%- include('partials/closed_entry.ejs', {t: t} ); %>
     <%_ }); _%>
+  <%_ } %>
   </ul>
   <% if (archive.length) { %>
+    <h2>Archived todos</h2>
+    <div id="chart"></div>
+  
     <input type="checkbox" id="display-toggle"/>
-    <label for="display-toggle" id="display-button"><span>▹ see more</span></label>
-    <label for="display-toggle" id="hide-button"><span>▿ see less</span></label>
+    <label for="display-toggle" id="display-button"><span>▹ show the archive</span></label>
+    <label for="display-toggle" id="hide-button"><span>▿ hide the archive</span></label>
     <div id="archive" style="padding-top:1rem;padding-right:2rem">
       <ul>
         <%_ archive.forEach( (w, wi) => { _%>
@@ -115,9 +123,6 @@ click <%= l.id %> call linkTo("<%= l.url %>")
         <%_ }); _%>
       </ul>
     </div>
-
-  <h2>Cumulative flow</h2>
-  <div id="chart"></div>
   <% } %>
 </main>
 
@@ -130,7 +135,7 @@ click <%= l.id %> call linkTo("<%= l.url %>")
   <p style="font-size:smaller">Page last updated <%= pageupdated %><br/>Task file last updated <%= fileupdated %></p>
   </div>
 
-  <script src="https://unpkg.com/mermaid@8.5.0/dist/mermaid.min.js"></script>
+  <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script>
     var linkTo = url => window.open(url, "_blank");
@@ -150,7 +155,7 @@ click <%= l.id %> call linkTo("<%= l.url %>")
     var chartOptions = {
       series: [
         {
-          name: 'Story points conquered',
+          name: 'Cumulative points conquered',
           data: <%- jsonchartdata %>
         }
       ],
