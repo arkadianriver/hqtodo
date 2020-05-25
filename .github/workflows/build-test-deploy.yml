@@ -1,7 +1,8 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# This workflow does a clean install, runs tests, builds to build folder, deploys to pages
+# More info:
+# https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: HQ Todo build
+name: build
 on:
   push:
     branches: [ master ]
@@ -31,4 +32,4 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: public
+        FOLDER: build
