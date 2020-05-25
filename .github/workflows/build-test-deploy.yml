@@ -11,17 +11,20 @@ jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
         persist-credentials: false
-    - name: Test and Build 🔧
+    - name: Set up
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
+    - name: Install and Test
       run: |
         npm ci
         npm test
-        npm run gh-pages
+    - name: Build 🔧
+      run: npm run gh-pages
     - name: Deploy to Pages 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
