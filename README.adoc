@@ -12,7 +12,7 @@ ifndef::env-github[]
 :icons: font
 endif::[]
 
-pass:[<p align="center"><img src="https://github.com/arkadianriver/hqtodo/workflows/HQ%20Todo%20build/badge.svg" alt="build status"/> <img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/>]
+pass:[<p align="center"><img src="https://github.com/arkadianriver/hqtodo/workflows/build/badge.svg" alt="build status"/> <!-- <img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/> -->]
 
 A li'l web app (page) to display todo items that are created with
 the Todo+ extension for VS Code or the Plaintasks package for Sublime Text.
@@ -22,42 +22,34 @@ Gantt chart.
 Tasks always shift with time, starting from now into the future.
 It's meant for todos knocked out at a regular story point velocity per day
 and labeled in a particular way.
-
-[.thumb]
-image:readme.png[image]
-
-{empty} +
-
 Completed items are displayed underneath, with _Archived_ items available.
-
-[.thumb]
-image:readme2.png[image]
-
-{empty} +
-
 An https://apexcharts.com/[ApexFlow] chart shows the cumulative story points
 you've knocked out.
 
-[.thumb]
-image:readme3.png[image]
+pass:[<h3 align="center"><a href="https://arkadianriver.github.io/hqtodo/" target="_blank">View the sample</a></h3>]
 
-== Run
+////
+pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img src="readme3.png" width="600px"/><img src="readme2.png" width="600px"/></p>]
+////
+
+== Running the app
 
 Currently requires NodeJS v12.
 
-Copy the `config/default.json` file to `config/production.json`
+. Copy the `config/default.json` file to `config/production.json`
 and add your info to the new file.
-You can put the TODO file anywhere on the file system the app can access
+Your own TODO file can be anywhere on the file system the app can access,
 such as a shared Cloud or Network mounted folder.
 
-Then, install and launch:
-
+. Install and launch:
++
 [source, bash]
 ----
 npm install
 ./run
 ----
 
+. Point your browser to `http://localhost:3000`.
 ////
 == Deploy
 
@@ -73,16 +65,23 @@ sudo systemctl enable hqtodo
 ----
 ////
 
-== Use
+== Maintaining your todo file
 
-Everything in the TODO file is ignored except:
+For the most part, update your TODO file as you normally would.
+There are a few conventions to use for the app to work.
+link:TODO[See the sample `TODO` file]
+as an example.
 
-- the _Todo items_ between the `Todos:` project and the `Notes:` project.
-- the _Todo items_ after `Archive:`
+Everything in your TODO file is ignored except ...
 
-See the sample `TODO` file.
+* the todo items between the `Todos:` project and the `Notes:` project.
+* the todo items after `Archive:`
 
-For the app to work, there's a simple pattern to follow for the Todo items:
+\... where a todo item is a line starting with ☐ or ✔.
+
+=== Active todo items
+
+Syntax:
 
 [source,bash]
 ----
@@ -99,6 +98,7 @@ For the app to work, there's a simple pattern to follow for the Todo items:
   They're simply displayed with the title.
 * When you press `Super-D` to mark a task with a checkmark and a `@done` tag, it's listed
   in the "`Recently closed todos`" section of the web page.
+  FIXME: currently, you gotta remove the priority tag before doing this.
 
 Example:
 
@@ -107,10 +107,12 @@ Example:
 ☐ @high Work with so-and-so on such-and-such @4h @prja @prjb
 ----
 
-Away for a few days?
+=== Interruptions
 
-You can let folks know about vacations and other "`interruptions to your steady velocity.`"
-Those items have a really special format.
+You can let folks know about vacations and other "`interruptions`"
+to your steady velocity.
+
+Syntax:
 
 [source,bash]
 ----
@@ -136,4 +138,8 @@ As set up now, it has two patterns:
 * one pattern that links to whatever repo you specify in the todo file itself
 `ghi•ragnoroct/linkme•9`
 
+=== Archived todos
 
+If you archive your done items (e.g. Cmd-Shift-A), they will be available at
+the bottom along with a graph of the cumulative story points you've knocked out
+over time. Marvel at your progress!
