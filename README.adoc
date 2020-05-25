@@ -1,4 +1,5 @@
 = hqtodo
+:experimental:
 :toc:
 :toc-placement!:
 ifdef::env-github[]
@@ -96,7 +97,7 @@ Syntax:
 * The optional `@Nh` tag indicates your estimated N hours. No tag gets the default of 2 hours.
 * You can provide any number of `@custom` tags for your own custom filtering.
   They're simply displayed with the title.
-* When you press `Super-D` to mark a task with a checkmark and a `@done` tag, it's listed
+* When you press kbd:[Super]-kbd:[D] to mark a task with a checkmark and a `@done` tag, it's listed
   in the "`Recently closed todos`" section of the web page.
   FIXME: currently, you gotta remove the priority tag before doing this.
 
@@ -140,6 +141,6 @@ As set up now, it has two patterns:
 
 === Archived todos
 
-If you archive your done items (e.g. Cmd-Shift-A), they will be available at
+If you archive your done items (e.g. kbd:[Cmd]-kbd:[Shift]-kbd:[A]]), they will be available at
 the bottom along with a graph of the cumulative story points you've knocked out
 over time. Marvel at your progress!
