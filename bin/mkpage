@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const app = require('../app');
+const http = require('http');
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+  return false;
+}
+
+let port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);    
+
+// assist https://github.com/expressjs/express/issues/1366#issuecomment-68693264
+let server = app.listen(port, function() {
+  console.log('Listening =^.^=');
+  // assist https://stackoverflow.com/a/19539521/5360420
+  http.request(`http://localhost:${port}`, res => {
+    let str = '';
+    res.on('data', chunk => {
+      str += chunk;
+    });
+    res.on('end', () => {
+      if (!fs.existsSync('./public')) fs.mkdirSync('./public');
+      fs.writeFileSync('./public/index.html', str);
+      server.close(() => { console.log('Done.'); });
+    });
+  }).end();
+});
+
