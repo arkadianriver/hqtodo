@@ -1,7 +1,7 @@
 node_modules/
 public/
 
-*lock.json
+#*lock.json
 config/*
 !config/default.json
 !config/test.json
