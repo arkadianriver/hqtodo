@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size:80%">
+<head>
+  <meta charset="UTF-8">
+  <title>hqtodo</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    h1 {
+      font-size: 34pt;
+      font-weight: 500;
+    }
+    h2 {
+      font-size: 24pt;
+      font-weight: 500;
+      margin-top: 2em;
+    }
+    ul {
+      list-style-type: none;
+    }
+    li {
+      font: 600 12pt 'IBM Plex Mono', monospace; /* Consolas, Monaco, monospace; */
+    }
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 12pt;
+      margin: 16px;
+      overflow-y: scroll;
+    }
+    #ourgantt > svg[id^="mermaid-"] .grid .tick {
+      stroke: grey;
+      opacity: 0.4;
+      shape-rendering: crispEdges;
+    }
+    #ourgantt > svg[id^="mermaid-"] .grid .tick > text {
+      stroke: black;
+      opacity: 1;
+    }
+
+    #closed .bullet { color: #555 }
+    #closed .date { color: #aaa } /* aaa */
+    #closed .title { color: #555 } /* 555 */
+    #closed .tagstring { color: #aaa } /* aaa */
+    #closed .estimate { color: #037 } /* 037 */
+
+    /* starttheme:plaintasksdefault */
+    #archive { background-color: #efe9b7; }
+    #archive .divider { background-color: #00000010; color: #bc644a }
+    #archive .bullet { color: #00723e }
+    #archive .date { color: #B1A68FBF } /* aaa */
+    #archive .title { color: #858266 } /* 555 */
+    #archive .tagstring { color: #B1A68FBF } /* aaa */
+    #archive .estimate { color: #00723e } /* 037 */
+    /* endtheme:plaintasksdefault */
+
+    label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.2em;
+      color: blue;
+    }
+    /* show/hide assist https://stackoverflow.com/a/44297341 */
+    input, label#hide-button, #archive { display:none; }
+    input#display-toggle:checked ~ label#display-button { display: none; }
+    input#display-toggle:checked ~ label#hide-button { display: block; }
+    input#display-toggle:checked ~ #archive { display: block; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>What &lt;Your Name&gt; is up to ...</h1>
+</header>
+<main>
+  <div id="ourgantt" class="mermaid">
+  gantt
+    excludes weekends
+
+    section In Progress
+    vacation  :done, k7, 2020-05-11, 5d
+    get thing-a-ma-bob info from SME-guru @prja :k3, after k7, 12h
+    work with so-and-so on such-and-such @prja @prjb :crit, k4, after k3, 6h
+    add such-and-such CSS to project page @prjb :k10, after k4, 6h
+    Whiz-Bang-Boom conference  :done, k6, 2020-05-20, 5d
+    storyboard feature 22 with design @prjc :k11, after k6, 12h
+    fix situation with UI weirdness @prjb :k12, after k11, 6h
+    
+    section Backlog
+    ghihq•4 edit whos-it&#39;s video Q @prjb :active, k5, after k12, 6h
+    document feature 22 ghi•ragnoroct/linkme•9 @prjc :active, k8, after k5, 12h
+    write script for whos-it video P @prjb :k9, after k8, 48h
+    todo this  :k13, after k9, 6h
+    todo that  :k14, after k13, 6h
+    
+
+    click k5 call linkTo("https://github.com/arkadianriver/hqtodo/issues/4")
+    click k8 call linkTo("https://github.com/ragnoroct/linkme/issues/9")
+    
+  </div>
+  <div style="display:flex;justify-content:space-around;width:100%">
+    <p style="font-size:smaller">Todos with issue numbers link to GitHub.</p>
+  </div>
+  <h2>Recently closed todos</h2>
+  <ul id="closed" style="list-style-type:none;">
+            <li><span class="bullet">✔</span> <span class="date">2020-05-12</span>
+              <span class="title" style="font-style:italic">decide organization requirements</span>
+              <span class="tagstring">@prja @woot</span>
+              <span class="estimate">(1.75)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-10</span>
+              <span class="title" style="font-style:italic">take cat to the vet</span>
+              <span class="tagstring"></span>
+              <span class="estimate">(0.75)</span>
+            </li>
+  </ul>
+  
+    <input type="checkbox" id="display-toggle"/>
+    <label for="display-toggle" id="display-button"><span>▹ see more</span></label>
+    <label for="display-toggle" id="hide-button"><span>▿ see less</span></label>
+    <div id="archive" style="padding-top:1rem;padding-right:2rem">
+      <ul>
+        <li>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-05-10</div>
+          <ul id="0" style="margin-left: 0">
+            <li><span class="bullet">✔</span> <span class="date">2020-05-08 22:45</span>
+              <span class="title" style="font-style:italic">Compose symphony</span>
+              <span class="tagstring">@prja @woot</span>
+              <span class="estimate">(5.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-06 21:37</span>
+              <span class="title" style="font-style:italic">Restructure archive of books</span>
+              <span class="tagstring"></span>
+              <span class="estimate">(0.25)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+        <li>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-05-03</div>
+          <ul id="1" style="margin-left: 0">
+            <li><span class="bullet">✔</span> <span class="date">2020-05-03 23:45</span>
+              <span class="title" style="font-style:italic">Take off to the great white north</span>
+              <span class="tagstring">@prja @woot</span>
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-02 22:00</span>
+              <span class="title" style="font-style:italic">Prepare the sled</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-02 21:00</span>
+              <span class="title" style="font-style:italic">Prepare the dogs</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.25)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+        <li>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-26</div>
+          <ul id="2" style="margin-left: 0">
+          </ul><span>&nbsp;</span>
+        </li>
+        <li>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-19</div>
+          <ul id="3" style="margin-left: 0">
+          </ul><span>&nbsp;</span>
+        </li>
+        <li>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-12</div>
+          <ul id="4" style="margin-left: 0">
+            <li><span class="bullet">✔</span> <span class="date">2020-04-12 07:00</span>
+              <span class="title" style="font-style:italic">Host a party for real</span>
+              <span class="tagstring">@prjc</span>
+              <span class="estimate">(2.00)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+        <li>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-05</div>
+          <ul id="5" style="margin-left: 0">
+            <li><span class="bullet">✔</span> <span class="date">2020-04-01 07:00</span>
+              <span class="title" style="font-style:italic">Host a party</span>
+              <span class="tagstring">@prjc</span>
+              <span class="estimate">(0.25)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+        <li>
+          <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-03-29</div>
+          <ul id="6" style="margin-left: 0">
+            <li><span class="bullet">✔</span> <span class="date">2020-03-29 07:00</span>
+              <span class="title" style="font-style:italic">Do something fun</span>
+              <span class="tagstring">@prjc</span>
+              <span class="estimate">(0.25)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+      </ul>
+    </div>
+
+  <h2>Cumulative flow</h2>
+  <div id="chart"></div>
+  
+</main>
+
+  <hr/>
+  <div style="display:flex;justify-content:space-between;width:100%">
+  <p style="font-size:smaller;">Page by <a target="_blank"
+  href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
+  with ♥ from Mermaid and ApexCharts
+  </p>
+  <p style="font-size:smaller">Page last updated 2020-05-25T06:25:56Z<br/>Task file last updated 2020-05-25T06:25:50Z</p>
+  </div>
+
+  <script src="https://unpkg.com/mermaid@8.5.0/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script>
+    var linkTo = url => window.open(url, "_blank");
+    mermaid.initialize({
+      startOnLoad: true,
+      securityLevel: "loose",
+      gantt: {
+        axisFormat: "%d %b",
+        titleTopMargin: 25,
+        topPadding: 60,
+        barGap: 4,
+        barheight: 75,
+        bottomMarginAdjust: 1
+      }
+    });
+
+    var chartOptions = {
+      series: [
+        {
+          name: 'Story points conquered',
+          data: [{"x":"2020-03-29 07:00","y":"0.25"},{"x":"2020-04-01 07:00","y":"0.50"},{"x":"2020-04-12 07:00","y":"2.50"},{"x":"2020-05-02 21:00","y":"2.75"},{"x":"2020-05-02 22:00","y":"3.00"},{"x":"2020-05-03 23:45","y":"4.00"},{"x":"2020-05-06 21:37","y":"4.25"},{"x":"2020-05-08 22:45","y":"9.50"}]
+        }
+      ],
+      chart: {
+        type: 'area',
+        height: 350,
+        //stacked: true,
+        events: {
+          selection: function (chart, e) {
+            console.log(new Date(e.xaxis.min))
+          }
+        },
+      },
+      colors: ['#00E396'], // ['#008FFB', '#00E396', '#CED4DC'],
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'stepline'
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          opacityFrom: 0.6,
+          opacityTo: 0.8,
+        }
+      },
+      legend: {
+        showForSingleSeries: true,
+        position: 'top',
+        horizontalAlign: 'left'
+      },
+      xaxis: {
+        type: 'datetime'
+      },
+    };
+    var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
+    chart.render();   
+  </script>
+</body>
+</html>
+
