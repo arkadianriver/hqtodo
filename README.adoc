@@ -75,7 +75,7 @@ as an example.
 
 Everything in your TODO file is ignored except ...
 
-* the todo items between the `Todos:` project and the `Notes:` project.
+* the todo items between the `Todos:` project and the next _top-level_ project.
 * the todo items after `Archive:`
 
 \... where a todo item is a line starting with ☐ or ✔.
