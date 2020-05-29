@@ -27,7 +27,7 @@ Completed items are displayed underneath, with _Archived_ items available.
 An https://apexcharts.com/[ApexFlow] chart shows the cumulative story points
 you've knocked out.
 
-pass:[<h3 align="center"><a href="https://arkadianriver.github.io/hqtodo/" target="_blank">View the sample</a></h3>]
+pass:[<div align="center"><a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><h3>View the sample</h3><img src="readme.png"/></a></div>]
 
 ////
 pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img src="readme3.png" width="600px"/><img src="readme2.png" width="600px"/></p>]
