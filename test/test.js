@@ -96,7 +96,7 @@ describe('Integration:', function() {
     expect(res.locals.issues.open.pending[2].link).to.equal("https://github.com/ragnoroct/linkme/issues/9");
   });
   it('injectInterrupts() should respect weekends', function() {
-    expect(res.locals.issues.open.pending[4].startdate.slice(0,-10)).to.equal("2020-06-15T00:00:00");
+    expect(res.locals.issues.open.pending[4].startdate).to.equal("2020-06-15T00:00:00");
   });
   it('injectInterrupts() should provide closed items', function() {
     expect(res.locals.issues.closed[1].title).to.equal("take cat to the vet");

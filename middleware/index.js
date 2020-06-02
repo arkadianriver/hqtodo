@@ -305,9 +305,9 @@ const _fillRanges = (rangeArray, todoArray) => {
     while (todoArray.length > 0 &&
       biz_duration.subtract(parseInt(todoArray[0].est.slice(0,-1), 10), 'hours') >= 0
     ) {
-      const thisTodo = todoArray.shift();                      // take it..
-      thisTodo.startdate = deltaCursor.toISOString(true);      //   ..assign its start date..
-      startDatedTodos.push(thisTodo);                          //     ..and hang onto it.
+      const thisTodo = todoArray.shift();                              // take it..
+      thisTodo.startdate = deltaCursor.toISOString(true).slice(0,-10); //   ..assign its start date..
+      startDatedTodos.push(thisTodo);                                  //     ..and hang onto it.
       // calculate delta for next todo (if any)
       const estAsInt = parseInt(thisTodo.est.slice(0,-1), 10);
       const delta = moment.duration(estAsInt, 'hours');
