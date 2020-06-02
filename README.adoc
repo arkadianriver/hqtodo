@@ -35,7 +35,7 @@ pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img s
 
 == Running the app
 
-Currently requires NodeJS v12.
+> *Prereq:* Currently requires NodeJS v12.
 
 . Copy the `config/default.json` file to `config/production.json`
 and add your info to the new file.
@@ -97,7 +97,7 @@ Syntax:
 * The optional `@Nh` tag indicates your estimated N hours. No tag gets the default of 2 hours.
 * You can provide any number of `@custom` tags for your own custom filtering.
   They're simply displayed with the title.
-* When you press kbd:[Super]-kbd:[D] to mark a task with a checkmark and a `@done` tag, it's listed
+* When you press kbd:[Super] + kbd:[D] to mark a task with a checkmark and a `@done` tag, it's listed
   in the "`Recently closed todos`" section of the web page.
   FIXME: currently, you gotta remove the priority tag before doing this.
 
@@ -129,7 +129,8 @@ Example:
 
 === Referencing a GitHub repo
 
-If you reference a particular issue in your todo text,
+If you reference a particular issue in your todo text
+(for example if you use the linkme VS Code extension),
 the Gantt chart will link to the issue from the task bar and todo text.
 
 Edit the config file repo URL to point to your own repo.
@@ -139,8 +140,10 @@ As set up now, it has two patterns:
 * one pattern that links to whatever repo you specify in the todo file itself
 `ghi•ragnoroct/linkme•9`
 
+You can of course change the patterns to link to whatever you want.
+
 === Archived todos
 
-If you archive your done items (e.g. kbd:[Cmd]-kbd:[Shift]-kbd:[A]]), they will be available at
+If you archive your done items (e.g. kbd:[Cmd+Shift+A]]), they will be available at
 the bottom along with a graph of the cumulative story points you've knocked out
 over time. Marvel at your progress!
