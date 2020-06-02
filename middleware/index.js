@@ -187,27 +187,37 @@ const _chunkRange = (rangeStart, rangeEnd, numBizDays, todoRangeArray) => {
   let startDay = moment(rangeStart).isoWeekday();
   // Normalize rangeEnd to itself or if a weekend or Monday to a Saturday.
   rangeEnd = moment(rangeEnd).startOf('day').prevBusinessDay().add(1,'d').format('YYYY-MM-DD');
+  // Initialize a few things we might need later, depending on the scenario:
   let endDay = moment(rangeEnd).startOf('day').isoWeekday();
-  // last day of the first week (when needed) is Friday
+  // - last day of the first week (when needed) is Friday
   const firstEnd = moment(rangeStart).isoWeekday(6).format('YYYY-MM-DD');
-  // start day of last week (when needed) is the monday before
+  // - start day of last week (when needed) is the monday before
   const finalStart = moment(rangeEnd).isoWeekday(1).format('YYYY-MM-DD');
+  // Better 'splain this dense switch..
+  // It determines the type of scenario based on how many days there are in the
+  // range, testing where weekends fall based on the start day M-F (ISO 1-5)
+  // For example: case 1 (Monday) is scenario 0 (one week) if the range is <= 5 days,
+  //   scenario 1 (two weeks) if <= 10 days, and scenario 2 (two weeks plus) otherwise.
+  //   Tue - Fri follow the same pattern but with different day offsets.
   switch (startDay) {
     case 1: scenario = numBizDays <= 5 ? 0 : numBizDays <= 10 ? 1 : 2; break;
     case 2: scenario = numBizDays <= 4 ? 0 : numBizDays <=  9 ? 1 : 2; break;
     case 3: scenario = numBizDays <= 3 ? 0 : numBizDays <=  8 ? 1 : 2; break;
     case 4: scenario = numBizDays <= 2 ? 0 : numBizDays <=  7 ? 1 : 2; break;
     case 5: scenario = numBizDays <= 1 ? 0 : numBizDays <=  6 ? 1 : 2; break;
+    // if a weekend, assume next business day (Monday)
+    default: scenario = numBizDays <= 5 ? 0 : numBizDays <= 10 ? 1 : 2; break;
   }
+  // Handle our scenario
   switch (scenario) {
-    case 0:
+    case 0: // a week or less
       todoRangeArray.push({ start: rangeStart, end: rangeEnd });
       break;
-    case 1:
+    case 1: // between a week and two weeks
       todoRangeArray.push({ start: rangeStart, end: firstEnd });
       todoRangeArray.push({ start: finalStart, end: rangeEnd });
       break;
-    case 2:
+    case 2: // more than two weeks
       const wFirst = Math.round(moment.duration(
         moment(firstEnd).startOf('day').diff(moment(rangeStart).startOf('day'))
       ).days());
@@ -333,39 +343,37 @@ const _fillRanges = (rangeArray, todoArray) => {
  */
 exports.injectInterrupts = () => {
   return (req, res, next) => {
-    if (!res.locals.issues['interrupts']) {
-      next();
-    } else {
-      const todoRangeArray = _getRangeArray(res.locals.issues['interrupts']);
-      const todoArray = _copyTodos(res.locals.issues.open);
-      const startDatedTodos = _fillRanges(todoRangeArray, todoArray);
-      const sortedMix = startDatedTodos
-        .concat(res.locals.issues.interrupts)
-        .sort( (a,b) => a.startdate < b.startdate ? -1 : 1);
-      delete res.locals.issues.interrupts;
-      res.locals.issues.open.active = [];
-      res.locals.issues.open.pending = [];
-      let active = true;
-      sortedMix.forEach( t => {
-        if (!t.hasOwnProperty('pipeline')) t.color = 'done, ';              // interrupts get done color
-        if (!t.hasOwnProperty('color')) t.color = t.link ? 'active, ' : ''; // non-crit GH links get active color
-        if (t.hasOwnProperty('pipeline')) { // it's a todo item
-          if (t.pipeline === 'active') {
-            active = true;
-            res.locals.issues.open.active.push(t);
-          } else {
-            active = false;
-            res.locals.issues.open.pending.push(t);
-          }
-        } else {                            // it's an interrupt
-          if (active) {
-            res.locals.issues.open.active.push(t);
-          } else {
-            res.locals.issues.open.pending.push(t);
-          }
+    // make sure we have an array, even if empty, because the rest depends on its presence
+    if (!res.locals.issues['interrupts']) res.locals.issues.interrupts = [];
+    const todoRangeArray = _getRangeArray(res.locals.issues.interrupts);
+    const todoArray = _copyTodos(res.locals.issues.open);
+    const startDatedTodos = _fillRanges(todoRangeArray, todoArray);
+    const sortedMix = startDatedTodos
+      .concat(res.locals.issues.interrupts)
+      .sort( (a,b) => a.startdate < b.startdate ? -1 : 1);
+    delete res.locals.issues.interrupts;
+    res.locals.issues.open.active = [];
+    res.locals.issues.open.pending = [];
+    let active = true;
+    sortedMix.forEach( t => {
+      if (!t.hasOwnProperty('pipeline')) t.color = 'done, ';              // interrupts get done color
+      if (!t.hasOwnProperty('color')) t.color = t.link ? 'active, ' : ''; // non-crit GH links get active color
+      if (t.hasOwnProperty('pipeline')) { // it's a todo item
+        if (t.pipeline === 'active') {
+          active = true;
+          res.locals.issues.open.active.push(t);
+        } else {
+          active = false;
+          res.locals.issues.open.pending.push(t);
         }
-      });
-    }
+      } else {                            // it's an interrupt
+        if (active) {
+          res.locals.issues.open.active.push(t);
+        } else {
+          res.locals.issues.open.pending.push(t);
+        }
+      }
+    });
     next();
   }
 }
