@@ -1,7 +1,11 @@
 node_modules/
 build/
+.vscode/
 
 #*lock.json
 config/*
 !config/default.json
 !config/test.json
+
+test/*
+!test/test.js

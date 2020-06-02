@@ -13,18 +13,14 @@ const pp = data => '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
  */
 
 router.get('/todos/raw', (req, res, next) => {
-  res.json({ rawTodos: res.locals.rawTodos, rawArchive: res.locals.rawArchive });
+  res.json({ rawTodos: req.app.locals.rawTodos, rawArchive: req.app.locals.rawArchive });
 });
 
 router.get('/todos/unordered', mw.parseRawTodos(), (req, res, next) => {
   res.json(res.locals.issues);
 });
 
-router.get('/todos/withinterrupts', mw.parseRawTodos(), mw.injectInterrupts(), (req, res, next) => {
-  res.json(res.locals.issues);
-});
-
-router.get('/todos', mw.parseRawTodos(), mw.injectInterrupts(), mw.prevnumsForGantt(),
+router.get('/todos', mw.parseRawTodos(), mw.injectInterrupts(),
   (req, res, next) => {
     res.json(res.locals.issues);
   });
@@ -40,7 +36,6 @@ router.get('/todos/archivedbyweek', mw.getArchive(), mw.getArchiveByWeek(), (req
 router.get('/',
   mw.parseRawTodos(),
   mw.injectInterrupts(),
-  mw.prevnumsForGantt(),
   mw.getArchive(),
   mw.getArchiveByWeek(),
   mw.renderIt()

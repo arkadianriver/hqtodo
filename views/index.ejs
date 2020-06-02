@@ -79,12 +79,12 @@
 
     section In Progress
     <% issues.open.active && issues.open.active.forEach( t => { -%>
-<%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
+<%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
     <% }); -%>
 
     section Backlog
     <% issues.open.pending && issues.open.pending.forEach( t => { -%>
-<%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['prevtask'] %>, <%= t['est'] %>
+<%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
     <% }); %>
 
     <% issues.links && issues.links.forEach( l => { -%>

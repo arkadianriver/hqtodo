@@ -1,6 +1,5 @@
-//const express = require('express');
-const moment = require('moment');
-const business = require('moment-business');
+const moment = require('moment-business-days');
+
 const config = require('config');
 
 const WHOAMI = config.get('yourName');
@@ -13,14 +12,14 @@ const A_DAY = moment.duration(1, 'd');
 
 // debug helpers
 const lg = data => console.log(data);
-const pp = data => '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+const pp = data => lg('<pre>'+JSON.stringify(data, null, 2)+'</pre>');
 
 
 /**
  * returns all tags in a tag array as a string, except "time estimate tags,"
  * which it normalizes into hours adjusted according to the HOURADJUST
  * configuration constant.
- * 
+ *
  * @param {Object[]} tags - list of \@tags
  */
 const _handleTags = (tags) => {
@@ -76,12 +75,12 @@ exports.parseRawTodos = () => {
       links: []
     }
     // parse each line and push the data record to the right place in the structure
-    for (let i = 0, j = 1; i < res.locals.rawTodos.length; i++) {
+    for (let i = 0, j = 1; i < req.app.locals.rawTodos.length; i++) {
       // breaking up regex into 3 passes:
       // 1. get open/closed state, optional pipeline, and title
-      let m = res.locals.rawTodos[i].match(/\s*([☐✔])\s(@low|@today|@high)?([^\@]+)@?/);
-      let m1 = [...res.locals.rawTodos[i].matchAll(/@\w+/g)];                  // 2. get tags
-      let m2 = res.locals.rawTodos[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d)/); // 3. get done date
+      let m = req.app.locals.rawTodos[i].match(/\s*([☐✔])\s(@low|@today|@high)?([^\@]+)@?/);
+      let m1 = [...req.app.locals.rawTodos[i].matchAll(/@\w+/g)];                  // 2. get tags
+      let m2 = req.app.locals.rawTodos[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d)/); // 3. get done date
       if (m) {
         // skip Frozens
         if (m[2] && m[2] == '@low') continue;
@@ -91,10 +90,14 @@ exports.parseRawTodos = () => {
         // quickly add interrupts
         if (m[3].match(/^\[/)) {
           const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/);
+          const enddate = moment(m4[2])
+            .add(parseInt(m4[1].slice(0,-1), 10), 'days')
+            .format('YYYY-MM-DD');
           if (m4) {
             issues['interrupts'].push({
               number: j,
               startdate: m4[2],
+              enddate: enddate,
               title: m4[3],
               est: m4[1]
             });
@@ -156,76 +159,212 @@ exports.parseRawTodos = () => {
   }
 }
 
+/**
+ * Return provided moment in the format needed, either now or the next business day
+ * as either a moment or as a string
+ *
+ * @param { Moment } myMoment - Actual date to convert to biz date
+ * @param { Boolean } asString - Whether to return as string (default undefined 'falsey')
+ */
+const _getBizStart = (myMoment, asString) => {
+  //initialize to today (or first avail biz day)
+  if (!myMoment.isBusinessDay()) myMoment.startOf('day').nextBusinessDay();
+  return asString ? myMoment.format('YYYY-MM-DD') : myMoment;
+}
+
+/**
+ * We gotta account for the weekends in our range of time. So, with our known total
+ * numBizDays, I see three scenarios:
+ * 
+ * 0: The range all happens before Saturday, push the start and stop time, no problem
+ * 1: The range contains only one weekend, calculate this week's days, next week's days,
+ *    and push each of 'em.
+ * 2: The range contains 2+ weekends, push the first week's days, loop through and push
+ *    the solid 5-day weeks in-between, push the last week's days.
+ */
+const _chunkRange = (rangeStart, rangeEnd, numBizDays, todoRangeArray) => {
+  let scenario = 0;
+  let startDay = moment(rangeStart).isoWeekday();
+  // Normalize rangeEnd to itself or if a weekend or Monday to a Saturday.
+  rangeEnd = moment(rangeEnd).startOf('day').prevBusinessDay().add(1,'d').format('YYYY-MM-DD');
+  let endDay = moment(rangeEnd).startOf('day').isoWeekday();
+  // last day of the first week (when needed) is Friday
+  const firstEnd = moment(rangeStart).isoWeekday(6).format('YYYY-MM-DD');
+  // start day of last week (when needed) is the monday before
+  const finalStart = moment(rangeEnd).isoWeekday(1).format('YYYY-MM-DD');
+  switch (startDay) {
+    case 1: scenario = numBizDays <= 5 ? 0 : numBizDays <= 10 ? 1 : 2; break;
+    case 2: scenario = numBizDays <= 4 ? 0 : numBizDays <=  9 ? 1 : 2; break;
+    case 3: scenario = numBizDays <= 3 ? 0 : numBizDays <=  8 ? 1 : 2; break;
+    case 4: scenario = numBizDays <= 2 ? 0 : numBizDays <=  7 ? 1 : 2; break;
+    case 5: scenario = numBizDays <= 1 ? 0 : numBizDays <=  6 ? 1 : 2; break;
+  }
+  switch (scenario) {
+    case 0:
+      todoRangeArray.push({ start: rangeStart, end: rangeEnd });
+      break;
+    case 1:
+      todoRangeArray.push({ start: rangeStart, end: firstEnd });
+      todoRangeArray.push({ start: finalStart, end: rangeEnd });
+      break;
+    case 2:
+      const wFirst = Math.round(moment.duration(
+        moment(firstEnd).startOf('day').diff(moment(rangeStart).startOf('day'))
+      ).days());
+      const wLast = Math.round(moment.duration(
+        moment(rangeEnd).startOf('day').diff(moment(finalStart).startOf('day'))
+      ).days());
+      const numWeeks = Math.floor( numBizDays / (wFirst + wLast) );
+      todoRangeArray.push({ start: rangeStart, end: firstEnd });
+      let istart = moment(rangeStart).isoWeekday(8); // the next monday
+      let iend = moment(firstEnd).isoWeekday(13); // the next saturday
+      for (i=0;i < numWeeks;i++) {
+        todoRangeArray.push({ start: istart.format('YYYY-MM-DD'), end: iend.format('YYYY-MM-DD') });
+        istart.add(7);
+        iend.add(7);
+      }
+      todoRangeArray.push({ start: finalStart, end: rangeEnd });
+      break;
+  }
+}
+
+
+/**
+ * Go through interrupts and return an array of ranges where todos can be filled.
+ * Already factor in business days and leave an open-ended range afterward.
+ * Remember: assigned moments are mutated by the moment methods!!!
+ * Also: Assumes interrupts do not start on weekends.
+ */
+const _getRangeArray = (interruptArray) => {
+  let endOfLast = moment().startOf('day');
+  const todoRangeArray = [];
+  interruptArray.forEach( event => {
+    // if the start date comes after the endOfLast event, we have some time to fill;
+    // that is.. if there are business days between.
+    const numBizDays = moment(event.startdate).businessDiff(_getBizStart(endOfLast), true);
+    if (numBizDays > 0) {
+      _chunkRange(endOfLast.format('YYYY-MM-DD'), event.startdate, numBizDays, todoRangeArray);
+    }
+    // regardless, check if we've extended our endOfLast date (that we use to compare to above)
+    if (moment(event.enddate).isAfter(endOfLast)) {
+      endOfLast = moment(event.enddate);
+    }
+  });
+  // leave the end open-ended (pretty much) (add 12 more biz weeks)
+  // hard-coded and not locale-specific, but meh.
+  let newCursor = endOfLast.nextBusinessDay();
+  todoRangeArray.push({
+    start: newCursor.format('YYYY-MM-DD'),
+    end: newCursor.isoWeekday(6).format('YYYY-MM-DD')
+  });
+  todoRangeArray.push({
+    start: newCursor.isoWeekday(6).add(2,'d').format('YYYY-MM-DD'),
+    end: newCursor.add(5,'d').format('YYYY-MM-DD')
+  });
+  for (i=0; i<12; i++) {
+    todoRangeArray.push({
+      start: newCursor.add(2,'d').format('YYYY-MM-DD'),
+      end: newCursor.add(5,'d').format('YYYY-MM-DD')
+    });
+  }
+  return todoRangeArray;
+}
+
+/**
+ * Takes open active and pending arrays and returns a single array with `active` and
+ * `pending` pipeline values assigned to each todo item.
+ *
+ * @param {Array} todosOpen - input Array (of two arrays)
+ * @returns {Array} - single array with both active and pending items with a new `pipeline` property.
+ */
+const _copyTodos = (todosOpen) => {
+  const newTodos = [];
+  todosOpen.active.forEach( t => { t.pipeline = 'active'; newTodos.push(t); });
+  todosOpen.pending.forEach( t => { t.pipeline = 'pending'; newTodos.push(t); });
+  return newTodos;
+}
+
+/**
+ * Fill available space with todos
+ * (available business days space already calculated and provided by _getRangeArray())
+ * TODO: todos that don't fit should be chunked into pieces that do fit. (maybe)
+ *
+ * @param {Array} rangeArray - List of spans that can be filled
+ * @param {Array} todoArray - List of todos to fill those spans (mutates to nothing)
+ * @returns {Array} - List of todos with startdates added
+ */
+const _fillRanges = (rangeArray, todoArray) => {
+  const startDatedTodos = [];
+  rangeArray.forEach( r => {
+    // initialize start time
+    const deltaCursor = moment(r.start + 'T00:00:00');
+    // capture the range as a duration (to chip away at as todos are added)
+    const biz_duration = moment.duration(moment(r.end+'T00:00:00').diff(deltaCursor));
+    // note: moment.subract() (and .add()) mutate in place
+    // as long as there are todos, and the next todo still fits (the biz_duration calc), use it.
+    while (todoArray.length > 0 &&
+      biz_duration.subtract(parseInt(todoArray[0].est.slice(0,-1), 10), 'hours') >= 0
+    ) {
+      const thisTodo = todoArray.shift();                      // take it..
+      thisTodo.startdate = deltaCursor.toISOString(true);      //   ..assign its start date..
+      startDatedTodos.push(thisTodo);                          //     ..and hang onto it.
+      // calculate delta for next todo (if any)
+      const estAsInt = parseInt(thisTodo.est.slice(0,-1), 10);
+      const delta = moment.duration(estAsInt, 'hours');
+      deltaCursor.add(delta);
+      startHere = deltaCursor.toISOString(true);
+    }
+  });
+  return startDatedTodos;
+}
 
 /**
  * Process in the pipeline that takes the existing issues data structure
- * and inserts the interrupts into their date-specific location in the
- * correct order, according to the durations of the time between today's
- * date and their start dates.
- * 
- * Using `moment-business` to capture the interval between last interrupt
- * end date and start of next interrupt, in weekdays only. Using `moment`
- * itself to subtract time for each iterated todo and to add time to
- * capture the duration of each interrupt when determining end date
+ * and inserts the interrupts. And more...
+ *
+ * (See private functions above)
+ *
+ * 1. _getRangeArray(): Using interrupt start and ends, find space in between.
+ * 2. _copyTodos(): Add pipeline property to each todo and merge into one array,
+ *                  to make it easy to...
+ * 3. _fillRanges(): ...fill ranges with todos.
+ * 4. Lastly, in here, recreate open/pending array of combined interrupts and todos,
+ *    sorted by startdates (while you're at it, add colors based on type)
  */
 exports.injectInterrupts = () => {
   return (req, res, next) => {
     if (!res.locals.issues['interrupts']) {
       next();
     } else {
-      let endoflastinterrupt = moment(); // initialize
-      // foreach interrupt loop through all todos (in each pipeline)
-      for (let i = 0; i < res.locals.issues['interrupts'].length; i++) {
-        const interruptstart = moment(res.locals.issues['interrupts'][i]['startdate'], 'YYYY-MM-DD');
-        const biz_duration = moment.duration(business.weekDays(endoflastinterrupt, interruptstart), 'days');
-        openpipes: for (const pipeidx of ['active', 'pending']) {
-          pipetodos: for (let tidx = 0; tidx < res.locals.issues['open'][pipeidx].length; tidx++) {
-            if (!res.locals.issues['open'][pipeidx][tidx]['startdate']) {
-              const estStr = res.locals.issues['open'][pipeidx][tidx]['est'].slice(0, -1);
-              const est = parseInt(estStr, 10);
-              if (biz_duration.subtract(est, 'hours') < A_DAY) {
-                // found the insert spot!
-                res.locals.issues['open'][pipeidx].splice(tidx, 0, res.locals.issues['interrupts'][i]);
-                break openpipes; // next interrupt
-              }
-            }
+      const todoRangeArray = _getRangeArray(res.locals.issues['interrupts']);
+      const todoArray = _copyTodos(res.locals.issues.open);
+      const startDatedTodos = _fillRanges(todoRangeArray, todoArray);
+      const sortedMix = startDatedTodos
+        .concat(res.locals.issues.interrupts)
+        .sort( (a,b) => a.startdate < b.startdate ? -1 : 1);
+      delete res.locals.issues.interrupts;
+      res.locals.issues.open.active = [];
+      res.locals.issues.open.pending = [];
+      let active = true;
+      sortedMix.forEach( t => {
+        if (!t.hasOwnProperty('pipeline')) t.color = 'done, ';              // interrupts get done color
+        if (!t.hasOwnProperty('color')) t.color = t.link ? 'active, ' : ''; // non-crit GH links get active color
+        if (t.hasOwnProperty('pipeline')) { // it's a todo item
+          if (t.pipeline === 'active') {
+            active = true;
+            res.locals.issues.open.active.push(t);
+          } else {
+            active = false;
+            res.locals.issues.open.pending.push(t);
+          }
+        } else {                            // it's an interrupt
+          if (active) {
+            res.locals.issues.open.active.push(t);
+          } else {
+            res.locals.issues.open.pending.push(t);
           }
         }
-        // calculate new endoflastinterrupt
-        const estStr = res.locals.issues['interrupts'][i]['est'].slice(0, -1);
-        const est = parseInt(estStr, 10);
-        endoflastinterrupt = business.addWeekDays(interruptstart, est);
-      }
-    }
-    delete res.locals.issues.interrupts;
-    next();
-  }
-}
-
-
-/**
- * Process in the pipeline that assigns each open todo a previous todo number
- * for the gantt stagger, except interrupts, which start on exact dates.
- * Also adds "color" strings.
- */
-exports.prevnumsForGantt = () => {
-  return (req, res, next) => {
-    const prevnum = {};
-    for (const s of ['active', 'pending']) {
-      res.locals.issues.open[s].forEach((todo, i) => {
-        if (todo.startdate) { // interrupt found
-          todo.prevtask = todo.startdate;
-          delete todo.startdate;
-          todo.color = 'done, ';
-        } else {
-          todo.prevtask = prevnum[s] ? 'after k' + prevnum[s] : moment().format('YYYY-MM-DD');
-          if (!todo.color) todo.color = todo.link ? 'active, ' : '';
-        }
-        prevnum[s] = todo.number.toString();
       });
-    }
-    if (res.locals.issues.open.pending[0].color !== 'done, ') {
-      res.locals.issues.open.pending[0].prevtask = `after k${prevnum.active}`;
     }
     next();
   }
@@ -240,10 +379,10 @@ exports.getArchive = () => {
     // define the desired structure
     const entries = [];
     // go through each rawArchive entry and add to entries entry
-    for (let i = 0; i < res.locals.rawArchive.length; i++) {
-      let mTitle = res.locals.rawArchive[i].match(/\s*✔\s([^\@]+)@?/);
-      let mTags = [...res.locals.rawArchive[i].matchAll(/@\w+/g)];
-      let mDone = res.locals.rawArchive[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d(\s*\d\d:\d\d)?)\)(?:\s+@project\(Todos\))?\s*$/);
+    for (let i = 0; i < req.app.locals.rawArchive.length; i++) {
+      let mTitle = req.app.locals.rawArchive[i].match(/\s*✔\s([^\@]+)@?/);
+      let mTags = [...req.app.locals.rawArchive[i].matchAll(/@\w+/g)];
+      let mDone = req.app.locals.rawArchive[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d(\s*\d\d:\d\d)?)\)(?:\s+@project\(Todos\))?\s*$/);
       if (!mDone) continue;
       const taggy = _handleTags(mTags.flat());
       const doneStr = mDone[2] ? mDone[1] : `${mDone[1]} 17:00`;
@@ -344,4 +483,9 @@ exports.renderIt = () => {
 if (process.env.NODE_ENV === 'test') {
   exports._handleTags = _handleTags;
   exports._getLinkUrl = _getLinkUrl;
+  exports._getBizStart = _getBizStart;
+  exports._chunkRange = _chunkRange;
+  exports._copyTodos = _copyTodos;
+  exports._fillRanges = _fillRanges;
+  exports._getRangeArray = _getRangeArray;
 }

@@ -14,7 +14,12 @@ const mw = require("../middleware/index.js");
 // Fakes, Spies, and Mocks
 // -----------------------
 const next = sinon.fake.returns(true);
+const clock = sinon.useFakeTimers({
+  now: 1590994800000, // 2020-06-01 00:00:00
+  shouldAdvanceTime: true
+});
 
+const req = { app: { locals: {}}};
 const res = { locals: {}};
 const expected = { locals: {}};
 
@@ -27,14 +32,13 @@ const mockRawTodos = {
     "☐ @today get thing-a-ma-bob info from SME-guru @4h @prja",
     "☐ @high work with so-and-so on such-and-such @2h @prja @prjb",
     "☐ ghihq•4 edit whos-it's video Q @2h @prjb",
-    "☐ [5d starting 2020-05-20]: Whiz-Bang-Boom conference",
-    "☐ [5d starting 2020-05-11]: vacation",
+    "☐ [2d starting 2020-06-03]: Whiz-Bang-Boom conference",
+    "☐ [3d starting 2020-06-09]: vacation",
     "☐ document feature 22 ghi•ragnoroct/linkme•9 @4h @prjc",
     "☐ write script for whos-it video P @16h @prjb",
     "☐ @today add such-and-such CSS to project page @2h @prjb",
     "☐ @today storyboard feature 22 with design @4h @prjc",
     "☐ @today fix situation with UI weirdness @2h @prjb",
-    "☐ todo this", "☐ todo that"
   ],
   rawArchive: [
     "✔ Paint Sistine Chapel @4h @done(2020-05-09 21:16) @project(Programming Todos)",
@@ -55,6 +59,7 @@ const mockRawTodos = {
 // -----------------------
 describe('Unit:', function() {
   this.beforeEach(function() {
+    req.app.locals = {};
     res.locals = {};
     expected.locals = {};
   });
@@ -70,11 +75,14 @@ describe('Unit:', function() {
 
 describe('Integration:', function() {
   this.beforeAll(function() {
-    res.locals = cloneDeep(mockRawTodos);
+    req.app.locals = cloneDeep(mockRawTodos);
+  });
+  this.afterAll(function() {
+    clock.restore();
   });
   it('parseRawTodos() should produce unordered but categorized json', function() {
     const testedFunction = mw.parseRawTodos();
-    testedFunction(null, res, next);
+    testedFunction(req, res, next);
     expect(res.locals.issues.closed[0]).to.deep.equal({
       closed_on: "2020-05-12",
       title: "decide organization requirements",
@@ -82,25 +90,23 @@ describe('Integration:', function() {
       est: "1.75"
     });
   });
-  it('injectInterrupts() should inject interrupts', function() {
+  it('injectInterrupts() should insert when one day is available', function() {
     const testedFunction = mw.injectInterrupts();
-    testedFunction(null, res, next);
-    expect(res.locals.issues.open.active[4].title).to.equal("Whiz-Bang-Boom conference");
+    testedFunction(req, res, next);
+    expect(res.locals.issues.open.pending[2].link).to.equal("https://github.com/ragnoroct/linkme/issues/9");
   });
-  it('prevnumsForGantt() should cascade items in gantt', function() {
-    const testedFunction = mw.prevnumsForGantt();
-    testedFunction(null, res, next);
-    expect(res.locals.issues.open.pending[3].prevtask).to.equal("after k9");
+  it('injectInterrupts() should respect weekends', function() {
+    expect(res.locals.issues.open.pending[4].startdate.slice(0,-10)).to.equal("2020-06-15T00:00:00");
   });
-  it('prevnumsForGantt() should provide closed items', function() {
+  it('injectInterrupts() should provide closed items', function() {
     expect(res.locals.issues.closed[1].title).to.equal("take cat to the vet");
   });
-  it('prevnumsForGantt() should provide links', function() {
+  it('injectInterrupts() should provide links', function() {
     expect(res.locals.issues.links[1]).to.deep.equal({id:"k8",url:"https://github.com/ragnoroct/linkme/issues/9"});
   });
   it('getArchive() should provide chart data', function() {
     const testedFunction = mw.getArchive();
-    testedFunction(null, res, next);
+    testedFunction(req, res, next);
     expect(res.locals.chartdata[6]).to.deep.equal({x:"2020-05-06 21:37",y:"4.25"});
   });
   it('getArchive() should provide archive entries, sorted', function() {
@@ -113,7 +119,7 @@ describe('Integration:', function() {
   });
   it('getArchiveByWeek() should provide archive entries, sorted by week', function() {
     const testedFunction = mw.getArchiveByWeek();
-    testedFunction(null, res, next);
+    testedFunction(req, res, next);
     expect(res.locals.archive[6]).to.deep.equal({
       weekEnding: "2020-03-29",
       entries: [

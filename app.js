@@ -22,6 +22,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const _isFileUpdated = () => {
+  const fileStats = fs.statSync(TODOFILE);
+  if (app.locals.todoFileUpdated &&
+      app.locals.todoFileUpdated.valueOf() == fileStats.mtime.valueOf()) {
+    return false;
+  } else {
+    app.locals.todoFileUpdated = fileStats.mtime;
+    return true;
+  };
+}
 
 /**
  * After testing, put this in a configurable module that returns the file
@@ -29,42 +39,45 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 app.use((req, res, next) => {
 
-  let fileData = fs.readFileSync(TODOFILE, 'utf8');
-  let fileStats = fs.statSync(TODOFILE);
-  res.locals.todoFileUpdated = fileStats.mtime;
+  if ( _isFileUpdated() ) {
 
-  if (fileData) {
-    const rawTodos = [];
-    const rawArchive = [];
-    inTodos = inArchive = false;
-    fileArray = fileData.split("\n");
-    for (i=0; i < fileArray.length; i++) {
-      if (fileArray[i].match(/^Todos:\s*$/)) {
-        inTodos = true;
-        continue;
+    const fileData = fs.readFileSync(TODOFILE, 'utf8');
+
+    if (fileData) {
+      const rawTodos = [];
+      const rawArchive = [];
+      inTodos = inArchive = false;
+      fileArray = fileData.split("\n");
+      for (i=0; i < fileArray.length; i++) {
+        if (fileArray[i].match(/^Todos:\s*$/)) {
+          inTodos = true;
+          continue;
+        }
+        if (fileArray[i].match(/^\S.+:\s*$/)) {
+          inTodos = false;
+        }
+        if (fileArray[i].match(/^Archive:\s*$/)) {
+          inArchive = true;
+          inTodos = false;
+        }
+        if (inTodos) {
+          let m = fileArray[i].match(/^\s*([☐✔].*)$/);
+          if (m) rawTodos.push(m[1].trim());
+        }
+        if (inArchive) {
+          let m = fileArray[i].match(/^\s*(✔.*)$/);
+          if (m) rawArchive.push(m[1].trim());
+        }
       }
-      if (fileArray[i].match(/^\S.+:\s*$/)) {
-        inTodos = false;
-      }
-      if (fileArray[i].match(/^Archive:\s*$/)) {
-        inArchive = true;
-        inTodos = false;
-      }
-      if (inTodos) {
-        let m = fileArray[i].match(/^\s*([☐✔].*)$/);
-        if (m) rawTodos.push(m[1].trim());
-      }
-      if (inArchive) {
-        let m = fileArray[i].match(/^\s*(✔.*)$/);
-        if (m) rawArchive.push(m[1].trim());
-      }
+      app.locals.rawTodos = rawTodos;
+      app.locals.rawArchive = rawArchive;
+    } else {
+      next(Error('Server error. Could not retrieve the todo list file.'));
     }
-    res.locals.rawTodos = rawTodos;
-    res.locals.rawArchive = rawArchive;
-    next();
-  } else {
-    next(Error('Server error. Could not retrieve the todo list file.'));
   }
+
+  next();
+
 });
 
 app.use('/', indexRouter);
