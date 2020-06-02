@@ -218,14 +218,20 @@ const _chunkRange = (rangeStart, rangeEnd, numBizDays, todoRangeArray) => {
       todoRangeArray.push({ start: finalStart, end: rangeEnd });
       break;
     case 2: // more than two weeks
+      // find num days in first week
       const wFirst = Math.round(moment.duration(
         moment(firstEnd).startOf('day').diff(moment(rangeStart).startOf('day'))
       ).days());
+      // find num days in last week
       const wLast = Math.round(moment.duration(
         moment(rangeEnd).startOf('day').diff(moment(finalStart).startOf('day'))
       ).days());
-      const numWeeks = Math.floor( numBizDays / (wFirst + wLast) );
+      // find number of weeks in-between
+      const numWeeks = Math.floor( ( numBizDays - (wFirst + wLast) ) / 5 );
+      // push them to the array of ranges:
+      // - the first weeks' days
       todoRangeArray.push({ start: rangeStart, end: firstEnd });
+      // - each of the weeks in between
       let istart = moment(rangeStart).isoWeekday(8); // the next monday
       let iend = moment(firstEnd).isoWeekday(13); // the next saturday
       for (i=0;i < numWeeks;i++) {
@@ -233,6 +239,7 @@ const _chunkRange = (rangeStart, rangeEnd, numBizDays, todoRangeArray) => {
         istart.add(7);
         iend.add(7);
       }
+      // - the last weeks' days
       todoRangeArray.push({ start: finalStart, end: rangeEnd });
       break;
   }
