@@ -43,11 +43,11 @@ const mockRawTodos = {
   rawArchive: [
     "✔ Paint Sistine Chapel @4h @done(2020-05-09 21:16) @project(Programming Todos)",
     "✔ Compose symphony @21h @prja @woot @done(2020-05-08 22:45) @project(Todos)",
-    "✔ Take off to the great white north @4h @prja @woot @done(2020-05-03 23:45) @project(Todos)",
-    "✔ Prepare the dogs @1h @prja @done(2020-05-02 21:00) @project(Todos)",
-    "✔ Prepare the sled @1h @prja @done(2020-05-02 22:00) @project(Todos)",
+    "✔ Take off to the great white north @4h @prja @woot @done(2020-05-03 23:45) @project(Todos.Survival)",
+    "✔ Prepare the dogs @1h @prja @done(2020-05-02 21:00) @project(Todos.Survival)",
+    "✔ Prepare the sled @1h @prja @done(2020-05-02 22:00) @project(Todos.Survival)",
     "✔ Restructure archive of books @1h @done(2020-05-06 21:37) @project(Todos)",
-    "✔ Host a party for real @8h @prjc @done(2020-04-12 07:00) @project(Todos)",
+    "✔ @today Host a party for real @8h @prjc @done(2020-04-12 07:00) @project(Todos)",
     "✔ Host a party @1h @prjc @done(2020-04-01 07:00) @project(Todos)",
     "✔ Do something fun @1h @prjc @done(2020-03-29 07:00) @project(Todos)"
   ]
@@ -109,13 +109,24 @@ describe('Integration:', function() {
     testedFunction(req, res, next);
     expect(res.locals.chartdata[6]).to.deep.equal({x:"2020-05-06 21:37",y:"4.25"});
   });
-  it('getArchive() should provide archive entries, sorted', function() {
+  it('getArchive() should provide archive entries, sorted, with proper title', function() {
     expect(res.locals.entries[5]).to.deep.equal({
       closed_on: "2020-04-12 07:00",
       title: "Host a party for real",
       tagstring: "@prjc",
       est: "2.00"
     });
+  });
+  it('getArchive() should match sub-todos too', function() {
+    expect(res.locals.entries[2]).to.deep.equal({
+      closed_on: "2020-05-03 23:45",
+      title: "Take off to the great white north",
+      tagstring: "@prja @woot",
+      est: "1.00"
+      });
+  });
+  it('getArchive() should NOT match items from sections outside of Todos', function() {
+    expect(res.locals.entries[0].title).to.not.equal("Paint Sistine Chapel");
   });
   it('getArchiveByWeek() should provide archive entries, sorted by week', function() {
     const testedFunction = mw.getArchiveByWeek();

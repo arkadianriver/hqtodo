@@ -4,8 +4,8 @@
   "author": "Gary Faircloth",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "NODE_ENV=test mocha",
-    "nyan": "NODE_ENV=test mocha -R nyan",
+    "test": "NODE_ENV=test mocha test/test*.js",
+    "nyan": "NODE_ENV=test mocha -R nyan test/test*.js",
     "gh-pages": "node ./bin/mkpage"
   },
   "main": "bin/www",

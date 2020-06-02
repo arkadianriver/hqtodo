@@ -380,9 +380,9 @@ exports.getArchive = () => {
     const entries = [];
     // go through each rawArchive entry and add to entries entry
     for (let i = 0; i < req.app.locals.rawArchive.length; i++) {
-      let mTitle = req.app.locals.rawArchive[i].match(/\s*✔\s([^\@]+)@?/);
+      let mTitle = req.app.locals.rawArchive[i].match(/\s*✔\s+(?:@today\s|@high\s|@low\s)?([^\@]+)@?/);
       let mTags = [...req.app.locals.rawArchive[i].matchAll(/@\w+/g)];
-      let mDone = req.app.locals.rawArchive[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d(\s*\d\d:\d\d)?)\)(?:\s+@project\(Todos\))?\s*$/);
+      let mDone = req.app.locals.rawArchive[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d(\s*\d\d:\d\d)?)\)(?:\s+@project\(Todos)/);
       if (!mDone) continue;
       const taggy = _handleTags(mTags.flat());
       const doneStr = mDone[2] ? mDone[1] : `${mDone[1]} 17:00`;
