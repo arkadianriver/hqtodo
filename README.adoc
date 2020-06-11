@@ -35,7 +35,7 @@ pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img s
 
 == Running the app
 
-> *Prereq:* Currently requires NodeJS v12.
+*Prereq:* Currently requires NodeJS v12.
 
 . Copy the `config/default.json` file to `config/production.json`
 and add your info to the new file.
@@ -126,6 +126,20 @@ Example:
 ----
 ☐ [5d starting 2020-05-18]: Whiz-Bang-Boom conference
 ----
+
+=== Milestones
+
+Milestones have the same form as an interrupt, but with a length
+of zero days (`0d`).
+
+Example:
+
+[source,bash]
+----
+☐ [0d starting 2020-06-15]: Complete Project A @proja
+----
+
+Milestones show up in their own section above the others.
 
 === Referencing a GitHub repo
 

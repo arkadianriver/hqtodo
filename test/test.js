@@ -39,6 +39,7 @@ const mockRawTodos = {
     "☐ @today add such-and-such CSS to project page @2h @prjb",
     "☐ @today storyboard feature 22 with design @4h @prjc",
     "☐ @today fix situation with UI weirdness @2h @prjb",
+    "☐ [0d starting 2020-06-15]: Complete ProjA @proja"
   ],
   rawArchive: [
     "✔ Paint Sistine Chapel @4h @done(2020-05-09 21:16) @project(Programming Todos)",
@@ -89,6 +90,11 @@ describe('Integration:', function() {
       tagstring: "@prja @woot",
       est: "1.75"
     });
+  });
+  it('parseRawTodos() should capture milestones', function() {
+    const testedFunction = mw.parseRawTodos();
+    testedFunction(req, res, next);
+    expect(res.locals.issues.milestones[0].startdate).to.equal("2020-06-15T00:00:00");
   });
   it('injectInterrupts() should insert when one day is available', function() {
     const testedFunction = mw.injectInterrupts();

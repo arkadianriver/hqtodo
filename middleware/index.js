@@ -71,6 +71,7 @@ exports.parseRawTodos = () => {
         pending: []
       },
       closed: [],
+      milestones: [],
       interrupts: [],
       links: []
     }
@@ -87,23 +88,35 @@ exports.parseRawTodos = () => {
         // quickly grab linkUrl if any
         let linkUrl = m[3] ? _getLinkUrl(m[3]) : null;
         if (linkUrl) issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
-        // quickly add interrupts
+        // quickly add milestones and interrupts
         if (m[3].match(/^\[/)) {
           const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/);
-          const enddate = moment(m4[2])
-            .add(parseInt(m4[1].slice(0,-1), 10), 'days')
-            .format('YYYY-MM-DD');
           if (m4) {
-            issues['interrupts'].push({
-              number: j,
-              startdate: m4[2],
-              enddate: enddate,
-              title: m4[3],
-              est: m4[1]
-            });
+            const numdays = parseInt(m4[1].slice(0, -1), 10);
+            const enddate = moment(m4[2])
+              .add(numdays, 'days')
+              .format('YYYY-MM-DD');
+            if (numdays === 0) {           // milestone
+              issues['milestones'].push({
+                number: j,
+                startdate: m4[2] + 'T00:00:00',
+                enddate: m4[2],
+                title: m4[3],
+                color: 'milestone, ',
+                est: m4[1]
+              });
+            } else {                       // interrupt
+              issues['interrupts'].push({
+                number: j,
+                startdate: m4[2],
+                enddate: enddate,
+                title: m4[3],
+                est: m4[1]
+              });
+            }
+            j++;
+            continue;
           }
-          j++;
-          continue;
         }
         // handle the rest
         const taggy = _handleTags(m1.flat());
@@ -151,7 +164,8 @@ exports.parseRawTodos = () => {
         j++;
       }
     }
-    // sort interrupts and closed before returning
+    // sort milestones, interrupts, and closed before returning
+    if (issues.milestones) issues.milestones.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
     if (issues.interrupts) issues.interrupts.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
     if (issues.closed) issues.closed.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.issues = issues;
