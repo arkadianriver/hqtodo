@@ -1,5 +1,5 @@
             <li><span class="bullet">✔</span> <span class="date"><%= t['closed_on'] %></span>
               <span class="title" style="font-style:italic"><%= t['title'] %></span>
-              <span class="tagstring"><%= t['tagstring'] %></span>
+              <% if (t.hasOwnProperty('tags')) { %><span class="tagstring"><%= t['tags'].join(' ') %></span><% } %>
               <span class="estimate">(<%= t['est'] %>)</span>
             </li>

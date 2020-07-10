@@ -29,6 +29,10 @@ router.get('/todos/archived', mw.getArchive(), (req, res, next) => {
   res.json(res.locals.entries);
 });
 
+router.get('/todos/archivedbytag', mw.getArchive(), mw.getArchiveByTag(), (req, res, next) => {
+  res.json(res.locals.archivebytag);
+});
+
 router.get('/todos/archivedbyweek', mw.getArchive(), mw.getArchiveByWeek(), (req, res, next) => {
   res.json(res.locals.archive);
 });
@@ -37,6 +41,7 @@ router.get('/',
   mw.parseRawTodos(),
   mw.injectInterrupts(),
   mw.getArchive(),
+  mw.getArchiveByTag(),
   mw.getArchiveByWeek(),
   mw.renderIt()
 );

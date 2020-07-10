@@ -116,23 +116,21 @@ describe('Integration:', function() {
     expect(res.locals.chartdata[6]).to.deep.equal({x:"2020-05-06 21:37",y:"4.25"});
   });
   it('getArchive() should provide archive entries, sorted, with proper title', function() {
-    expect(res.locals.entries[5]).to.deep.equal({
-      closed_on: "2020-04-12 07:00",
-      title: "Host a party for real",
-      tagstring: "@prjc",
-      est: "2.00"
-    });
+    expect(res.locals.entries[5].title).to.equal("Host a party for real");
   });
   it('getArchive() should match sub-todos too', function() {
-    expect(res.locals.entries[2]).to.deep.equal({
-      closed_on: "2020-05-03 23:45",
-      title: "Take off to the great white north",
-      tagstring: "@prja @woot",
-      est: "1.00"
-      });
+    expect(res.locals.entries[2].title).to.equal("Take off to the great white north");
   });
   it('getArchive() should NOT match items from sections outside of Todos', function() {
     expect(res.locals.entries[0].title).to.not.equal("Paint Sistine Chapel");
+  });
+  it('getArchiveByTag() should total item points', function() {
+    const testedFunction = mw.getArchiveByTag();
+    testedFunction(req, res, next);
+    expect(res.locals.archivebytag[0].points).to.equal(6.75);
+  });
+  it('getArchiveByTag() should match items', function() {
+    expect(res.locals.archivebytag[2].tag).to.equal("woot");
   });
   it('getArchiveByWeek() should provide archive entries, sorted by week', function() {
     const testedFunction = mw.getArchiveByWeek();
@@ -143,7 +141,7 @@ describe('Integration:', function() {
         {
           closed_on: "2020-03-29 07:00",
           title: "Do something fun",
-          tagstring: "@prjc",
+          tags: ["@prjc"],
           est: "0.25"
         }
       ]

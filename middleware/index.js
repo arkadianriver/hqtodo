@@ -416,11 +416,11 @@ exports.getArchive = () => {
       const taggy = _handleTags(mTags.flat());
       const doneStr = mDone[2] ? mDone[1] : `${mDone[1]} 17:00`;
       let title = mTitle[1].trim();
-      let tagstring = taggy[1];
+      let tags = taggy[1] ? taggy[1].split(' ') : [];
       entries.push({
         closed_on: doneStr,
         title: title,
-        tagstring: tagstring,
+        tags: tags,
         est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
       });
     }
@@ -438,6 +438,36 @@ exports.getArchive = () => {
       });
     });
     res.locals.chartdata = chartdata;
+    next();
+  }
+}
+
+
+/**
+ * take sorted JSON archive and swizzle it by tag
+ */
+exports.getArchiveByTag = () => {
+  return (req, res, next) => {
+    if (!Array.isArray(res.locals.entries) || !res.locals.entries.length) {
+      res.locals.archivebytag = [];
+      next();
+      return;
+    }
+    const bytag = {};
+    res.locals.entries.forEach( e => {
+      e.tags.forEach( tag => {
+        const category = tag.slice(1);
+        bytag.hasOwnProperty(category) || ( bytag[category] = { points: 0, items: [] } );
+        bytag[category].points += Number(e.est);
+        bytag[category].items.push({ closed_on: e.closed_on, title: e.title, est: e.est });
+      });
+    });
+    res.locals.archivebytag = [];
+    for (const [k, v] of Object.entries(bytag)) {
+      v.tag = k;
+      res.locals.archivebytag.push(v);
+    }
+    res.locals.archivebytag.sort((a, b) => a.tag < b.tag ? -1 : 1);
     next();
   }
 }
@@ -498,6 +528,7 @@ exports.renderIt = () => {
     res.render('index', {
       issues: res.locals.issues,
       archive: res.locals.archive,
+      bytag: res.locals.archivebytag,
       jsonchartdata: JSON.stringify(res.locals.chartdata),
       fileupdated: fileupdated,
       pageupdated: pageupdated,

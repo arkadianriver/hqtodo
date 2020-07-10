@@ -97,9 +97,8 @@ Syntax:
 * The optional `@Nh` tag indicates your estimated N hours. No tag gets the default of 2 hours.
 * You can provide any number of `@custom` tags for your own custom filtering.
   They're simply displayed with the title.
-* When you press kbd:[Super] + kbd:[D] to mark a task with a checkmark and a `@done` tag, it's listed
+* When you press kbd:[Super+D] to mark a task with a checkmark and a `@done` tag, it's listed
   in the "`Recently closed todos`" section of the web page.
-  FIXME: currently, you gotta remove the priority tag before doing this.
 
 Example:
 
@@ -161,3 +160,5 @@ You can of course change the patterns to link to whatever you want.
 If you archive your done items (e.g. kbd:[Cmd+Shift+A]]), they will be available at
 the bottom along with a graph of the cumulative story points you've knocked out
 over time. Marvel at your progress!
+
+TIP: Use category tags in your todo items to see them grouped and totaled by category.
