@@ -15,6 +15,22 @@
       font-weight: 500;
       margin-top: 2em;
     }
+    h3 {
+      font-size: 20pt;
+      font-weight: 500;
+      margin-top: 1.2em;
+      margin-left: 1.2em;
+      padding: 3px 9px 3px 9px;
+      background-color: #bc644a;
+      color: #efe9b7;
+    }
+    h4 {
+      font-size: 16pt;
+      font-weight: 500;
+      margin-top: 1em;
+      /* margin-left: 1.2em; */
+      color: #bc644a;
+    }
     ul {
       list-style-type: none;
     }
@@ -79,19 +95,19 @@
 
     
         section In Progress
-        get thing-a-ma-bob info from SME-guru @prja :k3, 2020-06-12T00:00:00, 12h
-        work with so-and-so on such-and-such @prja @prjb :crit, k4, 2020-06-12T12:00:00, 6h
-        add such-and-such CSS to project page @prjb :k8, 2020-06-12T18:00:00, 6h
-        storyboard feature 22 with design @prjc :k9, 2020-06-15T00:00:00, 12h
-        fix situation with UI weirdness @prjb :k10, 2020-06-15T12:00:00, 6h
+        get thing-a-ma-bob info from SME-guru @prja :k3, 2020-07-13T00:00:00, 12h
+        work with so-and-so on such-and-such @prja @prjb :crit, k4, 2020-07-13T12:00:00, 6h
+        add such-and-such CSS to project page @prjb :k8, 2020-07-13T18:00:00, 6h
+        storyboard feature 22 with design @prjc :k9, 2020-07-14T00:00:00, 12h
+        fix situation with UI weirdness @prjb :k10, 2020-07-14T12:00:00, 6h
         
         section Backlog
-        ghihq•4 edit whos-it&#39;s video Q @prjb :active, k5, 2020-06-15T18:00:00, 6h
-        document feature 22 ghi•ragnoroct/linkme•9 @prjc :active, k6, 2020-06-16T00:00:00, 12h
-        write script for whos-it video P @prjb :k7, 2020-06-16T12:00:00, 48h
-        todo this  :k11, 2020-06-18T12:00:00, 6h
-        todo that  :k12, 2020-06-18T18:00:00, 6h
-        Thaw and cook the fish I caught  :k13, 2020-06-19T00:00:00, 6h
+        ghihq•4 edit whos-it&#39;s video Q @prjb :active, k5, 2020-07-14T18:00:00, 6h
+        document feature 22 ghi•ragnoroct/linkme•9 @prjc :active, k6, 2020-07-15T00:00:00, 12h
+        write script for whos-it video P @prjb :k7, 2020-07-15T12:00:00, 48h
+        todo this  :k11, 2020-07-17T12:00:00, 6h
+        todo that  :k12, 2020-07-17T18:00:00, 6h
+        Thaw and cook the fish I caught  :k13, 2020-07-20T00:00:00, 6h
         
         click k5 call linkTo("https://github.com/arkadianriver/hqtodo/issues/4")
         click k6 call linkTo("https://github.com/ragnoroct/linkme/issues/9")
@@ -105,12 +121,12 @@
   <ul id="closed" style="list-style-type:none;">    
             <li><span class="bullet">✔</span> <span class="date">2020-05-12</span>
               <span class="title" style="font-style:italic">decide organization requirements</span>
-              <span class="tagstring">@prja @woot</span>
+              
               <span class="estimate">(1.75)</span>
             </li>
             <li><span class="bullet">✔</span> <span class="date">2020-05-10</span>
               <span class="title" style="font-style:italic">take cat to the vet</span>
-              <span class="tagstring"></span>
+              
               <span class="estimate">(0.75)</span>
             </li>
 
@@ -123,6 +139,7 @@
     <label for="display-toggle" id="display-button"><span>▹ show the archive</span></label>
     <label for="display-toggle" id="hide-button"><span>▿ hide the archive</span></label>
     <div id="archive" style="padding-top:1rem;padding-right:2rem">
+      <h3>by Week</h3>
       <ul>
         <li>
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-05-10</div>
@@ -200,8 +217,70 @@
           </ul><span>&nbsp;</span>
         </li>
       </ul>
-    </div>
-  
+      
+      <h3>by Tag</h3>
+      <ul>
+        <li><h4>prja (6.75)</h4>
+          <ul>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-08 22:45</span>
+              <span class="title" style="font-style:italic">Compose symphony</span>
+              
+              <span class="estimate">(5.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-03 23:45</span>
+              <span class="title" style="font-style:italic">Take off to the great white north</span>
+              
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-02 22:00</span>
+              <span class="title" style="font-style:italic">Prepare the sled</span>
+              
+              <span class="estimate">(0.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-02 21:00</span>
+              <span class="title" style="font-style:italic">Prepare the dogs</span>
+              
+              <span class="estimate">(0.25)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+        <li><h4>prjc (2.5)</h4>
+          <ul>
+            <li><span class="bullet">✔</span> <span class="date">2020-04-12 07:00</span>
+              <span class="title" style="font-style:italic">Host a party for real</span>
+              
+              <span class="estimate">(2.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-04-01 07:00</span>
+              <span class="title" style="font-style:italic">Host a party</span>
+              
+              <span class="estimate">(0.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-03-29 07:00</span>
+              <span class="title" style="font-style:italic">Do something fun</span>
+              
+              <span class="estimate">(0.25)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+        <li><h4>woot (6.25)</h4>
+          <ul>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-08 22:45</span>
+              <span class="title" style="font-style:italic">Compose symphony</span>
+              
+              <span class="estimate">(5.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2020-05-03 23:45</span>
+              <span class="title" style="font-style:italic">Take off to the great white north</span>
+              
+              <span class="estimate">(1.00)</span>
+            </li>
+          </ul><span>&nbsp;</span>
+        </li>
+      </ul>
+      
+  </div>
+
 </main>
 
   <hr/>
@@ -210,7 +289,7 @@
   href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
   with ♥ from Mermaid and ApexCharts
   </p>
-  <p style="font-size:smaller">Page last updated 2020-06-11T07:21:16Z<br/>Task file last updated 2020-06-11T07:21:16Z</p>
+  <p style="font-size:smaller">Page last updated 2020-07-10T01:06:51Z<br/>Task file last updated 2020-07-10T01:06:51Z</p>
   </div>
 
   <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
