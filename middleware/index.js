@@ -459,7 +459,12 @@ exports.getArchiveByTag = () => {
         const category = tag.slice(1);
         bytag.hasOwnProperty(category) || ( bytag[category] = { points: 0, items: [] } );
         bytag[category].points += Number(e.est);
-        bytag[category].items.push({ closed_on: e.closed_on, title: e.title, est: e.est });
+        bytag[category].items.push({
+          closed_on: e.closed_on,
+          title: e.title,
+          tags: e.tags,
+          est: e.est
+        });
       });
     });
     res.locals.archivebytag = [];
