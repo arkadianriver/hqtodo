@@ -77,10 +77,11 @@
       padding: 0.8em 0 1em 0;
     }
     /* show/hide assist https://stackoverflow.com/a/44297341 */
-    input, label#hide-button, #archive { display:none; }
-    input#display-toggle:checked ~ label#display-button { display: none; }
-    input#display-toggle:checked ~ label#hide-button { display: block; }
-    input#display-toggle:checked ~ #archive { display: block; }
+    input, label#display-button { display:none; }
+    #archive { display:block; }
+    input#display-toggle:checked ~ label#display-button { display: block; }
+    input#display-toggle:checked ~ label#hide-button { display: none; }
+    input#display-toggle:checked ~ #archive { display: none; }
   </style>
 </head>
 <body>
@@ -95,19 +96,19 @@
 
     
         section In Progress
-        get thing-a-ma-bob info from SME-guru @prja :k3, 2020-07-22T00:00:00, 12h
-        work with so-and-so on such-and-such @prja @prjb :crit, k4, 2020-07-22T12:00:00, 6h
-        add such-and-such CSS to project page @prjb :k8, 2020-07-22T18:00:00, 6h
-        storyboard feature 22 with design @prjc :k9, 2020-07-23T00:00:00, 12h
-        fix situation with UI weirdness @prjb :k10, 2020-07-23T12:00:00, 6h
+        get thing-a-ma-bob info from SME-guru @prja :k3, 2020-09-04T00:00:00, 12h
+        work with so-and-so on such-and-such @prja @prjb :crit, k4, 2020-09-04T12:00:00, 6h
+        add such-and-such CSS to project page @prjb :k8, 2020-09-04T18:00:00, 6h
+        storyboard feature 22 with design @prjc :k9, 2020-09-07T00:00:00, 12h
+        fix situation with UI weirdness @prjb :k10, 2020-09-07T12:00:00, 6h
         
         section Backlog
-        ghihq•4 edit whos-it&#39;s video Q @prjb :active, k5, 2020-07-23T18:00:00, 6h
-        document feature 22 ghi•ragnoroct/linkme•9 @prjc :active, k6, 2020-07-24T00:00:00, 12h
-        write script for whos-it video P @prjb :k7, 2020-07-27T00:00:00, 48h
-        todo this  :k11, 2020-07-29T00:00:00, 6h
-        todo that  :k12, 2020-07-29T06:00:00, 6h
-        Thaw and cook the fish I caught  :k13, 2020-07-29T12:00:00, 6h
+        ghihq•4 edit whos-it&#39;s video Q @prjb :active, k5, 2020-09-07T18:00:00, 6h
+        document feature 22 ghi•ragnoroct/linkme•9 @prjc :active, k6, 2020-09-08T00:00:00, 12h
+        write script for whos-it video P @prjb :k7, 2020-09-08T12:00:00, 48h
+        todo this  :k11, 2020-09-10T12:00:00, 6h
+        todo that  :k12, 2020-09-10T18:00:00, 6h
+        Thaw and cook the fish I caught  :k13, 2020-09-11T00:00:00, 6h
         
         click k5 call linkTo("https://github.com/arkadianriver/hqtodo/issues/4")
         click k6 call linkTo("https://github.com/ragnoroct/linkme/issues/9")
@@ -141,7 +142,7 @@
     <div id="archive" style="padding-top:1rem;padding-right:2rem">
       <h3>by Week</h3>
       <ul>
-        <li>
+        <li id="2020-05-10">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-05-10</div>
           <ul id="0" style="margin-left: 0">
             <li><span class="bullet">✔</span> <span class="date">2020-05-08 22:45</span>
@@ -156,7 +157,7 @@
             </li>
           </ul><span>&nbsp;</span>
         </li>
-        <li>
+        <li id="2020-05-03">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-05-03</div>
           <ul id="1" style="margin-left: 0">
             <li><span class="bullet">✔</span> <span class="date">2020-05-03 23:45</span>
@@ -176,17 +177,17 @@
             </li>
           </ul><span>&nbsp;</span>
         </li>
-        <li>
+        <li id="2020-04-26">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-26</div>
           <ul id="2" style="margin-left: 0">
           </ul><span>&nbsp;</span>
         </li>
-        <li>
+        <li id="2020-04-19">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-19</div>
           <ul id="3" style="margin-left: 0">
           </ul><span>&nbsp;</span>
         </li>
-        <li>
+        <li id="2020-04-12">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-12</div>
           <ul id="4" style="margin-left: 0">
             <li><span class="bullet">✔</span> <span class="date">2020-04-12 07:00</span>
@@ -196,7 +197,7 @@
             </li>
           </ul><span>&nbsp;</span>
         </li>
-        <li>
+        <li id="2020-04-05">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-04-05</div>
           <ul id="5" style="margin-left: 0">
             <li><span class="bullet">✔</span> <span class="date">2020-04-01 07:00</span>
@@ -206,7 +207,7 @@
             </li>
           </ul><span>&nbsp;</span>
         </li>
-        <li>
+        <li id="2020-03-29">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: 2020-03-29</div>
           <ul id="6" style="margin-left: 0">
             <li><span class="bullet">✔</span> <span class="date">2020-03-29 07:00</span>
@@ -220,7 +221,7 @@
       
       <h3>by Tag</h3>
       <ul>
-        <li><h4>prja (6.75)</h4>
+        <li id="prja"><h4>prja (6.75)</h4>
           <ul>
             <li><span class="bullet">✔</span> <span class="date">2020-05-08 22:45</span>
               <span class="title" style="font-style:italic">Compose symphony</span>
@@ -244,7 +245,7 @@
             </li>
           </ul><span>&nbsp;</span>
         </li>
-        <li><h4>prjc (2.5)</h4>
+        <li id="prjc"><h4>prjc (2.5)</h4>
           <ul>
             <li><span class="bullet">✔</span> <span class="date">2020-04-12 07:00</span>
               <span class="title" style="font-style:italic">Host a party for real</span>
@@ -263,7 +264,7 @@
             </li>
           </ul><span>&nbsp;</span>
         </li>
-        <li><h4>woot (6.25)</h4>
+        <li id="woot"><h4>woot (6.25)</h4>
           <ul>
             <li><span class="bullet">✔</span> <span class="date">2020-05-08 22:45</span>
               <span class="title" style="font-style:italic">Compose symphony</span>
@@ -289,7 +290,7 @@
   href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
   with ♥ from Mermaid and ApexCharts
   </p>
-  <p style="font-size:smaller">Page last updated 2020-07-21T06:11:22Z<br/>Task file last updated 2020-07-21T06:11:22Z</p>
+  <p style="font-size:smaller">Page last updated 2020-09-03T00:26:53Z<br/>Task file last updated 2020-09-03T00:26:53Z</p>
   </div>
 
   <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
