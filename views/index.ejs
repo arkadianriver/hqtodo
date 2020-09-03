@@ -77,10 +77,11 @@
       padding: 0.8em 0 1em 0;
     }
     /* show/hide assist https://stackoverflow.com/a/44297341 */
-    input, label#hide-button, #archive { display:none; }
-    input#display-toggle:checked ~ label#display-button { display: none; }
-    input#display-toggle:checked ~ label#hide-button { display: block; }
-    input#display-toggle:checked ~ #archive { display: block; }
+    input, label#display-button { display:none; }
+    #archive { display:block; }
+    input#display-toggle:checked ~ label#display-button { display: block; }
+    input#display-toggle:checked ~ label#hide-button { display: none; }
+    input#display-toggle:checked ~ #archive { display: none; }
   </style>
 </head>
 <body>
@@ -140,7 +141,7 @@
       <h3>by Week</h3>
       <ul>
         <%_ archive.forEach( (w, wi) => { _%>
-        <li>
+        <li id="<%= w.weekEnding %>">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: <%= w.weekEnding %></div>
           <ul id="<%= wi %>" style="margin-left: 0">
             <%_ w.entries.forEach( e => { _%>
@@ -154,7 +155,7 @@
       <h3>by Tag</h3>
       <ul>
         <%_ bytag.forEach( e => { _%>
-        <li><h4><%= e.tag %> (<%= e.points.toString() %>)</h4>
+        <li id="<%= e.tag %>"><h4><%= e.tag %> (<%= e.points.toString() %>)</h4>
           <ul>
             <%_ e.items.forEach( i => { _%>
 <%- include('partials/closed_entry', {t: i }) %>
