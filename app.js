@@ -47,7 +47,7 @@ app.use((req, res, next) => {
       const rawTodos = [];
       const rawArchive = [];
       inTodos = inArchive = false;
-      fileArray = fileData.split("\n");
+      fileArray = fileData.split(/\r?\n/);
       for (i=0; i < fileArray.length; i++) {
         if (fileArray[i].match(/^Todos:\s*$/)) {
           inTodos = true;
