@@ -111,6 +111,7 @@ Example:
 
 You can let folks know about vacations and other "`interruptions`"
 to your steady velocity.
+Specify the duration and start date as business days only.
 
 Syntax:
 

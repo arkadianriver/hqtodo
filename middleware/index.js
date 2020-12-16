@@ -93,9 +93,6 @@ exports.parseRawTodos = () => {
           const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/);
           if (m4) {
             const numdays = parseInt(m4[1].slice(0, -1), 10);
-            const enddate = moment(m4[2])
-              .add(numdays, 'days')
-              .format('YYYY-MM-DD');
             if (numdays === 0) {           // milestone
               issues['milestones'].push({
                 number: j,
@@ -106,6 +103,9 @@ exports.parseRawTodos = () => {
                 est: m4[1]
               });
             } else {                       // interrupt
+              const enddate = moment(m4[2])
+                .businessAdd(numdays - 1, 'days')
+                .format('YYYY-MM-DD');
               issues['interrupts'].push({
                 number: j,
                 startdate: m4[2],
@@ -184,6 +184,10 @@ const _getBizStart = (myMoment, asString) => {
   //initialize to today (or first avail biz day)
   if (!myMoment.isBusinessDay()) myMoment.startOf('day').nextBusinessDay();
   return asString ? myMoment.format('YYYY-MM-DD') : myMoment;
+}
+
+const _bizRangeEnd = (startDate, numBizDays) => {
+
 }
 
 /**
