@@ -186,10 +186,6 @@ const _getBizStart = (myMoment, asString) => {
   return asString ? myMoment.format('YYYY-MM-DD') : myMoment;
 }
 
-const _bizRangeEnd = (startDate, numBizDays) => {
-
-}
-
 /**
  * We gotta account for the weekends in our range of time. So, with our known total
  * numBizDays, I see three scenarios:
