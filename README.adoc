@@ -24,7 +24,7 @@ Tasks always shift with time, starting from now into the future.
 It's meant for todos knocked out at a regular story point velocity per day
 and labeled in a particular way.
 Completed items are displayed underneath, with _Archived_ items available.
-An https://apexcharts.com/[ApexFlow] chart shows the cumulative story points
+An https://apexcharts.com/[ApexCharts] area chart shows the cumulative story points
 you've knocked out.
 
 pass:[<a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><div align="center"><h3>View the sample</h3><img src="readme.png"/></div></a>]
