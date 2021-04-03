@@ -9,7 +9,7 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
-  build-test-deploy:
+  test-build-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -25,9 +25,11 @@ jobs:
       run: |
         npm ci
         npm test
-    - name: Build 🔧
+    - if: github.ref == 'refs/heads/master'
+      name: Build 🔧
       run: npm run gh-pages
-    - name: Deploy to Pages 🚀
+    - if: github.ref == 'refs/heads/master'
+      name: Deploy to Pages 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
