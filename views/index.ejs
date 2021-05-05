@@ -6,6 +6,22 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
   <style>
+    .hover {
+      position: absolute;
+      border-radius: 3px;
+      border: solid 1px black;
+      top: 0px;
+      right: 5px;
+      background-color: #e0a0a0;
+      padding: 6px;
+      margin: 0;
+    }
+    .hideme {
+      visibility: hidden;
+    }
+    .showme {
+      visibility: visible;
+    }
     h1 {
       font-size: 34pt;
       font-weight: 500;
@@ -89,10 +105,22 @@
   <h1>What <%= whoami %> is up to ...</h1>
 </header>
 <main>
+  <% issues.blockers && issues.blockers.forEach( l => { %>
+  <div id="hk<%= l.number %>" class="hover hideme">
+    <%- l.hover %><% if (l.link) {%><br /><a target="_blank" href="<%= l.link %>">see link</a><%}%>
+  </div>
+  <% }); %>
   <div id="ourgantt" class="mermaid">
   gantt
     excludes weekends
     todayMarker off
+
+    <% if (issues.blockers.length) { -%>
+    section Blockers
+    <% issues.blockers.forEach(b => { -%>
+    <%= b.title %> <%= b['tagstring'] %> :<%= b['color'] %>k<%= b['number'] %>, <%= b['startdate'] %>, <%= b['est'] %>
+    <% }); -%>
+    <% } -%>
 
     <% if (issues.milestones.length) { -%>
     section Milestones
@@ -117,7 +145,11 @@
 
     <% issues.links && issues.links.forEach( l => { -%>
     click <%= l.id %> call linkTo("<%= l.url %>")
-    <% }); %>
+    <% }); -%>
+
+    <% issues.blockers && issues.blockers.forEach( l => { -%>
+    click k<%= l.number -%> call showHover("k<%= l.number -%>")
+    <% }); -%>
   </div>
   <div style="display:flex;justify-content:space-around;width:100%">
     <p style="font-size:smaller">Todos with issue numbers link to GitHub.</p>
@@ -177,10 +209,14 @@
   </p>
   <p style="font-size:smaller">Page last updated <%= pageupdated %><br/>Task file last updated <%= fileupdated %></p>
   </div>
-
   <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script>
+    var showHover = id => {
+      const hover = document.querySelector(`#h${id}`);
+      hover.classList.toggle("showme");
+      hover.classList.toggle("hideme");
+    };
     var linkTo = url => window.open(url, "_blank");
     mermaid.initialize({
       startOnLoad: true,

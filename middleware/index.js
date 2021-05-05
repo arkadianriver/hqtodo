@@ -27,7 +27,7 @@ const _handleTags = (tags) => {
   let est = 2;
   let tagstring = '';
   for (let i = 0; i < tags.length; i++) {
-    if (tags[i].match(/(?:@low|@today|@high|@done|@project)/)) {
+    if (tags[i].match(/(?:@low|@today|@high|@done|@project|@blk)/)) {
       continue;
     } else if (tags[i].match(/@\d/)) {
       est = parseInt(tags[i].slice(1, -1), 10);
@@ -38,6 +38,34 @@ const _handleTags = (tags) => {
   }
   const estimate = est * HOURADJUST;
   return [estimate, tagstring.trimRight()];
+}
+
+
+const _capitalize = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+
+/**
+ * Called when a task is blocked by someone, indicated by one or more tags of the form
+ * `@blk.<method>.<person>`. A string is formatted and returned for the _Blockers_ section
+ * along with a new tags string.
+ * 
+ * @param {Object[]} tags - original full set of tags
+ * @returns String to append to text output
+ */
+const _handleBlockers = (tags) => {
+  let str = '';
+  let br = "<br />";
+  let lastindex = tags.length - 1;
+  for (let i = 0; i <= lastindex; i++) {
+    if (i === lastindex) br = '';
+    const m = tags[i].match(/^@blk\.(.*?)\.(.*)/);
+    str += m && m.length > 2
+         ? `await ${m[1]} response from ${_capitalize(m[2])}${br}`
+         : '';
+  }
+  return str;
 }
 
 
@@ -73,21 +101,24 @@ exports.parseRawTodos = () => {
       closed: [],
       milestones: [],
       interrupts: [],
-      links: []
+      links: [],
+      blockers: []
     }
     // parse each line and push the data record to the right place in the structure
     for (let i = 0, j = 1; i < req.app.locals.rawTodos.length; i++) {
       // breaking up regex into 3 passes:
       // 1. get open/closed state, optional pipeline, and title
       let m = req.app.locals.rawTodos[i].match(/\s*([☐✔])\s(@low|@today|@high)?([^\@]+)@?/);
-      let m1 = [...req.app.locals.rawTodos[i].matchAll(/@\w+/g)];                  // 2. get tags
+      let m1 = [...req.app.locals.rawTodos[i].matchAll(/@\S+/g)];                  // 2. get tags
       let m2 = req.app.locals.rawTodos[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d)/); // 3. get done date
       if (m) {
+        const tags = m1 && m1.length ? m1.flat() : [];
+        const isBlocker = tags.some(e => e.match(/^@blk/));
         // skip Frozens
         if (m[2] && m[2] == '@low') continue;
         // quickly grab linkUrl if any
         let linkUrl = m[3] ? _getLinkUrl(m[3]) : null;
-        if (linkUrl) issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
+        if (linkUrl && !isBlocker) issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
         // quickly add milestones and interrupts
         if (m[3].match(/^\[/)) {
           const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/);
@@ -119,8 +150,8 @@ exports.parseRawTodos = () => {
           }
         }
         // handle the rest
-        const taggy = _handleTags(m1.flat());
-        let title = m[3].trim();
+        const taggy = _handleTags(tags);
+        const title = m[3].trim();
         let tagstring = taggy[1];
         let est = Math.ceil(taggy[0]).toString() + 'h';
         if (m[1] === '✔') {  // the Dones
@@ -130,35 +161,32 @@ exports.parseRawTodos = () => {
             tagstring: tagstring,
             est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
           });
-        } else {            // the Opens
+        } else {            // the Opens and Blockers
+          const record = {
+            number: j,
+            title: title,
+            tagstring: tagstring,
+            est: est,
+            link: linkUrl,
+            color: ''
+          };
           switch (m[2]) {
-            case '@today':              // the actives
-              issues['open']['active'].push({
-                number: j,
-                title: title,
-                tagstring: tagstring,
-                link: linkUrl,
-                est: est
-              });
+            case '@today':
+              status = 'active';
               break;
-            case '@high':               // the active criticals
-              issues['open']['active'].push({
-                number: j,
-                title: title,
-                tagstring: tagstring,
-                est: est,
-                link: linkUrl,
-                color: "crit, "
-              })
+            case '@high':
+              status = 'active';
+              record.color = "crit, ";
               break;
-            default:                    // the Pendings
-              issues['open']['pending'].push({
-                number: j,
-                title: title,
-                tagstring: tagstring,
-                link: linkUrl,
-                est: est
-              });
+            default:
+              status = 'pending';
+          }
+          if (isBlocker) {
+            record.hover = _handleBlockers(tags);
+            record.startdate = moment().format('YYYY-MM-DDTHH:mm:SS');
+            issues.blockers.push(record);
+          } else {
+            issues['open'][status].push(record);
           }
         }
         j++;
@@ -167,6 +195,7 @@ exports.parseRawTodos = () => {
     // sort milestones, interrupts, and closed before returning
     if (issues.milestones) issues.milestones.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
     if (issues.interrupts) issues.interrupts.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
+    if (issues.blockers) issues.blockers.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
     if (issues.closed) issues.closed.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.issues = issues;
     next();

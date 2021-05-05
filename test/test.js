@@ -27,6 +27,7 @@ const mockRawTodos = {
   rawTodos: [
     "✔ decide organization requirements @7h @prja @woot @done(2020-05-12 22:45)",
     "✔ take cat to the vet @3h @done(2020-05-10 21:37)",
+    "☐ @today ghihq•21 something I need help with @6h @prjd @blk.email.chris @blk.slack.robin",
     "☐ @low do this low priority thing @4h @prja",
     "☐ @low review the user guide about whats-it @4h @prjb",
     "☐ @today get thing-a-ma-bob info from SME-guru @4h @prja",
@@ -108,7 +109,7 @@ describe('Integration:', function() {
     expect(res.locals.issues.closed[1].title).to.equal("take cat to the vet");
   });
   it('injectInterrupts() should provide links', function() {
-    expect(res.locals.issues.links[1]).to.deep.equal({id:"k8",url:"https://github.com/ragnoroct/linkme/issues/9"});
+    expect(res.locals.issues.links[1]).to.deep.equal({id:"k9",url:"https://github.com/ragnoroct/linkme/issues/9"});
   });
   it('getArchive() should provide chart data', function() {
     const testedFunction = mw.getArchive();
