@@ -15,8 +15,9 @@ endif::[]
 
 pass:[<p align="center"><a href="https://github.com/arkadianriver/hqtodo/actions"><img src="https://github.com/arkadianriver/hqtodo/workflows/build/badge.svg" alt="build status"/></a></p> <!-- <img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/> -->]
 
-A li'l web app (page) to display todo items that are created with
-the Todo+ extension for VS Code or the Plaintasks package for Sublime Text.
+A li'l web app (page) to display todo items that are created with the
+link:https://github.com/fabiospampinato/vscode-todo-plus[Todo+ extension]
+for VS Code or the Plaintasks package for Sublime Text.
 The open items are shown as a
 https://mermaid-js.github.io/mermaid/#/gantt[Mermaid]
 Gantt chart.
@@ -68,7 +69,9 @@ sudo systemctl enable hqtodo
 
 == Maintaining your todo file
 
-For the most part, update your TODO file as you normally would.
+For the most part,
+link:https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus#usage[update your TODO file]
+as you normally would.
 There are a few conventions to use for the app to work.
 link:TODO[See the sample `TODO` file]
 as an example.
