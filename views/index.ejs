@@ -234,33 +234,29 @@
     var chartOptions = {
       series: [
         {
-          name: 'Cumulative points conquered',
+          name: 'Cumulative points spent on Todos',
           data: <%- jsonchartdata %>
-        }
+        }<% if (hassupportdata) { %>,
+        {
+          name: 'Cumulative points spent in Support',
+          data: <%- jsonsupportdata %>
+        }<% } %>
       ],
       chart: {
-        type: 'area',
+        type: 'line',
         height: 350,
-        //stacked: true,
         events: {
           selection: function (chart, e) {
             console.log(new Date(e.xaxis.min))
           }
         },
       },
-      colors: ['#00E396'], // ['#008FFB', '#00E396', '#CED4DC'],
+      colors: ['#00E396'<% if (hassupportdata) { %>, '#CED4DC'<% } %>],
       dataLabels: {
         enabled: false
       },
       stroke: {
         curve: 'stepline'
-      },
-      fill: {
-        type: 'gradient',
-        gradient: {
-          opacityFrom: 0.6,
-          opacityTo: 0.8,
-        }
       },
       legend: {
         showForSingleSeries: true,
