@@ -501,7 +501,7 @@ exports.getSupport = () => {
     }];
     let spTotal = 0;
     entries.forEach( t => {
-      spTotal += Number.parseFloat(t.lasted/60 * HOURADJUST * STORYPOINTFACTOR);
+      spTotal += Number.parseFloat(t.lasted/60 * WH * HOURADJUST * STORYPOINTFACTOR);
       chartdata.push({
         x: t.closed_on,
         y: spTotal.toFixed(2)
