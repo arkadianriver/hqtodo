@@ -29,15 +29,38 @@ router.get('/todos/archived', mw.getArchive(), (req, res, next) => {
 });
 
 router.get('/todos/supportdata', mw.getArchive(), mw.getSupport(), (req, res, next) => {
-  res.json(res.locals.supportChartdata);
+  res.json(res.locals.supportentries);
 });
   
+router.get('/todos/supportondate/:ondate', mw.getSupport(), (req, res, next) => {
+  res.json(res.locals.supportondate);
+});
+
 router.get('/todos/archivedbytag', mw.getArchive(), mw.getArchiveByTag(), (req, res, next) => {
   res.json(res.locals.archivebytag);
 });
 
 router.get('/todos/archivedbyweek', mw.getArchive(), mw.getArchiveByWeek(), (req, res, next) => {
   res.json(res.locals.archive);
+});
+
+router.get('/api-docs', (req, res, next) => {
+  res.send(`<!DOCTYPE html>
+<html><title>api-docs</title>
+<body>
+<h2>endpoints available</h2>
+<pre>GET /
+GET /todos
+GET /todos/raw
+GET /todos/unordered
+GET /todos/supportdata
+GET /todos/supportondate/:YYYY-mm-dd
+GET /todos/archived
+GET /todos/archivedbytag
+GET /todos/archivedbyweek
+</pre>
+</body>
+</html>`);
 });
 
 router.get('/',

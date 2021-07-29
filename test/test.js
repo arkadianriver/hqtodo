@@ -121,13 +121,19 @@ describe('Integration:', function() {
   it('injectInterrupts() should provide links', function() {
     expect(res.locals.issues.links[1]).to.deep.equal({id:"k9",url:"https://github.com/ragnoroct/linkme/issues/9"});
   });
-  it('getSupport() should provide support entries, sorted, with proper date and length in minutes', function() {
-    const testedFunction = mw.getSupport();
-    testedFunction(req, res, next);
-    expect(res.locals.supportChartdata[0]).to.deep.equal({
-      closed_on: "2020-05-20 20:12",
-      lasted: 21
+  describe('with preset archive chartdata:', function() {
+    before(function() {
+      res.locals.chartdata = [{ x:'2020-05-19 20:00', y:0 }];
     });
+    it('getSupport() should provide support entries, sorted, with proper date and length in minutes', function() {
+      const testedFunction = mw.getSupport();
+      testedFunction(req, res, next);
+      expect(res.locals.supportentries[1]).to.deep.equal({
+        closed_on: "2020-05-20 20:12",
+        title: "person1 - help them with this",
+        lasted: 21
+      });
+    });  
   });
   it('getArchive() should provide chart data', function() {
     const testedFunction = mw.getArchive();

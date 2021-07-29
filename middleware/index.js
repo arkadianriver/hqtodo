@@ -472,6 +472,16 @@ exports.getSupport = () => {
   return (req, res, next) => {
     // define the desired structure
     const entries = [];
+    const ondate = {};
+    if (req.params && req.params.ondate) {
+      if (!req.params.ondate.match(/\d\d\d\d-\d\d-\d\d/)) {
+        res.locals.supportondate = { error: "Provide a date in the format YYYY-mm-dd" };
+        next();
+      }
+      ondate.date = req.params.ondate;
+      ondate.timespent = 0;
+      ondate.closedtickets = [];
+    }
     // go through each rawArchive entry and add to entries entry
     for (let i = 0; i < req.app.locals.rawArchive.length; i++) {
       let mDone = req.app.locals.rawArchive[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d(\s*\d\d:\d\d)?)\)\s+@lasted\((.*?)\)(?:\s+@project\(Support)/);
@@ -481,27 +491,37 @@ exports.getSupport = () => {
       //const taggy = _handleTags(mTags.flat());
       const doneStr = mDone[2] ? mDone[1] : `${mDone[1]} 17:00`;
       const minutesLasted = _getMinutes(mDone[3]);
-      //let title = mTitle[1].trim();
+      let title = mTitle[1].trim();
       //let tags = taggy[1] ? taggy[1].split(' ') : [];
       entries.push({
         closed_on: doneStr,
-        //title: title,
+        title: title,
         lasted: minutesLasted
         //tags: tags,
         //est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
       });
+      if (ondate.date && ondate.date === doneStr.substr(0,10)) {
+        ondate.timespent += minutesLasted;
+        ondate.closedtickets.push(title);
+      }
+    }
+    // for supportondate endpoint
+    if (ondate.date) {
+      ondate.timespent = `${Math.floor(ondate.timespent/60)}h${ondate.timespent%60}m`;
+      res.locals.supportondate = ondate;
+      next();
     }
     // sort entries ascending
-    entries.sort((a, b) => a.closed_on < b.closed_on ? -1 : 1);
-    //res.locals.supportentries = entries;
+    entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
+    res.locals.supportentries = entries;
     // prepare data for flow chart
     const chartdata = [{
       x: res.locals.chartdata[0].x,
       y: 0
     }];
     let spTotal = 0;
-    entries.forEach( t => {
-      spTotal += Number.parseFloat(t.lasted/60 * HOURADJUST * STORYPOINTFACTOR);
+    Array.from(entries).reverse().forEach( t => {
+      spTotal += Number.parseFloat(t.lasted/60 * WH * HOURADJUST * STORYPOINTFACTOR);
       chartdata.push({
         x: t.closed_on,
         y: spTotal.toFixed(2)

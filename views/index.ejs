@@ -205,7 +205,8 @@
   <div style="display:flex;justify-content:space-between;width:100%">
   <p style="font-size:smaller;">Page by <a target="_blank"
   href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
-  with ♥ from Mermaid and ApexCharts
+  with ♥ from Mermaid and ApexCharts<br/>
+  An <a href="/api-docs">API</a> is also available.
   </p>
   <p style="font-size:smaller">Page last updated <%= pageupdated %><br/>Task file last updated <%= fileupdated %></p>
   </div>
@@ -250,10 +251,6 @@
             console.log(new Date(e.xaxis.min))
           }
         },
-      },
-      colors: ['#00E396'<% if (hassupportdata) { %>, '#CED4DC'<% } %>],
-      dataLabels: {
-        enabled: false
       },
       stroke: {
         curve: 'stepline'
