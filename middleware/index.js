@@ -6,7 +6,8 @@ const WHOAMI = config.get('yourName');
 const LINKPATTERNS = config.get('linkmeLinks');
 const WH = config.get('workHoursPerDay');
 const HOURADJUST = 24 / WH; // 24hr day / 8hr workday
-const STORYPOINTFACTOR = config.get('storyPointsPerDay') / 24;
+const STORYPOINTSADAY = config.get('storyPointsPerDay');
+const STORYPOINTFACTOR = STORYPOINTSADAY / 24;
 
 const A_DAY = moment.duration(1, 'd');
 
@@ -521,7 +522,7 @@ exports.getSupport = () => {
     }];
     let spTotal = 0;
     Array.from(entries).reverse().forEach( t => {
-      spTotal += Number.parseFloat(t.lasted/60 * WH * HOURADJUST * STORYPOINTFACTOR);
+      spTotal += Number.parseFloat(t.lasted/60 * HOURADJUST * STORYPOINTFACTOR);
       chartdata.push({
         x: t.closed_on,
         y: spTotal.toFixed(2)
@@ -680,7 +681,9 @@ exports.renderIt = () => {
       jsonchartdata: JSON.stringify(res.locals.chartdata),
       fileupdated: fileupdated,
       pageupdated: pageupdated,
-      whoami: WHOAMI
+      whoami: WHOAMI,
+      spperday: STORYPOINTSADAY,
+      hrsperday: WH
     });
   }
 }
