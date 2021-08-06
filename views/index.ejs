@@ -31,6 +31,15 @@
       font-weight: 500;
       margin-top: 2em;
     }
+    .archivetitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .pointscale {
+      font-size: 12pt;
+      vertical-align: bottom;
+    }
     h3 {
       font-size: 20pt;
       font-weight: 500;
@@ -163,7 +172,10 @@
   <%_ } %>
   </ul>
   <% if (archive.length) { %>
-    <h2>Archived todos</h2>
+    <h2 class="archivetitle">
+      <div>Archived todos</div>
+      <div class="pointscale"><%= spperday %> point(s) per <%= hrsperday %>hr day</div>
+    </h2>
     <div id="chart"></div>
   
     <input type="checkbox" id="display-toggle"/>
