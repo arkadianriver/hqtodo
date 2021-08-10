@@ -20,13 +20,20 @@ router.get('/todos/unordered', mw.parseRawTodos(), (req, res, next) => {
   res.json(res.locals.issues);
 });
 
-router.get('/todos', mw.parseRawTodos(), mw.injectInterrupts(),
-  (req, res, next) => {
-    res.json(res.locals.issues);
-  });
+router.get('/todos', mw.parseRawTodos(), mw.injectInterrupts(), (req, res, next) => {
+  res.json(res.locals.issues);
+});
 
 router.get('/todos/archived', mw.getArchive(), (req, res, next) => {
   res.json(res.locals.entries);
+});
+
+router.get('/todos/supportdata', mw.getArchive(), mw.getSupport(), (req, res, next) => {
+  res.json(res.locals.supportentries);
+});
+  
+router.get('/todos/supportondate/:ondate', mw.getSupport(), (req, res, next) => {
+  res.json(res.locals.supportondate);
 });
 
 router.get('/todos/archivedbytag', mw.getArchive(), mw.getArchiveByTag(), (req, res, next) => {
@@ -37,10 +44,30 @@ router.get('/todos/archivedbyweek', mw.getArchive(), mw.getArchiveByWeek(), (req
   res.json(res.locals.archive);
 });
 
+router.get('/api-docs', (req, res, next) => {
+  res.send(`<!DOCTYPE html>
+<html><title>api-docs</title>
+<body>
+<h2>endpoints available</h2>
+<pre>GET /
+GET /todos
+GET /todos/raw
+GET /todos/unordered
+GET /todos/supportdata
+GET /todos/supportondate/:YYYY-mm-dd
+GET /todos/archived
+GET /todos/archivedbytag
+GET /todos/archivedbyweek
+</pre>
+</body>
+</html>`);
+});
+
 router.get('/',
   mw.parseRawTodos(),
   mw.injectInterrupts(),
   mw.getArchive(),
+  mw.getSupport(),
   mw.getArchiveByTag(),
   mw.getArchiveByWeek(),
   mw.renderIt()

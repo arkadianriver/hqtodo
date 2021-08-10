@@ -6,7 +6,8 @@ const WHOAMI = config.get('yourName');
 const LINKPATTERNS = config.get('linkmeLinks');
 const WH = config.get('workHoursPerDay');
 const HOURADJUST = 24 / WH; // 24hr day / 8hr workday
-const STORYPOINTFACTOR = config.get('storyPointsPerDay') / 24;
+const STORYPOINTSADAY = config.get('storyPointsPerDay');
+const STORYPOINTFACTOR = STORYPOINTSADAY / 24;
 
 const A_DAY = moment.duration(1, 'd');
 
@@ -430,6 +431,114 @@ exports.injectInterrupts = () => {
 
 
 /**
+ * Find minutes from a string of the form 'NdXhYmZs'
+ * Rounds up the seconds
+ */
+const _getMinutes = (str) => {
+  let ttl = 0;
+  let part = ''
+  for (i=0; i < str.length; i++) {
+    const c = str[i];
+    if (Number.isInteger(parseInt(c, 10))) {
+      part += c;
+    } else {
+      switch(c) {
+        case 'd':
+          ttl += parseInt(part, 10) * 24 * 60;
+          part = '';
+          break;
+        case 'h':
+          ttl += parseInt(part, 10) * 60;
+          part = '';
+          break;
+        case 'm':
+          ttl += parseInt(part, 10);
+          part = '';
+          break;
+        case 's':
+          ttl += part <= 60 ? 1 : Math.ceil(parseInt(part, 10)/60);
+          part = '';
+          break;
+        default: part = '';
+      }
+    }
+  }
+  return ttl;
+};
+
+/**
+ * Find support entries in rawArchive, sort 'em, and render as JSON
+ */
+exports.getSupport = () => {
+  return (req, res, next) => {
+    // define the desired structure
+    const entries = [];
+    const ondate = {};
+    if (req.params && req.params.ondate) {
+      if (!req.params.ondate.match(/\d\d\d\d-\d\d-\d\d/)) {
+        res.locals.supportondate = { error: "Provide a date in the format YYYY-mm-dd" };
+        next();
+      }
+      ondate.date = req.params.ondate;
+      ondate.timespent = 0;
+      ondate.closedtickets = [];
+    }
+    // go through each rawArchive entry and add to entries entry
+    for (let i = 0; i < req.app.locals.rawArchive.length; i++) {
+      let mDone = req.app.locals.rawArchive[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d(\s*\d\d:\d\d)?)\)\s+@lasted\((.*?)\)(?:\s+@project\(Support)/);
+      if (!mDone) continue;
+      let mTitle = req.app.locals.rawArchive[i].match(/\s*✔\s+(?:@today\s|@high\s|@low\s)?([^\@]+)@?/);
+      //let mTags = [...req.app.locals.rawArchive[i].matchAll(/@\w+/g)];
+      //const taggy = _handleTags(mTags.flat());
+      const doneStr = mDone[2] ? mDone[1] : `${mDone[1]} 17:00`;
+      const minutesLasted = _getMinutes(mDone[3]);
+      let title = mTitle[1].trim();
+      //let tags = taggy[1] ? taggy[1].split(' ') : [];
+      entries.push({
+        closed_on: doneStr,
+        title: title,
+        lasted: minutesLasted
+        //tags: tags,
+        //est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
+      });
+      if (ondate.date && ondate.date === doneStr.substr(0,10)) {
+        ondate.timespent += minutesLasted;
+        ondate.closedtickets.push(title);
+      }
+    }
+    // for supportondate endpoint
+    if (ondate.date) {
+      ondate.timespent = `${Math.floor(ondate.timespent/60)}h${ondate.timespent%60}m`;
+      res.locals.supportondate = ondate;
+      next();
+    }
+    // sort entries ascending
+    entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
+    res.locals.supportentries = entries;
+    // prepare data for flow chart
+    const chartdata = [{
+      x: res.locals.chartdata[0].x,
+      y: 0
+    }];
+    let spTotal = 0;
+    Array.from(entries).reverse().forEach( t => {
+      spTotal += Number.parseFloat(t.lasted/60 * HOURADJUST * STORYPOINTFACTOR);
+      chartdata.push({
+        x: t.closed_on,
+        y: spTotal.toFixed(2)
+      });
+    });
+    chartdata.push({
+      x: moment().format('YYYY-MM-DD HH:mm'),
+      y: spTotal.toFixed(2)
+    })
+    res.locals.supportChartdata = chartdata;
+    next();
+  }
+}
+
+
+/**
  * Put rawArchive into usable JSON and sort it
  */
 exports.getArchive = () => {
@@ -466,6 +575,10 @@ exports.getArchive = () => {
         y: (spTotal).toFixed(2)
       });
     });
+    chartdata.push({
+      x: moment().format('YYYY-MM-DD HH:mm'),
+      y: (spTotal).toFixed(2)
+    })
     res.locals.chartdata = chartdata;
     next();
   }
@@ -563,10 +676,14 @@ exports.renderIt = () => {
       issues: res.locals.issues,
       archive: res.locals.archive,
       bytag: res.locals.archivebytag,
+      hassupportdata: res.locals.supportChartdata.length > 0,
+      jsonsupportdata: JSON.stringify(res.locals.supportChartdata),
       jsonchartdata: JSON.stringify(res.locals.chartdata),
       fileupdated: fileupdated,
       pageupdated: pageupdated,
-      whoami: WHOAMI
+      whoami: WHOAMI,
+      spperday: STORYPOINTSADAY,
+      hrsperday: WH
     });
   }
 }
@@ -577,6 +694,7 @@ exports.renderIt = () => {
 if (process.env.NODE_ENV === 'test') {
   exports._handleTags = _handleTags;
   exports._getLinkUrl = _getLinkUrl;
+  exports._getMinutes = _getMinutes;
   exports._getBizStart = _getBizStart;
   exports._chunkRange = _chunkRange;
   exports._copyTodos = _copyTodos;

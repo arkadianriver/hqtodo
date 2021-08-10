@@ -43,8 +43,10 @@ const mockRawTodos = {
     "☐ [0d starting 2020-06-15]: Complete ProjA @proja"
   ],
   rawArchive: [
+    "✔ person2 - help them with that @started(2020-05-20 20:14) @done(2020-05-20 20:23) @lasted(9m58s) @project(Support)",
     "✔ Paint Sistine Chapel @4h @done(2020-05-09 21:16) @project(Programming Todos)",
     "✔ Compose symphony @21h @prja @woot @done(2020-05-08 22:45) @project(Todos)",
+    "✔ person1 - help them with this @started(2020-05-25 19:52) @done(2020-05-20 20:12) @lasted(20m55s) @project(Support)",
     "✔ Take off to the great white north @4h @prja @woot @done(2020-05-03 23:45) @project(Todos.Survival)",
     "✔ Prepare the dogs @1h @prja @done(2020-05-02 21:00) @project(Todos.Survival)",
     "✔ Prepare the sled @1h @prja @done(2020-05-02 22:00) @project(Todos.Survival)",
@@ -70,6 +72,14 @@ describe('Unit:', function() {
       const tags = ['@2d'];
       const r = mw._handleTags(tags);
       expect(r).to.deep.equal([48,''])
+    });
+    //it('should strip out priority tags', function(){});
+  });
+  describe('_getMinutes()', function() {
+    it('should report total minutes from day-hour-min-sec string', function(){
+      const timeString = '1h10m22s';
+      const r = mw._getMinutes(timeString);
+      expect(r).to.equal(71)
     });
     //it('should strip out priority tags', function(){});
   });
@@ -110,6 +120,20 @@ describe('Integration:', function() {
   });
   it('injectInterrupts() should provide links', function() {
     expect(res.locals.issues.links[1]).to.deep.equal({id:"k9",url:"https://github.com/ragnoroct/linkme/issues/9"});
+  });
+  describe('with preset archive chartdata:', function() {
+    before(function() {
+      res.locals.chartdata = [{ x:'2020-05-19 20:00', y:0 }];
+    });
+    it('getSupport() should provide support entries, sorted, with proper date and length in minutes', function() {
+      const testedFunction = mw.getSupport();
+      testedFunction(req, res, next);
+      expect(res.locals.supportentries[1]).to.deep.equal({
+        closed_on: "2020-05-20 20:12",
+        title: "person1 - help them with this",
+        lasted: 21
+      });
+    });  
   });
   it('getArchive() should provide chart data', function() {
     const testedFunction = mw.getArchive();

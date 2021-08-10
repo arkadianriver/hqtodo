@@ -1,25 +1,42 @@
- text beforehand.
-  yada yada
+
+Programming Todos:
+# tag::progtodos[] - for readme include
+  ☐ document newly added support feature
+  ☐ update the readme image
+  ☐ add the epic feature
+# end::progtodos[]
 
 Todos:
-  ✔ decide organization requirements @7h @prja @woot @done(2020-05-12 22:45)
-  ✔ take cat to the vet @3h @done(2020-05-10 21:37)
-  ☐ @today ghihq•21 something I need help with @6h @prjd @blk.email.chris @blk.slack.robin
-  ☐ @low do this low priority thing @4h @prja
-  ☐ @low review the user guide about whats-it @4h @prjb  
-  ☐ @today get thing-a-ma-bob info from SME-guru @4h @prja
-  ☐ @high work with so-and-so on such-and-such @2h @prja @prjb
-  ☐ ghihq•4 edit whos-it's video Q @2h @prjb
-  #☐ [2d starting 2020-06-15]: Whiz-Bang-Boom conference
-  #☐ [3d starting 2020-06-09]: vacation
-  #☐ [0d starting 2020-06-19]: Complete ProjA @proja
-  #☐ [0d starting 2020-06-24]: Complete ProjB @projb
+  ☐ @today ghihq•21 something I need help with @4h @prjd @blk.email.chris @blk.slack.robin
+  -----------------------------------------------------------------------------------
+  #☐ [5d starting 2021-08-16]: Vacation
+  -----------------------------------------------------------------------------------
+  ✔ take cat to the vet @3h @done(2021-08-09 21:37) @project(Todos)
+  ☐ @high ghihq•4 showing a linkme example @prjb
+  ☐ @today decide organization requirements @prja @woot
+  ☐ @today work with so-and-so on such-and-such @prja @prjb
+  ☐ get thing-a-ma-bob Info from SME-guru @4h @prja
+  ☐ add such-and-such CSS to project page @2h @prjb
+  ☐ storyboard feature 22 with design @4h @prjc
+  ☐ @low do this low priority thing @4h @prjb
+  ☐ review the user guide about whats-it @4h @prjb  
+  ☐ fix situation with UI weirdness @prjb
+  ☐ edit whos-it's video Q @prjb
   ☐ document feature 22 ghi•ragnoroct/linkme•9 @4h @prjc
-  ☐ write script for whos-it video P @16h @prjb
-  ☐ @today add such-and-such CSS to project page @2h @prjb
-  ☐ @today storyboard feature 22 with design @4h @prjc
-  ☐ @today fix situation with UI weirdness @2h @prjb
-
+  ☐ write script for whos-it video P @8h @prjb
+  ☐ make arrangements for that thing @personal
+  ☐ fix problems with the doo-hicky @prjb
+  ☐ revise thankful's document @4h @prjb
+  ☐ take refresher course on X @4h @edu
+  ☐ @low sit modi est etincidunt porro quaerat ut sit @tools
+  ☐ @low porro etincidunt ipsum magnam @prjc
+  ☐ @low amet porro porro sed quaerat modi @4h @tools
+  ☐ @low etincidunt non eius etincidunt numquam magnam adipisci @prja
+  ☐ @low dolore porro ipsum voluptatem @prjc
+  ☐ @low consectetur porro etincidunt adipisci dolor @prjc
+  ☐ @low porro etincidunt dolorem quiquia ipsum consectetur porro @4h @prjd
+  ☐ @low adipisci quaerat voluptatem quiquia porro @prja
+  ☐ @low sit adipisci est ut quiquia @4h @prjb
 
   Subproj:
     ☐ todo this
@@ -42,21 +59,200 @@ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-Programming Todos:
-  ✔ Weekday calculations between interrupts needs a little tweaking. @done(2020-05-16 20:44)
-  ✔ support an archive section @done(2020-05-16 20:44)
-  ☐ better error handling
-  ✔ when displaying archive, don't display anything but "Todos" project stufff @done(2020-05-16 20:44)
-  ✔ add :active color to linked items @done(2020-05-16 20:44)
-  ✔ custom config @done(2020-05-14 21:16)
-
 Archive:
-  ✔ Paint Sistine Chapel @4h @done(2020-05-09 21:16) @project(Programming Todos)
-  ✔ Compose symphony @21h @prja @woot @done(2020-05-08 22:45) @project(Todos)
-  ✔ Take off to the great white north @4h @prja @woot @done(2020-05-03 23:45) @project(Todos.Survival)
-  ✔ Prepare the dogs @1h @prja @done(2020-05-02 21:00) @project(Todos.Survival)
-  ✔ Prepare the sled @1h @prja @done(2020-05-02 22:00) @project(Todos.Survival)
-  ✔ Restructure archive of books @1h @done(2020-05-06 21:37) @project(Todos)
-  ✔ Host a party for real @8h @prjc @done(2020-04-12 07:00) @project(Todos)
-  ✔ Host a party @1h @prjc @done(2020-04-01 07:00) @project(Todos)
-  ✔ Do something fun @1h @prjc @done(2020-03-29 07:00) @project(Todos)
+  ✔ add support for support :O) @done(2021-07-22 21:32) @project(Programming Todos)
+  ✔ @today latest completed item eius est quiquia @prjc @prjb @done(2021-08-09 21:07) @project(Todos)
+  ✔ @today numquam quisquam quisquam est eius sed est @prjc @done(2021-08-09 05:35) @project(Todos)
+  ✔ @today neque dolore dolor etincidunt etincidunt dolor @prja @done(2021-08-07 15:56) @project(Todos)
+  ✔ @today sit tempora adipisci porro tempora quaerat @10h @prjc @tools @done(2021-08-07 02:40) @project(Todos)
+  ✔ @today tempora tempora sit eius @1h @prjc @done(2021-08-06 21:18) @project(Todos)
+  ✔ @today quisquam ut numquam etincidunt velit @prja @done(2021-08-05 22:37) @8h @project(Todos)
+  ✔ @today voluptatem tempora modi amet dolore @admin @done(2021-07-31 10:42) @project(Todos)
+  ✔ @today magnam numquam consectetur etincidunt @prjd @done(2021-07-28 16:47) @project(Todos)
+  ✔ @today sit modi est etincidunt porro quaerat ut sit @tools @done(2021-07-28 10:51) @project(Todos)
+  ✔ @today porro etincidunt ipsum magnam @prjc @done(2021-07-28 00:05) @project(Todos)
+  ✔ @today amet porro porro sed quaerat modi @4h @tools @done(2021-07-28 09:45) @project(Todos)
+  ✔ @today etincidunt non eius etincidunt numquam magnam adipisci @prja @done(2021-07-27 11:56) @project(Todos)
+  ✔ @today dolore porro ipsum voluptatem @prjc @done(2021-07-25 17:50) @project(Todos)
+  ✔ @today consectetur porro etincidunt adipisci dolor @prjc @done(2021-07-25 14:51) @project(Todos)
+  ✔ @today porro etincidunt dolorem quiquia ipsum consectetur porro @4h @prjd @done(2021-07-24 20:18) @project(Todos)
+  ✔ @today adipisci quaerat voluptatem quiquia porro @prja @done(2021-07-23 19:42) @project(Todos)
+  ✔ @today sit adipisci est ut quiquia @4h @prjc @done(2021-07-23 13:08) @project(Todos)
+  ✔ @high neque sed quisquam quisquam numquam modi @prjc @tools @done(2021-07-23 10:59) @project(Todos)
+  ✔ @today non dolor quaerat sed quaerat labore magnam labore @4h @prjd @done(2021-07-21 22:40) @project(Todos)
+  ✔ @today est quisquam eius modi dolor neque @prjd @done(2021-07-22 10:40) @project(Todos)
+  ✔ @today quisquam eius dolore sit modi est amet @prjc @done(2021-07-21 16:10) @project(Todos)
+  ✔ @today quaerat neque quisquam sed sit neque ut ipsum @prjc @prjb @done(2021-07-17 17:30) @project(Todos)
+  ✔ @today quisquam tempora quisquam magnam dolore @prjb @done(2021-07-21 07:10) @project(Todos)
+  ✔ @today ut labore velit dolorem @prjc @done(2021-07-20 17:41) @project(Todos)
+  ✔ @today est numquam ipsum etincidunt @prja @done(2021-07-20 11:59) @project(Todos)
+  ✔ @today gotta get this done @1h @prja @done(2021-07-22 12:55) @project(Todos)
+  ✔ person2 - help them with that @started(2020-05-20 20:14) @done(2021-07-20 20:23) @lasted(3h9m58s) @project(Support)
+  ✔ person1 - help them with this @started(2021-07-20 19:52) @done(2021-07-20 20:12) @lasted(1h20m55s) @project(Support)
+  ✔ Restructure archive of books @1h @prja @done(2021-07-19 21:37) @project(Todos)
+  ✔ Paint Sistine Chapel @1d @woot @personal @done(2021-07-18 21:16) @project(Todos)
+  ✔ Compose symphony @2d @personal @woot @done(2021-07-10 22:45) @project(Todos)
+  ✔ clean up express/markdown @4h @prjd @done(2021-07-08 22:04) @project(Todos)
+  ✔ YYZ prj - take off to the great white north @4h @prjb @woot @done(2021-07-03 23:45) @project(Todos.Survival)
+  ✔ Prepare the dogs @1h @prjb @done(2021-07-02 21:00) @project(Todos.Survival)
+  ✔ Prepare the sled @1h @prjb @done(2021-07-02 22:00) @project(Todos.Survival)
+  ✔ @today close the catco / dogco merger @woot @prjc @done(2021-05-18 19:32) @project(Todos)
+  ✔ Host a party for real @8h @prjc @done(2021-04-12 07:00) @project(Todos)
+  ✔ Host a party @1h @prjc @done(2021-04-01 07:00) @project(Todos)
+  ✔ [4d starting 2021-04-22]: Write the Docs conference @tools @done(2021-04-28 09:00) @project(Todos)
+  ✔ @today quisquam quiquia etincidunt quaerat est quaerat @prjb @done(2021-07-06 14:35) @project(Todos)
+  ✔ @today adipisci magnam amet tempora porro aliquam eius tempora @4h @prjc @done(2021-07-04 14:35) @project(Todos)
+  ✔ @today amet non quaerat dolore @2d @prjc @done(2021-07-03 23:53) @project(Todos)
+  ✔ @today dolorem quiquia non tempora quaerat @8h @prjc @done(2021-07-01 00:01) @project(Todos)
+  ✔ dolorem labore voluptatem ipsum @prjc @done(2021-06-30 11:21) @project(Todos)
+  ✔ dolore non etincidunt non ut dolor @3h @prjc @done(2021-06-29 19:59) @project(Todos)
+  ✔ ut consectetur quaerat eius est quiquia @prjc @prjb @done(2021-06-27 21:07) @project(Todos)
+  ✔ numquam quisquam quisquam est eius sed est @prjc @done(2021-06-27 05:35) @project(Todos)
+  ✔ neque dolore dolor etincidunt etincidunt dolor @prja @done(2021-06-20 15:56) @project(Todos)
+  ✔ sit tempora adipisci porro tempora quaerat @10h @prjc @tools @done(2021-06-20 02:40) @project(Todos)
+  ✔ tempora tempora sit eius @1h @prjc @done(2021-06-20 21:18) @project(Todos)
+  ✔ quisquam ut numquam etincidunt velit @prja @done(2021-06-20 22:37) @project(Todos)
+  ✔ voluptatem tempora modi amet dolore @admin @done(2021-06-18 10:42) @project(Todos)
+  ✔ magnam numquam consectetur etincidunt @prjd @done(2021-06-15 16:47) @project(Todos)
+  ✔ sit modi est etincidunt porro quaerat ut sit @tools @done(2021-06-15 10:51) @project(Todos)
+  ✔ porro etincidunt ipsum magnam @prjc @done(2021-06-15 00:05) @project(Todos)
+  ✔ amet porro porro sed quaerat modi @4h @tools @done(2021-06-15 09:45) @project(Todos)
+  ✔ etincidunt non eius etincidunt numquam magnam adipisci @prja @done(2021-06-14 11:56) @project(Todos)
+  ✔ dolore porro ipsum voluptatem @prjc @done(2021-06-12 17:50) @project(Todos)
+  ✔ consectetur porro etincidunt adipisci dolor @prjc @done(2021-06-12 14:51) @project(Todos)
+  ✔ porro etincidunt dolorem quiquia ipsum consectetur porro @4h @prjd @done(2021-06-11 20:18) @project(Todos)
+  ✔ @today adipisci quaerat voluptatem quiquia porro @prja @done(2021-06-10 19:42) @project(Todos)
+  ✔ @today sit adipisci est ut quiquia @4h @prjc @done(2021-06-10 13:08) @project(Todos)
+  ✔ @high neque sed quisquam quisquam numquam modi @prjc @tools @done(2021-06-10 10:59) @project(Todos)
+  ✔ today non dolor quaerat sed quaerat labore magnam labore @4h @prjd @done(2021-06-08 22:40) @project(Todos)
+  ✔ today est quisquam eius modi dolor neque @prjd @done(2021-06-09 10:40) @project(Todos)
+  ✔ today quisquam eius dolore sit modi est amet @prjc @done(2021-06-08 16:10) @project(Todos)
+  ✔ today quaerat neque quisquam sed sit neque ut ipsum @prjc @prjb @done(2021-06-04 17:30) @project(Todos)
+  ✔ today quisquam tempora quisquam magnam dolore @prjb @done(2021-06-08 07:10) @project(Todos)
+  ✔ today ut labore velit dolorem @prjc @done(2021-06-07 17:41) @project(Todos)
+  ✔ today est numquam ipsum etincidunt @prja @done(2021-06-07 11:59) @project(Todos)
+  ✔ @today quiquia ut quaerat consectetur @prjc @prjb @done(2021-05-31 11:24) @project(Todos)
+  ✔ magnam ipsum porro velit tempora neque velit tempora @4h @prja @done(2021-06-01 12:43) @project(Todos)
+  ✔ quiquia ut quisquam adipisci neque @prjc @done(2021-06-01 12:28) @project(Todos)
+  ✔ @today porro amet amet neque dolore voluptatem quisquam modi @prjc @done(2021-05-31 14:09) @project(Todos)
+  ✔ @today magnam numquam consectetur etincidunt @prjd @done(2021-05-29 16:47) @project(Todos)
+  ✔ @today sit modi est etincidunt porro quaerat ut sit @tools @done(2021-05-29 10:51) @project(Todos)
+  ✔ @today porro etincidunt ipsum magnam @prjc @done(2021-05-29 00:05) @project(Todos)
+  ✔ @today amet porro porro sed quaerat modi @4h @tools @done(2021-05-29 09:45) @project(Todos)
+  ✔ @today etincidunt non eius etincidunt numquam magnam adipisci @prja @done(2021-05-28 11:56) @project(Todos)
+  ✔ @today dolore porro ipsum voluptatem @prjc @done(2021-05-26 17:50) @project(Todos)
+  ✔ @today consectetur porro etincidunt adipisci dolor @prjc @done(2021-05-26 14:51) @project(Todos)
+  ✔ @today porro etincidunt dolorem quiquia ipsum consectetur porro @4h @prjd @done(2021-05-25 20:18) @project(Todos)
+  ✔ @today adipisci quaerat voluptatem quiquia porro @prja @done(2021-05-24 19:42) @project(Todos)
+  ✔ @today sit adipisci est ut quiquia @4h @prjc @done(2021-05-24 13:08) @project(Todos)
+  ✔ @high neque sed quisquam quisquam numquam modi @prjc @tools @done(2021-05-24 10:59) @project(Todos)
+  ✔ @today non dolor quaerat sed quaerat labore magnam labore @4h @prjd @done(2021-05-22 22:40) @project(Todos)
+  ✔ @today est quisquam eius modi dolor neque @prjd @done(2021-05-23 10:40) @project(Todos)
+  ✔ @today quisquam eius dolore sit modi est amet @prjc @done(2021-05-22 16:10) @project(Todos)
+  ✔ @today quaerat neque quisquam sed sit neque ut ipsum @prjc @prjb @done(2021-05-18 17:30) @project(Todos)
+  ✔ @today quisquam tempora quisquam magnam dolore @prjb @done(2021-05-22 07:10) @project(Todos)
+  ✔ @today ut labore velit dolorem @prjc @done(2021-05-21 17:41) @project(Todos)
+  ✔ @today est numquam ipsum etincidunt @prja @done(2021-05-21 11:59) @project(Todos)
+  ✔ @today quiquia ut quaerat consectetur @prjc @prjb @done(2021-05-14 11:24) @project(Todos)
+  ✔ @today magnam ipsum porro velit tempora neque velit tempora @4h @prja @done(2021-05-15 12:43) @project(Todos)
+  ✔ @today quiquia ut quisquam adipisci neque @prjc @done(2021-05-15 12:28) @project(Todos)
+  ✔ @today porro amet amet neque dolore voluptatem quisquam modi @prjc @done(2021-05-14 14:09) @project(Todos)
+  ✔ @today porro est sit adipisci dolore @tools @done(2021-05-11 14:18) @project(Todos)
+  ✔ @today ut eius magnam consectetur @prja @done(2021-05-12 06:41) @project(Todos)
+  ✔ @today porro aliquam aliquam consectetur @4h @tools @done(2021-05-12 08:41) @project(Todos)
+  ✔ @today quaerat amet non adipisci eius @4h @prjb @done(2021-05-07 11:53) @project(Todos)
+  ✔ @today magnam non est modi eius quiquia @prjc @done(2021-04-28 14:11) @project(Todos)
+  ✔ @today neque modi modi dolore neque adipisci aliquam etincidunt @4h @prja @done(2021-04-29 00:12) @project(Todos)
+  ✔ @today dolorem aliquam quisquam neque sed sit dolor quiquia @prja @done(2021-04-22 14:11) @project(Todos)
+  ✔ @today sed quiquia numquam sed consectetur amet @prja @done(2021-04-22 01:41) @project(Todos)
+  ✔ @today amet quisquam numquam eius etincidunt modi ipsum adipisci @1h @prjc @done(2021-04-21 14:35) @project(Todos)
+  ✔ @high sed modi ipsum ut consectetur @prja @done(2021-04-20 22:05) @project(Todos)
+  ✔ @today dolore dolore labore amet non voluptatem quaerat @prja @done(2021-04-20 22:04) @3h @project(Todos)
+  ✔ @high quaerat velit voluptatem velit non quiquia non @tools @done(2021-04-20 11:14) @project(Todos)
+  ✔ @today adipisci porro magnam labore ut quiquia tempora ipsum @8h @prja @done(2021-04-17 01:18) @project(Todos)
+  ✔ @today ipsum non dolore quisquam labore amet dolore amet @prja @done(2021-04-17 01:19) @project(Todos)
+  ✔ @today consectetur quaerat dolor dolor modi ipsum velit porro @prjc @done(2021-04-16 15:18) @project(Todos)
+  ✔ @today neque velit sit sit modi adipisci quiquia @done(2021-04-14 16:59) @project(Todos)
+  ✔ @high dolorem porro labore labore @4h @prjd @done(2021-04-14 16:58) @project(Todos)
+  ✔ @today amet magnam dolore non @prjc @done(2021-04-13 22:24) @project(Todos)
+  ✔ @today labore adipisci non est @3h @prja @done(2021-04-12 07:25) @project(Todos)
+  ✔ @today labore tempora sit aliquam quaerat @prjd @1h @done(2021-04-14 07:25) @project(Todos)
+  ✔ @today dolore adipisci magnam ut sed ipsum tempora etincidunt @prjc @1h @done(2021-04-14 07:25) @project(Todos)
+  ✔ @today sed quiquia ipsum numquam dolor dolor @2d @prja @done(2021-04-11 19:39) @project(Todos)
+  ✔ @today ut aliquam neque quaerat ipsum @4h @prjc @done(2021-04-09 19:11) @project(Todos)
+  ✔ @today labore ut ipsum voluptatem amet voluptatem quisquam @prjc @done(2021-04-08 01:25) @project(Todos)
+  ✔ @today sit modi quaerat non tempora @4h @prja @done(2021-04-08 01:24) @project(Todos)
+  ✔ @today labore aliquam modi sit amet amet @prjd @done(2021-04-05 19:33) @project(Todos)
+  ✔ @today dolorem quiquia porro etincidunt voluptatem numquam dolor consectetur @prja @done(2021-04-04 22:33) @project(Todos)
+  ✔ @today modi sed dolor dolor ut @prjc @done(2021-03-31 11:35) @project(Todos)
+  ✔ @today dolor dolorem porro labore @prjc @done(2021-03-31 10:34) @project(Todos)
+  ✔ @high neque est consectetur quisquam quaerat quiquia velit labore @done(2021-04-01 00:16) @project(Notes)
+  ✔ @high porro est eius quiquia neque voluptatem quaerat modi @done(2021-03-31 12:50) @project(Notes)
+  ✔ @high sed etincidunt sed consectetur dolorem amet porro @tools @done(2021-03-30 10:01) @project(Todos)
+  ✔ @today numquam quisquam voluptatem amet eius dolorem modi amet @done(2021-03-26 14:55) @project(Todos)
+  ✔ @high ut aliquam tempora quisquam @2h @prjc @done(2021-03-25 15:42) @project(Todos)
+  ✔ @high quaerat modi modi porro voluptatem @1h @prjd @done(2021-03-25 13:12) @project(Todos)
+  ✔ @high dolor velit quiquia modi etincidunt @1h @prja @done(2021-03-25 11:45) @project(Todos)
+  ✔ @high quiquia aliquam etincidunt non @prjb @done(2021-03-25 11:23) @project(Todos)
+  ✔ @high amet etincidunt neque est numquam tempora amet aliquam @prja @done(2021-03-25 10:23) @project(Todos)
+  ✔ @high amet tempora quisquam eius quisquam @prjc @done(2021-03-25 10:08) @project(Todos)
+  ✔ @today tempora dolorem neque dolor sit magnam @prja @done(2021-03-24 10:49) @project(Todos)
+  ✔ @today eius dolor dolore quaerat @done(2021-03-23 23:12) @project(Todos)
+  ✔ @today quaerat adipisci est dolor sed adipisci labore @done(2021-03-17 06:49) @project(Todos)
+  ✔ @today dolorem quiquia neque numquam est neque voluptatem labore @1h @prjc @done(2021-03-16 14:31) @project(Todos)
+  ✔ [2d starting 2021-03-12]: Vacation @done(2021-03-16 09:00) @project(Todos)
+  ✔ @today ipsum magnam dolore magnam labore dolorem @prja @done(2021-03-03 13:30) @project(Todos)
+  ✔ @today tempora tempora sed amet @4h @prjc @done(2021-03-04 14:31) @project(Todos)
+  ✔ [1d starting 2021-03-01]: Vacation @done(2021-03-02 09:00) @project(Todos)
+  ✔ [2d starting 2021-03-05]: Vacation @done(2021-03-09 07:29) @project(Todos)
+  ✔ @today magnam sed amet non neque quaerat dolorem @prjc @done(2021-02-25 14:33) @project(Todos)
+  ✔ @today aliquam sed tempora sed modi @prjc @done(2021-02-24 12:27) @project(Todos)
+  ✔ @today sit tempora amet sit aliquam @prjc @done(2021-02-23 10:12) @project(Todos)
+  ✔ @today aliquam magnam tempora dolore quiquia sed dolor dolorem @prja @done(2021-02-22 21:33) @project(Todos)
+  ✔ @today quisquam est quiquia eius @done(2021-02-15 22:00) @project(Todos)
+  ✔ @today magnam consectetur dolorem porro velit numquam quisquam consectetur @prjc @done(2021-02-21 17:51) @project(Todos)
+  ✔ @today amet non quaerat dolore @2d @prjc @done(2021-02-16 23:53) @project(Todos)
+  ✔ test Ruby 2.6 / Jekyll 4 @prja @4h @done(2021-02-14 06:11) @project(Todos)
+  ✔ @today dolorem quiquia non tempora quaerat @8h @prjc @done(2021-02-14 00:01) @project(Todos)
+  ✔ Investigate dark theme @prja @done(2021-02-10 20:33) @project(Todos)
+  ✔ @today dolorem labore voluptatem ipsum @prjc @done(2021-02-13 11:21) @project(Todos)
+  ✔ @today dolore non etincidunt non ut dolor @3h @prjc @done(2021-02-12 19:59) @project(Todos)
+  ✔ @today ut consectetur quaerat eius est quiquia @prjc @prjb @done(2021-02-10 21:07) @project(Todos)
+  ✔ @today Take Academind JS course @2d @edu @done(2021-02-10 21:46) @project(Todos)
+  ✔ @today numquam quisquam quisquam est eius sed est @prjc @done(2021-02-10 05:35) @project(Todos)
+  ✔ @today neque dolore dolor etincidunt etincidunt dolor @prja @done(2021-02-03 15:56) @project(Todos)
+  ✔ @today sit tempora adipisci porro tempora quaerat @10h @prjc @tools @done(2021-02-03 02:40) @project(Todos)
+  ✔ @today tempora tempora sit eius @1h @prjc @done(2021-02-03 21:18) @project(Todos)
+  ✔ @today quisquam ut numquam etincidunt velit @prja @done(2021-02-03 22:37) @project(Todos)
+  ✔ @today voluptatem tempora modi amet dolore @admin @done(2021-02-01 10:42) @project(Todos)
+  ✔ @today magnam numquam consectetur etincidunt @prjd @done(2021-01-29 16:47) @project(Todos)
+  ✔ @today sit modi est etincidunt porro quaerat ut sit @tools @done(2021-01-29 10:51) @project(Todos)
+  ✔ @today porro etincidunt ipsum magnam @prjc @done(2021-01-29 00:05) @project(Todos)
+  ✔ @today amet porro porro sed quaerat modi @4h @tools @done(2021-01-29 09:45) @project(Todos)
+  ✔ @today etincidunt non eius etincidunt numquam magnam adipisci @prja @done(2021-01-28 11:56) @project(Todos)
+  ✔ @today dolore porro ipsum voluptatem @prjc @done(2021-01-26 17:50) @project(Todos)
+  ✔ @today consectetur porro etincidunt adipisci dolor @prjc @done(2021-01-26 14:51) @project(Todos)
+  ✔ @today porro etincidunt dolorem quiquia ipsum consectetur porro @4h @prjd @done(2021-01-25 20:18) @project(Todos)
+  ✔ @today adipisci quaerat voluptatem quiquia porro @prja @done(2021-01-24 19:42) @project(Todos)
+  ✔ @today sit adipisci est ut quiquia @4h @prjc @done(2021-01-24 13:08) @project(Todos)
+  ✔ @high neque sed quisquam quisquam numquam modi @prjc @tools @done(2021-01-24 10:59) @project(Todos)
+  ✔ @today non dolor quaerat sed quaerat labore magnam labore @4h @prjd @done(2021-01-22 22:40) @project(Todos)
+  ✔ @today est quisquam eius modi dolor neque @prjd @done(2021-01-23 10:40) @project(Todos)
+  ✔ @today quisquam eius dolore sit modi est amet @prjc @done(2021-01-22 16:10) @project(Todos)
+  ✔ @today quaerat neque quisquam sed sit neque ut ipsum @prjc @prjb @done(2021-01-18 17:30) @project(Todos)
+  ✔ @today quisquam tempora quisquam magnam dolore @prjb @done(2021-01-22 07:10) @project(Todos)
+  ✔ @today ut labore velit dolorem @prjc @done(2021-01-21 17:41) @project(Todos)
+  ✔ @today est numquam ipsum etincidunt @prja @done(2021-01-21 11:59) @project(Todos)
+  ✔ @today quiquia ut quaerat consectetur @prjc @prjb @done(2021-01-14 11:24) @project(Todos)
+  ✔ @today magnam ipsum porro velit tempora neque velit tempora @4h @prja @done(2021-01-15 12:43) @project(Todos)
+  ✔ @today quiquia ut quisquam adipisci neque @prjc @done(2021-01-15 12:28) @project(Todos)
+  ✔ @today porro amet amet neque dolore voluptatem quisquam modi @prjc @done(2021-01-14 14:09) @project(Todos)
+  ✔ @today porro est sit adipisci dolore @tools @done(2021-01-11 14:18) @project(Todos)
+  ✔ @today ut eius magnam consectetur @prja @done(2021-01-12 06:41) @project(Todos)
+  ✔ @today porro aliquam aliquam consectetur @4h @tools @done(2021-01-12 08:41) @project(Todos)
+  ✔ @today quaerat amet non adipisci eius @4h @prjb @done(2021-01-07 11:53) @project(Todos)
+  ✔ Weekday calculations between interrupts needs a little tweaking. @done(2020-05-16 20:44) @project(Programming Todos)
+  ✔ support an archive section @done(2020-05-16 20:44) @project(Programming Todos)
+  ✔ when displaying archive, don't display anything but "Todos" project stufff @done(2020-05-16 20:44) @project(Programming Todos)
+  ✔ add :active color to linked items @done(2020-05-16 20:44) @project(Programming Todos)
+  ✔ custom config @done(2020-05-14 21:16) @project(Programming Todos)
