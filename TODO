@@ -4,6 +4,13 @@ Programming Todos:
   ☐ document newly added support feature
   ☐ update the readme image
   ☐ add the epic feature
+    ✔ add epic logic to parseRawTodos @done(2021-08-11 00:52)
+    ☐ add epic logic to getArchive
+    ☐ implement getEpics(:id) to display page
+    ☐ edit index.ejs to display epic listing
+    ☐ implement getEpics(:id) to display page
+    ☐ create epic.ejs view using data from /epics/:id
+    ☐ maybe add list all epics data for epics.ejx, too
 # end::progtodos[]
 
 Todos:
@@ -16,18 +23,23 @@ Todos:
   ☐ @today decide organization requirements @prja @woot
   ☐ @today work with so-and-so on such-and-such @prja @prjb
   ☐ get thing-a-ma-bob Info from SME-guru @4h @prja
-  ☐ add such-and-such CSS to project page @2h @prjb
-  ☐ storyboard feature 22 with design @4h @prjc
-  ☐ @low do this low priority thing @4h @prjb
+  : f22.Awesome Feature 22 ghihq•22 :
+    ☐ add such-and-such CSS to project page @2h @prjb
+    ☐ @today storyboard feature 22 with design @4h @prjc
+    ☐ document feature 22 ghi•ragnoroct/linkme•9 @4h @prjc
   ☐ review the user guide about whats-it @4h @prjb  
   ☐ fix situation with UI weirdness @prjb
-  ☐ edit whos-it's video Q @prjb
-  ☐ document feature 22 ghi•ragnoroct/linkme•9 @4h @prjc
-  ☐ write script for whos-it video P @8h @prjb
-  ☐ make arrangements for that thing @personal
+  : vidz.Nifty Video Project :
+    ☐ @today edit whos-it's video Q @prjb
+    ☐ write script for whos-it video P @8h @prjb
+  : m.Feature M :
+  : xedu.Learn fancy stuff :
+    ☐ take refresher course on X @4h @edu
+  Some other project name:
+    ☐ make arrangements for that thing @personal
+  ☐ @low do this low priority thing @4h @prjb
   ☐ fix problems with the doo-hicky @prjb
   ☐ revise thankful's document @4h @prjb
-  ☐ take refresher course on X @4h @edu
   ☐ @low sit modi est etincidunt porro quaerat ut sit @tools
   ☐ @low porro etincidunt ipsum magnam @prjc
   ☐ @low amet porro porro sed quaerat modi @4h @tools

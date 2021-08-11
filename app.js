@@ -61,8 +61,11 @@ app.use((req, res, next) => {
           inTodos = false;
         }
         if (inTodos) {
-          let m = fileArray[i].match(/^\s*([☐✔].*)$/);
-          if (m) rawTodos.push(m[1].trim());
+          let m = fileArray[i].match(/^(\s*)([☐✔:].*)$/);
+          if (m) rawTodos.push({
+            "indent": m[1].length,
+            "line": m[2].trim()
+          });
         }
         if (inArchive) {
           let m = fileArray[i].match(/^\s*(✔.*)$/);

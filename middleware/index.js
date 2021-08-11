@@ -102,48 +102,62 @@ exports.parseRawTodos = () => {
       closed: [],
       milestones: [],
       interrupts: [],
+      epics: [],
       links: [],
       blockers: []
     }
     // parse each line and push the data record to the right place in the structure
-    for (let i = 0, j = 1; i < req.app.locals.rawTodos.length; i++) {
+    const epic = { id: '', title: '', link: '' }
+    for (let i = 0, j = 1, epicId = ''; i < req.app.locals.rawTodos.length; i++) {
       // breaking up regex into 3 passes:
       // 1. get open/closed state, optional pipeline, and title
-      let m = req.app.locals.rawTodos[i].match(/\s*([☐✔])\s(@low|@today|@high)?([^\@]+)@?/);
-      let m1 = [...req.app.locals.rawTodos[i].matchAll(/@\S+/g)];                  // 2. get tags
-      let m2 = req.app.locals.rawTodos[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d)/); // 3. get done date
-      if (m) {
-        const tags = m1 && m1.length ? m1.flat() : [];
+      let [mLine, mMark, mPipe, mTitle] = req.app.locals.rawTodos[i].line.match(/\s*([☐✔:])\s(@low|@today|@high)?([^\@]+)@?/) || [];
+      let tagMatches = [...req.app.locals.rawTodos[i].line.matchAll(/@\S+/g)];                           // 2. get tags
+      let [, mDoneDate] = req.app.locals.rawTodos[i].line.match(/@done\s*\((\d\d\d\d-\d\d-\d\d)/) || []; // 3. get done date
+      if (mLine) {
+        const indent = req.app.locals.rawTodos[i].indent;
+        if (epicId && indent < 3) epicId = ''; // reset when outdented
+        if (mMark === ':' && indent < 3) {     // start epic when : at col 2
+          const etitle = mTitle.slice(mTitle.indexOf('.') + 1, -1).trimRight();
+          epicId = mTitle.slice(0, mTitle.indexOf('.'))
+          issues.epics.push({
+            id: epicId,
+            title: etitle,
+            link: _getLinkUrl(etitle)
+          });
+          continue;
+        }
+        const tags = tagMatches && tagMatches.length ? tagMatches.flat() : [];
         const isBlocker = tags.some(e => e.match(/^@blk/));
         // skip Frozens
-        if (m[2] && m[2] == '@low') continue;
+        if (mPipe && mPipe == '@low') continue;
         // quickly grab linkUrl if any
-        let linkUrl = m[3] ? _getLinkUrl(m[3]) : null;
+        let linkUrl = mTitle ? _getLinkUrl(mTitle) : null;
         if (linkUrl && !isBlocker) issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
         // quickly add milestones and interrupts
-        if (m[3].match(/^\[/)) {
-          const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/);
-          if (m4) {
-            const numdays = parseInt(m4[1].slice(0, -1), 10);
+        if (mTitle.match(/^\[/)) {
+          const [mMstone, mNumDays, mStartDate, mMileTitle] = mTitle.match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/) || [];
+          if (mMstone) {
+            const numdays = parseInt(mNumDays.slice(0, -1), 10);
             if (numdays === 0) {           // milestone
               issues['milestones'].push({
                 number: j,
-                startdate: m4[2] + 'T00:00:00',
-                enddate: m4[2],
-                title: m4[3],
+                startdate: mStartDate + 'T00:00:00',
+                enddate: mStartDate,
+                title: mMileTitle,
                 color: 'milestone, ',
-                est: m4[1]
+                est: mNumDays
               });
             } else {                       // interrupt
-              const enddate = moment(m4[2])
+              const enddate = moment(mStartDate)
                 .businessAdd(numdays - 1, 'days')
                 .format('YYYY-MM-DD');
               issues['interrupts'].push({
                 number: j,
-                startdate: m4[2],
+                startdate: mStartDate,
                 enddate: enddate,
-                title: m4[3],
-                est: m4[1]
+                title: mMileTitle,
+                est: mNumDays
               });
             }
             j++;
@@ -152,14 +166,15 @@ exports.parseRawTodos = () => {
         }
         // handle the rest
         const taggy = _handleTags(tags);
-        const title = m[3].trim();
+        const title = mTitle.trim();
         let tagstring = taggy[1];
         let est = Math.ceil(taggy[0]).toString() + 'h';
-        if (m[1] === '✔') {  // the Dones
+        if (mMark === '✔') {  // the Dones
           issues['closed'].push({
-            closed_on: m2[1],
+            closed_on: mDoneDate,
             title: title,
             tagstring: tagstring,
+            epic: epicId,
             est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
           });
         } else {            // the Opens and Blockers
@@ -167,11 +182,12 @@ exports.parseRawTodos = () => {
             number: j,
             title: title,
             tagstring: tagstring,
+            epic: epicId,
             est: est,
             link: linkUrl,
             color: ''
           };
-          switch (m[2]) {
+          switch (mPipe) {
             case '@today':
               status = 'active';
               break;
@@ -666,6 +682,32 @@ exports.getArchiveByWeek = () => {
 
 
 /**
+ * 
+ */
+ exports.getEpics = () => {
+  return (req, res, next) => {
+    // 0. If empty provided, return empty
+    if (!Array.isArray(res.locals.issues) || !res.locals.issues.length) {
+      if (!Array.isArray(res.locals.entries) || !res.locals.entries.length) {
+        res.locals.epics = [];
+        next();
+        return;
+      }
+    }
+    // 1. initialize things
+    const epics = [];
+    const issues = res.locals.issues;
+    const archived = res.locals.entries;
+    //
+    // TODO
+    //
+    res.locals.epics = [];
+    next();
+  }
+}
+
+
+/**
  * Takes resulting data structure from all the things and renders it to the page view
  */
 exports.renderIt = () => {
@@ -673,6 +715,7 @@ exports.renderIt = () => {
     let fileupdated = moment(res.locals.todoFileUpdated).utc().format();
     let pageupdated = moment().utc().format();
     res.render('index', {
+      epics: res.locals.epics,
       issues: res.locals.issues,
       archive: res.locals.archive,
       bytag: res.locals.archivebytag,

@@ -28,6 +28,10 @@ router.get('/todos/archived', mw.getArchive(), (req, res, next) => {
   res.json(res.locals.entries);
 });
 
+router.get('/todos/epics', mw.parseRawTodos(), mw.getArchive(), mw.getEpics(), (req, res, next) => {
+  res.json(res.locals.epics);
+});
+
 router.get('/todos/supportdata', mw.getArchive(), mw.getSupport(), (req, res, next) => {
   res.json(res.locals.supportentries);
 });
@@ -67,6 +71,7 @@ router.get('/',
   mw.parseRawTodos(),
   mw.injectInterrupts(),
   mw.getArchive(),
+  mw.getEpics(),
   mw.getSupport(),
   mw.getArchiveByTag(),
   mw.getArchiveByWeek(),
