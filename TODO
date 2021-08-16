@@ -4,7 +4,19 @@ Programming Todos:
   ☐ document newly added support feature
   ☐ update the readme image
   ☐ add the epic feature
+    ✔ first simply provide all the things by category (tag) @done(2021-08-15 10:00)
+    ✔ edit index.ejs to display epic listing @done(2021-08-15 13:00)
+    ✔ implement getTags(:id) to display page @done(2021-08-15 14:00)
+    ✔ create tags.ejs view using data from /tags @done(2021-08-15 19:00)
+    ☐ test to see how to provide extra tag/epic/category doc on the tag pages
+      • for example, is the below listing of epics worth maintaining?
 # end::progtodos[]
+
+Epics:
+  - @f22 Awesome Feature 22 ghihq•22
+  - @vidz Nifty Video Project
+  - @m Feature M
+  - @xedu Learn fancy stuff
 
 Todos:
   ☐ @today ghihq•21 something I need help with @4h @prjd @blk.email.chris @blk.slack.robin
@@ -16,18 +28,18 @@ Todos:
   ☐ @today decide organization requirements @prja @woot
   ☐ @today work with so-and-so on such-and-such @prja @prjb
   ☐ get thing-a-ma-bob Info from SME-guru @4h @prja
-  ☐ add such-and-such CSS to project page @2h @prjb
-  ☐ storyboard feature 22 with design @4h @prjc
-  ☐ @low do this low priority thing @4h @prjb
+  ☐ add such-and-such CSS to project page @2h @prjb @f22
+  ☐ @today storyboard feature 22 with design @4h @prjc @f22
+  ☐ document feature 22 ghi•ragnoroct/linkme•9 @4h @prjc @f22
   ☐ review the user guide about whats-it @4h @prjb  
   ☐ fix situation with UI weirdness @prjb
-  ☐ edit whos-it's video Q @prjb
-  ☐ document feature 22 ghi•ragnoroct/linkme•9 @4h @prjc
-  ☐ write script for whos-it video P @8h @prjb
+  ☐ @today edit whos-it's video Q @prjb @vidz
+  ☐ write script for whos-it video P @8h @prjb @vidz
+  ☐ take refresher course on X @4h @edu @xedu
   ☐ make arrangements for that thing @personal
+  ☐ @low do this low priority thing @4h @prjb
   ☐ fix problems with the doo-hicky @prjb
   ☐ revise thankful's document @4h @prjb
-  ☐ take refresher course on X @4h @edu
   ☐ @low sit modi est etincidunt porro quaerat ut sit @tools
   ☐ @low porro etincidunt ipsum magnam @prjc
   ☐ @low amet porro porro sed quaerat modi @4h @tools

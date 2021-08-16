@@ -1,0 +1,6 @@
+            <li><span class="bullet">☐</span>
+              <% if (t.link) { %><a target="_blank" href="%><%= t.link %><% } %>
+              <span class="title"><%= t.title %></span><% if (t.link) { %></a><% } %>
+              <% if (t.hasOwnProperty('tagstring')) { %><span class="tagstring"><%= t.tagstring %></span><% } %>
+              <span class="estimate">(<%= t.est %>)</span>
+            </li>

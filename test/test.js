@@ -135,12 +135,12 @@ describe('Integration:', function() {
       });
     });  
   });
-  it('getArchive() should provide chart data', function() {
+  it('getArchive() should provide archive entries, sorted, with proper title', function() {
     const testedFunction = mw.getArchive();
     testedFunction(req, res, next);
+  /* TODO: moved chartdata out of this one, but function test it and integr test the byTag ones
     expect(res.locals.chartdata[6]).to.deep.equal({x:"2020-05-06 21:37",y:"4.25"});
-  });
-  it('getArchive() should provide archive entries, sorted, with proper title', function() {
+  */
     expect(res.locals.entries[5].title).to.equal("Host a party for real");
   });
   it('getArchive() should match sub-todos too', function() {
@@ -160,7 +160,7 @@ describe('Integration:', function() {
   it('getArchiveByWeek() should provide archive entries, sorted by week', function() {
     const testedFunction = mw.getArchiveByWeek();
     testedFunction(req, res, next);
-    expect(res.locals.archive[6]).to.deep.equal({
+    expect(res.locals.archivebyweek[6]).to.deep.equal({
       weekEnding: "2020-03-29",
       entries: [
         {

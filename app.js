@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const _isFileUpdated = () => {
   const fileStats = fs.statSync(TODOFILE);
+  // TODO: filelastupdated shows same tstamp as displaypage - console.log(fileStats.mtime.valueOf())
   if (app.locals.todoFileUpdated &&
       app.locals.todoFileUpdated.valueOf() == fileStats.mtime.valueOf()) {
     return false;

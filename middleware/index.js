@@ -466,6 +466,10 @@ const _getMinutes = (str) => {
   return ttl;
 };
 
+const _minutesToEst = (minutes) => {
+  return Number.parseFloat(minutes/60 * HOURADJUST * STORYPOINTFACTOR)
+}
+
 /**
  * Find support entries in rawArchive, sort 'em, and render as JSON
  */
@@ -516,13 +520,14 @@ exports.getSupport = () => {
     entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.supportentries = entries;
     // prepare data for flow chart
+    const earliest_date = res.locals.entries[res.locals.entries.length - 1].closed_on;
     const chartdata = [{
-      x: res.locals.chartdata[0].x,
+      x: earliest_date,
       y: 0
     }];
     let spTotal = 0;
     Array.from(entries).reverse().forEach( t => {
-      spTotal += Number.parseFloat(t.lasted/60 * HOURADJUST * STORYPOINTFACTOR);
+      spTotal += _minutesToEst(t.lasted);
       chartdata.push({
         x: t.closed_on,
         y: spTotal.toFixed(2)
@@ -566,20 +571,150 @@ exports.getArchive = () => {
     entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.entries = entries;
     // prepare data, ascending for cumulative flow chart
-    const chartdata = [];
-    let spTotal = 0;
-    Array.from(entries).reverse().forEach( t => {
-      spTotal += Number.parseFloat(t.est);
-      chartdata.push({
-        x: t.closed_on,
-        y: (spTotal).toFixed(2)
+    //res.locals.chartdata = _chartdataFromArchive(entries);
+    next();
+  }
+}
+
+
+/**
+ * return data for apexcharts from the provided archive entries
+ */
+const _chartdataFromArchive = (descendingEntries) => {
+  const chartdata = [];
+  if (!Array.isArray(descendingEntries) || !descendingEntries.length) {
+    return chartdata;
+  }
+  let spTotal = 0;
+  descendingEntries.reverse().forEach( t => {
+    spTotal += Number.parseFloat(t.est);
+    chartdata.push({
+      x: t.closed_on,
+      y: (spTotal).toFixed(2)
+    });
+  });
+  chartdata.push({
+    x: moment().format('YYYY-MM-DD HH:mm'),
+    y: (spTotal).toFixed(2)
+  });
+  return chartdata;
+}
+
+
+/**
+ * get all the tags in all states
+ */
+ exports.getTags = () => {
+  return (req, res, next) => {
+    if ((!Array.isArray(res.locals.entries) || !res.locals.entries.length) &&
+        (!Array.isArray(res.locals.issues.open.active) || !res.locals.issues.open.active.length) &&
+        (!Array.isArray(res.locals.issues.open.pending) || !res.locals.issues.open.pending.length) &&
+        (!Array.isArray(res.locals.issues.open.closed) || !res.locals.issues.open.closed.length)) {
+      res.locals.tags = [];
+      next();
+      return;
+    }
+    const tags = {};
+    // grab tags from unsorted todos
+    [ ...res.locals.issues.open.active,
+      ...res.locals.issues.open.pending,
+      ...res.locals.issues.closed ].forEach( e => {
+      e.tagstring.split(/\s+/).forEach( tag => {
+        if ( tag.length > 0) {
+          const category = tag.slice(1); // remove '@'
+          tags.hasOwnProperty(category) || ( tags[category] = 0 );
+          tags[category]++;  
+        }
       });
     });
-    chartdata.push({
-      x: moment().format('YYYY-MM-DD HH:mm'),
-      y: (spTotal).toFixed(2)
-    })
-    res.locals.chartdata = chartdata;
+    // grab tags from archive entries
+    res.locals.entries.forEach( e => {
+      e.tags.forEach( tag => {
+        const category = tag.slice(1); // remove '@'
+        tags.hasOwnProperty(category) || ( tags[category] = 0 );
+        tags[category]++;
+      });
+    });
+    // return combined tags object to the response as an array
+    res.locals.tags = [];
+    for (const [k, v] of Object.entries(tags)) {
+      res.locals.tags.push({ tag: k, count: v });
+    }
+    res.locals.tags.sort((a, b) => a.tag > b.tag ? -1 : 1);
+    next();
+  }
+}
+
+
+/**
+ * get all the data for a particular tag in all the states
+ */
+ exports.getTagData = () => {
+  return (req, res, next) => {
+    if ((!Array.isArray(res.locals.entries) || !res.locals.entries.length) &&
+        (!Array.isArray(res.locals.issues.open.active) || !res.locals.issues.open.active.length) &&
+        (!Array.isArray(res.locals.issues.open.pending) || !res.locals.issues.open.pending.length) &&
+        (!Array.isArray(res.locals.issues.open.closed) || !res.locals.issues.open.closed.length)) {
+        res.locals.tagdata = {};
+      next();
+      return;
+    }
+    const tagname = req.params.tagname;
+    const tagData = {
+      open: {
+        active: [],
+        pending: []
+      },
+      closed: [],
+      archive: [],
+      chartdata: [],
+      opensum: 0,
+      archivesum: 0
+    }
+    // grab active entries that have this tag
+    res.locals.issues.open.active.forEach( e => {
+      if (e.tagstring.includes(`@${tagname}`)) {
+        tagData.open.active.push(e);
+        if (e.hasOwnProperty('est')) {
+          const esMin = _getMinutes(e.est);
+          tagData.opensum += _minutesToEst(esMin);
+        }
+      }
+    });
+    // grab pending entries that have this tag
+    res.locals.issues.open.pending.forEach( e => {
+      if (e.tagstring.includes(`@${tagname}`)) {
+        tagData.open.pending.push(e);        
+        if (e.hasOwnProperty('est')) {
+          const esMin = _getMinutes(e.est);
+          tagData.opensum += _minutesToEst(esMin);
+        }
+      }
+    });
+    // grab closed entries that have this tag
+    res.locals.issues.closed.forEach( e => {
+      if (e.tagstring.includes(`@${tagname}`)) {
+        tagData.closed.push(e);        
+      }
+    });
+    // grab archive entries that have this tag
+    res.locals.entries.forEach( e => {
+      e.tags.forEach( tag => {
+        const category = tag.slice(1); // remove '@'
+        if (category === tagname) {
+          tagData.archive.push(e);
+        }
+      });
+    });
+    // sort milestones, interrupts, and closed before returning
+    if (tagData.closed) tagData.closed.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
+    if (tagData.archive) {
+      tagData.archive.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
+      const chartdata = _chartdataFromArchive(tagData.archive);
+      tagData.archivesum = chartdata.length ? chartdata[chartdata.length - 1].y : 0;
+      tagData.chartdata = JSON.stringify(chartdata);
+    }
+    res.locals.tagdata = tagData;
     next();
   }
 }
@@ -627,7 +762,7 @@ exports.getArchiveByWeek = () => {
   return (req, res, next) => {
     // 0. If empty provided, return empty - assist https://stackoverflow.com/a/24403771/5360420
     if (!Array.isArray(res.locals.entries) || !res.locals.entries.length) {
-      res.locals.archive = [];
+      res.locals.archivebyweek = [];
       next();
       return;
     }
@@ -644,13 +779,14 @@ exports.getArchiveByWeek = () => {
     //    Note: ends in the middle while iterating through entries, so the for loop's while condition
     //          must include the _last case_ where entries.length == 0
     weekIterations:
-    for (let e = entries.shift(), w = 0; entries.length >= 0; w++) {
+    for (let e = entries[0], i = 0, w = 0; i < entries.length; w++) {
       archive[w] = { weekEnding: weekN, entries: [] };
-      entriesPerWeek:
+      // entriesPerWeek:
       while (e.closed_on.slice(0, 10) > weekNminusOne) {
         archive[w].entries.push(e);
-        if (entries.length !== 0) {
-          e = entries.shift();
+        i++;
+        if (i < entries.length) { // if we run out of entries we're done
+          e = entries[i];
         } else {
           break weekIterations;
         }
@@ -659,7 +795,7 @@ exports.getArchiveByWeek = () => {
       weekNminusOne = moment(weekNminusOne).subtract(7, 'days').format('YYYY-MM-DD');
     }
     // 4. Return the results
-    res.locals.archive = archive;
+    res.locals.archivebyweek = archive;
     next();
   }
 }
@@ -668,17 +804,39 @@ exports.getArchiveByWeek = () => {
 /**
  * Takes resulting data structure from all the things and renders it to the page view
  */
+ exports.renderTagPage = () => {
+  return (req, res, next) => {
+    const fileupdated = moment(res.locals.todoFileUpdated).utc().format();
+    const pageupdated = moment().utc().format();
+    res.render('tag', {
+      fileupdated: fileupdated,
+      pageupdated: pageupdated,
+      spperday: STORYPOINTSADAY,
+      hrsperday: WH,
+      whoami: WHOAMI,
+      tag: req.params.tagname,
+      tags: res.locals.tags,
+      tagdata: res.locals.tagdata
+    });
+  }
+}
+
+/**
+ * Takes resulting data structure from all the things and renders it to the page view
+ */
 exports.renderIt = () => {
   return (req, res, next) => {
-    let fileupdated = moment(res.locals.todoFileUpdated).utc().format();
-    let pageupdated = moment().utc().format();
+    const fileupdated = moment(res.locals.todoFileUpdated).utc().format();
+    const pageupdated = moment().utc().format();
+    const chartdata = _chartdataFromArchive(res.locals.entries);
     res.render('index', {
       issues: res.locals.issues,
-      archive: res.locals.archive,
+      byweek: res.locals.archivebyweek,
       bytag: res.locals.archivebytag,
+      tags: res.locals.tags,
       hassupportdata: res.locals.supportChartdata.length > 0,
       jsonsupportdata: JSON.stringify(res.locals.supportChartdata),
-      jsonchartdata: JSON.stringify(res.locals.chartdata),
+      jsonchartdata: JSON.stringify(chartdata),
       fileupdated: fileupdated,
       pageupdated: pageupdated,
       whoami: WHOAMI,
@@ -700,4 +858,5 @@ if (process.env.NODE_ENV === 'test') {
   exports._copyTodos = _copyTodos;
   exports._fillRanges = _fillRanges;
   exports._getRangeArray = _getRangeArray;
+  exports._chartdataFromArchive = _chartdataFromArchive;
 }

@@ -5,112 +5,13 @@
   <title>hqtodo</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
-  <style>
-    .hover {
-      position: absolute;
-      border-radius: 3px;
-      border: solid 1px black;
-      top: 0px;
-      right: 5px;
-      background-color: #e0a0a0;
-      padding: 6px;
-      margin: 0;
-    }
-    .hideme {
-      visibility: hidden;
-    }
-    .showme {
-      visibility: visible;
-    }
-    h1 {
-      font-size: 34pt;
-      font-weight: 500;
-    }
-    h2 {
-      font-size: 24pt;
-      font-weight: 500;
-      margin-top: 2em;
-    }
-    .archivetitle {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    .pointscale {
-      font-size: 12pt;
-      vertical-align: bottom;
-    }
-    h3 {
-      font-size: 20pt;
-      font-weight: 500;
-      margin-top: 1.2em;
-      margin-left: 1.2em;
-      padding: 3px 9px 3px 9px;
-      background-color: #bc644a;
-      color: #efe9b7;
-    }
-    h4 {
-      font-size: 16pt;
-      font-weight: 500;
-      margin-top: 1em;
-      /* margin-left: 1.2em; */
-      color: #bc644a;
-    }
-    ul {
-      list-style-type: none;
-    }
-    li {
-      font: 600 12pt 'IBM Plex Mono', monospace; /* Consolas, Monaco, monospace; */
-    }
-    body {
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 12pt;
-      margin: 16px;
-      overflow-y: scroll;
-    }
-    #ourgantt > svg[id^="mermaid-"] .grid .tick {
-      stroke: grey;
-      opacity: 0.4;
-      shape-rendering: crispEdges;
-    }
-    #ourgantt > svg[id^="mermaid-"] .grid .tick > text {
-      stroke: black;
-      opacity: 1;
-    }
-
-    #closed .bullet { color: #555 }
-    #closed .date { color: #aaa } /* aaa */
-    #closed .title { color: #555 } /* 555 */
-    #closed .tagstring { color: #aaa } /* aaa */
-    #closed .estimate { color: #037 } /* 037 */
-
-    /* starttheme:plaintasksdefault */
-    #archive { background-color: #efe9b7; }
-    #archive .divider { background-color: #00000010; color: #bc644a }
-    #archive .bullet { color: #00723e }
-    #archive .date { color: #B1A68FBF } /* aaa */
-    #archive .title { color: #858266 } /* 555 */
-    #archive .tagstring { color: #B1A68FBF } /* aaa */
-    #archive .estimate { color: #00723e } /* 037 */
-    /* endtheme:plaintasksdefault */
-
-    label {
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 1.2em;
-      color: blue;
-      display: block;
-      padding: 0.8em 0 1em 0;
-    }
-    /* show/hide assist https://stackoverflow.com/a/44297341 */
-    input, label#display-button { display:none; }
-    #archive { display:block; }
-    input#display-toggle:checked ~ label#display-button { display: block; }
-    input#display-toggle:checked ~ label#hide-button { display: none; }
-    input#display-toggle:checked ~ #archive { display: none; }
-  </style>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <header>
+  <% if (tags.length) { %>
+    <%- include('partials/tagnav', {tags: tags, home: true }) %>
+  <% } %>
   <h1>What <%= whoami %> is up to ...</h1>
 </header>
 <main>
@@ -171,7 +72,7 @@
     <%_ }); _%>
   <%_ } %>
   </ul>
-  <% if (archive.length) { %>
+  <% if (byweek.length) { %>
     <h2 class="archivetitle">
       <div>Archived todos</div>
       <div class="pointscale"><%= spperday %> point(s) per <%= hrsperday %>hr day</div>
@@ -184,7 +85,7 @@
     <div id="archive" style="padding-top:1rem;padding-right:2rem">
       <h3>by Week</h3>
       <ul>
-        <%_ archive.forEach( (w, wi) => { _%>
+        <%_ byweek.forEach( (w, wi) => { _%>
         <li id="<%= w.weekEnding %>">
           <div class="divider" style="padding:1px 0 1px 6px">Week ending: <%= w.weekEnding %></div>
           <ul id="<%= wi %>" style="margin-left: 0">

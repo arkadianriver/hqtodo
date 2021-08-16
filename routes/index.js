@@ -28,6 +28,14 @@ router.get('/todos/archived', mw.getArchive(), (req, res, next) => {
   res.json(res.locals.entries);
 });
 
+router.get('/todos/tags', mw.parseRawTodos(), mw.getArchive(), mw.getTags(), (req, res, next) => {
+  res.json(res.locals.tags);
+});
+
+router.get('/todos/tags/:tagname', mw.parseRawTodos(), mw.getArchive(), mw.getTagData(), (req, res, next) => {
+  res.json(res.locals.tagdata);
+});
+
 router.get('/todos/supportdata', mw.getArchive(), mw.getSupport(), (req, res, next) => {
   res.json(res.locals.supportentries);
 });
@@ -41,7 +49,7 @@ router.get('/todos/archivedbytag', mw.getArchive(), mw.getArchiveByTag(), (req, 
 });
 
 router.get('/todos/archivedbyweek', mw.getArchive(), mw.getArchiveByWeek(), (req, res, next) => {
-  res.json(res.locals.archive);
+  res.json(res.locals.archivebyweek);
 });
 
 router.get('/api-docs', (req, res, next) => {
@@ -63,10 +71,19 @@ GET /todos/archivedbyweek
 </html>`);
 });
 
+router.get('/tags/:tagname',
+  mw.parseRawTodos(),
+  mw.getArchive(),
+  mw.getTags(),
+  mw.getTagData(),
+  mw.renderTagPage()
+);
+
 router.get('/',
   mw.parseRawTodos(),
   mw.injectInterrupts(),
   mw.getArchive(),
+  mw.getTags(),
   mw.getSupport(),
   mw.getArchiveByTag(),
   mw.getArchiveByWeek(),
