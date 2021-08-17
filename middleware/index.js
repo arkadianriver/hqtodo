@@ -601,6 +601,10 @@ const _chartdataFromArchive = (descendingEntries) => {
 }
 
 
+function _addCSSClass(propName, className) {
+  return propName.match(className) ? propName : `${propName} ${className}`;
+}
+
 /**
  * get all the tags in all states
  */
@@ -618,16 +622,57 @@ const _chartdataFromArchive = (descendingEntries) => {
     }
     const tags = {};
     // grab tags from unsorted todos
-    [ ...res.locals.issues.open.active,
-      ...res.locals.issues.open.pending,
-      ...res.locals.issues.milestones,
-      ...res.locals.issues.blockers,
+    res.locals.issues.open.active.forEach( e => {
+      e.tagstring.split(/\s+/).forEach( tag => {
+        if ( tag.length > 0) {
+          const category = tag.slice(1); // remove '@'
+          tags.hasOwnProperty(category) || (
+            tags[category] = { count: 0, class: 'hasactive' }
+          );
+          tags[category].count++;  
+        }
+      });
+    });
+    res.locals.issues.blockers.forEach( e => {
+      e.tagstring.split(/\s+/).forEach( tag => {
+        if ( tag.length > 0) {
+          const category = tag.slice(1); // remove '@'
+          tags.hasOwnProperty(category) || (
+            tags[category] = { count: 0, class: 'hasblocker' }
+          );
+          tags[category].count++;
+          tags[category].class = _addCSSClass(
+            tags[category].class, 'hasblocker'
+          );
+        }
+      });
+    });
+    res.locals.issues.milestones.forEach( e => {
+      e.tagstring.split(/\s+/).forEach( tag => {
+        if ( tag.length > 0) {
+          const category = tag.slice(1); // remove '@'
+          tags.hasOwnProperty(category) || (
+            tags[category] = { count: 0, class: 'hasmilestone' }
+          );
+          tags[category].count++;
+          tags[category].class = _addCSSClass(
+            tags[category].class, 'hasmilestone'
+          );
+        }
+      });
+    });
+    [ ...res.locals.issues.open.pending,
       ...res.locals.issues.closed ].forEach( e => {
       e.tagstring.split(/\s+/).forEach( tag => {
         if ( tag.length > 0) {
           const category = tag.slice(1); // remove '@'
-          tags.hasOwnProperty(category) || ( tags[category] = 0 );
-          tags[category]++;  
+          tags.hasOwnProperty(category) || (
+            tags[category] = { count: 0, class: 'hasopen' }
+          );
+          tags[category].count++;
+          tags[category].class = _addCSSClass(
+            tags[category].class, 'hasopen'
+          );
         }
       });
     });
@@ -635,14 +680,18 @@ const _chartdataFromArchive = (descendingEntries) => {
     res.locals.entries.forEach( e => {
       e.tags.forEach( tag => {
         const category = tag.slice(1); // remove '@'
-        tags.hasOwnProperty(category) || ( tags[category] = 0 );
-        tags[category]++;
+        tags.hasOwnProperty(category) || (
+          tags[category] = { count: 0, class: 'hasclosed' }
+        );
+        tags[category].count++;
+        // if not discovered yet, not open, so enough to init with closed class
       });
     });
     // return combined tags object to the response as an array
     res.locals.tags = [];
     for (const [k, v] of Object.entries(tags)) {
-      res.locals.tags.push({ tag: k, count: v });
+      v.tag = k;
+      res.locals.tags.push(v);
     }
     res.locals.tags.sort((a, b) => a.tag < b.tag ? -1 : 1);
     next();

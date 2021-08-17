@@ -1,13 +1,15 @@
+<% let isMilestone = (t.enddate && t.enddate === t.startdate.substr(0,10)) %>
+<% let liBullet = t.hover ? '!' : isMilestone ? '⋄' : '☐' %>
             <li class="oentry">
-              <div class="obullet">☐</div>
+              <div class="obullet"><%= liBullet %></div>
               <div class="otext">
-              <% if ( (t.enddate && t.enddate === t.startdate.substr(0,10)) ) { %>
+              <% if (isMilestone) { %>
               <span class="milestone-date"><%= t.enddate %></span>
               <% } %>
               <% if (t.link) { %><a target="_blank" href="%><%= t.link %>"><% } %><span
               class="title"><%= t.title %></span><% if (t.link) { %></a><% } %>
               <% if (t.hasOwnProperty('tagstring')) { %><span class="tagstring"><%= t.tagstring %></span><% } %>
-              <% if ( !(t.enddate && t.enddate === t.startdate.substr(0,10)) ) { %>
+              <% if ( !isMilestone ) { %>
               <span class="estimate">(<%= t.est %>)</span>
               <% } %>
               <% if (t.hover) { %><br /><span class="blockers"><%- t.hover %></span><% } %>

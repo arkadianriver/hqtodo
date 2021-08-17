@@ -27,14 +27,26 @@
       color: cornflowerblue;
       text-decoration: none;
     }
+    ul.tags > li > a.hasclosed {
+      color: lightgray;
+    }
+    ul.tags > li > a.hasactive::after {
+      content: '⁺'
+    }
+    ul.tags > li > a.hasmilestone::before {
+      content: '⋄'
+    }
+    ul.tags > li > a.hasblocker::after {
+      content: '!'
+    }
     ul.tags > li > a:hover {
-      color: blue;
+      text-decoration: underline;
     }
 </style>
 <div class="tagnav">
   <h2 class="tagstitle">Tag nav</h2>
   <ul class="tags"><% tags.map( t => { %>
-    <li data-count="<%= t.count %>"><a
+    <li data-count="<%= t.count %>"><a class="<%= t.class %>"
       href="<% if (process.env.MY_ENV == 'gh-pages') { %><%= t.tag %>.html<% } else { %>/tags/<%= t.tag %><% } %>">@<%= t.tag %></a></li>
   <% }) %></ul>
   <% if (!home) { %><ul class="tags"><li><a

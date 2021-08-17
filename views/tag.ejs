@@ -19,7 +19,6 @@
   <h2>Todo (<%= tagdata.opensum %> pts)</h2>
 
   <%_ if (tagdata.milestones && tagdata.milestones.length !== 0) { %>
-    <h3 class="open">Milestones</h3>
     <ul id="active" style="list-style-type:none;">    
       <%_ tagdata.milestones.forEach( t => { _%>
   <%- include('partials/open_entry.ejs', {t: t} ); %>
@@ -28,7 +27,6 @@
   </ul>  
 
   <%_ if (tagdata.blockers && tagdata.blockers.length !== 0) { %>
-    <h3 class="open">Blockers</h3>
     <ul id="active" style="list-style-type:none;">    
       <%_ tagdata.blockers.forEach( t => { _%>
   <%- include('partials/open_entry.ejs', {t: t} ); %>
