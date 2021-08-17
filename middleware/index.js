@@ -730,13 +730,13 @@ function _addCSSClass(propName, className) {
     }
     // grab milestone entries that have this tag
     res.locals.issues.milestones.forEach( e => {
-      if (e.tagstring.includes(`@${tagname}`)) {
+      if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
         tagData.milestones.push(e);
       }
     });
     // grab blocker entries that have this tag
     res.locals.issues.blockers.forEach( e => {
-      if (e.tagstring.includes(`@${tagname}`)) {
+      if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
         tagData.blockers.push(e);
         if (e.hasOwnProperty('est')) {
           const esMin = _getMinutes(e.est);
@@ -746,7 +746,7 @@ function _addCSSClass(propName, className) {
     });    
     // grab active entries that have this tag
     res.locals.issues.open.active.forEach( e => {
-      if (e.tagstring.includes(`@${tagname}`)) {
+      if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
         tagData.open.active.push(e);
         if (e.hasOwnProperty('est')) {
           const esMin = _getMinutes(e.est);
@@ -756,7 +756,7 @@ function _addCSSClass(propName, className) {
     });
     // grab pending entries that have this tag
     res.locals.issues.open.pending.forEach( e => {
-      if (e.tagstring.includes(`@${tagname}`)) {
+      if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
         tagData.open.pending.push(e);        
         if (e.hasOwnProperty('est')) {
           const esMin = _getMinutes(e.est);
@@ -766,7 +766,7 @@ function _addCSSClass(propName, className) {
     });
     // grab closed entries that have this tag
     res.locals.issues.closed.forEach( e => {
-      if (e.tagstring.includes(`@${tagname}`)) {
+      if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
         tagData.closed.push(e);        
       }
     });
