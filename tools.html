@@ -39,47 +39,59 @@
       color: cornflowerblue;
       text-decoration: none;
     }
+    ul.tags > li > a.hasclosed {
+      color: lightgray;
+    }
+    ul.tags > li > a.hasactive::after {
+      content: '⁺'
+    }
+    ul.tags > li > a.hasmilestone::before {
+      content: '⋄'
+    }
+    ul.tags > li > a.hasblocker::after {
+      content: '!'
+    }
     ul.tags > li > a:hover {
-      color: blue;
+      text-decoration: underline;
     }
 </style>
 <div class="tagnav">
   <h2 class="tagstitle">Tag nav</h2>
   <ul class="tags">
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasclosed"
       href="admin.html">@admin</a></li>
   
-    <li data-count="2"><a
+    <li data-count="2"><a class="hasopen"
       href="edu.html">@edu</a></li>
   
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasactive hasopen"
       href="f22.html">@f22</a></li>
   
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasopen"
       href="personal.html">@personal</a></li>
   
-    <li data-count="44"><a
+    <li data-count="44"><a class="hasactive hasopen"
       href="prja.html">@prja</a></li>
   
-    <li data-count="30"><a
+    <li data-count="30"><a class="hasactive hasopen"
       href="prjb.html">@prjb</a></li>
   
-    <li data-count="84"><a
+    <li data-count="84"><a class="hasactive hasopen"
       href="prjc.html">@prjc</a></li>
   
-    <li data-count="22"><a
+    <li data-count="22"><a class="hasblocker"
       href="prjd.html">@prjd</a></li>
   
-    <li data-count="22"><a
+    <li data-count="22"><a class="hasclosed"
       href="tools.html">@tools</a></li>
   
-    <li data-count="2"><a
+    <li data-count="2"><a class="hasactive hasopen"
       href="vidz.html">@vidz</a></li>
   
-    <li data-count="5"><a
+    <li data-count="5"><a class="hasactive"
       href="woot.html">@woot</a></li>
   
-    <li data-count="1"><a
+    <li data-count="1"><a class="hasopen"
       href="xedu.html">@xedu</a></li>
   </ul>
   <ul class="tags"><li><a
@@ -245,7 +257,7 @@
   with ♥ from Mermaid and ApexCharts<br/>
   An <a href="/api-docs">API</a> is also available.
   </p>
-  <p style="font-size:smaller">Page last updated 2021-08-17T04:02:38Z<br/>Task file last updated 2021-08-17T04:02:38Z</p>
+  <p style="font-size:smaller">Page last updated 2021-08-17T16:08:56Z<br/>Task file last updated 2021-08-17T16:08:56Z</p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -260,7 +272,7 @@
       series: [
         {
           name: 'Cumulative points spent on tools todos',
-          data: [{"x":"2021-01-11 14:18","y":"0.50"},{"x":"2021-01-12 08:41","y":"1.50"},{"x":"2021-01-24 10:59","y":"2.00"},{"x":"2021-01-29 09:45","y":"3.00"},{"x":"2021-01-29 10:51","y":"3.50"},{"x":"2021-02-03 02:40","y":"6.00"},{"x":"2021-03-30 10:01","y":"6.50"},{"x":"2021-04-20 11:14","y":"7.00"},{"x":"2021-04-28 09:00","y":"7.50"},{"x":"2021-05-11 14:18","y":"8.00"},{"x":"2021-05-12 08:41","y":"9.00"},{"x":"2021-05-24 10:59","y":"9.50"},{"x":"2021-05-29 09:45","y":"10.50"},{"x":"2021-05-29 10:51","y":"11.00"},{"x":"2021-06-10 10:59","y":"11.50"},{"x":"2021-06-15 09:45","y":"12.50"},{"x":"2021-06-15 10:51","y":"13.00"},{"x":"2021-06-20 02:40","y":"15.50"},{"x":"2021-07-23 10:59","y":"16.00"},{"x":"2021-07-28 09:45","y":"17.00"},{"x":"2021-07-28 10:51","y":"17.50"},{"x":"2021-08-07 02:40","y":"20.00"},{"x":"2021-08-17 04:02","y":"20.00"}]
+          data: [{"x":"2021-01-11 14:18","y":"0.50"},{"x":"2021-01-12 08:41","y":"1.50"},{"x":"2021-01-24 10:59","y":"2.00"},{"x":"2021-01-29 09:45","y":"3.00"},{"x":"2021-01-29 10:51","y":"3.50"},{"x":"2021-02-03 02:40","y":"6.00"},{"x":"2021-03-30 10:01","y":"6.50"},{"x":"2021-04-20 11:14","y":"7.00"},{"x":"2021-04-28 09:00","y":"7.50"},{"x":"2021-05-11 14:18","y":"8.00"},{"x":"2021-05-12 08:41","y":"9.00"},{"x":"2021-05-24 10:59","y":"9.50"},{"x":"2021-05-29 09:45","y":"10.50"},{"x":"2021-05-29 10:51","y":"11.00"},{"x":"2021-06-10 10:59","y":"11.50"},{"x":"2021-06-15 09:45","y":"12.50"},{"x":"2021-06-15 10:51","y":"13.00"},{"x":"2021-06-20 02:40","y":"15.50"},{"x":"2021-07-23 10:59","y":"16.00"},{"x":"2021-07-28 09:45","y":"17.00"},{"x":"2021-07-28 10:51","y":"17.50"},{"x":"2021-08-07 02:40","y":"20.00"},{"x":"2021-08-17 16:08","y":"20.00"}]
         }
       ],
       chart: {

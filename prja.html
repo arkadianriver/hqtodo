@@ -39,47 +39,59 @@
       color: cornflowerblue;
       text-decoration: none;
     }
+    ul.tags > li > a.hasclosed {
+      color: lightgray;
+    }
+    ul.tags > li > a.hasactive::after {
+      content: '⁺'
+    }
+    ul.tags > li > a.hasmilestone::before {
+      content: '⋄'
+    }
+    ul.tags > li > a.hasblocker::after {
+      content: '!'
+    }
     ul.tags > li > a:hover {
-      color: blue;
+      text-decoration: underline;
     }
 </style>
 <div class="tagnav">
   <h2 class="tagstitle">Tag nav</h2>
   <ul class="tags">
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasclosed"
       href="admin.html">@admin</a></li>
   
-    <li data-count="2"><a
+    <li data-count="2"><a class="hasopen"
       href="edu.html">@edu</a></li>
   
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasactive hasopen"
       href="f22.html">@f22</a></li>
   
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasopen"
       href="personal.html">@personal</a></li>
   
-    <li data-count="44"><a
+    <li data-count="44"><a class="hasactive hasopen"
       href="prja.html">@prja</a></li>
   
-    <li data-count="30"><a
+    <li data-count="30"><a class="hasactive hasopen"
       href="prjb.html">@prjb</a></li>
   
-    <li data-count="84"><a
+    <li data-count="84"><a class="hasactive hasopen"
       href="prjc.html">@prjc</a></li>
   
-    <li data-count="22"><a
+    <li data-count="22"><a class="hasblocker"
       href="prjd.html">@prjd</a></li>
   
-    <li data-count="22"><a
+    <li data-count="22"><a class="hasclosed"
       href="tools.html">@tools</a></li>
   
-    <li data-count="2"><a
+    <li data-count="2"><a class="hasactive hasopen"
       href="vidz.html">@vidz</a></li>
   
-    <li data-count="5"><a
+    <li data-count="5"><a class="hasactive"
       href="woot.html">@woot</a></li>
   
-    <li data-count="1"><a
+    <li data-count="1"><a class="hasopen"
       href="xedu.html">@xedu</a></li>
   </ul>
   <ul class="tags"><li><a
@@ -102,7 +114,9 @@
 
     <h3 class="open">In progress</h3>
     <ul id="active" style="list-style-type:none;">    
-              <li class="oentry">
+  
+
+            <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
@@ -116,7 +130,9 @@
               </div>
             </li>
 
-              <li class="oentry">
+  
+
+            <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
@@ -136,7 +152,9 @@
 
     <h3 class="open">Backlog</h3>
     <ul id="pending" style="list-style-type:none;">    
-              <li class="oentry">
+  
+
+            <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
@@ -388,7 +406,7 @@
   with ♥ from Mermaid and ApexCharts<br/>
   An <a href="/api-docs">API</a> is also available.
   </p>
-  <p style="font-size:smaller">Page last updated 2021-08-17T04:02:38Z<br/>Task file last updated 2021-08-17T04:02:38Z</p>
+  <p style="font-size:smaller">Page last updated 2021-08-17T16:08:56Z<br/>Task file last updated 2021-08-17T16:08:56Z</p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -403,7 +421,7 @@
       series: [
         {
           name: 'Cumulative points spent on prja todos',
-          data: [{"x":"2021-01-12 06:41","y":"0.50"},{"x":"2021-01-15 12:43","y":"1.50"},{"x":"2021-01-21 11:59","y":"2.00"},{"x":"2021-01-24 19:42","y":"2.50"},{"x":"2021-01-28 11:56","y":"3.00"},{"x":"2021-02-03 15:56","y":"3.50"},{"x":"2021-02-03 22:37","y":"4.00"},{"x":"2021-02-10 20:33","y":"4.50"},{"x":"2021-02-14 06:11","y":"5.50"},{"x":"2021-02-22 21:33","y":"6.00"},{"x":"2021-03-03 13:30","y":"6.50"},{"x":"2021-03-24 10:49","y":"7.00"},{"x":"2021-03-25 10:23","y":"7.50"},{"x":"2021-03-25 11:45","y":"7.75"},{"x":"2021-04-04 22:33","y":"8.25"},{"x":"2021-04-08 01:24","y":"9.25"},{"x":"2021-04-11 19:39","y":"13.25"},{"x":"2021-04-12 07:25","y":"14.00"},{"x":"2021-04-17 01:18","y":"16.00"},{"x":"2021-04-17 01:19","y":"16.50"},{"x":"2021-04-20 22:05","y":"17.00"},{"x":"2021-04-22 01:41","y":"17.50"},{"x":"2021-04-22 14:11","y":"18.00"},{"x":"2021-04-29 00:12","y":"19.00"},{"x":"2021-05-12 06:41","y":"19.50"},{"x":"2021-05-15 12:43","y":"20.50"},{"x":"2021-05-21 11:59","y":"21.00"},{"x":"2021-05-24 19:42","y":"21.50"},{"x":"2021-05-28 11:56","y":"22.00"},{"x":"2021-06-01 12:43","y":"23.00"},{"x":"2021-06-07 11:59","y":"23.50"},{"x":"2021-06-10 19:42","y":"24.00"},{"x":"2021-06-14 11:56","y":"24.50"},{"x":"2021-06-20 15:56","y":"25.00"},{"x":"2021-06-20 22:37","y":"25.50"},{"x":"2021-07-19 21:37","y":"25.75"},{"x":"2021-07-20 11:59","y":"26.25"},{"x":"2021-07-22 12:55","y":"26.50"},{"x":"2021-07-23 19:42","y":"27.00"},{"x":"2021-07-27 11:56","y":"27.50"},{"x":"2021-08-07 15:56","y":"28.00"},{"x":"2021-08-17 04:02","y":"28.00"}]
+          data: [{"x":"2021-01-12 06:41","y":"0.50"},{"x":"2021-01-15 12:43","y":"1.50"},{"x":"2021-01-21 11:59","y":"2.00"},{"x":"2021-01-24 19:42","y":"2.50"},{"x":"2021-01-28 11:56","y":"3.00"},{"x":"2021-02-03 15:56","y":"3.50"},{"x":"2021-02-03 22:37","y":"4.00"},{"x":"2021-02-10 20:33","y":"4.50"},{"x":"2021-02-14 06:11","y":"5.50"},{"x":"2021-02-22 21:33","y":"6.00"},{"x":"2021-03-03 13:30","y":"6.50"},{"x":"2021-03-24 10:49","y":"7.00"},{"x":"2021-03-25 10:23","y":"7.50"},{"x":"2021-03-25 11:45","y":"7.75"},{"x":"2021-04-04 22:33","y":"8.25"},{"x":"2021-04-08 01:24","y":"9.25"},{"x":"2021-04-11 19:39","y":"13.25"},{"x":"2021-04-12 07:25","y":"14.00"},{"x":"2021-04-17 01:18","y":"16.00"},{"x":"2021-04-17 01:19","y":"16.50"},{"x":"2021-04-20 22:05","y":"17.00"},{"x":"2021-04-22 01:41","y":"17.50"},{"x":"2021-04-22 14:11","y":"18.00"},{"x":"2021-04-29 00:12","y":"19.00"},{"x":"2021-05-12 06:41","y":"19.50"},{"x":"2021-05-15 12:43","y":"20.50"},{"x":"2021-05-21 11:59","y":"21.00"},{"x":"2021-05-24 19:42","y":"21.50"},{"x":"2021-05-28 11:56","y":"22.00"},{"x":"2021-06-01 12:43","y":"23.00"},{"x":"2021-06-07 11:59","y":"23.50"},{"x":"2021-06-10 19:42","y":"24.00"},{"x":"2021-06-14 11:56","y":"24.50"},{"x":"2021-06-20 15:56","y":"25.00"},{"x":"2021-06-20 22:37","y":"25.50"},{"x":"2021-07-19 21:37","y":"25.75"},{"x":"2021-07-20 11:59","y":"26.25"},{"x":"2021-07-22 12:55","y":"26.50"},{"x":"2021-07-23 19:42","y":"27.00"},{"x":"2021-07-27 11:56","y":"27.50"},{"x":"2021-08-07 15:56","y":"28.00"},{"x":"2021-08-17 16:08","y":"28.00"}]
         }
       ],
       chart: {

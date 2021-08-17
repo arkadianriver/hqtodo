@@ -39,47 +39,59 @@
       color: cornflowerblue;
       text-decoration: none;
     }
+    ul.tags > li > a.hasclosed {
+      color: lightgray;
+    }
+    ul.tags > li > a.hasactive::after {
+      content: '⁺'
+    }
+    ul.tags > li > a.hasmilestone::before {
+      content: '⋄'
+    }
+    ul.tags > li > a.hasblocker::after {
+      content: '!'
+    }
     ul.tags > li > a:hover {
-      color: blue;
+      text-decoration: underline;
     }
 </style>
 <div class="tagnav">
   <h2 class="tagstitle">Tag nav</h2>
   <ul class="tags">
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasclosed"
       href="admin.html">@admin</a></li>
   
-    <li data-count="2"><a
+    <li data-count="2"><a class="hasopen"
       href="edu.html">@edu</a></li>
   
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasactive hasopen"
       href="f22.html">@f22</a></li>
   
-    <li data-count="3"><a
+    <li data-count="3"><a class="hasopen"
       href="personal.html">@personal</a></li>
   
-    <li data-count="44"><a
+    <li data-count="44"><a class="hasactive hasopen"
       href="prja.html">@prja</a></li>
   
-    <li data-count="30"><a
+    <li data-count="30"><a class="hasactive hasopen"
       href="prjb.html">@prjb</a></li>
   
-    <li data-count="84"><a
+    <li data-count="84"><a class="hasactive hasopen"
       href="prjc.html">@prjc</a></li>
   
-    <li data-count="22"><a
+    <li data-count="22"><a class="hasblocker"
       href="prjd.html">@prjd</a></li>
   
-    <li data-count="22"><a
+    <li data-count="22"><a class="hasclosed"
       href="tools.html">@tools</a></li>
   
-    <li data-count="2"><a
+    <li data-count="2"><a class="hasactive hasopen"
       href="vidz.html">@vidz</a></li>
   
-    <li data-count="5"><a
+    <li data-count="5"><a class="hasactive"
       href="woot.html">@woot</a></li>
   
-    <li data-count="1"><a
+    <li data-count="1"><a class="hasopen"
       href="xedu.html">@xedu</a></li>
   </ul>
   <ul class="tags"><li><a
@@ -102,7 +114,9 @@
 
     <h3 class="open">In progress</h3>
     <ul id="active" style="list-style-type:none;">    
-              <li class="oentry">
+  
+
+            <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
@@ -122,7 +136,9 @@
 
     <h3 class="open">Backlog</h3>
     <ul id="pending" style="list-style-type:none;">    
-              <li class="oentry">
+  
+
+            <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
@@ -136,7 +152,9 @@
               </div>
             </li>
 
-              <li class="oentry">
+  
+
+            <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
@@ -172,7 +190,7 @@
   with ♥ from Mermaid and ApexCharts<br/>
   An <a href="/api-docs">API</a> is also available.
   </p>
-  <p style="font-size:smaller">Page last updated 2021-08-17T04:02:38Z<br/>Task file last updated 2021-08-17T04:02:38Z</p>
+  <p style="font-size:smaller">Page last updated 2021-08-17T16:08:56Z<br/>Task file last updated 2021-08-17T16:08:56Z</p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
