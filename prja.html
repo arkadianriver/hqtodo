@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size:80%">
+<head>
+  <meta charset="UTF-8">
+  <title>hqtodo</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<header>
+  
+    <style>
+    .tagnav {
+      border: solid 1px black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tagnav > .tagstitle {
+      font-size: 1.6em;
+      font-weight: 400;
+      align-items: center;
+      margin: 0;
+    }
+    ul.tags {
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    ul.tags > li {
+      padding: 6px;
+      font-size: larger;
+    }
+    ul.tags > li > a {
+      color: cornflowerblue;
+      text-decoration: none;
+    }
+    ul.tags > li > a:hover {
+      color: blue;
+    }
+</style>
+<div class="tagnav">
+  <h2 class="tagstitle">Tag nav</h2>
+  <ul class="tags">
+    <li data-count="3"><a
+      href="admin.html">@admin</a></li>
+  
+    <li data-count="2"><a
+      href="edu.html">@edu</a></li>
+  
+    <li data-count="3"><a
+      href="f22.html">@f22</a></li>
+  
+    <li data-count="3"><a
+      href="personal.html">@personal</a></li>
+  
+    <li data-count="44"><a
+      href="prja.html">@prja</a></li>
+  
+    <li data-count="30"><a
+      href="prjb.html">@prjb</a></li>
+  
+    <li data-count="84"><a
+      href="prjc.html">@prjc</a></li>
+  
+    <li data-count="22"><a
+      href="prjd.html">@prjd</a></li>
+  
+    <li data-count="22"><a
+      href="tools.html">@tools</a></li>
+  
+    <li data-count="2"><a
+      href="vidz.html">@vidz</a></li>
+  
+    <li data-count="5"><a
+      href="woot.html">@woot</a></li>
+  
+    <li data-count="1"><a
+      href="xedu.html">@xedu</a></li>
+  </ul>
+  <ul class="tags"><li><a
+    href="index.html">Home</a></li></ul>
+</div>
+
+  
+  <h1>@prja</h1>
+</header>
+<main>
+
+  <h2>Todo (6 pts)</h2>
+
+
+  </ul>  
+
+
+  </ul>  
+
+
+    <h3 class="open">In progress</h3>
+    <ul id="active" style="list-style-type:none;">    
+              <li class="oentry">
+              <div class="obullet">☐</div>
+              <div class="otext">
+              
+              <span
+              class="title">decide organization requirements</span>
+              <span class="tagstring">@prja @woot</span>
+              
+              <span class="estimate">(6h)</span>
+              
+              
+              </div>
+            </li>
+
+              <li class="oentry">
+              <div class="obullet">☐</div>
+              <div class="otext">
+              
+              <span
+              class="title">work with so-and-so on such-and-such</span>
+              <span class="tagstring">@prja @prjb</span>
+              
+              <span class="estimate">(6h)</span>
+              
+              
+              </div>
+            </li>
+
+
+  </ul>  
+
+
+    <h3 class="open">Backlog</h3>
+    <ul id="pending" style="list-style-type:none;">    
+              <li class="oentry">
+              <div class="obullet">☐</div>
+              <div class="otext">
+              
+              <span
+              class="title">get thing-a-ma-bob Info from SME-guru</span>
+              <span class="tagstring">@prja</span>
+              
+              <span class="estimate">(12h)</span>
+              
+              
+              </div>
+            </li>
+
+
+    </ul>  
+
+
+
+    <h2 class="archivetitle">
+      <div>Done (28.00 pts)</div>
+      <div class="pointscale">2 point(s) per 8hr day</div>
+    </h2>
+    <div id="chart"></div>
+
+  
+    <input type="checkbox" id="display-toggle"/>
+    <label for="display-toggle" id="display-button"><span>▹ show the archive</span></label>
+    <label for="display-toggle" id="hide-button"><span>▿ hide the archive</span></label>
+    <div id="archive" style="padding-top:1rem;padding-right:2rem">
+      <h3>Completed for @prja</h3>
+      <ul>
+            <li><span class="bullet">✔</span> <span class="date">2021-08-07 15:56</span>
+              <span class="title" style="font-style:italic">neque dolore dolor etincidunt etincidunt dolor</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-07-27 11:56</span>
+              <span class="title" style="font-style:italic">etincidunt non eius etincidunt numquam magnam adipisci</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-07-23 19:42</span>
+              <span class="title" style="font-style:italic">adipisci quaerat voluptatem quiquia porro</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-07-22 12:55</span>
+              <span class="title" style="font-style:italic">gotta get this done</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-07-20 11:59</span>
+              <span class="title" style="font-style:italic">est numquam ipsum etincidunt</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-07-19 21:37</span>
+              <span class="title" style="font-style:italic">Restructure archive of books</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-06-20 22:37</span>
+              <span class="title" style="font-style:italic">quisquam ut numquam etincidunt velit</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-06-20 15:56</span>
+              <span class="title" style="font-style:italic">neque dolore dolor etincidunt etincidunt dolor</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-06-14 11:56</span>
+              <span class="title" style="font-style:italic">etincidunt non eius etincidunt numquam magnam adipisci</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-06-10 19:42</span>
+              <span class="title" style="font-style:italic">adipisci quaerat voluptatem quiquia porro</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-06-07 11:59</span>
+              <span class="title" style="font-style:italic">today est numquam ipsum etincidunt</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-06-01 12:43</span>
+              <span class="title" style="font-style:italic">magnam ipsum porro velit tempora neque velit tempora</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-05-28 11:56</span>
+              <span class="title" style="font-style:italic">etincidunt non eius etincidunt numquam magnam adipisci</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-05-24 19:42</span>
+              <span class="title" style="font-style:italic">adipisci quaerat voluptatem quiquia porro</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-05-21 11:59</span>
+              <span class="title" style="font-style:italic">est numquam ipsum etincidunt</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-05-15 12:43</span>
+              <span class="title" style="font-style:italic">magnam ipsum porro velit tempora neque velit tempora</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-05-12 06:41</span>
+              <span class="title" style="font-style:italic">ut eius magnam consectetur</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-29 00:12</span>
+              <span class="title" style="font-style:italic">neque modi modi dolore neque adipisci aliquam etincidunt</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-22 14:11</span>
+              <span class="title" style="font-style:italic">dolorem aliquam quisquam neque sed sit dolor quiquia</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-22 01:41</span>
+              <span class="title" style="font-style:italic">sed quiquia numquam sed consectetur amet</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-20 22:05</span>
+              <span class="title" style="font-style:italic">sed modi ipsum ut consectetur</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-17 01:19</span>
+              <span class="title" style="font-style:italic">ipsum non dolore quisquam labore amet dolore amet</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-17 01:18</span>
+              <span class="title" style="font-style:italic">adipisci porro magnam labore ut quiquia tempora ipsum</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(2.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-12 07:25</span>
+              <span class="title" style="font-style:italic">labore adipisci non est</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.75)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-11 19:39</span>
+              <span class="title" style="font-style:italic">sed quiquia ipsum numquam dolor dolor</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(4.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-08 01:24</span>
+              <span class="title" style="font-style:italic">sit modi quaerat non tempora</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-04-04 22:33</span>
+              <span class="title" style="font-style:italic">dolorem quiquia porro etincidunt voluptatem numquam dolor consectetur</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-03-25 11:45</span>
+              <span class="title" style="font-style:italic">dolor velit quiquia modi etincidunt</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.25)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-03-25 10:23</span>
+              <span class="title" style="font-style:italic">amet etincidunt neque est numquam tempora amet aliquam</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-03-24 10:49</span>
+              <span class="title" style="font-style:italic">tempora dolorem neque dolor sit magnam</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-03-03 13:30</span>
+              <span class="title" style="font-style:italic">ipsum magnam dolore magnam labore dolorem</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-02-22 21:33</span>
+              <span class="title" style="font-style:italic">aliquam magnam tempora dolore quiquia sed dolor dolorem</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-02-14 06:11</span>
+              <span class="title" style="font-style:italic">test Ruby 2.6 / Jekyll 4</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-02-10 20:33</span>
+              <span class="title" style="font-style:italic">Investigate dark theme</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-02-03 22:37</span>
+              <span class="title" style="font-style:italic">quisquam ut numquam etincidunt velit</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-02-03 15:56</span>
+              <span class="title" style="font-style:italic">neque dolore dolor etincidunt etincidunt dolor</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-01-28 11:56</span>
+              <span class="title" style="font-style:italic">etincidunt non eius etincidunt numquam magnam adipisci</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-01-24 19:42</span>
+              <span class="title" style="font-style:italic">adipisci quaerat voluptatem quiquia porro</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-01-21 11:59</span>
+              <span class="title" style="font-style:italic">est numquam ipsum etincidunt</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-01-15 12:43</span>
+              <span class="title" style="font-style:italic">magnam ipsum porro velit tempora neque velit tempora</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(1.00)</span>
+            </li>
+            <li><span class="bullet">✔</span> <span class="date">2021-01-12 06:41</span>
+              <span class="title" style="font-style:italic">ut eius magnam consectetur</span>
+              <span class="tagstring">@prja</span>
+              <span class="estimate">(0.50)</span>
+            </li>
+        <span>&nbsp;</span>
+      </ul>
+      <span>&nbsp;</span>
+    </div>
+  
+
+</main>
+
+  <hr/>
+  <div style="display:flex;justify-content:space-between;width:100%">
+  <p style="font-size:smaller;">Page by <a target="_blank"
+  href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
+  with ♥ from Mermaid and ApexCharts<br/>
+  An <a href="/api-docs">API</a> is also available.
+  </p>
+  <p style="font-size:smaller">Page last updated 2021-08-17T04:02:38Z<br/>Task file last updated 2021-08-17T04:02:38Z</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script>
+    var showHover = id => {
+      const hover = document.querySelector(`#h${id}`);
+      hover.classList.toggle("showme");
+      hover.classList.toggle("hideme");
+    };
+
+    var chartOptions = {
+      series: [
+        {
+          name: 'Cumulative points spent on prja todos',
+          data: [{"x":"2021-01-12 06:41","y":"0.50"},{"x":"2021-01-15 12:43","y":"1.50"},{"x":"2021-01-21 11:59","y":"2.00"},{"x":"2021-01-24 19:42","y":"2.50"},{"x":"2021-01-28 11:56","y":"3.00"},{"x":"2021-02-03 15:56","y":"3.50"},{"x":"2021-02-03 22:37","y":"4.00"},{"x":"2021-02-10 20:33","y":"4.50"},{"x":"2021-02-14 06:11","y":"5.50"},{"x":"2021-02-22 21:33","y":"6.00"},{"x":"2021-03-03 13:30","y":"6.50"},{"x":"2021-03-24 10:49","y":"7.00"},{"x":"2021-03-25 10:23","y":"7.50"},{"x":"2021-03-25 11:45","y":"7.75"},{"x":"2021-04-04 22:33","y":"8.25"},{"x":"2021-04-08 01:24","y":"9.25"},{"x":"2021-04-11 19:39","y":"13.25"},{"x":"2021-04-12 07:25","y":"14.00"},{"x":"2021-04-17 01:18","y":"16.00"},{"x":"2021-04-17 01:19","y":"16.50"},{"x":"2021-04-20 22:05","y":"17.00"},{"x":"2021-04-22 01:41","y":"17.50"},{"x":"2021-04-22 14:11","y":"18.00"},{"x":"2021-04-29 00:12","y":"19.00"},{"x":"2021-05-12 06:41","y":"19.50"},{"x":"2021-05-15 12:43","y":"20.50"},{"x":"2021-05-21 11:59","y":"21.00"},{"x":"2021-05-24 19:42","y":"21.50"},{"x":"2021-05-28 11:56","y":"22.00"},{"x":"2021-06-01 12:43","y":"23.00"},{"x":"2021-06-07 11:59","y":"23.50"},{"x":"2021-06-10 19:42","y":"24.00"},{"x":"2021-06-14 11:56","y":"24.50"},{"x":"2021-06-20 15:56","y":"25.00"},{"x":"2021-06-20 22:37","y":"25.50"},{"x":"2021-07-19 21:37","y":"25.75"},{"x":"2021-07-20 11:59","y":"26.25"},{"x":"2021-07-22 12:55","y":"26.50"},{"x":"2021-07-23 19:42","y":"27.00"},{"x":"2021-07-27 11:56","y":"27.50"},{"x":"2021-08-07 15:56","y":"28.00"},{"x":"2021-08-17 04:02","y":"28.00"}]
+        }
+      ],
+      chart: {
+        type: 'line',
+        height: 350,
+        events: {
+          selection: function (chart, e) {
+            console.log(new Date(e.xaxis.min))
+          }
+        },
+      },
+      stroke: {
+        curve: 'stepline'
+      },
+      legend: {
+        showForSingleSeries: true,
+        position: 'top',
+        horizontalAlign: 'left'
+      },
+      xaxis: {
+        type: 'datetime'
+      },
+    };
+    var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
+    chart.render();   
+  </script>
+
+</body></html>

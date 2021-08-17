@@ -1,0 +1,113 @@
+.hover {
+  position: absolute;
+  border-radius: 3px;
+  border: solid 1px black;
+  top: 0px;
+  right: 5px;
+  background-color: #e0a0a0;
+  padding: 6px;
+  margin: 0;
+}
+.hideme {
+  visibility: hidden;
+}
+.showme {
+  visibility: visible;
+}
+h1 {
+  font-size: 34pt;
+  font-weight: 500;
+}
+h2 {
+  font-size: 24pt;
+  font-weight: 500;
+  margin-top: 2em;
+}
+.archivetitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.pointscale {
+  font-size: 12pt;
+  vertical-align: bottom;
+}
+h3 {
+  font-size: 20pt;
+  font-weight: 500;
+  margin-top: 1.2em;
+  margin-left: 1.2em;
+  padding: 3px 9px 3px 9px;
+  background-color: #bc644a;
+  color: #efe9b7;
+}
+h3.open {
+  color: black;
+  background-color: white;
+  border-left: solid 1px black;
+}
+h4 {
+  font-size: 16pt;
+  font-weight: 500;
+  margin-top: 1em;
+  /* margin-left: 1.2em; */
+  color: #bc644a;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  font: 600 12pt 'IBM Plex Mono', monospace; /* Consolas, Monaco, monospace; */
+}
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12pt;
+  margin: 16px;
+  overflow-y: scroll;
+}
+#ourgantt > svg[id^="mermaid-"] .grid .tick {
+  stroke: grey;
+  opacity: 0.4;
+  shape-rendering: crispEdges;
+}
+#ourgantt > svg[id^="mermaid-"] .grid .tick > text {
+  stroke: black;
+  opacity: 1;
+}
+
+.oentry { display: flex; flex-flow: row nowrap }
+.oentry .obullet { padding-right: 10px }
+.oentry .otext .blockers { color: red }
+
+#closed .bullet { color: #555 }
+#closed .date { color: #aaa } /* aaa */
+#closed .title { color: #555 } /* 555 */
+#closed .tagstring { color: #aaa } /* aaa */
+#closed .estimate { color: #037 } /* 037 */
+
+/* starttheme:plaintasksdefault */
+#archive { background-color: #efe9b7; }
+#archive .divider { background-color: #00000010; color: #bc644a }
+#archive .bullet { color: #00723e }
+#archive .date { color: #B1A68FBF } /* aaa */
+#archive .title { color: #858266 } /* 555 */
+#archive .tagstring { color: #B1A68FBF } /* aaa */
+#archive .estimate { color: #00723e } /* 037 */
+/* endtheme:plaintasksdefault */
+
+/* show/hide assist https://stackoverflow.com/a/44297341 */
+
+label {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1.2em;
+  color: blue;
+  display: block;
+  padding: 0.8em 0 1em 0;
+}
+
+input, label#hide-button { display:none; }
+#archive { display:none; }
+input#display-toggle:checked ~ label#display-button { display: none; }
+input#display-toggle:checked ~ label#hide-button { display: block; }
+input#display-toggle:checked ~ #archive { display: block; }
+

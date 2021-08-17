@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size:80%">
+<head>
+  <meta charset="UTF-8">
+  <title>hqtodo</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<header>
+  
+    <style>
+    .tagnav {
+      border: solid 1px black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tagnav > .tagstitle {
+      font-size: 1.6em;
+      font-weight: 400;
+      align-items: center;
+      margin: 0;
+    }
+    ul.tags {
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    ul.tags > li {
+      padding: 6px;
+      font-size: larger;
+    }
+    ul.tags > li > a {
+      color: cornflowerblue;
+      text-decoration: none;
+    }
+    ul.tags > li > a:hover {
+      color: blue;
+    }
+</style>
+<div class="tagnav">
+  <h2 class="tagstitle">Tag nav</h2>
+  <ul class="tags">
+    <li data-count="3"><a
+      href="admin.html">@admin</a></li>
+  
+    <li data-count="2"><a
+      href="edu.html">@edu</a></li>
+  
+    <li data-count="3"><a
+      href="f22.html">@f22</a></li>
+  
+    <li data-count="3"><a
+      href="personal.html">@personal</a></li>
+  
+    <li data-count="44"><a
+      href="prja.html">@prja</a></li>
+  
+    <li data-count="30"><a
+      href="prjb.html">@prjb</a></li>
+  
+    <li data-count="84"><a
+      href="prjc.html">@prjc</a></li>
+  
+    <li data-count="22"><a
+      href="prjd.html">@prjd</a></li>
+  
+    <li data-count="22"><a
+      href="tools.html">@tools</a></li>
+  
+    <li data-count="2"><a
+      href="vidz.html">@vidz</a></li>
+  
+    <li data-count="5"><a
+      href="woot.html">@woot</a></li>
+  
+    <li data-count="1"><a
+      href="xedu.html">@xedu</a></li>
+  </ul>
+  <ul class="tags"><li><a
+    href="index.html">Home</a></li></ul>
+</div>
+
+  
+  <h1>@vidz</h1>
+</header>
+<main>
+
+  <h2>Todo (7.5 pts)</h2>
+
+
+  </ul>  
+
+
+  </ul>  
+
+
+    <h3 class="open">In progress</h3>
+    <ul id="active" style="list-style-type:none;">    
+              <li class="oentry">
+              <div class="obullet">☐</div>
+              <div class="otext">
+              
+              <span
+              class="title">edit whos-it&#39;s video Q</span>
+              <span class="tagstring">@prjb @vidz</span>
+              
+              <span class="estimate">(6h)</span>
+              
+              
+              </div>
+            </li>
+
+
+  </ul>  
+
+
+    <h3 class="open">Backlog</h3>
+    <ul id="pending" style="list-style-type:none;">    
+              <li class="oentry">
+              <div class="obullet">☐</div>
+              <div class="otext">
+              
+              <span
+              class="title">write script for whos-it video P</span>
+              <span class="tagstring">@prjb @vidz</span>
+              
+              <span class="estimate">(24h)</span>
+              
+              
+              </div>
+            </li>
+
+
+    </ul>  
+
+
+
+    <h2 class="archivetitle">
+      <div>Done (0 pts)</div>
+      <div class="pointscale">2 point(s) per 8hr day</div>
+    </h2>
+    <div id="chart"></div>
+
+  
+
+</main>
+
+  <hr/>
+  <div style="display:flex;justify-content:space-between;width:100%">
+  <p style="font-size:smaller;">Page by <a target="_blank"
+  href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
+  with ♥ from Mermaid and ApexCharts<br/>
+  An <a href="/api-docs">API</a> is also available.
+  </p>
+  <p style="font-size:smaller">Page last updated 2021-08-17T04:02:38Z<br/>Task file last updated 2021-08-17T04:02:38Z</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script>
+    var showHover = id => {
+      const hover = document.querySelector(`#h${id}`);
+      hover.classList.toggle("showme");
+      hover.classList.toggle("hideme");
+    };
+
+    var chartOptions = {
+      series: [
+        {
+          name: 'Cumulative points spent on vidz todos',
+          data: []
+        }
+      ],
+      chart: {
+        type: 'line',
+        height: 350,
+        events: {
+          selection: function (chart, e) {
+            console.log(new Date(e.xaxis.min))
+          }
+        },
+      },
+      stroke: {
+        curve: 'stepline'
+      },
+      legend: {
+        showForSingleSeries: true,
+        position: 'top',
+        horizontalAlign: 'left'
+      },
+      xaxis: {
+        type: 'datetime'
+      },
+    };
+    var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
+    chart.render();   
+  </script>
+
+</body></html>
