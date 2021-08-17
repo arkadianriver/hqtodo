@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "test": "NODE_ENV=test mocha test/test*.js",
     "nyan": "NODE_ENV=test mocha -R nyan test/test*.js",
-    "gh-pages": "node ./bin/mkpage"
+    "gh-pages": "MY_ENV=gh-pages node ./bin/mkpage"
   },
   "main": "bin/www",
   "description": "Visualize your Todo list",

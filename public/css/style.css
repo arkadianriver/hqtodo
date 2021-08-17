@@ -75,6 +75,10 @@ body {
   opacity: 1;
 }
 
+.oentry { display: flex; flex-flow: row nowrap }
+.oentry .obullet { padding-right: 10px }
+.oentry .otext .blockers { color: red }
+
 #closed .bullet { color: #555 }
 #closed .date { color: #aaa } /* aaa */
 #closed .title { color: #555 } /* 555 */

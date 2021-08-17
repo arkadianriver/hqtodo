@@ -109,9 +109,9 @@ exports.parseRawTodos = () => {
     for (let i = 0, j = 1; i < req.app.locals.rawTodos.length; i++) {
       // breaking up regex into 3 passes:
       // 1. get open/closed state, optional pipeline, and title
-      let m = req.app.locals.rawTodos[i].match(/\s*([☐✔])\s(@low|@today|@high)?([^\@]+)@?/);
-      let m1 = [...req.app.locals.rawTodos[i].matchAll(/@\S+/g)];                  // 2. get tags
-      let m2 = req.app.locals.rawTodos[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d)/); // 3. get done date
+      const m = req.app.locals.rawTodos[i].match(/\s*([☐✔])\s(@low|@today|@high)?([^\@]+)@?/);
+      const m1 = [...req.app.locals.rawTodos[i].matchAll(/@\S+/g)];                  // 2. get tags
+      const m2 = req.app.locals.rawTodos[i].match(/@done\s*\((\d\d\d\d-\d\d-\d\d)/); // 3. get done date
       if (m) {
         const tags = m1 && m1.length ? m1.flat() : [];
         const isBlocker = tags.some(e => e.match(/^@blk/));
@@ -120,40 +120,42 @@ exports.parseRawTodos = () => {
         // quickly grab linkUrl if any
         let linkUrl = m[3] ? _getLinkUrl(m[3]) : null;
         if (linkUrl && !isBlocker) issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
+        // check if milestone or interrupt to set m4 and grab title
+        const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]:\s*(.*)$/);
+        // grab tags and title
+        const taggy = _handleTags(tags);
+        const title = m4 ? m4[3].trim() : m[3].trim();
+        let tagstring = taggy[1];
         // quickly add milestones and interrupts
-        if (m[3].match(/^\[/)) {
-          const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]: (.*)$/);
-          if (m4) {
-            const numdays = parseInt(m4[1].slice(0, -1), 10);
-            if (numdays === 0) {           // milestone
-              issues['milestones'].push({
-                number: j,
-                startdate: m4[2] + 'T00:00:00',
-                enddate: m4[2],
-                title: m4[3],
-                color: 'milestone, ',
-                est: m4[1]
-              });
-            } else {                       // interrupt
-              const enddate = moment(m4[2])
-                .businessAdd(numdays - 1, 'days')
-                .format('YYYY-MM-DD');
-              issues['interrupts'].push({
-                number: j,
-                startdate: m4[2],
-                enddate: enddate,
-                title: m4[3],
-                est: m4[1]
-              });
-            }
-            j++;
-            continue;
+        if (m4) {
+          const numdays = parseInt(m4[1].slice(0, -1), 10);
+          if (numdays === 0) {           // milestone
+            issues['milestones'].push({
+              number: j,
+              startdate: m4[2] + 'T00:00:00',
+              enddate: m4[2],
+              title: title,
+              tagstring: tagstring,
+              color: 'milestone, ',
+              est: m4[1]
+            });
+          } else {                       // interrupt
+            const enddate = moment(m4[2])
+              .businessAdd(numdays - 1, 'days')
+              .format('YYYY-MM-DD');
+            issues['interrupts'].push({
+              number: j,
+              startdate: m4[2],
+              enddate: enddate,
+              title: m4[3],
+              tagstring: tagstring,
+              est: m4[1]
+            });
           }
+          j++;
+          continue;
         }
         // handle the rest
-        const taggy = _handleTags(tags);
-        const title = m[3].trim();
-        let tagstring = taggy[1];
         let est = Math.ceil(taggy[0]).toString() + 'h';
         if (m[1] === '✔') {  // the Dones
           issues['closed'].push({
@@ -570,8 +572,6 @@ exports.getArchive = () => {
     // sort entries, descending for archive
     entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.entries = entries;
-    // prepare data, ascending for cumulative flow chart
-    //res.locals.chartdata = _chartdataFromArchive(entries);
     next();
   }
 }
@@ -607,6 +607,8 @@ const _chartdataFromArchive = (descendingEntries) => {
  exports.getTags = () => {
   return (req, res, next) => {
     if ((!Array.isArray(res.locals.entries) || !res.locals.entries.length) &&
+        (!Array.isArray(res.locals.issues.milestones) || !res.locals.issues.milestones.length) &&
+        (!Array.isArray(res.locals.issues.blockers) || !res.locals.issues.blockers.length) &&
         (!Array.isArray(res.locals.issues.open.active) || !res.locals.issues.open.active.length) &&
         (!Array.isArray(res.locals.issues.open.pending) || !res.locals.issues.open.pending.length) &&
         (!Array.isArray(res.locals.issues.open.closed) || !res.locals.issues.open.closed.length)) {
@@ -618,6 +620,8 @@ const _chartdataFromArchive = (descendingEntries) => {
     // grab tags from unsorted todos
     [ ...res.locals.issues.open.active,
       ...res.locals.issues.open.pending,
+      ...res.locals.issues.milestones,
+      ...res.locals.issues.blockers,
       ...res.locals.issues.closed ].forEach( e => {
       e.tagstring.split(/\s+/).forEach( tag => {
         if ( tag.length > 0) {
@@ -640,7 +644,7 @@ const _chartdataFromArchive = (descendingEntries) => {
     for (const [k, v] of Object.entries(tags)) {
       res.locals.tags.push({ tag: k, count: v });
     }
-    res.locals.tags.sort((a, b) => a.tag > b.tag ? -1 : 1);
+    res.locals.tags.sort((a, b) => a.tag < b.tag ? -1 : 1);
     next();
   }
 }
@@ -652,6 +656,8 @@ const _chartdataFromArchive = (descendingEntries) => {
  exports.getTagData = () => {
   return (req, res, next) => {
     if ((!Array.isArray(res.locals.entries) || !res.locals.entries.length) &&
+        (!Array.isArray(res.locals.issues.milestones) || !res.locals.issues.milestones.length) &&
+        (!Array.isArray(res.locals.issues.blockers) || !res.locals.issues.blockers.length) &&
         (!Array.isArray(res.locals.issues.open.active) || !res.locals.issues.open.active.length) &&
         (!Array.isArray(res.locals.issues.open.pending) || !res.locals.issues.open.pending.length) &&
         (!Array.isArray(res.locals.issues.open.closed) || !res.locals.issues.open.closed.length)) {
@@ -665,12 +671,30 @@ const _chartdataFromArchive = (descendingEntries) => {
         active: [],
         pending: []
       },
+      milestones: [],
+      blockers: [],
       closed: [],
       archive: [],
       chartdata: [],
       opensum: 0,
       archivesum: 0
     }
+    // grab milestone entries that have this tag
+    res.locals.issues.milestones.forEach( e => {
+      if (e.tagstring.includes(`@${tagname}`)) {
+        tagData.milestones.push(e);
+      }
+    });
+    // grab blocker entries that have this tag
+    res.locals.issues.blockers.forEach( e => {
+      if (e.tagstring.includes(`@${tagname}`)) {
+        tagData.blockers.push(e);
+        if (e.hasOwnProperty('est')) {
+          const esMin = _getMinutes(e.est);
+          tagData.opensum += _minutesToEst(esMin);
+        }
+      }
+    });    
     // grab active entries that have this tag
     res.locals.issues.open.active.forEach( e => {
       if (e.tagstring.includes(`@${tagname}`)) {
@@ -706,13 +730,14 @@ const _chartdataFromArchive = (descendingEntries) => {
         }
       });
     });
-    // sort milestones, interrupts, and closed before returning
-    if (tagData.closed) tagData.closed.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
+    // sort arrays before returning
+    if (tagData.closed) tagData.closed.sort((a, b) => a.closed_on < b.closed_on ? -1 : 1);
     if (tagData.archive) {
       tagData.archive.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
       const chartdata = _chartdataFromArchive(tagData.archive);
       tagData.archivesum = chartdata.length ? chartdata[chartdata.length - 1].y : 0;
       tagData.chartdata = JSON.stringify(chartdata);
+      tagData.archive.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     }
     res.locals.tagdata = tagData;
     next();

@@ -23,17 +23,34 @@ app.set('port', port);
 // assist https://github.com/expressjs/express/issues/1366#issuecomment-68693264
 let server = app.listen(port, function() {
   console.log('Listening =^.^=');
-  // assist https://stackoverflow.com/a/19539521/5360420
-  http.request(`http://localhost:${port}`, res => {
-    let str = '';
-    res.on('data', chunk => {
-      str += chunk;
-    });
-    res.on('end', () => {
-      if (!fs.existsSync('./build')) fs.mkdirSync('./build');
-      fs.writeFileSync('./build/index.html', str);
-      server.close(() => { console.log('Done.'); });
-    });
-  }).end();
+  fs.mkdirSync('./build/css', { recursive: true });
+
+  [ ['/', '/index.html'],
+    ['/css/style.css', '/css/style.css'],
+    ['/tags/xedu', '/xedu.html'],
+    ['/tags/woot', '/woot.html'],
+    ['/tags/vidz', '/vidz.html'],
+    ['/tags/tools', '/tools.html'],
+    ['/tags/prjd', '/prjd.html'],
+    ['/tags/prjc', '/prjc.html'],
+    ['/tags/prjb', '/prjb.html'],
+    ['/tags/prja', '/prja.html'],
+    ['/tags/personal', '/personal.html'],
+    ['/tags/f22', '/f22.html'],
+    ['/tags/edu', '/edu.html'],
+    ['/tags/admin', '/admin.html']
+   ].forEach( a => {
+    // assist https://stackoverflow.com/a/19539521/5360420
+    http.request(`http://localhost:${port}${a[0]}`, res => {
+      let str = '';
+      res.on('data', chunk => {
+        str += chunk;
+      });
+      res.on('end', () => {
+        fs.writeFileSync(`./build${a[1]}`, str);
+        server.close(() => { console.log(`Built ${a[1]}`); });
+      });
+    }).end();
+  });
 });
 

@@ -1,6 +1,15 @@
-            <li><span class="bullet">☐</span>
+            <li class="oentry">
+              <div class="obullet">☐</div>
+              <div class="otext">
+              <% if ( (t.enddate && t.enddate === t.startdate.substr(0,10)) ) { %>
+              <span class="milestone-date"><%= t.enddate %></span>
+              <% } %>
               <% if (t.link) { %><a target="_blank" href="%><%= t.link %>"><% } %><span
               class="title"><%= t.title %></span><% if (t.link) { %></a><% } %>
               <% if (t.hasOwnProperty('tagstring')) { %><span class="tagstring"><%= t.tagstring %></span><% } %>
+              <% if ( !(t.enddate && t.enddate === t.startdate.substr(0,10)) ) { %>
               <span class="estimate">(<%= t.est %>)</span>
+              <% } %>
+              <% if (t.hover) { %><br /><span class="blockers"><%- t.hover %></span><% } %>
+              </div>
             </li>
