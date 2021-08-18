@@ -26,6 +26,7 @@ h1 {
 }
 .tagpagetitle {
   display: flex;
+  flex-flow: row wrap;
   justify-content: left;
   align-items: baseline;
 }
