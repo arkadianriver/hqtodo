@@ -24,10 +24,7 @@
         @<%= tag %> <% if (taginfo && taginfo.hasOwnProperty(tag)) { %>
         <div class="tagtitleinfo">
           <%= taginfo[tag].title %> <% if (taginfo[tag].link) { %>(<a
-            target="_blank"
-            href="<%= taginfo[tag].link %>"
-            >More info</a
-          >)<% } %>
+            target="_blank" href="<%= taginfo[tag].link %>">More info</a>)<% } %>
         </div>
         <% } %>
       </h1>
