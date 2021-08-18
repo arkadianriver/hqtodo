@@ -753,31 +753,40 @@ function _addCSSClass(propName, className) {
     // grab blocker entries that have this tag
     res.locals.issues.blockers.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        tagData.blockers.push(e);
+        newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
-          const esMin = _getMinutes(e.est);
-          tagData.opensum += _minutesToEst(esMin);
+          const intHrs = parseInt(newE.est.slice(0, -1), 10);
+          const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
+          tagData.opensum += spEst;
+          newE.est = spEst;
         }
+        tagData.blockers.push(newE);
       }
     });    
     // grab active entries that have this tag
     res.locals.issues.open.active.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        tagData.open.active.push(e);
+        newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
-          const esMin = _getMinutes(e.est);
-          tagData.opensum += _minutesToEst(esMin);
+          const intHrs = parseInt(newE.est.slice(0, -1), 10);
+          const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
+          tagData.opensum += spEst;
+          newE.est = spEst;
         }
+        tagData.open.active.push(newE);
       }
     });
     // grab pending entries that have this tag
     res.locals.issues.open.pending.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        tagData.open.pending.push(e);        
+        newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
-          const esMin = _getMinutes(e.est);
-          tagData.opensum += _minutesToEst(esMin);
+          const intHrs = parseInt(newE.est.slice(0, -1), 10);
+          const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
+          tagData.opensum += spEst;
+          newE.est = spEst;
         }
+        tagData.open.pending.push(newE);
       }
     });
     // grab closed entries that have this tag
@@ -795,6 +804,8 @@ function _addCSSClass(propName, className) {
         }
       });
     });
+    // no leading zero
+    tagData.opensum = Number.parseFloat(tagData.opensum).toFixed(2);
     // sort arrays before returning
     if (tagData.closed) tagData.closed.sort((a, b) => a.closed_on < b.closed_on ? -1 : 1);
     if (tagData.archive) {
