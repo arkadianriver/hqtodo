@@ -47,29 +47,29 @@ app.use((req, res, next) => {
     if (fileData) {
       const rawTodos = [];
       const rawArchive = [];
-      inTodos = inArchive = false;
-      fileArray = fileData.split(/\r?\n/);
+      const rawTaginfo = [];
+      const fileArray = fileData.split(/\r?\n/);
+      let activeSection = '';
       for (i=0; i < fileArray.length; i++) {
-        if (fileArray[i].match(/^Todos:\s*$/)) {
-          inTodos = true;
+        const projHead = fileArray[i].match(/^(\S.+):\s*$/);
+        if (projHead && projHead.length > 1) {
+          activeSection = projHead[1];
           continue;
         }
-        if (fileArray[i].match(/^\S.+:\s*$/)) {
-          inTodos = false;
+        if (activeSection === 'Taginfo') {
+          let m = fileArray[i].match(/^\s*([☐✔].*)$/);
+          if (m) rawTaginfo.push(m[1].trim());
         }
-        if (fileArray[i].match(/^Archive:\s*$/)) {
-          inArchive = true;
-          inTodos = false;
-        }
-        if (inTodos) {
+        if (activeSection === 'Todos') {
           let m = fileArray[i].match(/^\s*([☐✔].*)$/);
           if (m) rawTodos.push(m[1].trim());
         }
-        if (inArchive) {
+        if (activeSection === 'Archive') {
           let m = fileArray[i].match(/^\s*(✔.*)$/);
           if (m) rawArchive.push(m[1].trim());
         }
       }
+      app.locals.rawTaginfo = rawTaginfo;
       app.locals.rawTodos = rawTodos;
       app.locals.rawArchive = rawArchive;
     } else {

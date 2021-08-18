@@ -12,7 +12,15 @@
   <% if (tags.length) { %>
     <%- include('partials/tagnav', {tags: tags, home: false }) %>
   <% } %>
-  <h1>@<%= tag %></h1>
+  <h1 class="tagpagetitle">@<%= tag %>
+    <% if (taginfo && taginfo.hasOwnProperty(tag)) { %>
+    <div class="tagtitleinfo">
+      <%= taginfo[tag].title %>
+      <% if (taginfo[tag].link) { %>(<a
+        target="_blank" href="<%= taginfo[tag].link %>">More info</a>)<% } %>
+    </div>
+    <% } %>
+  </h1>
 </header>
 <main>
 

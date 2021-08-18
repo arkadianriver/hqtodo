@@ -18,6 +18,16 @@ h1 {
   font-size: 34pt;
   font-weight: 500;
 }
+.tagpagetitle {
+  display: flex;
+  justify-content: left;
+  align-items: baseline;
+}
+.tagtitleinfo {
+  padding-left: 20px;
+  font-size: 14pt;
+  vertical-align: bottom;
+}
 h2 {
   font-size: 24pt;
   font-weight: 500;

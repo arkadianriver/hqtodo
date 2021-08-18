@@ -12,11 +12,11 @@ Programming Todos:
       • for example, is the below listing of epics worth maintaining?
 # end::progtodos[]
 
-Epics:
-  - @f22 Awesome Feature 22 ghihq•22
-  - @vidz Nifty Video Project
-  - @m Feature M
-  - @xedu Learn fancy stuff
+Taginfo:
+  ☐ @f24 Awesome Feature 24 - ghihq•24
+  ☐ @vidz Nifty Video Project - http://arkadianriver.com/topics/hqtodo.html
+  ☐ @woot Fabulous stuff
+  ☐ @xedu All about XYZ programming
 
 Todos:
   ☐ @today ghihq•21 something I need help with @4h @prjd @blk.email.chris @blk.slack.robin
@@ -28,14 +28,14 @@ Todos:
   ☐ @today decide organization requirements @prja @woot
   ☐ @today work with so-and-so on such-and-such @prja @prjb
   ☐ get thing-a-ma-bob Info from SME-guru @4h @prja
-  ☐ add such-and-such CSS to project page @2h @prjb @f22
-  ☐ @today storyboard feature 22 with design @4h @prjc @f22
-  ☐ document feature 22 ghi•ragnoroct/linkme•9 @4h @prjc @f22
+  ☐ add such-and-such CSS to project page @2h @prjb @f24
+  ☐ @today storyboard feature 22 with design @4h @prjc @f24
+  ☐ document feature 24 ghi•ragnoroct/linkme•9 @4h @prjc @f24
   ☐ review the user guide about whats-it @4h @prjb  
   ☐ fix situation with UI weirdness @prjb
   ☐ @today edit whos-it's video Q @prjb @vidz
   ☐ write script for whos-it video P @8h @prjb @vidz
-  ☐ take refresher course on X @4h @edu @xedu
+  ☐ take refresher course on XYZ.3 @4h @edu @xedu
   ☐ make arrangements for that thing @personal
   ☐ @low do this low priority thing @4h @prjb
   ☐ fix problems with the doo-hicky @prjb

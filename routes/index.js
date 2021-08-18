@@ -13,7 +13,11 @@ const pp = data => '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
  */
 
 router.get('/todos/raw', (req, res, next) => {
-  res.json({ rawTodos: req.app.locals.rawTodos, rawArchive: req.app.locals.rawArchive });
+  res.json({
+    rawTaginfo: req.app.locals.rawTaginfo,
+    rawTodos: req.app.locals.rawTodos,
+    rawArchive: req.app.locals.rawArchive
+  });
 });
 
 router.get('/todos/unordered', mw.parseRawTodos(), (req, res, next) => {
@@ -29,7 +33,10 @@ router.get('/todos/archived', mw.getArchive(), (req, res, next) => {
 });
 
 router.get('/todos/tags', mw.parseRawTodos(), mw.getArchive(), mw.getTags(), (req, res, next) => {
-  res.json(res.locals.tags);
+  res.json({
+    taginfo: res.locals.taginfo,
+    tags: res.locals.tags
+  });
 });
 
 router.get('/todos/tags/:tagname', mw.parseRawTodos(), mw.getArchive(), mw.getTagData(), (req, res, next) => {

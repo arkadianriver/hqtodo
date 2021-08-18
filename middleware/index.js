@@ -610,6 +610,22 @@ function _addCSSClass(propName, className) {
  */
  exports.getTags = () => {
   return (req, res, next) => {
+    // well, first some taginfo if it exists (for the tag view pages)
+    // should prolly be its own fn, but now only used when tags are used, so there ya go
+    res.locals.taginfo = {};
+    for (let i = 0, j = 1; i < req.app.locals.rawTaginfo.length; i++) {
+      const tagline = req.app.locals.rawTaginfo[i].match(/\s*☐\s+@(\S+)\s+(.*?)(?: - (.*))?$/);
+      if (tagline && tagline.length > 1) {
+        const tlink = tagline[3] 
+          ? ( tagline[3].substr(0,4) === 'http' ? tagline[3] : _getLinkUrl(tagline[3]) )
+          : '';
+        res.locals.taginfo[tagline[1]] = {
+          title: tagline[2],
+          link: tlink
+        }
+      }
+    }
+    // now onto the tags ...
     if ((!Array.isArray(res.locals.entries) || !res.locals.entries.length) &&
         (!Array.isArray(res.locals.issues.milestones) || !res.locals.issues.milestones.length) &&
         (!Array.isArray(res.locals.issues.blockers) || !res.locals.issues.blockers.length) &&
@@ -621,7 +637,7 @@ function _addCSSClass(propName, className) {
       return;
     }
     const tags = {};
-    // grab tags from unsorted todos
+    // grab tags from unsorted todos (and so on) ...
     res.locals.issues.open.active.forEach( e => {
       e.tagstring.split(/\s+/).forEach( tag => {
         if ( tag.length > 0) {
@@ -889,6 +905,7 @@ exports.getArchiveByWeek = () => {
       hrsperday: WH,
       whoami: WHOAMI,
       tag: req.params.tagname,
+      taginfo: res.locals.taginfo,
       tags: res.locals.tags,
       tagdata: res.locals.tagdata
     });
