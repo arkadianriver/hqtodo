@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" style="font-size:80%">
-<head>
-  <meta charset="UTF-8">
-  <title>hqtodo</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-<header>
-  
-    <style>
+<html lang="en" style="font-size: 80%">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hqtodo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./css/style.css"
+    />
+  </head>
+  <body>
+    <header>
+       <style>
     .tagnav {
       border: solid 1px black;
       display: flex;
@@ -65,7 +73,7 @@
       href="edu.html">@edu</a></li>
   
     <li data-count="3"><a class="hasactive hasopen"
-      href="f22.html">@f22</a></li>
+      href="f24.html">@f24</a></li>
   
     <li data-count="3"><a class="hasopen"
       href="personal.html">@personal</a></li>
@@ -97,105 +105,115 @@
   <ul class="tags"><li><a
     href="index.html">Home</a></li></ul>
 </div>
-
-  
-  <h1>@xedu</h1>
-</header>
-<main>
-
-  <h2>Todo (3 pts)</h2>
-
-
-  </ul>  
-
-
-  </ul>  
+ 
+      <h1 class="tagpagetitle">
+        @xedu 
+        <div class="tagtitleinfo">
+          All about XYZ programming 
+        </div>
+        
+      </h1>
+    </header>
+    <main>
+      <h2>Todo (1.00 pts)</h2>
 
 
-  </ul>  
+      </ul>
 
 
-    <h3 class="open">Backlog</h3>
-    <ul id="pending" style="list-style-type:none;">    
-  
+      </ul>
+
+
+      </ul>
+
+
+      <h3 class="open">Backlog</h3>
+      <ul id="pending" style="list-style-type: none">
+
 
             <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
               <span
-              class="title">take refresher course on X</span>
+              class="title">take refresher course on XYZ.3</span>
               <span class="tagstring">@edu @xedu</span>
               
-              <span class="estimate">(12h)</span>
+              <span class="estimate">(1.00)</span>
               
               
               </div>
             </li>
 
-
-    </ul>  
-
+      </ul>
 
 
-    <h2 class="archivetitle">
-      <div>Done (0 pts)</div>
-      <div class="pointscale">2 point(s) per 8hr day</div>
-    </h2>
-    <div id="chart"></div>
 
-  
+      <h2 class="archivetitle">
+        <div>Done (0.00 pts)</div>
+        <div class="pointscale">
+          2 point(s) per 8hr day
+        </div>
+      </h2>
+      <div id="chart"></div>
 
-</main>
+      
+    </main>
 
-  <hr/>
-  <div style="display:flex;justify-content:space-between;width:100%">
-  <p style="font-size:smaller;">Page by <a target="_blank"
-  href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
-  with ♥ from Mermaid and ApexCharts<br/>
-  An <a href="/api-docs">API</a> is also available.
-  </p>
-  <p style="font-size:smaller">Page last updated 2021-08-17T19:09:42Z<br/>Task file last updated 2021-08-17T19:09:42Z</p>
-  </div>
+    <hr />
+    <div style="display: flex; justify-content: space-between; width: 100%">
+      <p style="font-size: smaller">
+        Page by
+        <a target="_blank" href="https://github.com/arkadianriver/hqtodo"
+          >hqtodo</a
+        >
+        with ♥ from Mermaid and ApexCharts<br />
+        An <a href="/api-docs">API</a> is also available.
+      </p>
+      <p style="font-size: smaller">
+        Page last updated 2021-08-18T10:49:43Z<br />Task file last updated 2021-08-18T10:49:43Z
+      </p>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script>
-    var showHover = id => {
-      const hover = document.querySelector(`#h${id}`);
-      hover.classList.toggle("showme");
-      hover.classList.toggle("hideme");
-    };
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+      var showHover = id => {
+        const hover = document.querySelector(`#h${id}`);
+        hover.classList.toggle("showme");
+        hover.classList.toggle("hideme");
+      };
 
-    var chartOptions = {
-      series: [
-        {
-          name: 'Cumulative points spent on xedu todos',
-          data: []
-        }
-      ],
-      chart: {
-        type: 'line',
-        height: 350,
-        events: {
-          selection: function (chart, e) {
-            console.log(new Date(e.xaxis.min))
+      var chartOptions = {
+        series: [
+          {
+            name: 'Points spent on xedu todos',
+            data: []
+          }
+        ],
+        chart: {
+          type: 'bar',
+          height: 200,
+          stacked: true
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
           }
         },
-      },
-      stroke: {
-        curve: 'stepline'
-      },
-      legend: {
-        showForSingleSeries: true,
-        position: 'top',
-        horizontalAlign: 'left'
-      },
-      xaxis: {
-        type: 'datetime'
-      },
-    };
-    var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
-    chart.render();   
-  </script>
-
-</body></html>
+        dataLabels: {
+          enabled: false
+        },
+        legend: {
+          showForSingleSeries: true,
+          position: 'top',
+          horizontalAlign: 'left'
+        },
+        xaxis: {
+          type: 'datetime'
+        },
+      };
+      var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
+      chart.render();
+    </script>
+  </body>
+</html>

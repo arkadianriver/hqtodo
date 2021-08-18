@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" style="font-size:80%">
-<head>
-  <meta charset="UTF-8">
-  <title>hqtodo</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-<header>
-  
-    <style>
+<html lang="en" style="font-size: 80%">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hqtodo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./css/style.css"
+    />
+  </head>
+  <body>
+    <header>
+       <style>
     .tagnav {
       border: solid 1px black;
       display: flex;
@@ -65,7 +73,7 @@
       href="edu.html">@edu</a></li>
   
     <li data-count="3"><a class="hasactive hasopen"
-      href="f22.html">@f22</a></li>
+      href="f24.html">@f24</a></li>
   
     <li data-count="3"><a class="hasopen"
       href="personal.html">@personal</a></li>
@@ -97,24 +105,24 @@
   <ul class="tags"><li><a
     href="index.html">Home</a></li></ul>
 </div>
-
-  
-  <h1>@prjc</h1>
-</header>
-<main>
-
-  <h2>Todo (6 pts)</h2>
-
-
-  </ul>  
+ 
+      <h1 class="tagpagetitle">
+        @prjc 
+      </h1>
+    </header>
+    <main>
+      <h2>Todo (2.00 pts)</h2>
 
 
-  </ul>  
+      </ul>
 
 
-    <h3 class="open">In progress</h3>
-    <ul id="active" style="list-style-type:none;">    
-  
+      </ul>
+
+
+      <h3 class="open">In progress</h3>
+      <ul id="active" style="list-style-type: none">
+
 
             <li class="oentry">
               <div class="obullet">☐</div>
@@ -122,520 +130,447 @@
               
               <span
               class="title">storyboard feature 22 with design</span>
-              <span class="tagstring">@prjc @f22</span>
+              <span class="tagstring">@prjc @f24</span>
               
-              <span class="estimate">(12h)</span>
+              <span class="estimate">(1.00)</span>
               
               
               </div>
             </li>
 
+      </ul>
 
-  </ul>  
 
+      <h3 class="open">Backlog</h3>
+      <ul id="pending" style="list-style-type: none">
 
-    <h3 class="open">Backlog</h3>
-    <ul id="pending" style="list-style-type:none;">    
-  
 
             <li class="oentry">
               <div class="obullet">☐</div>
               <div class="otext">
               
               <a target="_blank" href="https://github.com/ragnoroct/linkme/issues/9"><span
-              class="title">document feature 22 ghi•ragnoroct/linkme•9</span></a>
-              <span class="tagstring">@prjc @f22</span>
+              class="title">document feature 24 ghi•ragnoroct/linkme•9</span></a>
+              <span class="tagstring">@prjc @f24</span>
               
-              <span class="estimate">(12h)</span>
+              <span class="estimate">(1.00)</span>
               
               
               </div>
             </li>
 
-
-    </ul>  
-
+      </ul>
 
 
-    <h2 class="archivetitle">
-      <div>Done (60.75 pts)</div>
-      <div class="pointscale">2 point(s) per 8hr day</div>
-    </h2>
-    <div id="chart"></div>
 
-  
-    <input type="checkbox" id="display-toggle"/>
-    <label for="display-toggle" id="display-button"><span>▹ show the archive</span></label>
-    <label for="display-toggle" id="hide-button"><span>▿ hide the archive</span></label>
-    <div id="archive" style="padding-top:1rem;padding-right:2rem">
-      <h3>Completed for @prjc</h3>
-      <ul>
+      <h2 class="archivetitle">
+        <div>Done (60.75 pts)</div>
+        <div class="pointscale">
+          2 point(s) per 8hr day
+        </div>
+      </h2>
+      <div id="chart"></div>
+
+      
+      <input type="checkbox" id="display-toggle" />
+      <label for="display-toggle" id="display-button"
+        ><span>▹ show the archive</span></label
+      >
+      <label for="display-toggle" id="hide-button"
+        ><span>▿ hide the archive</span></label
+      >
+      <div id="archive" style="padding-top: 1rem; padding-right: 2rem">
+        <h3>Completed for @prjc</h3>
+        <ul>
             <li><span class="bullet">✔</span> <span class="date">2021-08-09 21:07</span>
               <span class="title" style="font-style:italic">latest completed item eius est quiquia</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-08-09 05:35</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-08-09 05:35</span>
               <span class="title" style="font-style:italic">numquam quisquam quisquam est eius sed est</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-08-07 02:40</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-08-07 02:40</span>
               <span class="title" style="font-style:italic">sit tempora adipisci porro tempora quaerat</span>
               <span class="tagstring">@prjc @tools</span>
               <span class="estimate">(2.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-08-06 21:18</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-08-06 21:18</span>
               <span class="title" style="font-style:italic">tempora tempora sit eius</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.25)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-28 00:05</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-28 00:05</span>
               <span class="title" style="font-style:italic">porro etincidunt ipsum magnam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-25 17:50</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-25 17:50</span>
               <span class="title" style="font-style:italic">dolore porro ipsum voluptatem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-25 14:51</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-25 14:51</span>
               <span class="title" style="font-style:italic">consectetur porro etincidunt adipisci dolor</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-23 13:08</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-23 13:08</span>
               <span class="title" style="font-style:italic">sit adipisci est ut quiquia</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(1.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-23 10:59</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-23 10:59</span>
               <span class="title" style="font-style:italic">neque sed quisquam quisquam numquam modi</span>
               <span class="tagstring">@prjc @tools</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-21 16:10</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-21 16:10</span>
               <span class="title" style="font-style:italic">quisquam eius dolore sit modi est amet</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-20 17:41</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-20 17:41</span>
               <span class="title" style="font-style:italic">ut labore velit dolorem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-17 17:30</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-17 17:30</span>
               <span class="title" style="font-style:italic">quaerat neque quisquam sed sit neque ut ipsum</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-04 14:35</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-04 14:35</span>
               <span class="title" style="font-style:italic">adipisci magnam amet tempora porro aliquam eius tempora</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(1.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-03 23:53</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-03 23:53</span>
               <span class="title" style="font-style:italic">amet non quaerat dolore</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(4.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-07-01 00:01</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-01 00:01</span>
               <span class="title" style="font-style:italic">dolorem quiquia non tempora quaerat</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(2.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-30 11:21</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-30 11:21</span>
               <span class="title" style="font-style:italic">dolorem labore voluptatem ipsum</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-29 19:59</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-29 19:59</span>
               <span class="title" style="font-style:italic">dolore non etincidunt non ut dolor</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.75)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-27 21:07</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-27 21:07</span>
               <span class="title" style="font-style:italic">ut consectetur quaerat eius est quiquia</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-27 05:35</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-27 05:35</span>
               <span class="title" style="font-style:italic">numquam quisquam quisquam est eius sed est</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-20 21:18</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-20 21:18</span>
               <span class="title" style="font-style:italic">tempora tempora sit eius</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.25)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-20 02:40</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-20 02:40</span>
               <span class="title" style="font-style:italic">sit tempora adipisci porro tempora quaerat</span>
               <span class="tagstring">@prjc @tools</span>
               <span class="estimate">(2.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-15 00:05</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-15 00:05</span>
               <span class="title" style="font-style:italic">porro etincidunt ipsum magnam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-12 17:50</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-12 17:50</span>
               <span class="title" style="font-style:italic">dolore porro ipsum voluptatem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-12 14:51</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-12 14:51</span>
               <span class="title" style="font-style:italic">consectetur porro etincidunt adipisci dolor</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-10 13:08</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-10 13:08</span>
               <span class="title" style="font-style:italic">sit adipisci est ut quiquia</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(1.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-10 10:59</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-10 10:59</span>
               <span class="title" style="font-style:italic">neque sed quisquam quisquam numquam modi</span>
               <span class="tagstring">@prjc @tools</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-08 16:10</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-08 16:10</span>
               <span class="title" style="font-style:italic">today quisquam eius dolore sit modi est amet</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-07 17:41</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-07 17:41</span>
               <span class="title" style="font-style:italic">today ut labore velit dolorem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-04 17:30</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-04 17:30</span>
               <span class="title" style="font-style:italic">today quaerat neque quisquam sed sit neque ut ipsum</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-06-01 12:28</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-01 12:28</span>
               <span class="title" style="font-style:italic">quiquia ut quisquam adipisci neque</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-31 14:09</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-31 14:09</span>
               <span class="title" style="font-style:italic">porro amet amet neque dolore voluptatem quisquam modi</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-31 11:24</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-31 11:24</span>
               <span class="title" style="font-style:italic">quiquia ut quaerat consectetur</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-29 00:05</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-29 00:05</span>
               <span class="title" style="font-style:italic">porro etincidunt ipsum magnam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-26 17:50</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-26 17:50</span>
               <span class="title" style="font-style:italic">dolore porro ipsum voluptatem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-26 14:51</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-26 14:51</span>
               <span class="title" style="font-style:italic">consectetur porro etincidunt adipisci dolor</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-24 13:08</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-24 13:08</span>
               <span class="title" style="font-style:italic">sit adipisci est ut quiquia</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(1.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-24 10:59</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-24 10:59</span>
               <span class="title" style="font-style:italic">neque sed quisquam quisquam numquam modi</span>
               <span class="tagstring">@prjc @tools</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-22 16:10</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-22 16:10</span>
               <span class="title" style="font-style:italic">quisquam eius dolore sit modi est amet</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-21 17:41</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-21 17:41</span>
               <span class="title" style="font-style:italic">ut labore velit dolorem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-18 19:32</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-18 19:32</span>
               <span class="title" style="font-style:italic">close the catco / dogco merger</span>
               <span class="tagstring">@woot @prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-18 17:30</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-18 17:30</span>
               <span class="title" style="font-style:italic">quaerat neque quisquam sed sit neque ut ipsum</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-15 12:28</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-15 12:28</span>
               <span class="title" style="font-style:italic">quiquia ut quisquam adipisci neque</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-14 14:09</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-14 14:09</span>
               <span class="title" style="font-style:italic">porro amet amet neque dolore voluptatem quisquam modi</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-05-14 11:24</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-14 11:24</span>
               <span class="title" style="font-style:italic">quiquia ut quaerat consectetur</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-28 14:11</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-28 14:11</span>
               <span class="title" style="font-style:italic">magnam non est modi eius quiquia</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-21 14:35</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-21 14:35</span>
               <span class="title" style="font-style:italic">amet quisquam numquam eius etincidunt modi ipsum adipisci</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.25)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-16 15:18</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-16 15:18</span>
               <span class="title" style="font-style:italic">consectetur quaerat dolor dolor modi ipsum velit porro</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-14 07:25</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-14 07:25</span>
               <span class="title" style="font-style:italic">dolore adipisci magnam ut sed ipsum tempora etincidunt</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.25)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-13 22:24</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-13 22:24</span>
               <span class="title" style="font-style:italic">amet magnam dolore non</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-12 07:00</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-12 07:00</span>
               <span class="title" style="font-style:italic">Host a party for real</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(2.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-09 19:11</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-09 19:11</span>
               <span class="title" style="font-style:italic">ut aliquam neque quaerat ipsum</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(1.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-08 01:25</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-08 01:25</span>
               <span class="title" style="font-style:italic">labore ut ipsum voluptatem amet voluptatem quisquam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-04-01 07:00</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-01 07:00</span>
               <span class="title" style="font-style:italic">Host a party</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.25)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-03-31 11:35</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-03-31 11:35</span>
               <span class="title" style="font-style:italic">modi sed dolor dolor ut</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-03-31 10:34</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-03-31 10:34</span>
               <span class="title" style="font-style:italic">dolor dolorem porro labore</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-03-25 15:42</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-03-25 15:42</span>
               <span class="title" style="font-style:italic">ut aliquam tempora quisquam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-03-25 10:08</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-03-25 10:08</span>
               <span class="title" style="font-style:italic">amet tempora quisquam eius quisquam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-03-16 14:31</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-03-16 14:31</span>
               <span class="title" style="font-style:italic">dolorem quiquia neque numquam est neque voluptatem labore</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.25)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-03-04 14:31</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-03-04 14:31</span>
               <span class="title" style="font-style:italic">tempora tempora sed amet</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(1.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-25 14:33</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-25 14:33</span>
               <span class="title" style="font-style:italic">magnam sed amet non neque quaerat dolorem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-24 12:27</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-24 12:27</span>
               <span class="title" style="font-style:italic">aliquam sed tempora sed modi</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-23 10:12</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-23 10:12</span>
               <span class="title" style="font-style:italic">sit tempora amet sit aliquam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-21 17:51</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-21 17:51</span>
               <span class="title" style="font-style:italic">magnam consectetur dolorem porro velit numquam quisquam consectetur</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-16 23:53</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-16 23:53</span>
               <span class="title" style="font-style:italic">amet non quaerat dolore</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(4.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-14 00:01</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-14 00:01</span>
               <span class="title" style="font-style:italic">dolorem quiquia non tempora quaerat</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(2.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-13 11:21</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-13 11:21</span>
               <span class="title" style="font-style:italic">dolorem labore voluptatem ipsum</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-12 19:59</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-12 19:59</span>
               <span class="title" style="font-style:italic">dolore non etincidunt non ut dolor</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.75)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-10 21:07</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-10 21:07</span>
               <span class="title" style="font-style:italic">ut consectetur quaerat eius est quiquia</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-10 05:35</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-10 05:35</span>
               <span class="title" style="font-style:italic">numquam quisquam quisquam est eius sed est</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-03 21:18</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-03 21:18</span>
               <span class="title" style="font-style:italic">tempora tempora sit eius</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.25)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-02-03 02:40</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-03 02:40</span>
               <span class="title" style="font-style:italic">sit tempora adipisci porro tempora quaerat</span>
               <span class="tagstring">@prjc @tools</span>
               <span class="estimate">(2.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-29 00:05</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-29 00:05</span>
               <span class="title" style="font-style:italic">porro etincidunt ipsum magnam</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-26 17:50</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-26 17:50</span>
               <span class="title" style="font-style:italic">dolore porro ipsum voluptatem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-26 14:51</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-26 14:51</span>
               <span class="title" style="font-style:italic">consectetur porro etincidunt adipisci dolor</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-24 13:08</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-24 13:08</span>
               <span class="title" style="font-style:italic">sit adipisci est ut quiquia</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(1.00)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-24 10:59</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-24 10:59</span>
               <span class="title" style="font-style:italic">neque sed quisquam quisquam numquam modi</span>
               <span class="tagstring">@prjc @tools</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-22 16:10</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-22 16:10</span>
               <span class="title" style="font-style:italic">quisquam eius dolore sit modi est amet</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-21 17:41</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-21 17:41</span>
               <span class="title" style="font-style:italic">ut labore velit dolorem</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-18 17:30</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-18 17:30</span>
               <span class="title" style="font-style:italic">quaerat neque quisquam sed sit neque ut ipsum</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-15 12:28</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-15 12:28</span>
               <span class="title" style="font-style:italic">quiquia ut quisquam adipisci neque</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-14 14:09</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-14 14:09</span>
               <span class="title" style="font-style:italic">porro amet amet neque dolore voluptatem quisquam modi</span>
               <span class="tagstring">@prjc</span>
               <span class="estimate">(0.50)</span>
-            </li>
-            <li><span class="bullet">✔</span> <span class="date">2021-01-14 11:24</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-14 11:24</span>
               <span class="title" style="font-style:italic">quiquia ut quaerat consectetur</span>
               <span class="tagstring">@prjc @prjb</span>
               <span class="estimate">(0.50)</span>
-            </li>
+            </li>          <span>&nbsp;</span>
+        </ul>
         <span>&nbsp;</span>
-      </ul>
-      <span>&nbsp;</span>
+      </div>
+      
+    </main>
+
+    <hr />
+    <div style="display: flex; justify-content: space-between; width: 100%">
+      <p style="font-size: smaller">
+        Page by
+        <a target="_blank" href="https://github.com/arkadianriver/hqtodo"
+          >hqtodo</a
+        >
+        with ♥ from Mermaid and ApexCharts<br />
+        An <a href="/api-docs">API</a> is also available.
+      </p>
+      <p style="font-size: smaller">
+        Page last updated 2021-08-18T10:49:43Z<br />Task file last updated 2021-08-18T10:49:43Z
+      </p>
     </div>
-  
 
-</main>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+      var showHover = id => {
+        const hover = document.querySelector(`#h${id}`);
+        hover.classList.toggle("showme");
+        hover.classList.toggle("hideme");
+      };
 
-  <hr/>
-  <div style="display:flex;justify-content:space-between;width:100%">
-  <p style="font-size:smaller;">Page by <a target="_blank"
-  href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
-  with ♥ from Mermaid and ApexCharts<br/>
-  An <a href="/api-docs">API</a> is also available.
-  </p>
-  <p style="font-size:smaller">Page last updated 2021-08-17T19:09:42Z<br/>Task file last updated 2021-08-17T19:09:42Z</p>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script>
-    var showHover = id => {
-      const hover = document.querySelector(`#h${id}`);
-      hover.classList.toggle("showme");
-      hover.classList.toggle("hideme");
-    };
-
-    var chartOptions = {
-      series: [
-        {
-          name: 'Cumulative points spent on prjc todos',
-          data: [{"x":"2021-01-14 11:24","y":"0.50"},{"x":"2021-01-14 14:09","y":"1.00"},{"x":"2021-01-15 12:28","y":"1.50"},{"x":"2021-01-18 17:30","y":"2.00"},{"x":"2021-01-21 17:41","y":"2.50"},{"x":"2021-01-22 16:10","y":"3.00"},{"x":"2021-01-24 10:59","y":"3.50"},{"x":"2021-01-24 13:08","y":"4.50"},{"x":"2021-01-26 14:51","y":"5.00"},{"x":"2021-01-26 17:50","y":"5.50"},{"x":"2021-01-29 00:05","y":"6.00"},{"x":"2021-02-03 02:40","y":"8.50"},{"x":"2021-02-03 21:18","y":"8.75"},{"x":"2021-02-10 05:35","y":"9.25"},{"x":"2021-02-10 21:07","y":"9.75"},{"x":"2021-02-12 19:59","y":"10.50"},{"x":"2021-02-13 11:21","y":"11.00"},{"x":"2021-02-14 00:01","y":"13.00"},{"x":"2021-02-16 23:53","y":"17.00"},{"x":"2021-02-21 17:51","y":"17.50"},{"x":"2021-02-23 10:12","y":"18.00"},{"x":"2021-02-24 12:27","y":"18.50"},{"x":"2021-02-25 14:33","y":"19.00"},{"x":"2021-03-04 14:31","y":"20.00"},{"x":"2021-03-16 14:31","y":"20.25"},{"x":"2021-03-25 10:08","y":"20.75"},{"x":"2021-03-25 15:42","y":"21.25"},{"x":"2021-03-31 10:34","y":"21.75"},{"x":"2021-03-31 11:35","y":"22.25"},{"x":"2021-04-01 07:00","y":"22.50"},{"x":"2021-04-08 01:25","y":"23.00"},{"x":"2021-04-09 19:11","y":"24.00"},{"x":"2021-04-12 07:00","y":"26.00"},{"x":"2021-04-13 22:24","y":"26.50"},{"x":"2021-04-14 07:25","y":"26.75"},{"x":"2021-04-16 15:18","y":"27.25"},{"x":"2021-04-21 14:35","y":"27.50"},{"x":"2021-04-28 14:11","y":"28.00"},{"x":"2021-05-14 11:24","y":"28.50"},{"x":"2021-05-14 14:09","y":"29.00"},{"x":"2021-05-15 12:28","y":"29.50"},{"x":"2021-05-18 17:30","y":"30.00"},{"x":"2021-05-18 19:32","y":"30.50"},{"x":"2021-05-21 17:41","y":"31.00"},{"x":"2021-05-22 16:10","y":"31.50"},{"x":"2021-05-24 10:59","y":"32.00"},{"x":"2021-05-24 13:08","y":"33.00"},{"x":"2021-05-26 14:51","y":"33.50"},{"x":"2021-05-26 17:50","y":"34.00"},{"x":"2021-05-29 00:05","y":"34.50"},{"x":"2021-05-31 11:24","y":"35.00"},{"x":"2021-05-31 14:09","y":"35.50"},{"x":"2021-06-01 12:28","y":"36.00"},{"x":"2021-06-04 17:30","y":"36.50"},{"x":"2021-06-07 17:41","y":"37.00"},{"x":"2021-06-08 16:10","y":"37.50"},{"x":"2021-06-10 10:59","y":"38.00"},{"x":"2021-06-10 13:08","y":"39.00"},{"x":"2021-06-12 14:51","y":"39.50"},{"x":"2021-06-12 17:50","y":"40.00"},{"x":"2021-06-15 00:05","y":"40.50"},{"x":"2021-06-20 02:40","y":"43.00"},{"x":"2021-06-20 21:18","y":"43.25"},{"x":"2021-06-27 05:35","y":"43.75"},{"x":"2021-06-27 21:07","y":"44.25"},{"x":"2021-06-29 19:59","y":"45.00"},{"x":"2021-06-30 11:21","y":"45.50"},{"x":"2021-07-01 00:01","y":"47.50"},{"x":"2021-07-03 23:53","y":"51.50"},{"x":"2021-07-04 14:35","y":"52.50"},{"x":"2021-07-17 17:30","y":"53.00"},{"x":"2021-07-20 17:41","y":"53.50"},{"x":"2021-07-21 16:10","y":"54.00"},{"x":"2021-07-23 10:59","y":"54.50"},{"x":"2021-07-23 13:08","y":"55.50"},{"x":"2021-07-25 14:51","y":"56.00"},{"x":"2021-07-25 17:50","y":"56.50"},{"x":"2021-07-28 00:05","y":"57.00"},{"x":"2021-08-06 21:18","y":"57.25"},{"x":"2021-08-07 02:40","y":"59.75"},{"x":"2021-08-09 05:35","y":"60.25"},{"x":"2021-08-09 21:07","y":"60.75"},{"x":"2021-08-17 19:09","y":"60.75"}]
-        }
-      ],
-      chart: {
-        type: 'line',
-        height: 350,
-        events: {
-          selection: function (chart, e) {
-            console.log(new Date(e.xaxis.min))
+      var chartOptions = {
+        series: [
+          {
+            name: 'Points spent on prjc todos',
+            data: [{"x":"2021-01-07","y":"0.00"},{"x":"2021-01-08","y":0},{"x":"2021-01-09","y":0},{"x":"2021-01-10","y":0},{"x":"2021-01-11","y":0},{"x":"2021-01-12","y":0},{"x":"2021-01-13","y":0},{"x":"2021-01-14","y":"1.00"},{"x":"2021-01-15","y":"0.50"},{"x":"2021-01-16","y":0},{"x":"2021-01-17","y":0},{"x":"2021-01-18","y":"0.50"},{"x":"2021-01-19","y":0},{"x":"2021-01-20","y":0},{"x":"2021-01-21","y":"0.50"},{"x":"2021-01-22","y":"0.50"},{"x":"2021-01-23","y":0},{"x":"2021-01-24","y":"1.50"},{"x":"2021-01-25","y":0},{"x":"2021-01-26","y":"1.00"},{"x":"2021-01-27","y":0},{"x":"2021-01-28","y":0},{"x":"2021-01-29","y":"0.50"},{"x":"2021-01-30","y":0},{"x":"2021-01-31","y":0},{"x":"2021-02-01","y":0},{"x":"2021-02-02","y":0},{"x":"2021-02-03","y":"2.75"},{"x":"2021-02-04","y":0},{"x":"2021-02-05","y":0},{"x":"2021-02-06","y":0},{"x":"2021-02-07","y":0},{"x":"2021-02-08","y":0},{"x":"2021-02-09","y":0},{"x":"2021-02-10","y":"1.00"},{"x":"2021-02-11","y":0},{"x":"2021-02-12","y":"0.75"},{"x":"2021-02-13","y":"0.50"},{"x":"2021-02-14","y":"2.00"},{"x":"2021-02-15","y":0},{"x":"2021-02-16","y":"4.00"},{"x":"2021-02-17","y":0},{"x":"2021-02-18","y":0},{"x":"2021-02-19","y":0},{"x":"2021-02-20","y":0},{"x":"2021-02-21","y":"0.50"},{"x":"2021-02-22","y":0},{"x":"2021-02-23","y":"0.50"},{"x":"2021-02-24","y":"0.50"},{"x":"2021-02-25","y":"0.50"},{"x":"2021-02-26","y":0},{"x":"2021-02-27","y":0},{"x":"2021-02-28","y":0},{"x":"2021-03-01","y":0},{"x":"2021-03-02","y":0},{"x":"2021-03-03","y":0},{"x":"2021-03-04","y":"1.00"},{"x":"2021-03-05","y":0},{"x":"2021-03-06","y":0},{"x":"2021-03-07","y":0},{"x":"2021-03-08","y":0},{"x":"2021-03-09","y":0},{"x":"2021-03-10","y":0},{"x":"2021-03-11","y":0},{"x":"2021-03-12","y":0},{"x":"2021-03-13","y":0},{"x":"2021-03-14","y":0},{"x":"2021-03-15","y":0},{"x":"2021-03-16","y":"0.25"},{"x":"2021-03-17","y":0},{"x":"2021-03-18","y":0},{"x":"2021-03-19","y":0},{"x":"2021-03-20","y":0},{"x":"2021-03-21","y":0},{"x":"2021-03-22","y":0},{"x":"2021-03-23","y":0},{"x":"2021-03-24","y":0},{"x":"2021-03-25","y":"1.00"},{"x":"2021-03-26","y":0},{"x":"2021-03-27","y":0},{"x":"2021-03-28","y":0},{"x":"2021-03-29","y":0},{"x":"2021-03-30","y":0},{"x":"2021-03-31","y":"1.00"},{"x":"2021-04-01","y":"0.25"},{"x":"2021-04-02","y":0},{"x":"2021-04-03","y":0},{"x":"2021-04-04","y":0},{"x":"2021-04-05","y":0},{"x":"2021-04-06","y":0},{"x":"2021-04-07","y":0},{"x":"2021-04-08","y":"0.50"},{"x":"2021-04-09","y":"1.00"},{"x":"2021-04-10","y":0},{"x":"2021-04-11","y":0},{"x":"2021-04-12","y":"2.00"},{"x":"2021-04-13","y":"0.50"},{"x":"2021-04-14","y":"0.25"},{"x":"2021-04-15","y":0},{"x":"2021-04-16","y":"0.50"},{"x":"2021-04-17","y":0},{"x":"2021-04-18","y":0},{"x":"2021-04-19","y":0},{"x":"2021-04-20","y":0},{"x":"2021-04-21","y":"0.25"},{"x":"2021-04-22","y":0},{"x":"2021-04-23","y":0},{"x":"2021-04-24","y":0},{"x":"2021-04-25","y":0},{"x":"2021-04-26","y":0},{"x":"2021-04-27","y":0},{"x":"2021-04-28","y":"0.50"},{"x":"2021-04-29","y":0},{"x":"2021-04-30","y":0},{"x":"2021-05-01","y":0},{"x":"2021-05-02","y":0},{"x":"2021-05-03","y":0},{"x":"2021-05-04","y":0},{"x":"2021-05-05","y":0},{"x":"2021-05-06","y":0},{"x":"2021-05-07","y":0},{"x":"2021-05-08","y":0},{"x":"2021-05-09","y":0},{"x":"2021-05-10","y":0},{"x":"2021-05-11","y":0},{"x":"2021-05-12","y":0},{"x":"2021-05-13","y":0},{"x":"2021-05-14","y":"1.00"},{"x":"2021-05-15","y":"0.50"},{"x":"2021-05-16","y":0},{"x":"2021-05-17","y":0},{"x":"2021-05-18","y":"1.00"},{"x":"2021-05-19","y":0},{"x":"2021-05-20","y":0},{"x":"2021-05-21","y":"0.50"},{"x":"2021-05-22","y":"0.50"},{"x":"2021-05-23","y":0},{"x":"2021-05-24","y":"1.50"},{"x":"2021-05-25","y":0},{"x":"2021-05-26","y":"1.00"},{"x":"2021-05-27","y":0},{"x":"2021-05-28","y":0},{"x":"2021-05-29","y":"0.50"},{"x":"2021-05-30","y":0},{"x":"2021-05-31","y":"1.00"},{"x":"2021-06-01","y":"0.50"},{"x":"2021-06-02","y":0},{"x":"2021-06-03","y":0},{"x":"2021-06-04","y":"0.50"},{"x":"2021-06-05","y":0},{"x":"2021-06-06","y":0},{"x":"2021-06-07","y":"0.50"},{"x":"2021-06-08","y":"0.50"},{"x":"2021-06-09","y":0},{"x":"2021-06-10","y":"1.50"},{"x":"2021-06-11","y":0},{"x":"2021-06-12","y":"1.00"},{"x":"2021-06-13","y":0},{"x":"2021-06-14","y":0},{"x":"2021-06-15","y":"0.50"},{"x":"2021-06-16","y":0},{"x":"2021-06-17","y":0},{"x":"2021-06-18","y":0},{"x":"2021-06-19","y":0},{"x":"2021-06-20","y":"2.75"},{"x":"2021-06-21","y":0},{"x":"2021-06-22","y":0},{"x":"2021-06-23","y":0},{"x":"2021-06-24","y":0},{"x":"2021-06-25","y":0},{"x":"2021-06-26","y":0},{"x":"2021-06-27","y":"1.00"},{"x":"2021-06-28","y":0},{"x":"2021-06-29","y":"0.75"},{"x":"2021-06-30","y":"0.50"},{"x":"2021-07-01","y":"2.00"},{"x":"2021-07-02","y":0},{"x":"2021-07-03","y":"4.00"},{"x":"2021-07-04","y":"1.00"},{"x":"2021-07-05","y":0},{"x":"2021-07-06","y":0},{"x":"2021-07-07","y":0},{"x":"2021-07-08","y":0},{"x":"2021-07-09","y":0},{"x":"2021-07-10","y":0},{"x":"2021-07-11","y":0},{"x":"2021-07-12","y":0},{"x":"2021-07-13","y":0},{"x":"2021-07-14","y":0},{"x":"2021-07-15","y":0},{"x":"2021-07-16","y":0},{"x":"2021-07-17","y":"0.50"},{"x":"2021-07-18","y":0},{"x":"2021-07-19","y":0},{"x":"2021-07-20","y":"0.50"},{"x":"2021-07-21","y":"0.50"},{"x":"2021-07-22","y":0},{"x":"2021-07-23","y":"1.50"},{"x":"2021-07-24","y":0},{"x":"2021-07-25","y":"1.00"},{"x":"2021-07-26","y":0},{"x":"2021-07-27","y":0},{"x":"2021-07-28","y":"0.50"},{"x":"2021-07-29","y":0},{"x":"2021-07-30","y":0},{"x":"2021-07-31","y":0},{"x":"2021-08-01","y":0},{"x":"2021-08-02","y":0},{"x":"2021-08-03","y":0},{"x":"2021-08-04","y":0},{"x":"2021-08-05","y":0},{"x":"2021-08-06","y":"0.25"},{"x":"2021-08-07","y":"2.50"},{"x":"2021-08-08","y":0},{"x":"2021-08-09","y":"1.00"},{"x":"2021-08-10","y":0},{"x":"2021-08-11","y":0},{"x":"2021-08-12","y":0},{"x":"2021-08-13","y":0},{"x":"2021-08-14","y":0},{"x":"2021-08-15","y":0},{"x":"2021-08-16","y":0},{"x":"2021-08-17","y":0},{"x":"2021-08-18","y":"0.00"},{"x":"2021-08-19","y":0}]
+          }
+        ],
+        chart: {
+          type: 'bar',
+          height: 200,
+          stacked: true
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
           }
         },
-      },
-      stroke: {
-        curve: 'stepline'
-      },
-      legend: {
-        showForSingleSeries: true,
-        position: 'top',
-        horizontalAlign: 'left'
-      },
-      xaxis: {
-        type: 'datetime'
-      },
-    };
-    var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
-    chart.render();   
-  </script>
-
-</body></html>
+        dataLabels: {
+          enabled: false
+        },
+        legend: {
+          showForSingleSeries: true,
+          position: 'top',
+          horizontalAlign: 'left'
+        },
+        xaxis: {
+          type: 'datetime'
+        },
+      };
+      var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
+      chart.render();
+    </script>
+  </body>
+</html>

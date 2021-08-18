@@ -15,8 +15,24 @@
   visibility: visible;
 }
 h1 {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
   font-size: 34pt;
   font-weight: 500;
+}
+#homesubtitle {
+  font-size: 20pt;
+}
+.tagpagetitle {
+  display: flex;
+  justify-content: left;
+  align-items: baseline;
+}
+.tagtitleinfo {
+  padding-left: 20px;
+  font-size: 14pt;
+  vertical-align: bottom;
 }
 h2 {
   font-size: 24pt;
