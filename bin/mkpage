@@ -36,7 +36,7 @@ let server = app.listen(port, function() {
     ['/tags/prjb', '/prjb.html'],
     ['/tags/prja', '/prja.html'],
     ['/tags/personal', '/personal.html'],
-    ['/tags/f22', '/f22.html'],
+    ['/tags/f24', '/f24.html'],
     ['/tags/edu', '/edu.html'],
     ['/tags/admin', '/admin.html']
    ].forEach( a => {
