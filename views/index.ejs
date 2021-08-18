@@ -12,7 +12,10 @@
   <% if (tags.length) { %>
     <%- include('partials/tagnav', {tags: tags, home: true }) %>
   <% } %>
-  <h1>What <%= whoami %> is up to ...</h1>
+  <h1>
+    <div id="hometitle">What <%= whoami %> is up to</div>
+    <div id="homesubtitle">from <%= startdate %> to today</div>
+  </h1>
 </header>
 <main>
   <% issues.blockers && issues.blockers.forEach( l => { %>

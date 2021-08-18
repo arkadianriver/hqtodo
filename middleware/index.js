@@ -969,6 +969,7 @@ exports.renderIt = () => {
       hassupportdata: res.locals.supportChartdata.length > 0,
       jsonsupportdata: JSON.stringify(res.locals.supportChartdata),
       jsonchartdata: JSON.stringify(chartdata),
+      startdate: chartdata[0].x.substr(0,10),
       fileupdated: fileupdated,
       pageupdated: pageupdated,
       whoami: WHOAMI,
