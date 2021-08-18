@@ -1,6 +1,7 @@
 const moment = require('moment-business-days');
 
 const config = require('config');
+const { entries } = require('lodash');
 
 const WHOAMI = config.get('yourName');
 const LINKPATTERNS = config.get('linkmeLinks');
@@ -576,11 +577,10 @@ exports.getArchive = () => {
   }
 }
 
-
 /**
  * return data for apexcharts from the provided archive entries
  */
-const _chartdataFromArchive = (descendingEntries) => {
+ const _chartdataFromFullArchive = (descendingEntries) => {
   const chartdata = [];
   if (!Array.isArray(descendingEntries) || !descendingEntries.length) {
     return chartdata;
@@ -597,6 +597,34 @@ const _chartdataFromArchive = (descendingEntries) => {
     x: moment().format('YYYY-MM-DD HH:mm'),
     y: (spTotal).toFixed(2)
   });
+  return chartdata;
+}
+
+
+/**
+ * data for tag chart is summed estimates on daily bars
+ */
+const _chartdataFromTagArchive = (descendingEntries, dayOne) => {
+  const chartdata = [];
+  if (!Array.isArray(descendingEntries) || !descendingEntries.length) {
+    return chartdata;
+  }
+  const chartobj = {};
+  const dayNow = moment();
+  chartobj[dayOne] = 0;
+  chartobj[dayNow.format('YYYY-MM-DD')] = 0;
+  descendingEntries.reverse().forEach( e => {
+    const newE = Number.parseFloat(e.est);
+    const dateVal = e.closed_on.substr(0,10);
+    chartobj[dateVal] = chartobj.hasOwnProperty(dateVal)
+      ? chartobj[dateVal] + newE : newE;
+  });
+  for (let m = moment(dayOne); m.diff(dayNow, 'days') <= 0; m.add(1, 'days')) {
+    const dateKey = m.format('YYYY-MM-DD');
+    const dateValue = chartobj.hasOwnProperty(dateKey)
+      ? chartobj[dateKey].toFixed(2) : 0;
+    chartdata.push({ x: dateKey, y: dateValue });
+  }
   return chartdata;
 }
 
@@ -757,7 +785,7 @@ function _addCSSClass(propName, className) {
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
-          tagData.opensum += spEst;
+          tagData.opensum += Number.parseFloat(spEst);
           newE.est = spEst;
         }
         tagData.blockers.push(newE);
@@ -770,7 +798,7 @@ function _addCSSClass(propName, className) {
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
-          tagData.opensum += spEst;
+          tagData.opensum += Number.parseFloat(spEst);
           newE.est = spEst;
         }
         tagData.open.active.push(newE);
@@ -783,7 +811,7 @@ function _addCSSClass(propName, className) {
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
-          tagData.opensum += spEst;
+          tagData.opensum += Number.parseFloat(spEst);
           newE.est = spEst;
         }
         tagData.open.pending.push(newE);
@@ -801,17 +829,19 @@ function _addCSSClass(propName, className) {
         const category = tag.slice(1); // remove '@'
         if (category === tagname) {
           tagData.archive.push(e);
+          tagData.archivesum += Number.parseFloat(e.est)
         }
       });
     });
     // no leading zero
-    tagData.opensum = Number.parseFloat(tagData.opensum).toFixed(2);
+    tagData.opensum = tagData.opensum.toFixed(2);
     // sort arrays before returning
     if (tagData.closed) tagData.closed.sort((a, b) => a.closed_on < b.closed_on ? -1 : 1);
     if (tagData.archive) {
       tagData.archive.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
-      const chartdata = _chartdataFromArchive(tagData.archive);
-      tagData.archivesum = chartdata.length ? chartdata[chartdata.length - 1].y : 0;
+      const dayOne = res.locals.entries[res.locals.entries.length - 1].closed_on.substr(0, 10);
+      const chartdata = _chartdataFromTagArchive(tagData.archive, dayOne);
+      tagData.archivesum = tagData.archivesum.toFixed(2)
       tagData.chartdata = JSON.stringify(chartdata);
       tagData.archive.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     }
@@ -930,7 +960,7 @@ exports.renderIt = () => {
   return (req, res, next) => {
     const fileupdated = moment(res.locals.todoFileUpdated).utc().format();
     const pageupdated = moment().utc().format();
-    const chartdata = _chartdataFromArchive(res.locals.entries);
+    const chartdata = _chartdataFromFullArchive(res.locals.entries);
     res.render('index', {
       issues: res.locals.issues,
       byweek: res.locals.archivebyweek,
@@ -960,5 +990,6 @@ if (process.env.NODE_ENV === 'test') {
   exports._copyTodos = _copyTodos;
   exports._fillRanges = _fillRanges;
   exports._getRangeArray = _getRangeArray;
-  exports._chartdataFromArchive = _chartdataFromArchive;
+  exports._chartdataFromFullArchive = _chartdataFromFullArchive;
+  exports._chartdataFromTagArchive = _chartdataFromTagArchive;
 }

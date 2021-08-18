@@ -1,146 +1,157 @@
 <!DOCTYPE html>
-<html lang="en" style="font-size:80%">
-<head>
-  <meta charset="UTF-8">
-  <title>hqtodo</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="<% if (process.env.MY_ENV == 'gh-pages') { %>.<% } %>/css/style.css">
-</head>
-<body>
-<header>
-  <% if (tags.length) { %>
-    <%- include('partials/tagnav', {tags: tags, home: false }) %>
-  <% } %>
-  <h1 class="tagpagetitle">@<%= tag %>
-    <% if (taginfo && taginfo.hasOwnProperty(tag)) { %>
-    <div class="tagtitleinfo">
-      <%= taginfo[tag].title %>
-      <% if (taginfo[tag].link) { %>(<a
-        target="_blank" href="<%= taginfo[tag].link %>">More info</a>)<% } %>
-    </div>
-    <% } %>
-  </h1>
-</header>
-<main>
+<html lang="en" style="font-size: 80%">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hqtodo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="<% if (process.env.MY_ENV == 'gh-pages') { %>.<% } %>/css/style.css"
+    />
+  </head>
+  <body>
+    <header>
+      <% if (tags.length) { %> <%- include('partials/tagnav', {tags: tags, home:
+      false }) %> <% } %>
+      <h1 class="tagpagetitle">
+        @<%= tag %> <% if (taginfo && taginfo.hasOwnProperty(tag)) { %>
+        <div class="tagtitleinfo">
+          <%= taginfo[tag].title %> <% if (taginfo[tag].link) { %>(<a
+            target="_blank"
+            href="<%= taginfo[tag].link %>"
+            >More info</a
+          >)<% } %>
+        </div>
+        <% } %>
+      </h1>
+    </header>
+    <main>
+      <h2>Todo (<%= tagdata.opensum %> pts)</h2>
 
-  <h2>Todo (<%= tagdata.opensum %> pts)</h2>
-
-  <%_ if (tagdata.milestones && tagdata.milestones.length !== 0) { %>
-    <ul id="active" style="list-style-type:none;">    
-      <%_ tagdata.milestones.forEach( t => { _%>
-  <%- include('partials/open_entry.ejs', {t: t} ); %>
-    <%_ }); _%>
-  <%_ } %>
-  </ul>  
-
-  <%_ if (tagdata.blockers && tagdata.blockers.length !== 0) { %>
-    <ul id="active" style="list-style-type:none;">    
-      <%_ tagdata.blockers.forEach( t => { _%>
-  <%- include('partials/open_entry.ejs', {t: t} ); %>
-    <%_ }); _%>
-  <%_ } %>
-  </ul>  
-
-  <%_ if (tagdata.open.active && tagdata.open.active.length !== 0) { %>
-    <h3 class="open">In progress</h3>
-    <ul id="active" style="list-style-type:none;">    
-      <%_ tagdata.open.active.forEach( t => { _%>
-  <%- include('partials/open_entry.ejs', {t: t} ); %>
-    <%_ }); _%>
-  <%_ } %>
-  </ul>  
-
-  <%_ if (tagdata.open.pending && tagdata.open.pending.length !== 0) { %>
-    <h3 class="open">Backlog</h3>
-    <ul id="pending" style="list-style-type:none;">    
-      <%_ tagdata.open.pending.forEach( t => { _%>
-  <%- include('partials/open_entry.ejs', {t: t} ); %>
-      <%_ }); _%>
-    <%_ } %>
-    </ul>  
-
-  <%_ if (tagdata.closed && tagdata.closed.length !== 0) { %>
-    <h3>Recently finished</h3>
-    <ul id="closed" style="list-style-type:none;">    
-      <%_ tagdata.closed.forEach( t => { _%>
-  <%- include('partials/closed_entry.ejs', {t: t} ); %>
-    <%_ }); _%>
-    </ul>
-  <%_ } %>
-
-    <h2 class="archivetitle">
-      <div>Done (<%= tagdata.archivesum %> pts)</div>
-      <div class="pointscale"><%= spperday %> point(s) per <%= hrsperday %>hr day</div>
-    </h2>
-    <div id="chart"></div>
-
-  <% if (tagdata.archive.length > 0) { %>
-    <input type="checkbox" id="display-toggle"/>
-    <label for="display-toggle" id="display-button"><span>▹ show the archive</span></label>
-    <label for="display-toggle" id="hide-button"><span>▿ hide the archive</span></label>
-    <div id="archive" style="padding-top:1rem;padding-right:2rem">
-      <h3>Completed for @<%= tag %></h3>
-      <ul>
-        <%_ tagdata.archive.forEach( i => { _%>
-<%- include('partials/closed_entry', {t: i }) %>
-        <%_ }); _%>
-        <span>&nbsp;</span>
+      <%_ if (tagdata.milestones && tagdata.milestones.length !== 0) { %>
+      <ul id="active" style="list-style-type: none">
+        <%_ tagdata.milestones.forEach( t => { _%> <%-
+        include('partials/open_entry.ejs', {t: t} ); %> <%_ }); _%> <%_ } %>
       </ul>
-      <span>&nbsp;</span>
+
+      <%_ if (tagdata.blockers && tagdata.blockers.length !== 0) { %>
+      <ul id="active" style="list-style-type: none">
+        <%_ tagdata.blockers.forEach( t => { _%> <%-
+        include('partials/open_entry.ejs', {t: t} ); %> <%_ }); _%> <%_ } %>
+      </ul>
+
+      <%_ if (tagdata.open.active && tagdata.open.active.length !== 0) { %>
+      <h3 class="open">In progress</h3>
+      <ul id="active" style="list-style-type: none">
+        <%_ tagdata.open.active.forEach( t => { _%> <%-
+        include('partials/open_entry.ejs', {t: t} ); %> <%_ }); _%> <%_ } %>
+      </ul>
+
+      <%_ if (tagdata.open.pending && tagdata.open.pending.length !== 0) { %>
+      <h3 class="open">Backlog</h3>
+      <ul id="pending" style="list-style-type: none">
+        <%_ tagdata.open.pending.forEach( t => { _%> <%-
+        include('partials/open_entry.ejs', {t: t} ); %> <%_ }); _%> <%_ } %>
+      </ul>
+
+      <%_ if (tagdata.closed && tagdata.closed.length !== 0) { %>
+      <h3>Recently finished</h3>
+      <ul id="closed" style="list-style-type: none">
+        <%_ tagdata.closed.forEach( t => { _%> <%-
+        include('partials/closed_entry.ejs', {t: t} ); %> <%_ }); _%>
+      </ul>
+      <%_ } %>
+
+      <h2 class="archivetitle">
+        <div>Done (<%= tagdata.archivesum %> pts)</div>
+        <div class="pointscale">
+          <%= spperday %> point(s) per <%= hrsperday %>hr day
+        </div>
+      </h2>
+      <div id="chart"></div>
+
+      <% if (tagdata.archive.length > 0) { %>
+      <input type="checkbox" id="display-toggle" />
+      <label for="display-toggle" id="display-button"
+        ><span>▹ show the archive</span></label
+      >
+      <label for="display-toggle" id="hide-button"
+        ><span>▿ hide the archive</span></label
+      >
+      <div id="archive" style="padding-top: 1rem; padding-right: 2rem">
+        <h3>Completed for @<%= tag %></h3>
+        <ul>
+          <%_ tagdata.archive.forEach( i => { _%> <%-
+          include('partials/closed_entry', {t: i }) %> <%_ }); _%>
+          <span>&nbsp;</span>
+        </ul>
+        <span>&nbsp;</span>
+      </div>
+      <% } %>
+    </main>
+
+    <hr />
+    <div style="display: flex; justify-content: space-between; width: 100%">
+      <p style="font-size: smaller">
+        Page by
+        <a target="_blank" href="https://github.com/arkadianriver/hqtodo"
+          >hqtodo</a
+        >
+        with ♥ from Mermaid and ApexCharts<br />
+        An <a href="/api-docs">API</a> is also available.
+      </p>
+      <p style="font-size: smaller">
+        Page last updated <%= pageupdated %><br />Task file last updated <%=
+        fileupdated %>
+      </p>
     </div>
-  <% } %>
 
-</main>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+      var showHover = id => {
+        const hover = document.querySelector(`#h${id}`);
+        hover.classList.toggle("showme");
+        hover.classList.toggle("hideme");
+      };
 
-  <hr/>
-  <div style="display:flex;justify-content:space-between;width:100%">
-  <p style="font-size:smaller;">Page by <a target="_blank"
-  href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
-  with ♥ from Mermaid and ApexCharts<br/>
-  An <a href="/api-docs">API</a> is also available.
-  </p>
-  <p style="font-size:smaller">Page last updated <%= pageupdated %><br/>Task file last updated <%= fileupdated %></p>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script>
-    var showHover = id => {
-      const hover = document.querySelector(`#h${id}`);
-      hover.classList.toggle("showme");
-      hover.classList.toggle("hideme");
-    };
-
-    var chartOptions = {
-      series: [
-        {
-          name: 'Cumulative points spent on <%= tag %> todos',
-          data: <%- tagdata.chartdata %>
-        }
-      ],
-      chart: {
-        type: 'line',
-        height: 350,
-        events: {
-          selection: function (chart, e) {
-            console.log(new Date(e.xaxis.min))
+      var chartOptions = {
+        series: [
+          {
+            name: 'Points spent on <%= tag %> todos',
+            data: <%- tagdata.chartdata %>
+          }
+        ],
+        chart: {
+          type: 'bar',
+          height: 200,
+          stacked: true
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
           }
         },
-      },
-      stroke: {
-        curve: 'stepline'
-      },
-      legend: {
-        showForSingleSeries: true,
-        position: 'top',
-        horizontalAlign: 'left'
-      },
-      xaxis: {
-        type: 'datetime'
-      },
-    };
-    var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
-    chart.render();   
-  </script>
-
-</body></html>
+        dataLabels: {
+          enabled: false
+        },
+        legend: {
+          showForSingleSeries: true,
+          position: 'top',
+          horizontalAlign: 'left'
+        },
+        xaxis: {
+          type: 'datetime'
+        },
+      };
+      var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
+      chart.render();
+    </script>
+  </body>
+</html>
