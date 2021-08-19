@@ -43,26 +43,63 @@
       padding: 6px;
       font-size: larger;
     }
-    ul.tags > li > a {
+    .lgopen, ul.tags > li > a {
       color: cornflowerblue;
       text-decoration: none;
     }
-    ul.tags > li > a.hasclosed {
+    ul.tags > li > a.hasclosed, .lgclosed {
       color: lightgray;
     }
-    ul.tags > li > a.hasactive::after {
+    ul.tags > li > a.hasactive::after, .lgactive::after {
       content: '⁺';
     }
-    ul.tags > li > a.hasmilestone::before {
+    ul.tags > li > a.hasmilestone::before, .lgmilestone::before {
       content: '♦';
     }
-    ul.tags > li > a.hasblocker {
+    ul.tags > li > a.hasblocker, .lgblocker {
       color: palevioletred;
     }
     ul.tags > li > a:hover {
       text-decoration: underline;
     }
+    #legend {
+      display: inline-block;
+      font-size: smaller;
+      margin-top: 3px;
+      padding: 2px 6px 2px 6px;
+      border-radius: 6px;
+      background-color: cadetblue;
+      position: relative;
+    }
+    #legend:hover {
+      cursor: pointer;
+    }
+    #legend:hover + #legend-pop {
+      display: flex;
+      flex-flow:row wrap;
+      justify-content: left;
+      align-content: flex-start;
+    }
+    #legend-pop {
+      position: absolute;
+      display: none;
+      background-color: #fcfcfc;
+      margin:0;
+      top: 98%;
+      left: 5rem;
+      max-width: 380px;
+      height: 5rem;
+      overflow-y: auto;
+      border:solid 1px black;
+      border-radius: 6px;
+    }
+    #legend-pop > div {
+      font-weight: bold;
+      padding: 0 6px 0 6px;
+      margin: 3px;
+    }
 </style>
+<div id="tagnav-container" style="position: relative">
 <div class="tagnav">
   <h2 class="tagstitle">Tag nav</h2>
   <ul class="tags">
@@ -105,7 +142,15 @@
   <ul class="tags"><li><a
     href="index.html">Home</a></li></ul>
 </div>
- 
+<div id="legend">Legend</div>
+<div id="legend-pop">
+  <div class="lgopen">has-open</div>
+  <div class="lgclosed">has-only-closed</div>
+  <div class="lgopen lgactive">has-inprogress</div>
+  <div class="lgopen lgmilestone">has-milestone</div>
+  <div class="lgblocker">has-blocker</div>
+</div>
+</div> 
       <h1 class="tagpagetitle">
         @vidz 
         <div class="tagtitleinfo">
@@ -190,7 +235,7 @@
         An <a href="/api-docs">API</a> is also available.
       </p>
       <p style="font-size: smaller">
-        Page last updated 2021-08-18T14:52:44Z<br />Task file last updated 2021-08-18T14:52:44Z
+        Page last updated 2021-08-19T04:25:38Z<br />Task file last updated 2021-08-19T04:25:38Z
       </p>
     </div>
 
