@@ -32,28 +32,28 @@
     <% if (issues.blockers.length) { -%>
     section Blockers
     <% issues.blockers.forEach(b => { -%>
-    <%= b.title %> <%= b['tagstring'] %> :<%= b['color'] %>k<%= b['number'] %>, <%= b['startdate'] %>, <%= b['est'] %>
+    <%- `${b.title.replace(/[:#]/,'-')}` %> <%= b['tagstring'] %> :<%= b['color'] %>k<%= b['number'] %>, <%= b['startdate'] %>, <%= b['est'] %>
     <% }); -%>
     <% } -%>
 
     <% if (issues.milestones.length) { -%>
     section Milestones
     <% issues.milestones.forEach( t => { -%>
-    <%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
+    <%- `${t.title.replace(/[:#]/,'-')}` %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
     <% }); -%>
     <% } -%>
 
     <% if (issues.open.active.length) { -%>
     section In Progress
     <% issues.open.active.forEach( t => { -%>
-    <%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
+    <%- `${t.title.replace(/[:#]/,'-')}` %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
     <% }); -%>
     <% } -%>
 
     <% if (issues.open.pending.length) { -%>
     section Backlog
     <% issues.open.pending.forEach( t => { -%>
-    <%= t.title %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
+    <%- `${t.title.replace(/[:#]/,'-')}` %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
     <% }); -%>
     <% } -%>
 
