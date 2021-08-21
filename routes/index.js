@@ -43,6 +43,10 @@ router.get('/todos/tags/:tagname', mw.parseRawTodos(), mw.getArchive(), mw.getTa
   res.json(res.locals.tagdata);
 });
 
+router.get('/todos/searchdata', mw.parseRawTodos(), mw.getArchive(), mw.getSearchData(), (req, res, next) => {
+  res.json(res.locals.searchData);
+});
+
 router.get('/todos/supportdata', mw.getArchive(), mw.getSupport(), (req, res, next) => {
   res.json(res.locals.supportentries);
 });
@@ -83,6 +87,7 @@ router.get('/tags/:tagname',
   mw.getArchive(),
   mw.getTags(),
   mw.getTagData(),
+  mw.getSearchData(),
   mw.renderTagPage()
 );
 
@@ -91,6 +96,7 @@ router.get('/',
   mw.injectInterrupts(),
   mw.getArchive(),
   mw.getTags(),
+  mw.getSearchData(),
   mw.getSupport(),
   mw.getArchiveByTag(),
   mw.getArchiveByWeek(),

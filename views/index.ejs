@@ -5,6 +5,7 @@
   <title>hqtodo</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.02.min.css"/>
   <link rel="stylesheet" href="<% if (process.env.MY_ENV == 'gh-pages') { %>.<% } %>/css/style.css">
 </head>
 <body>
@@ -121,13 +122,14 @@
   <div style="display:flex;justify-content:space-between;width:100%">
   <p style="font-size:smaller;">Page by <a target="_blank"
   href="https://github.com/arkadianriver/hqtodo">hqtodo</a>
-  with ♥ from Mermaid and ApexCharts<br/>
+  with ♥ from Mermaid, ApexCharts, and autoComplete.js<br/>
   An <a href="/api-docs">API</a> is also available.
   </p>
   <p style="font-size:smaller">Page last updated <%= pageupdated %><br/>Task file last updated <%= fileupdated %></p>
   </div>
   <script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
   <script>
     var showHover = id => {
       const hover = document.querySelector(`#h${id}`);
@@ -181,7 +183,10 @@
       },
     };
     var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
-    chart.render();   
+    chart.render();  
+
+    <%- include('partials/search_script', {searchData: searchData }) %>
+
   </script>
 </body>
 </html>

@@ -122,7 +122,7 @@ label {
   padding: 0.8em 0 1em 0;
 }
 
-input, label#hide-button { display:none; }
+input#display-toggle, label#hide-button { display:none; }
 #archive { display:none; }
 input#display-toggle:checked ~ label#display-button { display: none; }
 input#display-toggle:checked ~ label#hide-button { display: block; }

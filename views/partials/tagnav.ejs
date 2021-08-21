@@ -1,6 +1,12 @@
 <style>
+    :root {
+      --transition-1: all 0.3s ease-in-out;
+      --transition-2: all 0.2s ease-in-out;
+    }
     .tagnav {
       border: solid 1px black;
+      border-radius: 4px;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -47,7 +53,7 @@
       font-size: smaller;
       margin-top: 3px;
       padding: 2px 6px 2px 6px;
-      border-radius: 6px;
+      border-radius: 4px;
       background-color: cadetblue;
       position: relative;
     }
@@ -65,18 +71,75 @@
       display: none;
       background-color: #fcfcfc;
       margin:0;
-      top: 98%;
+      top: 30%;
       left: 5rem;
-      max-width: 380px;
+      width: 380px;
+      z-index: 99;
       height: 5rem;
       overflow-y: auto;
       border:solid 1px black;
-      border-radius: 6px;
+      border-radius: 4px;
     }
     #legend-pop > div {
       font-weight: bold;
       padding: 0 6px 0 6px;
       margin: 3px;
+    }
+
+    /* autoComplete.js */
+    .autoComplete_wrapper {
+      margin-top: 2px;
+      z-index: 1;
+    }
+    .autoComplete_wrapper > ul {
+      right: 0;
+      left: unset;
+      width: 70vw;
+      max-height: 60vh;
+    }
+    .autoComplete_wrapper > ul > p {
+      text-align: center;
+      padding-bottom: 18px;
+      border-bottom: solid 1px rgba(0,0,0,0.1)
+    }
+    .autoComplete_wrapper a {
+      color:cornflowerblue;
+      text-decoration: none;
+    }
+    .autoComplete_wrapper a:hover {
+      text-decoration: underline;
+    }
+    .no_result {
+      margin: 0.3rem;
+      padding: 0.3rem 0.5rem;
+      list-style: none;
+      text-align: left;
+      font-size: 1rem;
+      color: #212121;
+      transition: all 0.1s ease-in-out;
+      border-radius: 0.35rem;
+      background-color: rgba(255, 255, 255, 1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+    .selection {
+      display: none;
+      margin-top: 0; /* 25vh; */
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffc6c6;
+      transition: var(--transition-1);
+    }
+    .selection::selection {
+      color: #64ceaa;
+    }
+    @media only screen and (max-width: 600px) {
+      .selection {
+        margin-top: 15vh;
+      }
     }
 </style>
 <div id="tagnav-container" style="position: relative">
@@ -89,6 +152,8 @@
   <% if (!home) { %><ul class="tags"><li><a
     href="<% if (process.env.MY_ENV == 'gh-pages') { %>index.html<% } else { %>/<% } %>">Home</a></li></ul><% } %>
 </div>
+<div style="display:flex;flow-flow:row nowrap;justify-content:space-between;">
+<div style="position:relative;float:left">
 <div id="legend">Legend</div>
 <div id="legend-pop">
   <div class="lgopen">has-open</div>
@@ -96,5 +161,13 @@
   <div class="lgopen lgactive">has-inprogress</div>
   <div class="lgopen lgmilestone">has-milestone</div>
   <div class="lgblocker">has-blocker</div>
+</div>
+</div>
+<div style="position:relative;float:right">
+<div class="autoComplete_wrapper">
+  <input id="autoComplete" type="text" tabindex="1" />
+</div>
+<div class="selection"></div>
+</div>
 </div>
 </div>

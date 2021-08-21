@@ -744,7 +744,64 @@ function _addCSSClass(propName, className) {
 
 
 /**
- * get all the data for a particular tag in all the states
+ * get all the data for all the things (but interrupts) for search
+ */
+ exports.getSearchData = () => {
+  return (req, res, next) => {
+    if ((!Array.isArray(res.locals.entries) || !res.locals.entries.length) &&
+        (!Array.isArray(res.locals.issues.milestones) || !res.locals.issues.milestones.length) &&
+        (!Array.isArray(res.locals.issues.blockers) || !res.locals.issues.blockers.length) &&
+        (!Array.isArray(res.locals.issues.open.active) || !res.locals.issues.open.active.length) &&
+        (!Array.isArray(res.locals.issues.open.pending) || !res.locals.issues.open.pending.length) &&
+        (!Array.isArray(res.locals.issues.open.closed) || !res.locals.issues.open.closed.length)) {
+        res.locals.searchData = [];
+      next();
+      return;
+    }
+    const searchData = [];
+    // grab milestone entries that have this tag
+    res.locals.issues.milestones.forEach( e => {
+      const tagArray = e.tagstring.split(/\s+/);
+      if (tagArray[0].length === 0) tagArray.shift();
+      searchData.push({ title: e.title, tags: tagArray, state: "Milestones" });
+    });
+    // grab blocker entries that have this tag
+    res.locals.issues.blockers.forEach( e => {
+      const tagArray = e.tagstring.split(/\s+/);
+      if (tagArray[0].length === 0) tagArray.shift();
+      searchData.push({ title: e.title, tags: tagArray, state: "Blockers" });
+    });    
+    // grab active entries that have this tag
+    res.locals.issues.open.active.forEach( e => {
+      const tagArray = e.tagstring.split(/\s+/);
+      if (tagArray[0].length === 0) tagArray.shift();
+      searchData.push({ title: e.title, tags: tagArray, state: "In progress" });
+    });
+    // grab pending entries that have this tag
+    res.locals.issues.open.pending.forEach( e => {
+      const tagArray = e.tagstring.split(/\s+/);
+      if (tagArray[0].length === 0) tagArray.shift();
+      searchData.push({ title: e.title, tags: tagArray, state: "Backlog" });
+    });
+    // grab closed entries that have this tag
+    res.locals.issues.closed.forEach( e => {
+      const tagArray = e.tagstring.split(/\s+/);
+      if (tagArray[0].length === 0) tagArray.shift();
+      searchData.push({ title: e.title, tags: tagArray, state: "Closed" });
+    });
+    // grab archive entries that have this tag
+    res.locals.entries.forEach( e => {
+      searchData.push({ title: `${e.closed_on.substr(0,10)} - ${e.title}`, tags: e.tags, state: "Archive" });
+    });
+    res.locals.searchData = searchData;
+    next();
+  }
+}
+
+
+/**
+ * get all the data for a particular tag in all the states,
+ * and since we're scanning all the things, populate the searchData while we're at it
  */
  exports.getTagData = () => {
   return (req, res, next) => {
@@ -948,7 +1005,8 @@ exports.getArchiveByWeek = () => {
       tag: req.params.tagname,
       taginfo: res.locals.taginfo,
       tags: res.locals.tags,
-      tagdata: res.locals.tagdata
+      tagdata: res.locals.tagdata,
+      searchData: JSON.stringify(res.locals.searchData)
     });
   }
 }
@@ -969,6 +1027,7 @@ exports.renderIt = () => {
       hassupportdata: res.locals.supportChartdata.length > 0,
       jsonsupportdata: JSON.stringify(res.locals.supportChartdata),
       jsonchartdata: JSON.stringify(chartdata),
+      searchData: JSON.stringify(res.locals.searchData),
       startdate: chartdata[0].x.substr(0,10),
       fileupdated: fileupdated,
       pageupdated: pageupdated,
