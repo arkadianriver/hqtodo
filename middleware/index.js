@@ -994,11 +994,9 @@ exports.getArchiveByWeek = () => {
  */
  exports.renderTagPage = () => {
   return (req, res, next) => {
-    const fileupdated = moment(res.locals.todoFileUpdated).utc().format();
-    const pageupdated = moment().utc().format();
     res.render('tag', {
-      fileupdated: fileupdated,
-      pageupdated: pageupdated,
+      fileupdated: moment(req.app.locals.todoFileUpdated).utc().format(),
+      pageupdated: moment().utc().format(),
       spperday: STORYPOINTSADAY,
       hrsperday: WH,
       whoami: WHOAMI,
@@ -1016,8 +1014,6 @@ exports.getArchiveByWeek = () => {
  */
 exports.renderIt = () => {
   return (req, res, next) => {
-    const fileupdated = moment(res.locals.todoFileUpdated).utc().format();
-    const pageupdated = moment().utc().format();
     const chartdata = _chartdataFromFullArchive(res.locals.entries);
     res.render('index', {
       issues: res.locals.issues,
@@ -1029,8 +1025,8 @@ exports.renderIt = () => {
       jsonchartdata: JSON.stringify(chartdata),
       searchData: JSON.stringify(res.locals.searchData),
       startdate: chartdata[0].x.substr(0,10),
-      fileupdated: fileupdated,
-      pageupdated: pageupdated,
+      fileupdated: moment(req.app.locals.todoFileUpdated).utc().format(),
+      pageupdated: moment().utc().format(),
       whoami: WHOAMI,
       spperday: STORYPOINTSADAY,
       hrsperday: WH

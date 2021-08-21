@@ -22,9 +22,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+/**
+ * Sets a variable (timestamp incl. milliseconds) to be used by clients
+ * And returns boolean, used to determine whether to reload TODOFILE
+ */
 const _isFileUpdated = () => {
   const fileStats = fs.statSync(TODOFILE);
-  // TODO: filelastupdated shows same tstamp as displaypage - console.log(fileStats.mtime.valueOf())
   if (app.locals.todoFileUpdated &&
       app.locals.todoFileUpdated.valueOf() == fileStats.mtime.valueOf()) {
     return false;
@@ -35,8 +39,8 @@ const _isFileUpdated = () => {
 }
 
 /**
- * After testing, put this in a configurable module that returns the file
- * regardless of if it's stored locally, in Box, Dropbox, Google Docs, whatever.
+ * Want to reload TODOFILE to repopulate the locals vars
+ * only if user updated it on disk
  */
 app.use((req, res, next) => {
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html><title>api-docs</title>
+<link rel="stylesheet" href="<% if (process.env.MY_ENV == 'gh-pages') { %>.<% } %>/css/style.css">
+<style>
+  dt {
+    font-weight: bold;
+  }
+  dd {
+    margin: 6px 0 24px 24px;
+  }
+</style>
+<body>
+<% /*
+  TODO: @low - DRY: add comments to routes and pull list directly from there (use jsdocs?)
+*/ %>
+<h1>Available endpoints</h1>
+<h2>HTML view responses</h2>
+<dl>
+<dt><code>GET /</code></dt><dd>Show status page for all the things</dd>
+<dt><code>GET /tags/:tagname</code></dt><dd>Show status page for a particular tag</dd>
+</dl>
+
+<h2>JSON data responses</h2>
+<dl>
+<dt><code>GET /todos/filelastupdated</code></dt><dd>timestamp in milliseconds when the TODO file was last modified</dd>
+<dt><code>GET /todos/raw</code></dt><dd>entries from TODO file (or cache), filtered to only archived, open, and taginfo</dd>
+<dt><code>GET /todos/unordered</code></dt><dd>open items, with all metadata except gantt ordering info</dd>
+<dt><code>GET /todos</code></dt><dd>open items, with interrupt and ordering for mermaid</dd>
+<dt><code>GET /todos/supportdata</code></dt><dd>all support entries, with time in minutes</dd>
+<dt><code>GET /todos/supportondate/:YYYY-mm-dd</code></dt><dd>support item list and total time string for given date</dd>
+<dt><code>GET /todos/archived</code></dt><dd>archived items, with metadata extracted</dd>
+<dt><code>GET /todos/archivedbytag</code></dt><dd>archived items, grouped by tag with group est totals</dd>
+<dt><code>GET /todos/archivedbyweek</code></dt><dd>archived items, grouped by week (ending Sunday)</dd>
+<dt><code>GET /todos/tags</code></dt><dd>(1) title and link for tags in Taginfo section of TODO file<br/>(2) list of all tags, with classs and counts</dd>
+<dt><code>GET /todos/searchdata</code></dt><dd>all the things, with tag array and which state it's in</dd>
+</dl>
+
+</body>
+</html>

@@ -8,8 +8,13 @@ Programming Todos:
     ✔ edit index.ejs to display epic listing @done(2021-08-15 13:00)
     ✔ implement getTags(:id) to display page @done(2021-08-15 14:00)
     ✔ create tags.ejs view using data from /tags @done(2021-08-15 19:00)
-    ☐ test to see how to provide extra tag/epic/category doc on the tag pages
-      • for example, is the below listing of epics worth maintaining?
+    ✔ test to see how to provide extra tag/epic/category doc on the tag pages @done(2021-08-21 11:24)
+  ✔ expose lastmodified for eventual client-based app @done(2021-08-21 09:02)
+  ✔ limit doc requests @done(2021-08-21 11:21)
+  ☐ capture url in link and pop text out of title
+  ☐ display link in archive (and anywhere else not exposed in tag/full view)
+  ☐ add Carbon style
+  ☐ improve doc: use routes and jsdocs, pull readme into /doc endpoint on gh-pages
 # end::progtodos[]
 
 Taginfo:

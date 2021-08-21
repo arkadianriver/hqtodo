@@ -25,7 +25,8 @@ let server = app.listen(port, function() {
   console.log('Listening =^.^=');
   fs.mkdirSync('./build/css', { recursive: true });
 
-  [ ['/', '/index.html'],
+  const pages = [
+    ['/', '/index.html'],
     ['/css/style.css', '/css/style.css'],
     ['/tags/xedu', '/xedu.html'],
     ['/tags/woot', '/woot.html'],
@@ -38,19 +39,38 @@ let server = app.listen(port, function() {
     ['/tags/personal', '/personal.html'],
     ['/tags/f24', '/f24.html'],
     ['/tags/edu', '/edu.html'],
-    ['/tags/admin', '/admin.html']
-   ].forEach( a => {
+    ['/tags/admin', '/admin.html'],
+    ['/doc', '/doc.html']
+  ];
+
+  const makePage = (page) => {
+    if (!Array.isArray(page) || !page.length) return;
+    const [ endpoint, htmlpage ] = page;
     // assist https://stackoverflow.com/a/19539521/5360420
-    http.request(`http://localhost:${port}${a[0]}`, res => {
+    http.request(`http://localhost:${port}${endpoint}`, res => {
       let str = '';
       res.on('data', chunk => {
         str += chunk;
       });
+      res.on('error', (err) => {
+        console.log(err);
+      })
       res.on('end', () => {
-        fs.writeFileSync(`./build${a[1]}`, str);
-        server.close(() => { console.log(`Built ${a[1]}`); });
+        fs.writeFileSync(`./build${htmlpage}`, str);
+        console.log(`Built ${htmlpage}`);
       });
     }).end();
-  });
-});
+  };
 
+  // simple request throttle - assist: https://stackoverflow.com/a/64254202
+  let i = 0;
+  const requestId = setInterval(() => {
+    if (i > pages.length) {
+      console.log('Closing the server.');
+      clearTimeout(requestId);
+      server.close();
+    }
+    makePage(pages[i++]);
+  }, 200);
+
+});

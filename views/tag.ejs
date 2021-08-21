@@ -95,22 +95,8 @@
       <% } %>
     </main>
 
-    <hr />
-    <div style="display: flex; justify-content: space-between; width: 100%">
-      <p style="font-size: smaller">
-        Page by
-        <a target="_blank" href="https://github.com/arkadianriver/hqtodo"
-          >hqtodo</a
-        >
-        with ♥ from Mermaid, ApexCharts, and autoComplete.js<br />
-        An <a href="/api-docs">API</a> is also available.
-      </p>
-      <p style="font-size: smaller">
-        Page last updated <%= pageupdated %><br />Task file last updated <%=
-        fileupdated %>
-      </p>
-    </div>
-
+    <%- include('partials/footer', {pageupdated: pageupdated, fileupdated: fileupdated}) %>
+    
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
     <script>

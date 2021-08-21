@@ -12,8 +12,13 @@ const pp = data => '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
  * a burndown chart, which I want to provide eventually
  */
 
+router.get('/todos/filelastupdated', (req, res, next) => {
+  res.json(req.app.locals.todoFileUpdated);
+})
+
 router.get('/todos/raw', (req, res, next) => {
   res.json({
+    filelastupdated: req.app.locals.todoFileUpdated,
     rawTaginfo: req.app.locals.rawTaginfo,
     rawTodos: req.app.locals.rawTodos,
     rawArchive: req.app.locals.rawArchive
@@ -63,23 +68,8 @@ router.get('/todos/archivedbyweek', mw.getArchive(), mw.getArchiveByWeek(), (req
   res.json(res.locals.archivebyweek);
 });
 
-router.get('/api-docs', (req, res, next) => {
-  res.send(`<!DOCTYPE html>
-<html><title>api-docs</title>
-<body>
-<h2>endpoints available</h2>
-<pre>GET /
-GET /todos
-GET /todos/raw
-GET /todos/unordered
-GET /todos/supportdata
-GET /todos/supportondate/:YYYY-mm-dd
-GET /todos/archived
-GET /todos/archivedbytag
-GET /todos/archivedbyweek
-</pre>
-</body>
-</html>`);
+router.get('/doc', (req, res, next) => {
+  res.render('apidoc');
 });
 
 router.get('/tags/:tagname',
