@@ -73,18 +73,22 @@ const _handleBlockers = (tags) => {
 
 /**
  * Take the first link-search-pattern in the todo (assumes only one per todo)
- * and return the defined URL pattern.
+ * and set the defined URL pattern (for hrefs) and the title without the link pattern
+ * (because some of the patterns are cryptic and we don't want 'em in the reports).
  */
-const _getLinkUrl = (str) => {
+const _getLinkFromTitle = (str) => {
+  const retVal = { linkUrl: '', filteredTitle: str };
   for (pat of LINKPATTERNS) {
     // assist https://stackoverflow.com/a/494046
     const searchpat = new RegExp(`\\b${pat.pattern}\\b`);
     const matched = str.match(searchpat);
     if (matched) {
-      return matched[0].replace(searchpat, pat.url);
+      retVal.linkUrl = matched[0].replace(searchpat, pat.url);
+      retVal.filteredTitle = str.replace(searchpat, '').trim();
+      return retVal;
     }
   }
-  return null;
+  return retVal;
 }
 
 
@@ -119,13 +123,13 @@ exports.parseRawTodos = () => {
         // skip Frozens
         if (m[2] && m[2] == '@low') continue;
         // quickly grab linkUrl if any
-        let linkUrl = m[3] ? _getLinkUrl(m[3]) : null;
-        if (linkUrl && !isBlocker) issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
+        const { linkUrl, filteredTitle } = m[3] ? _getLinkFromTitle(m[3]) : { linkUrl, filteredTitle };
+        if (linkUrl && !isBlocker && m[1] === '☐') issues.links.push({ id: `k${j.toString()}`, url: linkUrl });
         // check if milestone or interrupt to set m4 and grab title
-        const m4 = m[3].match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]:\s*(.*)$/);
+        const m4 = filteredTitle.match(/^\[(\d+d) starting (\d\d\d\d-\d\d-\d\d)\]:\s*(.*)$/);
         // grab tags and title
         const taggy = _handleTags(tags);
-        const title = m4 ? m4[3].trim() : m[3].trim();
+        const title = m4 ? m4[3].trim() : filteredTitle.trim();
         let tagstring = taggy[1];
         // quickly add milestones and interrupts
         if (m4) {
@@ -162,6 +166,7 @@ exports.parseRawTodos = () => {
           issues['closed'].push({
             closed_on: m2[1],
             title: title,
+            link: linkUrl,
             tagstring: tagstring,
             est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
           });
@@ -561,11 +566,13 @@ exports.getArchive = () => {
       if (!mDone) continue;
       const taggy = _handleTags(mTags.flat());
       const doneStr = mDone[2] ? mDone[1] : `${mDone[1]} 17:00`;
-      let title = mTitle[1].trim();
+      //let title = mTitle[1].trim();
+      const { linkUrl, filteredTitle } = mTitle[1] ? _getLinkFromTitle(mTitle[1].trim()) : { linkUrl, filteredTitle };
       let tags = taggy[1] ? taggy[1].split(' ') : [];
       entries.push({
         closed_on: doneStr,
-        title: title,
+        title: filteredTitle,
+        link: linkUrl,
         tags: tags,
         est: (taggy[0] * STORYPOINTFACTOR).toFixed(2)
       });
@@ -642,14 +649,12 @@ function _addCSSClass(propName, className) {
     // should prolly be its own fn, but now only used when tags are used, so there ya go
     res.locals.taginfo = {};
     for (let i = 0, j = 1; i < req.app.locals.rawTaginfo.length; i++) {
-      const tagline = req.app.locals.rawTaginfo[i].match(/\s*☐\s+@(\S+)\s+(.*?)(?: - (.*))?$/);
+      const tagline = req.app.locals.rawTaginfo[i].match(/\s*☐\s+@(\S+)\s+(.*?)$/);
       if (tagline && tagline.length > 1) {
-        const tlink = tagline[3] 
-          ? ( tagline[3].substr(0,4) === 'http' ? tagline[3] : _getLinkUrl(tagline[3]) )
-          : '';
+        const { linkUrl, filteredTitle } = _getLinkFromTitle(tagline[2]);
         res.locals.taginfo[tagline[1]] = {
-          title: tagline[2],
-          link: tlink
+          title: filteredTitle,
+          link: linkUrl
         }
       }
     }
@@ -927,6 +932,7 @@ exports.getArchiveByTag = () => {
         bytag[category].items.push({
           closed_on: e.closed_on,
           title: e.title,
+          link: e.link,
           tags: e.tags,
           est: e.est
         });
@@ -1039,7 +1045,7 @@ exports.renderIt = () => {
 // assist https://stackoverflow.com/a/57212354/5360420
 if (process.env.NODE_ENV === 'test') {
   exports._handleTags = _handleTags;
-  exports._getLinkUrl = _getLinkUrl;
+  exports._getLinkFromTitle = _getLinkFromTitle;
   exports._getMinutes = _getMinutes;
   exports._getBizStart = _getBizStart;
   exports._chunkRange = _chunkRange;

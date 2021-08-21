@@ -53,7 +53,7 @@ const mockRawTodos = {
     "✔ Restructure archive of books @1h @done(2020-05-06 21:37) @project(Todos)",
     "✔ @today Host a party for real @8h @prjc @done(2020-04-12 07:00) @project(Todos)",
     "✔ Host a party @1h @prjc @done(2020-04-01 07:00) @project(Todos)",
-    "✔ Do something fun @1h @prjc @done(2020-03-29 07:00) @project(Todos)"
+    "✔ Do something fun url•https://meetup.com @4h @prjc @done(2020-03-29 21:00) @project(Todos)"
   ]
 };
 
@@ -98,6 +98,7 @@ describe('Integration:', function() {
     expect(res.locals.issues.closed[0]).to.deep.equal({
       closed_on: "2020-05-12",
       title: "decide organization requirements",
+      link: "",
       tagstring: "@prja @woot",
       est: "1.75"
     });
@@ -157,17 +158,18 @@ describe('Integration:', function() {
   it('getArchiveByTag() should match items', function() {
     expect(res.locals.archivebytag[2].tag).to.equal("woot");
   });
-  it('getArchiveByWeek() should provide archive entries, sorted by week', function() {
+  it('getArchiveByWeek() should provide archive entries, sorted by week (with link, too)', function() {
     const testedFunction = mw.getArchiveByWeek();
     testedFunction(req, res, next);
     expect(res.locals.archivebyweek[6]).to.deep.equal({
       weekEnding: "2020-03-29",
       entries: [
         {
-          closed_on: "2020-03-29 07:00",
+          closed_on: "2020-03-29 21:00",
           title: "Do something fun",
+          link: "https://meetup.com",
           tags: ["@prjc"],
-          est: "0.25"
+          est: "1.00"
         }
       ]
     });

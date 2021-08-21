@@ -11,6 +11,10 @@
     {
       "pattern": "ghi•([^•]+)•(\\d+)",
       "url": "https://github.com/$1/issues/$2"
+    },
+    {
+      "pattern": "url•(\\S+)",
+      "url": "$1"
     }
   ]
 }
