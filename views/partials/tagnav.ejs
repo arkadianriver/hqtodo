@@ -147,10 +147,10 @@
   <h2 class="tagstitle">Tag nav</h2>
   <ul class="tags"><% tags.map( t => { %>
     <li data-count="<%= t.count %>"><a class="<%= t.class %>"
-      href="<% if (process.env.MY_ENV == 'gh-pages') { %><%= t.tag %>.html<% } else { %>/tags/<%= t.tag %><% } %>">@<%= t.tag %></a></li>
+      href="<% if (process.env.MY_ENV == 'gh-pages') { %><%= t.tag %>.html<% } else { %>/ejs/tags/<%= t.tag %><% } %>">@<%= t.tag %></a></li>
   <% }) %></ul>
   <% if (!home) { %><ul class="tags"><li><a
-    href="<% if (process.env.MY_ENV == 'gh-pages') { %>index.html<% } else { %>/<% } %>">Home</a></li></ul><% } %>
+    href="<% if (process.env.MY_ENV == 'gh-pages') { %>index.html<% } else { %>/ejs<% } %>">Home</a></li></ul><% } %>
 </div>
 <div style="display:flex;flow-flow:row nowrap;justify-content:space-between;">
 <div style="position:relative;float:left">

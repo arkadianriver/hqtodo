@@ -1,0 +1,5 @@
+.oentry { display: flex; flex-flow: row nowrap }
+.oentry .obullet { padding-right: 10px }
+.oentry .otext .blockers { color: #750e13; }
+.oentry .otext .tagstring { color: #a0a0a0; }
+.blocker-line { line-height: 0.6rem; padding: 0; margin: 0; }

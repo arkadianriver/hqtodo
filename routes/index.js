@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 
 const mw = require('../middleware/index');
@@ -72,7 +73,7 @@ router.get('/doc', (req, res, next) => {
   res.render('apidoc');
 });
 
-router.get('/tags/:tagname',
+router.get('/ejs/tags/:tagname',
   mw.parseRawTodos(),
   mw.getArchive(),
   mw.getTags(),
@@ -81,7 +82,16 @@ router.get('/tags/:tagname',
   mw.renderTagPage()
 );
 
-router.get('/',
+router.get('/api/tags/:tagname',
+  mw.parseRawTodos(),
+  mw.getArchive(),
+  mw.getTags(),
+  mw.getTagData(),
+  mw.getSearchData(),
+  mw.renderTagPage('api')
+);
+
+router.get('/ejs',
   mw.parseRawTodos(),
   mw.injectInterrupts(),
   mw.getArchive(),
@@ -92,6 +102,34 @@ router.get('/',
   mw.getArchiveByWeek(),
   mw.renderIt()
 );
+
+router.get('/webc',
+  mw.parseRawTodos(),
+  mw.injectInterrupts(),
+  mw.getArchive(),
+  mw.getTags(),
+  mw.getSearchData(),
+  mw.getSupport(),
+  mw.getArchiveByTag(),
+  mw.getArchiveByWeek(),
+  mw.renderIt('webc')
+);
+
+router.get('/api',
+  mw.parseRawTodos(),
+  mw.injectInterrupts(),
+  mw.getArchive(),
+  mw.getTags(),
+  mw.getSearchData(),
+  mw.getSupport(),
+  mw.getArchiveByTag(),
+  mw.getArchiveByWeek(),
+  mw.renderIt('api')
+);
+
+router.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client-react-carbon/build', 'index.html'));
+})
 
 
 module.exports = router;

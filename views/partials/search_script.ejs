@@ -36,7 +36,7 @@ const autoCompleteJS = new autoComplete({
       // Modify Results Item Content
       item.innerHTML = `
       <span style="font-size: 14px; font-weight: bold; color: rgb(92,92,92); padding: 0;">
-      ${data.value.tags.length > 0 ? data.value.tags.map( t => `<a href="/tags/${t.substring(1)}">${t}</a>`).join(' ') + ' &gt;' : ''}
+      ${data.value.tags.length > 0 ? data.value.tags.map( t => `<a href="/ejs/tags/${t.substring(1)}">${t}</a>`).join(' ') + ' &gt;' : ''}
       ${data.value.state}
       </span>
       <span style="font-size: 12px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; padding: 3px 0 3px 9px;">

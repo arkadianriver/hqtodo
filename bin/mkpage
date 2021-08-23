@@ -17,7 +17,7 @@ function normalizePort(val) {
   return false;
 }
 
-let port = normalizePort(process.env.PORT || '3000');
+let port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);    
 
 // assist https://github.com/expressjs/express/issues/1366#issuecomment-68693264
@@ -26,20 +26,20 @@ let server = app.listen(port, function() {
   fs.mkdirSync('./build/css', { recursive: true });
 
   const pages = [
-    ['/', '/index.html'],
+    ['/ejs', '/index.html'],
     ['/css/style.css', '/css/style.css'],
-    ['/tags/xedu', '/xedu.html'],
-    ['/tags/woot', '/woot.html'],
-    ['/tags/vidz', '/vidz.html'],
-    ['/tags/tools', '/tools.html'],
-    ['/tags/prjd', '/prjd.html'],
-    ['/tags/prjc', '/prjc.html'],
-    ['/tags/prjb', '/prjb.html'],
-    ['/tags/prja', '/prja.html'],
-    ['/tags/personal', '/personal.html'],
-    ['/tags/f24', '/f24.html'],
-    ['/tags/edu', '/edu.html'],
-    ['/tags/admin', '/admin.html'],
+    ['/ejs/tags/xedu', '/xedu.html'],
+    ['/ejs/tags/woot', '/woot.html'],
+    ['/ejs/tags/vidz', '/vidz.html'],
+    ['/ejs/tags/tools', '/tools.html'],
+    ['/ejs/tags/prjd', '/prjd.html'],
+    ['/ejs/tags/prjc', '/prjc.html'],
+    ['/ejs/tags/prjb', '/prjb.html'],
+    ['/ejs/tags/prja', '/prja.html'],
+    ['/ejs/tags/personal', '/personal.html'],
+    ['/ejs/tags/f24', '/f24.html'],
+    ['/ejs/tags/edu', '/edu.html'],
+    ['/ejs/tags/admin', '/admin.html'],
     ['/doc', '/doc.html']
   ];
 

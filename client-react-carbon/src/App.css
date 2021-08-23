@@ -1,0 +1,48 @@
+.app-head-spacer {
+  display: block;
+  z-index: 0;
+  height: 3rem;
+}
+.app-breadcrumb {
+  display: inline-flex;
+}
+.bx--breadcrumb {
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: .16px;
+  display: inline-flex;
+}
+h1 {
+  font-size: 2.8rem;
+  font-weight: 400;
+  margin-top: 2.2rem;
+  margin-bottom: 3.0rem;
+}
+h2 {
+  margin-top: 3.8rem;
+  margin-bottom: 3.0rem;
+  margin-bottom: 2.4rem;
+}
+h3 {
+  margin-top: 2.0rem;
+  margin-bottom: 0.8rem;
+  padding-left: 16px;
+  border-left: solid 1px #161616;
+}
+li {
+  line-height: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+ul {
+  margin-bottom: 1.8rem;
+}
+#ourgantt > svg[id^="mermaid-"] .grid .tick {
+  stroke: grey;
+  opacity: 0.4;
+  shape-rendering: crispEdges;
+}
+#ourgantt > svg[id^="mermaid-"] .grid .tick > text {
+  stroke: black;
+  opacity: 1;
+}

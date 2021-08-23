@@ -1,0 +1,22 @@
+/*
+.tag-section-closed .cbullet { color: #555 }
+.tag-section-closed .cdate { color: #aaa }
+.tag-section-closed .ctitle { color: #555 }
+*/
+/* .tag-section-closed .cestimate { color: #037 } */
+
+/* .tag-section-archive { background-color: #efe9b7; }
+.tag-section-archive .cdivider { background-color: #00000010; color: #bc644a }
+.tag-section-archive .cbullet { color: #00723e }
+.tag-section-archive .cdate { color: #B1A68FBF }
+.tag-section-archive .ctitle { color: #858266 }
+.tag-section-archive .cestimate { color: #00723e }
+.tag-section-archive .ctitle { color: #909090 }
+.tag-section-archive .ctagstring { color: #a0a0a0 }
+*/
+.tag-section-archive { color: #696969 }
+.tag-section-archive > h3 { color: #161616 }
+.ctagstring { color: #a0a0a0 }
+.centry { display: flex; flex-flow: row nowrap; }
+.cbullet { margin-right: 8px;}
+.ctext { white-space: normal;}

@@ -1,0 +1,13 @@
+.tag-title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: baseline;
+}
+.tag-title .shortdesc {
+  margin-left: 32px;
+  font-size: 1.2rem;
+}
+.tag-page-content ul {
+  margin-left: 16px;
+}

@@ -998,9 +998,9 @@ exports.getArchiveByWeek = () => {
 /**
  * Takes resulting data structure from all the things and renders it to the page view
  */
- exports.renderTagPage = () => {
+ exports.renderTagPage = (endpoint) => {
   return (req, res, next) => {
-    res.render('tag', {
+    const data = {
       fileupdated: moment(req.app.locals.todoFileUpdated).utc().format(),
       pageupdated: moment().utc().format(),
       spperday: STORYPOINTSADAY,
@@ -1011,17 +1011,22 @@ exports.getArchiveByWeek = () => {
       tags: res.locals.tags,
       tagdata: res.locals.tagdata,
       searchData: JSON.stringify(res.locals.searchData)
-    });
+    };
+    switch(endpoint) {
+      case 'api': res.json(data); break;
+      case 'webc': res.render('webc-carbon/tag', data); break;
+      default: res.render('tag', data);
+    }
   }
 }
 
 /**
  * Takes resulting data structure from all the things and renders it to the page view
  */
-exports.renderIt = () => {
+exports.renderIt = (endpoint) => {
   return (req, res, next) => {
     const chartdata = _chartdataFromFullArchive(res.locals.entries);
-    res.render('index', {
+    const data = {
       issues: res.locals.issues,
       byweek: res.locals.archivebyweek,
       bytag: res.locals.archivebytag,
@@ -1036,7 +1041,12 @@ exports.renderIt = () => {
       whoami: WHOAMI,
       spperday: STORYPOINTSADAY,
       hrsperday: WH
-    });
+    };
+    switch(endpoint) {
+      case 'api': res.json(data); break;
+      case 'webc': res.render('webc-carbon/index', data); break;
+      default: res.render('index', data);
+    }
   }
 }
 

@@ -20,8 +20,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+// merge our original static path with react's for backward compatibility
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, 'client-react-carbon/build')));
 
 /**
  * Sets a variable (timestamp incl. milliseconds) to be used by clients

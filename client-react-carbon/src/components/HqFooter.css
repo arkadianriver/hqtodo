@@ -1,0 +1,16 @@
+.hq-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.hq-footer p {
+  font-size: 0.75rem;
+}
+.smaller-link {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #0043ce;
+  text-decoration: none;
+}
+.smaller-link:hover {
+  text-decoration: underline;
+}
