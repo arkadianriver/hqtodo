@@ -3,7 +3,7 @@ Programming Todos:
 # tag::progtodos[] - for readme include
   ☐ document newly added support feature
   ☐ update the readme image
-  ☐ add the epic feature
+  ✔ add the epic feature @done(2021-08-21 12:33)
     ✔ first simply provide all the things by category (tag) @done(2021-08-15 10:00)
     ✔ edit index.ejs to display epic listing @done(2021-08-15 13:00)
     ✔ implement getTags(:id) to display page @done(2021-08-15 14:00)
@@ -11,9 +11,9 @@ Programming Todos:
     ✔ test to see how to provide extra tag/epic/category doc on the tag pages @done(2021-08-21 11:24)
   ✔ expose lastmodified for eventual client-based app @done(2021-08-21 09:02)
   ✔ limit doc requests @done(2021-08-21 11:21)
-  ☐ capture url in link and pop text out of title
-  ☐ display link in archive (and anywhere else not exposed in tag/full view)
-  ☐ add Carbon style
+  ✔ capture url in link and pop text out of title @done(2021-08-23 01:32)
+  ✔ display link in archive (and anywhere else not exposed in tag/full view) @done(2021-08-23 01:31)
+  ☐ add Carbon style (inProgress)
   ☐ improve doc: use routes and jsdocs, pull readme into /doc endpoint on gh-pages
 # end::progtodos[]
 

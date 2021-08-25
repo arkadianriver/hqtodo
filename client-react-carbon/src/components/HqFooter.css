@@ -1,6 +1,7 @@
 .hq-footer {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 }
 .hq-footer p {
   font-size: 0.75rem;

@@ -37,12 +37,3 @@ li {
 ul {
   margin-bottom: 1.8rem;
 }
-#ourgantt > svg[id^="mermaid-"] .grid .tick {
-  stroke: grey;
-  opacity: 0.4;
-  shape-rendering: crispEdges;
-}
-#ourgantt > svg[id^="mermaid-"] .grid .tick > text {
-  stroke: black;
-  opacity: 1;
-}

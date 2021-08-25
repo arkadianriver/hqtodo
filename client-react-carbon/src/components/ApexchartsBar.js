@@ -46,7 +46,7 @@ class ApexchartsBar extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.tagName !== prevProps.tagName) {
+    if (this.props.seriesData !== prevProps.seriesData) {
       this.setState((state, props) => {
         return {
           series: [

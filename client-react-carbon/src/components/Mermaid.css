@@ -1,0 +1,33 @@
+.gantt-container {
+  position: relative;
+}
+.hover {
+  position: absolute;
+  border-radius: 3px;
+  border: solid 1px black;
+  top: 0px;
+  right: 5px;
+  width: 50vw;
+  background-color: #e0a0a0;
+  padding: 6px;
+  margin: 0;
+}
+.hideme {
+  display: none; /* visibility: hidden; */
+}
+.showme {
+  display: block; /* visibility: visible; */
+}
+#ourgantt > svg[id^="mermaid-"] .grid .tick {
+  stroke: grey;
+  opacity: 0.4;
+  shape-rendering: crispEdges;
+}
+#ourgantt > svg[id^="mermaid-"] .grid .tick > text {
+  stroke: black;
+  opacity: 1;
+}
+.pre-nowrap {
+  white-space: pre;
+  font-family: "IBM Plex Mono";
+}

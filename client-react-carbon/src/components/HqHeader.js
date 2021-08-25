@@ -4,15 +4,13 @@ import {
   Header,
   HeaderName,
   HeaderGlobalBar,
-  HeaderGlobalAction,
+  Search,
 } from "carbon-components-react";
-import { Search20 } from "@carbon/icons-react";
-import { useHistory } from "react-router"; 
+import { useHistory } from "react-router";
 
 const HqHeader = () => {
-
   const history = useHistory();
-  const clickHandler = () => history.push('/');
+  const clickHandler = () => history.push("/");
 
   return (
     <Header aria-label="hqTodo" className="hq-header">
@@ -20,9 +18,7 @@ const HqHeader = () => {
         &lt;Your name&gt;
       </HeaderName>
       <HeaderGlobalBar>
-        <HeaderGlobalAction>
-          <Search20 />
-        </HeaderGlobalAction>
+        <Search placeholder="Search all todos" />
       </HeaderGlobalBar>
     </Header>
   );
