@@ -3,6 +3,7 @@
   overflow-y: hidden;
   white-space: nowrap;
 }
+.hq-tag-entry {}
 .hq-tag-tile {
   height: 3rem;
   min-height: 3rem;
@@ -15,6 +16,7 @@
   margin-top: 0;
   padding-top: 0;
   align-items: flex-start;
+  justify-content: space-between;
   /* align-items: stretch; */
   height: 32px;
 }

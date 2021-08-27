@@ -843,7 +843,7 @@ function _addCSSClass(propName, className) {
     // grab blocker entries that have this tag
     res.locals.issues.blockers.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        newE = {}; Object.assign(newE, e);
+        const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
@@ -856,7 +856,7 @@ function _addCSSClass(propName, className) {
     // grab active entries that have this tag
     res.locals.issues.open.active.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        newE = {}; Object.assign(newE, e);
+        const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
@@ -869,7 +869,7 @@ function _addCSSClass(propName, className) {
     // grab pending entries that have this tag
     res.locals.issues.open.pending.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        newE = {}; Object.assign(newE, e);
+        const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
@@ -1030,7 +1030,9 @@ exports.renderIt = (endpoint) => {
       issues: res.locals.issues,
       byweek: res.locals.archivebyweek,
       bytag: res.locals.archivebytag,
+      entries: res.locals.entries,
       tags: res.locals.tags,
+      taginfo: res.locals.taginfo,
       hassupportdata: res.locals.supportChartdata.length > 0,
       jsonsupportdata: JSON.stringify(res.locals.supportChartdata),
       jsonchartdata: JSON.stringify(chartdata),
@@ -1040,7 +1042,8 @@ exports.renderIt = (endpoint) => {
       pageupdated: moment().utc().format(),
       whoami: WHOAMI,
       spperday: STORYPOINTSADAY,
-      hrsperday: WH
+      hrsperday: WH,
+      spfactor: STORYPOINTFACTOR
     };
     switch(endpoint) {
       case 'api': res.json(data); break;

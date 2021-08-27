@@ -7,7 +7,7 @@
   border: solid 1px black;
   top: 0px;
   right: 5px;
-  width: 50vw;
+  width: max-content;
   background-color: #e0a0a0;
   padding: 6px;
   margin: 0;

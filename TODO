@@ -15,6 +15,8 @@ Programming Todos:
   ✔ display link in archive (and anywhere else not exposed in tag/full view) @done(2021-08-23 01:31)
   ☐ add Carbon style (inProgress)
   ☐ improve doc: use routes and jsdocs, pull readme into /doc endpoint on gh-pages
+  ✔ poll server and reload on file change (webhooks too much work on server side). @done(2021-08-26 23:24)
+  ☐ clean up /api data, fetch only what you need and push org logic to the client
 # end::progtodos[]
 
 Taginfo:

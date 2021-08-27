@@ -8,17 +8,17 @@ import {
 } from "carbon-components-react";
 import { useHistory } from "react-router";
 
-const HqHeader = () => {
+const HqHeader = (props) => {
   const history = useHistory();
   const clickHandler = () => history.push("/");
 
   return (
     <Header aria-label="hqTodo" className="hq-header">
       <HeaderName href="#" prefix="hqTodo" onClick={clickHandler}>
-        &lt;Your name&gt;
+        {props.userName}
       </HeaderName>
       <HeaderGlobalBar>
-        <Search placeholder="Search all todos" />
+        <Search placeholder="Search all todos" className="hq-search" />
       </HeaderGlobalBar>
     </Header>
   );

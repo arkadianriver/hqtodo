@@ -1,3 +1,6 @@
 .hq-header {
   position: relative;
 }
+.hq-search {
+  max-width: 304px;
+}

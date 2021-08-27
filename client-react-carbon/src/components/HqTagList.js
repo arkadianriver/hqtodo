@@ -18,15 +18,15 @@ const HqTagList = (props) => {
     let scrollCompleted = 0;
     let slideVar = setInterval(() => {
       if (direction === "left") {
-        container.scrollLeft -= 20;
+        container.scrollLeft -= 30;
       } else {
-        container.scrollLeft += 20;
+        container.scrollLeft += 30;
       }
       scrollCompleted += 10;
       if (scrollCompleted >= 100) {
         window.clearInterval(slideVar);
       }
-    }, 40);
+    }, 60);
   }
 
   const history = useHistory();
@@ -61,6 +61,7 @@ const HqTagList = (props) => {
                 type={getColor(t.class)}
                 title={t.tag}
                 onClick={() => clickHandler(t.tag)}
+                className="hq-tag-entry"
               >
                 <span className={milestoneClass(t.class)}>@{t.tag}</span>
               </Tag>

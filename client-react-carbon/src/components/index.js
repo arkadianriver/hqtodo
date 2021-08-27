@@ -1,6 +1,6 @@
 export { default as ApexchartsBar } from "./ApexchartsBar";
 export { default as ApexchartsLine } from "./ApexchartsLine";
-export { default as Mermaid } from "./Mermaid";
+export { default as MermaidGantt } from "./MermaidGantt";
 export { default as HqHeader } from "./HqHeader";
 export { default as HqTagList } from "./HqTagList";
 export { default as HqEntryOpen } from "./HqEntryOpen";

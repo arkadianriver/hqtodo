@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import mermaid from "mermaid";
-import "./Mermaid.css";
+import "./MermaidGantt.css";
 
 mermaid.initialize({
   startOnLoad: true,
@@ -15,7 +15,7 @@ mermaid.initialize({
   },
 });
 
-class Mermaid extends Component {
+class MermaidGantt extends Component {
   componentDidMount() {
     window.showHover = (id) => {
       const hover = document.querySelector(`#h${id}`);
@@ -112,4 +112,4 @@ class Mermaid extends Component {
   }
 }
 
-export default Mermaid;
+export default MermaidGantt;
