@@ -22,7 +22,7 @@ const HqEntryClosed = (props) => {
         {props.entry.tags && (
           <span className="ctagstring"> {props.entry.tags.join(' ')}</span>
         )}
-        <span class="cestimate"> ({props.entry.est})</span>
+        <span className="cestimate"> ({props.entry.est})</span>
       </div>
     </li>
   );

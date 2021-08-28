@@ -26,7 +26,6 @@ function App() {
               data.jsonsupportdata = JSON.parse(data.jsonsupportdata);
               setData(data);
               setSavedSourceTimestamp(currentSourceTimestamp);
-              console.log(currentSourceTimestamp);
               setIsLoading(false);
             });
         }
@@ -34,7 +33,6 @@ function App() {
   };
 
   useInterval(async () => {
-    console.log("polling hqtodo server");
     makeRequest();
   }, 40000);
 

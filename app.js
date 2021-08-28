@@ -40,6 +40,11 @@ const _isFileUpdated = () => {
   };
 }
 
+app.use((req, res, next) => {
+  console.log(`\nFrom address ${req.socket.remoteAddress}`);
+  next();
+})
+
 /**
  * Want to reload TODOFILE to repopulate the locals vars
  * only if user updated it on disk

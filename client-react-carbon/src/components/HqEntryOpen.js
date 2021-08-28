@@ -27,12 +27,12 @@ const HqEntryOpen = (props) => {
         {props.entry.tagstring && (
           <span className="tagstring"> {props.entry.tagstring}</span>
         )}
-        {!isMilestone && <span class="estimate"> ({props.entry.est})</span>}
+        {!isMilestone && <span className="estimate"> ({props.entry.est})</span>}
         {props.entry.hover &&
           props.entry.hover.split("<br />").map((h) => (
             <div className="blocker-line">
               <br />
-              <span class="blockers">{h}</span>
+              <span className="blockers">{h}</span>
             </div>
           ))}
       </div>

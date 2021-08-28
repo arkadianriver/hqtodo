@@ -59,9 +59,10 @@ const HqTagList = (props) => {
             props.tags.map((t) => (
               <Tag
                 type={getColor(t.class)}
+                key={t.tag}
+                id={t.tag}
                 title={t.tag}
                 onClick={() => clickHandler(t.tag)}
-                className="hq-tag-entry"
               >
                 <span className={milestoneClass(t.class)}>@{t.tag}</span>
               </Tag>

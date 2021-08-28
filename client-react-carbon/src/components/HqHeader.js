@@ -18,7 +18,11 @@ const HqHeader = (props) => {
         {props.userName}
       </HeaderName>
       <HeaderGlobalBar>
-        <Search placeholder="Search all todos" className="hq-search" />
+        <Search
+          labelText="Search"
+          placeholder="Search all todos"
+          className="hq-search"
+        />
       </HeaderGlobalBar>
     </Header>
   );
