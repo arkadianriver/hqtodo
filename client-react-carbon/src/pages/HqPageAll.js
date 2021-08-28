@@ -1,10 +1,8 @@
 import React from "react";
 import { Grid, Row, Column, Content } from "carbon-components-react";
-import {
-  HqEntryClosed,
-  MermaidGantt,
-  ApexchartsLine,
-} from "../components";
+import { HqEntryClosed, ApexchartsLine } from "../components";
+import { slugify } from "../utils/slugify";
+import MermaidGantt from "../components/MermaidGantt";
 import "./HqPageAll.css";
 
 const HqPageAll = (props) => {
@@ -21,8 +19,35 @@ const HqPageAll = (props) => {
                 )}
               </div>
             </h1>
-            <MermaidGantt issues={props.data.issues} />
-
+            <div className="gantt-container">
+              {props.data.issues.blockers.map((l) => (
+                <div
+                  key={`${l.number}-${slugify(l.title)}`}
+                  id={`hk${l.number}`}
+                  className="hover hideme"
+                >
+                  {l.hover.split("<br />").map((h, i) => (
+                    <span key={`${i}-${slugify(h)}`}>
+                      {h}
+                      <br />
+                    </span>
+                  ))}
+                  {l.link && (
+                    <span>
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={l.link}
+                      >
+                        see link
+                      </a>
+                    </span>
+                  )}
+                </div>
+              ))}
+              {/* <div dangerouslySetInnerHTML={{ __html: svg }} /> */}
+              <MermaidGantt issues={props.data.issues} />
+            </div>
             <div className="all-gantt-footnote">
               <p>Todos with issue numbers link to GitHub.</p>
             </div>
@@ -30,8 +55,8 @@ const HqPageAll = (props) => {
               <div className="all-closed-section">
                 <h2>Recently closed todos</h2>
                 <ul id="closed" className="all-closed-list">
-                  {props.data.issues.closed.map((t) => (
-                    <HqEntryClosed entry={t} />
+                  {props.data.issues.closed.map((t, i) => (
+                    <HqEntryClosed key={`${i}-${slugify(t.title)}`} entry={t} />
                   ))}
                 </ul>
               </div>
@@ -56,14 +81,17 @@ const HqPageAll = (props) => {
                   <div className="all-section-archive">
                     <ul>
                       {props.data.byweek.map((w) => (
-                        <li>
+                        <li key={w.weekEnding}>
                           <h4 className="all-week-heading">
                             Week ending {w.weekEnding}
                           </h4>
                           {w.entries && w.entries.length !== 0 && (
                             <ul>
-                              {w.entries.map((e) => (
-                                <HqEntryClosed entry={e} />
+                              {w.entries.map((e, i) => (
+                                <HqEntryClosed
+                                  key={`${i}-${slugify(e.title)}`}
+                                  entry={e}
+                                />
                               ))}
                             </ul>
                           )}
