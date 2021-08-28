@@ -10,15 +10,15 @@ export function useInterval(callback, delay) {
 
   // Remember the latest callback.
   useEffect(() => {
-    callback();
     savedCallback.current = callback;
   }, [callback]);
 
-  // Set up the interval.
+  // Set up the interval (and run it initially, too)
   useEffect(() => {
     function tick() {
       savedCallback.current();
     }
+    savedCallback.current();
     if (delay !== null) {
       let id = setInterval(tick, delay);
       return () => clearInterval(id);
