@@ -8,7 +8,9 @@ const config = require('config');
 
 const TODOFILE = config.get('todoFile');
 
-var indexRouter = require('./routes/index');
+var { indexRouter, doc } = require('./routes/index');
+
+doc.title = "hqTodo server app" // custom doc 'cuz jsdoc and swagger are overkill
 
 var app = express();
 
@@ -40,6 +42,7 @@ const _isFileUpdated = () => {
   };
 }
 
+// distinguish clients for future metrics
 app.use((req, res, next) => {
   console.log(`\nFrom address ${req.socket.remoteAddress}`);
   next();
