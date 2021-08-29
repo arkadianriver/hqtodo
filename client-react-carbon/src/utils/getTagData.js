@@ -123,7 +123,6 @@ export const getTagData = (data, tagname) => {
   if (tagData.archive) {
     tagData.archive.sort((a, b) => (a.closed_on > b.closed_on ? -1 : 1));
     const dayOne = data.entries ? data.entries[0].closed_on.substr(0, 10) : undefined;
-    console.log(dayOne);
     const chartdata = dayOne ? _chartdataFromTagArchive(tagData.archive, dayOne) : [];
     tagData.archivesum = tagData.archivesum.toFixed(2);
     tagData.chartdata = chartdata;

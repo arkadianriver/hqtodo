@@ -2,11 +2,8 @@ import React from "react";
 import "./HqPageTag.css";
 import { useParams } from "react-router-dom";
 import { Loading, Grid, Row, Column, Content } from "carbon-components-react";
-import {
-  ApexchartsBar,
-  HqEntryOpen,
-  HqEntryClosed,
-} from "../components";
+import { ApexchartsBar, HqEntryOpen, HqEntryClosed } from "../components";
+import { slugify } from "../utils/slugify";
 import { getTagData } from "../utils/getTagData";
 
 const HqPageTag = (props) => {
@@ -18,7 +15,6 @@ const HqPageTag = (props) => {
   React.useEffect(() => {
     const td = getTagData(props.data, tag);
     setData(td);
-    console.log(td);
     setIsLoading(false);
   }, [props, tag]);
 
@@ -56,7 +52,10 @@ const HqPageTag = (props) => {
               <div className="tag-section-milestones">
                 <ul>
                   {tagData.milestones.map((e) => (
-                    <HqEntryOpen entry={e} />
+                    <HqEntryOpen
+                      key={`${e.number}-${slugify(e.title)}`}
+                      entry={e}
+                    />
                   ))}
                 </ul>
               </div>
@@ -65,7 +64,10 @@ const HqPageTag = (props) => {
               <div className="tag-section-blockers">
                 <ul>
                   {tagData.blockers.map((e) => (
-                    <HqEntryOpen entry={e} />
+                    <HqEntryOpen
+                      key={`${e.number}-${slugify(e.title)}`}
+                      entry={e}
+                    />
                   ))}{" "}
                 </ul>
               </div>
@@ -75,7 +77,10 @@ const HqPageTag = (props) => {
                 <h3>In progress</h3>
                 <ul>
                   {tagData.open.active.map((e) => (
-                    <HqEntryOpen entry={e} />
+                    <HqEntryOpen
+                      key={`${e.number}-${slugify(e.title)}`}
+                      entry={e}
+                    />
                   ))}
                 </ul>
               </div>
@@ -85,7 +90,10 @@ const HqPageTag = (props) => {
                 <h3>Backlog</h3>
                 <ul>
                   {tagData.open.pending.map((e) => (
-                    <HqEntryOpen entry={e} />
+                    <HqEntryOpen
+                      key={`${e.number}-${slugify(e.title)}`}
+                      entry={e}
+                    />
                   ))}
                 </ul>
               </div>
@@ -94,8 +102,8 @@ const HqPageTag = (props) => {
               <div className="tag-section-recently-closed">
                 <h3>Recently complete</h3>
                 <ul>
-                  {tagData.closed.map((e) => (
-                    <HqEntryClosed entry={e} />
+                  {tagData.closed.map((e, i) => (
+                    <HqEntryClosed key={`${i}-${slugify(e.title)}`} entry={e} />
                   ))}
                 </ul>
               </div>
@@ -107,7 +115,10 @@ const HqPageTag = (props) => {
                 <h3>Archive</h3>
                 <ul>
                   {tagData.archive.map((e) => (
-                    <HqEntryClosed entry={e} />
+                    <HqEntryClosed
+                      key={`${e.closed_on}-${slugify(e.title)}`}
+                      entry={e}
+                    />
                   ))}
                 </ul>
               </div>
