@@ -1,5 +1,6 @@
 import "./HqFooter.css";
-import { Row, Column, Link, Grid } from "carbon-components-react";
+import { Row, Column, Grid } from "carbon-components-react";
+import { HashLink as Link } from "react-router-hash-link";
 
 const HqFooter = (props) => {
   const makeLink = (href, linktext) => {
@@ -16,8 +17,6 @@ const HqFooter = (props) => {
       <Link
         className="smaller-link"
         to={href}
-        target="_blank"
-        rel="noopener noreferrer"
       >
         {linktext}
       </Link>
@@ -38,7 +37,7 @@ const HqFooter = (props) => {
               <br />
               IBM Carbon Design System, and other fine modules.
               <br />
-              An {makeLink("/doc", "API")} is also available.
+              An {makeLink("/doc#doc-server", "API")} is also available.
             </p>
             <p>
               Page last updated:

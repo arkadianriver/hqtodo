@@ -1,0 +1,36 @@
+.doc-title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: baseline;
+}
+.doc-section-routes ul {
+  margin-top: 2.0rem;
+  margin-left: 16px;
+}
+.doc-route {
+  margin-bottom: 2.0rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.doc-route > div {
+  margin-bottom: 0.3rem;
+}
+.doc-route-spec {
+  display: flex;
+  flex-flow: row wrap;
+}
+.doc-route-spec > div {
+  padding: 0 8px 0 0;
+}
+.doc-route-method {
+  font-weight: bold;
+  color: brown;
+  line-height: 1.2rem;
+}
+.doc-route-path {
+  font-family: 'IBM Plex Mono';
+  line-height: 1.2rem;
+}

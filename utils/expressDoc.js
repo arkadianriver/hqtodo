@@ -20,7 +20,7 @@ class expressDoc {
   //   without swagger.
   setRoute(router, fn, path, description, ...fns) {
     router[fn](path, ...fns);
-    const method = fn.name;
+    const method = fn.toUpperCase();
     this._docProps.routes.push({ method, path, description });
   }
 

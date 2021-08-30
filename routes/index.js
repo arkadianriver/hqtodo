@@ -82,7 +82,7 @@ doc.setRoute(
   router,
   "get",
   "/todos/tags",
-  `(1) title and link for tags in Taginfo section of TODO file.<br />
+  `(1) title and link for tags in Taginfo section of TODO file.
   (2) list of all tags, with classs and counts.`,
   mw.parseRawTodos(),
   mw.getArchive(),
@@ -251,7 +251,7 @@ doc.setRoute(
 doc.setRoute(
   router,
   "get",
-  "/doc",
+  "/api/doc",
   "Documentation data for the Express server portion of hqTodo.",
   (req, res) => {
     //console.log(indexRouter.stack);

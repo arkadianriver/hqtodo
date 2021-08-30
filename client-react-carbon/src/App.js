@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import "carbon-components/css/carbon-components.min.css";
 import "./App.css";
 import { Loading } from "carbon-components-react";
-import { HqPageAll, HqPageTag } from "./pages";
+import { HqPageAll, HqPageTag, HqPageDoc } from "./pages";
 import { HqFooter, HqHeader, HqTagList } from "./components";
 import { useInterval } from "./utils/useInterval";
 import Headroom from "react-headroom";
@@ -52,6 +52,9 @@ function App() {
         </Route>
         <Route path="/tags/:tag">
           <HqPageTag data={data} />
+        </Route>
+        <Route path="/doc">
+          <HqPageDoc />
         </Route>
       </Switch>
       <HqFooter pageUpdated={data.pageupdated} fileUpdated={data.fileupdated} />
