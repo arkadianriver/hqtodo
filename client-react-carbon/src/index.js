@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
-const basename = process.env.REACT_APP_DEMO !== "true" ? '/' : '/build'
+const basename = process.env.REACT_APP_DEMO !== "true" ? '/' : '/hqtodo'
 
 ReactDOM.render(
   <React.StrictMode>
