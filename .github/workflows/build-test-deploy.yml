@@ -26,8 +26,12 @@ jobs:
         npm ci
         npm test
     - if: github.ref == 'refs/heads/master'
-      name: Build 🔧
-      run: npm run gh-pages
+      name: Install client deps and Build 🔧
+      run: |
+        cd client-react-carbon
+        npm ci
+        cd ..
+        npm run gh-pages
     - if: github.ref == 'refs/heads/master'
       name: Deploy to Pages 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
