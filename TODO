@@ -1,40 +1,25 @@
-
-Programming Todos:
-# tag::progtodos[] - for readme include
-  ☐ document newly added support feature
-  ☐ update the readme image
-  ☐ add the epic feature
-    ✔ first simply provide all the things by category (tag) @done(2021-08-15 10:00)
-    ✔ edit index.ejs to display epic listing @done(2021-08-15 13:00)
-    ✔ implement getTags(:id) to display page @done(2021-08-15 14:00)
-    ✔ create tags.ejs view using data from /tags @done(2021-08-15 19:00)
-    ✔ test to see how to provide extra tag/epic/category doc on the tag pages @done(2021-08-21 11:24)
-  ✔ expose lastmodified for eventual client-based app @done(2021-08-21 09:02)
-  ✔ limit doc requests @done(2021-08-21 11:21)
-  ☐ capture url in link and pop text out of title
-  ☐ display link in archive (and anywhere else not exposed in tag/full view)
-  ☐ add Carbon style
-  ☐ improve doc: use routes and jsdocs, pull readme into /doc endpoint on gh-pages
-# end::progtodos[]
-
 Taginfo:
   ☐ @f24 Awesome Feature 24 ghihq•24
   ☐ @vidz Nifty Video Project url•http://arkadianriver.com/topics/hqtodo.html
   ☐ @woot Fabulous stuff
   ☐ @xedu All about XYZ programming
+  ☐ @hq The hqTodo programming project
 
 Todos:
   ☐ @today ghihq•21 something I need help with @4h @prjd @blk.email.chris @blk.slack.robin
   -----------------------------------------------------------------------------------
-  #☐ [5d starting 2021-08-16]: Vacation
+  #☐ [5d starting 2021-09-06]: Vacation
   -----------------------------------------------------------------------------------
-  ✔ take cat to the vet url•https://www.yelp.com/search?find_desc=Cat+Vet&find_loc=Seattle%2C+WA @3h @done(2021-08-09 21:37) @project(Todos)
+  ☐ @today Add search to the Carbon client @8h @hq
+  ☐ document and do more with the daily support feature @hq
+  ☐ pull the legend (and maybe the readme) into /doc endpoint @hq
+  ☐ clean up /api data, fetch only what you need and push org logic to the client @4h @hq
   ☐ @high ghihq•4 showing a linkme example @prjb
   ☐ @today decide 1:2 organization requirements @prja @woot
   ☐ @today work with so-and-so on such-and-such @prja @prjb
   ☐ get thing-a-ma-bob Info from SME-guru @4h @prja
   ☐ add such-and-such CSS to project page @2h @prjb @f24
-  ☐ @today storyboard feature 22 with design @4h @prjc @f24
+  ☐ @today storyboard feature 24 with design @4h @prjc @f24
   ☐ document feature 24 ghi•ragnoroct/linkme•9 @4h @prjc @f24
   ☐ review the user guide about whats-it @4h @prjb  
   ☐ fix situation with UI weirdness @prjb
@@ -77,6 +62,21 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 Archive:
+  ✔ @today update readme with new features @3h @hq @done(2021-09-01 00:10) @project(Todos)
+  ✔ mock data for gh-pages demo of react app @16h @hq @done(2021-08-30 22:09) @project(Todos)
+  ✔ update the readme image @hq @done(2021-08-31 23:57) @project(Todos)
+  ✔ first simply provide all the things by category (tag) @4h @hq @done(2021-08-15 10:00) @project(Todos.Epic feature)
+  ✔ edit index.ejs to display epic listing @hq @done(2021-08-15 13:00) @project(Todos.Epic feature)
+  ✔ implement getTags(:id) to display page @8h @hq @done(2021-08-15 14:00) @project(Todos.Epic feature)
+  ✔ create tags.ejs view using data from /tags @3h @hq @done(2021-08-15 19:00) @project(Todos.Epic feature)
+  ✔ test to see how to provide extra tag/epic/category doc on the tag pages @hq @done(2021-08-21 11:24) @project(Todos.Epic feature)
+  ✔ expose lastmodified for eventual client-based app @hq @done(2021-08-21 09:02) @project(Todos)
+  ✔ limit doc requests @hq @done(2021-08-21 11:21) @project(Todos)
+  ✔ capture url in link and pop text out of title @hq @done(2021-08-23 01:32) @project(Todos)
+  ✔ display link in archive (and anywhere else not exposed in tag/full view) @hq @done(2021-08-23 01:31) @project(Todos)
+  ✔ add Carbon style @16h @hq @done(2021-08-29 01:00) @project(Todos)
+  ✔ improve doc - use routes @9h @done(2021-08-29 23:01) @project(Todos)
+  ✔ poll server and reload on file change (webhooks too much work on server side) @12h @hq @done(2021-08-26 23:24) @project(Todos)
   ✔ link in archive too ghihq•31 with extra text after @3h @woot @done(2021-08-21 11:30) @project(Todos)
   ✔ add support for support :O) @done(2021-07-22 21:32) @project(Programming Todos)
   ✔ @today latest completed item eius est quiquia @prjc @prjb @done(2021-08-09 21:07) @project(Todos)

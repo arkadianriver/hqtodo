@@ -843,7 +843,7 @@ function _addCSSClass(propName, className) {
     // grab blocker entries that have this tag
     res.locals.issues.blockers.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        newE = {}; Object.assign(newE, e);
+        const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
@@ -856,7 +856,7 @@ function _addCSSClass(propName, className) {
     // grab active entries that have this tag
     res.locals.issues.open.active.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        newE = {}; Object.assign(newE, e);
+        const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
@@ -869,7 +869,7 @@ function _addCSSClass(propName, className) {
     // grab pending entries that have this tag
     res.locals.issues.open.pending.forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
-        newE = {}; Object.assign(newE, e);
+        const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
           const intHrs = parseInt(newE.est.slice(0, -1), 10);
           const spEst = (intHrs * STORYPOINTFACTOR).toFixed(2)
@@ -998,9 +998,9 @@ exports.getArchiveByWeek = () => {
 /**
  * Takes resulting data structure from all the things and renders it to the page view
  */
- exports.renderTagPage = () => {
+ exports.renderTagPage = (endpoint) => {
   return (req, res, next) => {
-    res.render('tag', {
+    const data = {
       fileupdated: moment(req.app.locals.todoFileUpdated).utc().format(),
       pageupdated: moment().utc().format(),
       spperday: STORYPOINTSADAY,
@@ -1011,21 +1011,28 @@ exports.getArchiveByWeek = () => {
       tags: res.locals.tags,
       tagdata: res.locals.tagdata,
       searchData: JSON.stringify(res.locals.searchData)
-    });
+    };
+    switch(endpoint) {
+      case 'api': res.json(data); break;
+      case 'webc': res.render('webc-carbon/tag', data); break;
+      default: res.render('tag', data);
+    }
   }
 }
 
 /**
  * Takes resulting data structure from all the things and renders it to the page view
  */
-exports.renderIt = () => {
+exports.renderIt = (endpoint) => {
   return (req, res, next) => {
     const chartdata = _chartdataFromFullArchive(res.locals.entries);
-    res.render('index', {
+    const data = {
       issues: res.locals.issues,
       byweek: res.locals.archivebyweek,
       bytag: res.locals.archivebytag,
+      entries: res.locals.entries,
       tags: res.locals.tags,
+      taginfo: res.locals.taginfo,
       hassupportdata: res.locals.supportChartdata.length > 0,
       jsonsupportdata: JSON.stringify(res.locals.supportChartdata),
       jsonchartdata: JSON.stringify(chartdata),
@@ -1035,8 +1042,14 @@ exports.renderIt = () => {
       pageupdated: moment().utc().format(),
       whoami: WHOAMI,
       spperday: STORYPOINTSADAY,
-      hrsperday: WH
-    });
+      hrsperday: WH,
+      spfactor: STORYPOINTFACTOR
+    };
+    switch(endpoint) {
+      case 'api': res.json(data); break;
+      case 'webc': res.render('webc-carbon/index', data); break;
+      default: res.render('index', data);
+    }
   }
 }
 

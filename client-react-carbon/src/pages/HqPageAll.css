@@ -1,0 +1,40 @@
+.all-title {
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.all-title .shortdesc {
+  line-height: 2.0rem;
+  font-size: 1.2rem;
+}
+.all-page-content ul {
+  margin-left: 16px;
+}
+.all-week-heading {
+  margin-bottom: 12px;
+}
+.archivetitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.pointscale {
+  font-size: 12pt;
+  vertical-align: bottom;
+}
+.all-closed-list {
+  list-style-type:none;
+}
+.all-gantt-footnote {
+  display:flex;
+  justify-content:space-around;
+  width:100%
+}
+.all-gantt-footnote p {
+  font-size: smaller;
+}
+.all-section-archive {
+  margin-top: 2.0rem;
+}

@@ -1,0 +1,43 @@
+.hq-tag-box {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.hq-tag-tile {
+  height: 3rem;
+  min-height: 3rem;
+  max-height: 3rem;
+  padding: 8px 16px 8px 16px;
+}
+.hq-tag-row {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0;
+  padding-top: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  /* align-items: stretch; */
+  height: 32px;
+}
+.hq-tag-leftbttn, .hq-tag-rightbttn {
+  width: 32px;
+  padding: 2px 8px 12px 8px;
+  height: 100%;
+  vertical-align: text-top;
+}
+.hq-tag-leftbttn {
+  padding: 2px 8px 12px 0px;
+}
+.hq-tag-rightbttn {
+  padding: 2px 0px 12px 8px;
+}
+.hq-tag-archive {
+  color: #909090;
+}
+.hq-tag-link {
+  text-decoration: none;
+  color: inherit;
+}
+.has-milestone:before {
+  content: '♦';
+}

@@ -1,0 +1,55 @@
+{
+  "name": "client-react-carbon",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@carbon/themes": "^10.40.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "apexcharts": "^3.27.3",
+    "carbon-components": "^10.41.0",
+    "carbon-components-react": "^7.41.0",
+    "carbon-icons": "^7.0.7",
+    "luxon": "^2.0.2",
+    "mermaid": "^8.12.0",
+    "node-sass": "^6.0.1",
+    "react": "^17.0.2",
+    "react-apexcharts": "^1.3.9",
+    "react-dom": "^17.0.2",
+    "react-headroom": "^3.1.1",
+    "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.4.3",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "node setupBuild.js && cross-env PORT=3001 REACT_APP_DEMO=false react-scripts start",
+    "build": "node setupBuild.js && react-scripts build",
+    "demo-build": "REACT_APP_DEMO=true node setupBuild.js && BUILD_PATH=../build REACT_APP_DEMO=true react-scripts build && node cleanupDemo.js",
+    "test": "node setupBuild.js && react-scripts test",
+    "eject": "node setupBuild.js && react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
