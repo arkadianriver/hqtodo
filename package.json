@@ -1,12 +1,12 @@
 {
   "name": "hqtodo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Gary Faircloth",
   "scripts": {
     "start": "node ./bin/www",
     "test": "NODE_ENV=test mocha test/test*.js",
     "nyan": "NODE_ENV=test mocha -R nyan test/test*.js",
-    "gh-pages": "MY_ENV=gh-pages node ./bin/mkpage"
+    "gh-pages": "cd client-react-carbon && npm run demo-build && cd .. && MY_ENV=gh-pages node ./bin/mkpage"
   },
   "main": "bin/www",
   "description": "Visualize your Todo list",

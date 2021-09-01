@@ -22,7 +22,7 @@ const HqHeader = (props) => {
       <HeaderGlobalBar>
         <Search
           labelText="Search"
-          placeholder="Search all todos"
+          placeholder="Search all todos (TBD)" // TODO: search implementation
           className="hq-search"
         />
         <HeaderGlobalAction

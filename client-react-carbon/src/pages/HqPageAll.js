@@ -73,9 +73,17 @@ const HqPageAll = (props) => {
                   </div>
                 </h2>
                 <ApexchartsLine
-                  jsonchartdata={props.data.jsonchartdata}
+                  jsonchartdata={
+                    process.env.REACT_APP_DEMO === "true"
+                      ? JSON.parse(props.data.jsonchartdata)
+                      : props.data.jsonchartdata
+                  }
                   hassupportdata={props.data.hassupportdata}
-                  jsonsupportdata={props.data.jsonsupportdata}
+                  jsonsupportdata={
+                    process.env.REACT_APP_DEMO === "true"
+                      ? JSON.parse(props.data.jsonsupportdata)
+                      : props.data.jsonsupportdata
+                  }
                 />
                 {props.data.byweek && props.data.byweek.length !== 0 && (
                   <div className="all-section-archive">

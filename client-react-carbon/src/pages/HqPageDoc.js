@@ -2,18 +2,21 @@ import React from "react";
 import "./HqPageDoc.css";
 import { Loading, Grid, Row, Column, Content } from "carbon-components-react";
 import { slugify } from "../utils/slugify";
+import apiDocData from "../test/mock-doc-data";
 
 const HqPageDoc = () => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const [docData, setData] = React.useState([]);
+  const [docData, setData] = React.useState(apiDocData);
 
   React.useEffect(() => {
-    fetch("/api/doc")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setIsLoading(false);
-      });
+    if (process.env.REACT_APP_DEMO !== "true") {
+      fetch("/api/doc")
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data);
+        });
+    }
+    setIsLoading(false);
   }, []);
 
   if (isLoading) {

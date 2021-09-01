@@ -23,7 +23,7 @@ app.set('port', port);
 // assist https://github.com/expressjs/express/issues/1366#issuecomment-68693264
 let server = app.listen(port, function() {
   console.log('Listening =^.^=');
-  fs.mkdirSync('./build/css', { recursive: true });
+  fs.mkdirSync('./build/ejs/css', { recursive: true });
 
   const pages = [
     ['/ejs', '/index.html'],
@@ -40,7 +40,8 @@ let server = app.listen(port, function() {
     ['/ejs/tags/f24', '/f24.html'],
     ['/ejs/tags/edu', '/edu.html'],
     ['/ejs/tags/admin', '/admin.html'],
-    ['/doc', '/doc.html']
+    ['/ejs/tags/hq', '/hq.html'],
+    ['/ejs/doc', '/doc.html']
   ];
 
   const makePage = (page) => {
@@ -56,7 +57,7 @@ let server = app.listen(port, function() {
         console.log(err);
       })
       res.on('end', () => {
-        fs.writeFileSync(`./build${htmlpage}`, str);
+        fs.writeFileSync(`./build/ejs${htmlpage}`, str);
         console.log(`Built ${htmlpage}`);
       });
     }).end();

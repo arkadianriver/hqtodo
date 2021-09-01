@@ -24,10 +24,11 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env PORT=3001 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node setupBuild.js && cross-env PORT=3001 REACT_APP_DEMO=false react-scripts start",
+    "build": "node setupBuild.js && react-scripts build",
+    "demo-build": "REACT_APP_DEMO=true node setupBuild.js && BUILD_PATH=../build REACT_APP_DEMO=true react-scripts build && node cleanupDemo.js",
+    "test": "node setupBuild.js && react-scripts test",
+    "eject": "node setupBuild.js && react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

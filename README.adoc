@@ -1,4 +1,4 @@
-= hqtodo
+= hqTodo
 :experimental:
 :toc:
 :toc-placement!:
@@ -15,43 +15,83 @@ endif::[]
 
 pass:[<p align="center"><a href="https://github.com/arkadianriver/hqtodo/actions"><img src="https://github.com/arkadianriver/hqtodo/workflows/build/badge.svg" alt="build status"/></a></p> <!-- <img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/> -->]
 
-A li'l web app (page) to display todo items that are created with the
-link:https://github.com/fabiospampinato/vscode-todo-plus[Todo+ extension]
-for VS Code or the Plaintasks package for Sublime Text.
-The open items are shown as a
-https://mermaid-js.github.io/mermaid/#/gantt[Mermaid]
-Gantt chart.
-Tasks always shift with time, starting from now into the future.
-It's meant for todos knocked out at a regular story point velocity per day
-and labeled in a particular way.
-Completed items are displayed underneath, with _Archived_ items available.
-An https://apexcharts.com/[ApexCharts] area chart shows the cumulative story points
-you've knocked out.
+If you love keyboard shortcuts and things like Org mode,
+you might like hqTodo to present your complete agile workflow from one easily editable Todo list in VS Code.
+Rather than drag cards around and click and open various windows,
+use Fabio Spampinato's
+link:https://github.com/fabiospampinato/vscode-todo-plus[TODO+ extension]
+to capture status, categories, and estimates as individual todo items in a text file,
+with keyboard shortcuts to prioritize and close issues.
+His extension is awesome, and with this li'l hqTodo web app,
+all that information is summarized in an easily consumable report for you
+(and your team if you want).
 
-pass:[<a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><div align="center"><h3>View a sample</h3><img src="readme.png"/></div></a>]
+pass:[<a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><div align="center"><h3>View a sample</h3><img src="readme.gif"/></div></a>]
 
 ////
 pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img src="readme3.png" width="600px"/><img src="readme2.png" width="600px"/></p>]
 ////
 
+== Features
+
+- Open items and their estimates are used to display a
+https://mermaid-js.github.io/mermaid/#/gantt[Mermaid]
+Gantt chart.
+Tasks shift with time, starting from now into the future,
+providing a quick glimpse of probable completion dates.
+- https://apexcharts.com/[ApexCharts] is used to display cumulative story points
+you've knocked out to help keep track of your velocity.
+- If you field support questions, you can also track those with the TODO+ extension
+and view the cumulative time spent in the chart.
+- Completed items are displayed underneath. Great for weekly status reports.
+- Tag your items to provide a detailed status page for each project.
+- Because everyone else uses other forms of tracking,
+I use the
+link:https://marketplace.visualstudio.com/items?itemName=ragnoroct.linkme[Link Me extension]
+to include shortcuts to all those other resources in my Todo list.
+The hqTodo app exposes those links, too.
+
 == Running the app
 
-*Prereq:* Currently requires NodeJS v12.
+*Prereq:* NodeJS v12 or higher.
 
-. Copy the `config/default.json` file to `config/production.json`
+. Set things up.
+.. Copy the `config/default.json` file to `config/production.json`
 and add your info to the new file.
 Your own TODO file can be anywhere on the file system the app can access,
 such as a shared Cloud or Network mounted folder.
-
-. Install and launch:
+.. Install server dependencies:
 +
 [source, bash]
 ----
 npm install
+----
+.. Install client dependencies and build it:
++
+[source, bash]
+----
+cd client-react-carbon
+npm install
+npm run build
+cd ..
+----
+. Thereafter, run the app with ...
++
+[source, bash]
+----
 ./run
 ----
++
+\... and point your browser to `http://localhost:3000`.
++
+kbd:[Ctrl+C] stops the server.
 
-. Point your browser to `http://localhost:3000`.
+One way to deploy the app in "production" is to run it on a server
+with pm2, systemctl, etc.,
+and add your TODO file to a folder on the server that's
+synced with your local workstation with SyncThing or similar
+cloud folder sync application.
+
 ////
 == Deploy
 
@@ -78,6 +118,7 @@ as an example.
 
 Everything in your TODO file is ignored except ...
 
+* the list in the optional `Taginfo:` section
 * the todo items between the `Todos:` project and the next _top-level_ project.
 * the todo items after `Archive:`
 
@@ -167,8 +208,31 @@ over time. Marvel at your progress!
 
 TIP: Use category tags in your todo items to see them grouped and totaled by category.
 
+=== The taginfo section
+
+Use this section if you want to provide a more descriptive title
+and link to more information on the project.
+
+The structure of each entry:
+
+[source,bash]
+----
+☐ @tagname full title of the project or category - url or linkme link
+----
+
+Example:
+
+[source,bash]
+----
+☐ @prja Project A - den•bRNzBMOVaqYl6i7C.html
+----
+
+I personally link to pages published with link:https://dendron.so[Dendron],
+because I like to also use VS Code for my note taking,
+and Dendron has a cool feature where you can publish Notes to a web site.
+
+
 == What's next?
 
-[verse]
-include::TODO[tag=progtodos]
+See the link:https://arkadianriver.github.io/hqtodo/ejs/hq.html[@hq project] in the Classic-styled hqTodo file.
 

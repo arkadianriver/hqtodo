@@ -30,7 +30,7 @@ const HqEntryOpen = (props) => {
         {!isMilestone && <span className="estimate"> ({props.entry.est})</span>}
         {props.entry.hover &&
           props.entry.hover.split("<br />").map((h) => (
-            <div className="blocker-line">
+            <div key={h} className="blocker-line">
               <br />
               <span className="blockers">{h}</span>
             </div>

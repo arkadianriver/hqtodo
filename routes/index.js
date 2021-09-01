@@ -201,6 +201,14 @@ doc.setRoute(
 doc.setRoute(
   router,
   "get",
+  "/ejs/doc",
+  "Documentation (server-side rendering)",
+  (req, res) => res.render('apidoc')
+);
+
+doc.setRoute(
+  router,
+  "get",
   "/webc",
   `Half-started Web component rendering of all the stuff.
   Project stopped in favor of React.`,
