@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 80%">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hqtodo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.02.min.css"/>
+    <link
+      rel="stylesheet"
+      href="./css/style.css"
+    />
+  </head>
+  <body>
+    <header>
+       <style>
+    :root {
+      --transition-1: all 0.3s ease-in-out;
+      --transition-2: all 0.2s ease-in-out;
+    }
+    .tagnav {
+      border: solid 1px black;
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tagnav > .tagstitle {
+      font-size: 1.6em;
+      font-weight: 400;
+      align-items: center;
+      margin: 0;
+    }
+    ul.tags {
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    ul.tags > li {
+      padding: 6px;
+      font-size: larger;
+    }
+    .lgopen, ul.tags > li > a {
+      color: cornflowerblue;
+      text-decoration: none;
+    }
+    ul.tags > li > a.hasclosed, .lgclosed {
+      color: lightgray;
+    }
+    ul.tags > li > a.hasactive::after, .lgactive::after {
+      content: '⁺';
+    }
+    ul.tags > li > a.hasmilestone::before, .lgmilestone::before {
+      content: '♦';
+    }
+    ul.tags > li > a.hasblocker, .lgblocker {
+      color: palevioletred;
+    }
+    ul.tags > li > a:hover {
+      text-decoration: underline;
+    }
+    #legend {
+      display: inline-block;
+      font-size: smaller;
+      margin-top: 3px;
+      padding: 2px 6px 2px 6px;
+      border-radius: 4px;
+      background-color: cadetblue;
+      position: relative;
+    }
+    #legend:hover {
+      cursor: pointer;
+    }
+    #legend:hover + #legend-pop {
+      display: flex;
+      flex-flow:row wrap;
+      justify-content: left;
+      align-content: flex-start;
+    }
+    #legend-pop {
+      position: absolute;
+      display: none;
+      background-color: #fcfcfc;
+      margin:0;
+      top: 30%;
+      left: 5rem;
+      width: 380px;
+      z-index: 99;
+      height: 5rem;
+      overflow-y: auto;
+      border:solid 1px black;
+      border-radius: 4px;
+    }
+    #legend-pop > div {
+      font-weight: bold;
+      padding: 0 6px 0 6px;
+      margin: 3px;
+    }
+
+    /* autoComplete.js */
+    .autoComplete_wrapper {
+      margin-top: 2px;
+      z-index: 1;
+    }
+    .autoComplete_wrapper > ul {
+      right: 0;
+      left: unset;
+      width: 70vw;
+      max-height: 60vh;
+    }
+    .autoComplete_wrapper > ul > p {
+      text-align: center;
+      padding-bottom: 18px;
+      border-bottom: solid 1px rgba(0,0,0,0.1)
+    }
+    .autoComplete_wrapper a {
+      color:cornflowerblue;
+      text-decoration: none;
+    }
+    .autoComplete_wrapper a:hover {
+      text-decoration: underline;
+    }
+    .no_result {
+      margin: 0.3rem;
+      padding: 0.3rem 0.5rem;
+      list-style: none;
+      text-align: left;
+      font-size: 1rem;
+      color: #212121;
+      transition: all 0.1s ease-in-out;
+      border-radius: 0.35rem;
+      background-color: rgba(255, 255, 255, 1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+    .selection {
+      display: none;
+      margin-top: 0; /* 25vh; */
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffc6c6;
+      transition: var(--transition-1);
+    }
+    .selection::selection {
+      color: #64ceaa;
+    }
+    @media only screen and (max-width: 600px) {
+      .selection {
+        margin-top: 15vh;
+      }
+    }
+</style>
+<div id="tagnav-container" style="position: relative">
+<div class="tagnav">
+  <h2 class="tagstitle">Tag nav</h2>
+  <ul class="tags">
+    <li data-count="3"><a class="hasclosed"
+      href="admin.html">@admin</a></li>
+  
+    <li data-count="2"><a class="hasopen"
+      href="edu.html">@edu</a></li>
+  
+    <li data-count="3"><a class="hasactive hasopen"
+      href="f24.html">@f24</a></li>
+  
+    <li data-count="18"><a class="hasactive hasopen"
+      href="hq.html">@hq</a></li>
+  
+    <li data-count="3"><a class="hasopen"
+      href="personal.html">@personal</a></li>
+  
+    <li data-count="44"><a class="hasactive hasopen"
+      href="prja.html">@prja</a></li>
+  
+    <li data-count="30"><a class="hasactive hasopen"
+      href="prjb.html">@prjb</a></li>
+  
+    <li data-count="84"><a class="hasactive hasopen"
+      href="prjc.html">@prjc</a></li>
+  
+    <li data-count="22"><a class="hasblocker"
+      href="prjd.html">@prjd</a></li>
+  
+    <li data-count="22"><a class="hasclosed"
+      href="tools.html">@tools</a></li>
+  
+    <li data-count="2"><a class="hasactive hasopen"
+      href="vidz.html">@vidz</a></li>
+  
+    <li data-count="6"><a class="hasactive"
+      href="woot.html">@woot</a></li>
+  
+    <li data-count="1"><a class="hasopen"
+      href="xedu.html">@xedu</a></li>
+  </ul>
+  <ul class="tags"><li><a
+    href="index.html">Home</a></li></ul>
+</div>
+<div style="display:flex;flow-flow:row nowrap;justify-content:space-between;">
+<div style="position:relative;float:left">
+<div id="legend">Legend</div>
+<div id="legend-pop">
+  <div class="lgopen">has-open</div>
+  <div class="lgclosed">has-only-closed</div>
+  <div class="lgopen lgactive">has-inprogress</div>
+  <div class="lgopen lgmilestone">has-milestone</div>
+  <div class="lgblocker">has-blocker</div>
+</div>
+</div>
+<div style="position:relative;float:right">
+<div class="autoComplete_wrapper">
+  <input id="autoComplete" type="text" tabindex="1" />
+</div>
+<div class="selection"></div>
+</div>
+</div>
+</div>
+ 
+      <h1 class="tagpagetitle">
+        @tools 
+      </h1>
+    </header>
+    <main>
+      <h2>Todo (0.00 pts)</h2>
+
+
+      </ul>
+
+
+      </ul>
+
+
+      </ul>
+
+
+      </ul>
+
+
+
+      <h2 class="archivetitle">
+        <div>Done (20.00 pts)</div>
+        <div class="pointscale">
+          2 point(s) per 8hr day
+        </div>
+      </h2>
+      <div id="chart"></div>
+
+      
+      <input type="checkbox" id="display-toggle" />
+      <label for="display-toggle" id="display-button"
+        ><span>▹ show the archive</span></label
+      >
+      <label for="display-toggle" id="hide-button"
+        ><span>▿ hide the archive</span></label
+      >
+      <div id="archive" style="padding-top: 1rem; padding-right: 2rem">
+        <h3>Completed for @tools</h3>
+        <ul>
+            <li><span class="bullet">✔</span> <span class="date">2021-08-07 02:40</span>
+              <span class="title" style="font-style:italic">
+                sit tempora adipisci porro tempora quaerat
+              </span>
+              <span class="tagstring">@prjc @tools</span>
+              <span class="estimate">(2.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-28 10:51</span>
+              <span class="title" style="font-style:italic">
+                sit modi est etincidunt porro quaerat ut sit
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-28 09:45</span>
+              <span class="title" style="font-style:italic">
+                amet porro porro sed quaerat modi
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(1.00)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-07-23 10:59</span>
+              <span class="title" style="font-style:italic">
+                neque sed quisquam quisquam numquam modi
+              </span>
+              <span class="tagstring">@prjc @tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-20 02:40</span>
+              <span class="title" style="font-style:italic">
+                sit tempora adipisci porro tempora quaerat
+              </span>
+              <span class="tagstring">@prjc @tools</span>
+              <span class="estimate">(2.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-15 10:51</span>
+              <span class="title" style="font-style:italic">
+                sit modi est etincidunt porro quaerat ut sit
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-15 09:45</span>
+              <span class="title" style="font-style:italic">
+                amet porro porro sed quaerat modi
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(1.00)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-06-10 10:59</span>
+              <span class="title" style="font-style:italic">
+                neque sed quisquam quisquam numquam modi
+              </span>
+              <span class="tagstring">@prjc @tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-29 10:51</span>
+              <span class="title" style="font-style:italic">
+                sit modi est etincidunt porro quaerat ut sit
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-29 09:45</span>
+              <span class="title" style="font-style:italic">
+                amet porro porro sed quaerat modi
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(1.00)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-24 10:59</span>
+              <span class="title" style="font-style:italic">
+                neque sed quisquam quisquam numquam modi
+              </span>
+              <span class="tagstring">@prjc @tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-12 08:41</span>
+              <span class="title" style="font-style:italic">
+                porro aliquam aliquam consectetur
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(1.00)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-05-11 14:18</span>
+              <span class="title" style="font-style:italic">
+                porro est sit adipisci dolore
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-28 09:00</span>
+              <span class="title" style="font-style:italic">
+                [4d starting 2021-04-22]: Write the Docs conference
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-04-20 11:14</span>
+              <span class="title" style="font-style:italic">
+                quaerat velit voluptatem velit non quiquia non
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-03-30 10:01</span>
+              <span class="title" style="font-style:italic">
+                sed etincidunt sed consectetur dolorem amet porro
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-02-03 02:40</span>
+              <span class="title" style="font-style:italic">
+                sit tempora adipisci porro tempora quaerat
+              </span>
+              <span class="tagstring">@prjc @tools</span>
+              <span class="estimate">(2.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-29 10:51</span>
+              <span class="title" style="font-style:italic">
+                sit modi est etincidunt porro quaerat ut sit
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-29 09:45</span>
+              <span class="title" style="font-style:italic">
+                amet porro porro sed quaerat modi
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(1.00)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-24 10:59</span>
+              <span class="title" style="font-style:italic">
+                neque sed quisquam quisquam numquam modi
+              </span>
+              <span class="tagstring">@prjc @tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-12 08:41</span>
+              <span class="title" style="font-style:italic">
+                porro aliquam aliquam consectetur
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(1.00)</span>
+            </li>            <li><span class="bullet">✔</span> <span class="date">2021-01-11 14:18</span>
+              <span class="title" style="font-style:italic">
+                porro est sit adipisci dolore
+              </span>
+              <span class="tagstring">@tools</span>
+              <span class="estimate">(0.50)</span>
+            </li>          <span>&nbsp;</span>
+        </ul>
+        <span>&nbsp;</span>
+      </div>
+      
+    </main>
+
+    <hr/>
+<div style="display:flex;justify-content:space-between;width:100%">
+<p style="font-size:smaller;">Made with ♥ by <a target="_blank"
+href="https://github.com/arkadianriver/hqtodo">hqtodo</a>,<br/>
+Mermaid, ApexCharts, autoComplete.js,<br/>and other fine modules.<br/>
+An <a href="/doc" target="_blank">API</a> is also available.
+</p>
+<p style="font-size:smaller">Page last updated:<br/>2021-09-01T08:59:41Z<br/>Task file last updated:<br/>2021-09-01T08:57:15Z</p>
+</div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+    <script>
+      var showHover = id => {
+        const hover = document.querySelector(`#h${id}`);
+        hover.classList.toggle("showme");
+        hover.classList.toggle("hideme");
+      };
+
+      var chartOptions = {
+        series: [
+          {
+            name: 'Points spent on tools todos',
+            data: [{"x":"2021-01-07","y":"0.00"},{"x":"2021-01-08","y":0},{"x":"2021-01-09","y":0},{"x":"2021-01-10","y":0},{"x":"2021-01-11","y":"0.50"},{"x":"2021-01-12","y":"1.00"},{"x":"2021-01-13","y":0},{"x":"2021-01-14","y":0},{"x":"2021-01-15","y":0},{"x":"2021-01-16","y":0},{"x":"2021-01-17","y":0},{"x":"2021-01-18","y":0},{"x":"2021-01-19","y":0},{"x":"2021-01-20","y":0},{"x":"2021-01-21","y":0},{"x":"2021-01-22","y":0},{"x":"2021-01-23","y":0},{"x":"2021-01-24","y":"0.50"},{"x":"2021-01-25","y":0},{"x":"2021-01-26","y":0},{"x":"2021-01-27","y":0},{"x":"2021-01-28","y":0},{"x":"2021-01-29","y":"1.50"},{"x":"2021-01-30","y":0},{"x":"2021-01-31","y":0},{"x":"2021-02-01","y":0},{"x":"2021-02-02","y":0},{"x":"2021-02-03","y":"2.50"},{"x":"2021-02-04","y":0},{"x":"2021-02-05","y":0},{"x":"2021-02-06","y":0},{"x":"2021-02-07","y":0},{"x":"2021-02-08","y":0},{"x":"2021-02-09","y":0},{"x":"2021-02-10","y":0},{"x":"2021-02-11","y":0},{"x":"2021-02-12","y":0},{"x":"2021-02-13","y":0},{"x":"2021-02-14","y":0},{"x":"2021-02-15","y":0},{"x":"2021-02-16","y":0},{"x":"2021-02-17","y":0},{"x":"2021-02-18","y":0},{"x":"2021-02-19","y":0},{"x":"2021-02-20","y":0},{"x":"2021-02-21","y":0},{"x":"2021-02-22","y":0},{"x":"2021-02-23","y":0},{"x":"2021-02-24","y":0},{"x":"2021-02-25","y":0},{"x":"2021-02-26","y":0},{"x":"2021-02-27","y":0},{"x":"2021-02-28","y":0},{"x":"2021-03-01","y":0},{"x":"2021-03-02","y":0},{"x":"2021-03-03","y":0},{"x":"2021-03-04","y":0},{"x":"2021-03-05","y":0},{"x":"2021-03-06","y":0},{"x":"2021-03-07","y":0},{"x":"2021-03-08","y":0},{"x":"2021-03-09","y":0},{"x":"2021-03-10","y":0},{"x":"2021-03-11","y":0},{"x":"2021-03-12","y":0},{"x":"2021-03-13","y":0},{"x":"2021-03-14","y":0},{"x":"2021-03-15","y":0},{"x":"2021-03-16","y":0},{"x":"2021-03-17","y":0},{"x":"2021-03-18","y":0},{"x":"2021-03-19","y":0},{"x":"2021-03-20","y":0},{"x":"2021-03-21","y":0},{"x":"2021-03-22","y":0},{"x":"2021-03-23","y":0},{"x":"2021-03-24","y":0},{"x":"2021-03-25","y":0},{"x":"2021-03-26","y":0},{"x":"2021-03-27","y":0},{"x":"2021-03-28","y":0},{"x":"2021-03-29","y":0},{"x":"2021-03-30","y":"0.50"},{"x":"2021-03-31","y":0},{"x":"2021-04-01","y":0},{"x":"2021-04-02","y":0},{"x":"2021-04-03","y":0},{"x":"2021-04-04","y":0},{"x":"2021-04-05","y":0},{"x":"2021-04-06","y":0},{"x":"2021-04-07","y":0},{"x":"2021-04-08","y":0},{"x":"2021-04-09","y":0},{"x":"2021-04-10","y":0},{"x":"2021-04-11","y":0},{"x":"2021-04-12","y":0},{"x":"2021-04-13","y":0},{"x":"2021-04-14","y":0},{"x":"2021-04-15","y":0},{"x":"2021-04-16","y":0},{"x":"2021-04-17","y":0},{"x":"2021-04-18","y":0},{"x":"2021-04-19","y":0},{"x":"2021-04-20","y":"0.50"},{"x":"2021-04-21","y":0},{"x":"2021-04-22","y":0},{"x":"2021-04-23","y":0},{"x":"2021-04-24","y":0},{"x":"2021-04-25","y":0},{"x":"2021-04-26","y":0},{"x":"2021-04-27","y":0},{"x":"2021-04-28","y":"0.50"},{"x":"2021-04-29","y":0},{"x":"2021-04-30","y":0},{"x":"2021-05-01","y":0},{"x":"2021-05-02","y":0},{"x":"2021-05-03","y":0},{"x":"2021-05-04","y":0},{"x":"2021-05-05","y":0},{"x":"2021-05-06","y":0},{"x":"2021-05-07","y":0},{"x":"2021-05-08","y":0},{"x":"2021-05-09","y":0},{"x":"2021-05-10","y":0},{"x":"2021-05-11","y":"0.50"},{"x":"2021-05-12","y":"1.00"},{"x":"2021-05-13","y":0},{"x":"2021-05-14","y":0},{"x":"2021-05-15","y":0},{"x":"2021-05-16","y":0},{"x":"2021-05-17","y":0},{"x":"2021-05-18","y":0},{"x":"2021-05-19","y":0},{"x":"2021-05-20","y":0},{"x":"2021-05-21","y":0},{"x":"2021-05-22","y":0},{"x":"2021-05-23","y":0},{"x":"2021-05-24","y":"0.50"},{"x":"2021-05-25","y":0},{"x":"2021-05-26","y":0},{"x":"2021-05-27","y":0},{"x":"2021-05-28","y":0},{"x":"2021-05-29","y":"1.50"},{"x":"2021-05-30","y":0},{"x":"2021-05-31","y":0},{"x":"2021-06-01","y":0},{"x":"2021-06-02","y":0},{"x":"2021-06-03","y":0},{"x":"2021-06-04","y":0},{"x":"2021-06-05","y":0},{"x":"2021-06-06","y":0},{"x":"2021-06-07","y":0},{"x":"2021-06-08","y":0},{"x":"2021-06-09","y":0},{"x":"2021-06-10","y":"0.50"},{"x":"2021-06-11","y":0},{"x":"2021-06-12","y":0},{"x":"2021-06-13","y":0},{"x":"2021-06-14","y":0},{"x":"2021-06-15","y":"1.50"},{"x":"2021-06-16","y":0},{"x":"2021-06-17","y":0},{"x":"2021-06-18","y":0},{"x":"2021-06-19","y":0},{"x":"2021-06-20","y":"2.50"},{"x":"2021-06-21","y":0},{"x":"2021-06-22","y":0},{"x":"2021-06-23","y":0},{"x":"2021-06-24","y":0},{"x":"2021-06-25","y":0},{"x":"2021-06-26","y":0},{"x":"2021-06-27","y":0},{"x":"2021-06-28","y":0},{"x":"2021-06-29","y":0},{"x":"2021-06-30","y":0},{"x":"2021-07-01","y":0},{"x":"2021-07-02","y":0},{"x":"2021-07-03","y":0},{"x":"2021-07-04","y":0},{"x":"2021-07-05","y":0},{"x":"2021-07-06","y":0},{"x":"2021-07-07","y":0},{"x":"2021-07-08","y":0},{"x":"2021-07-09","y":0},{"x":"2021-07-10","y":0},{"x":"2021-07-11","y":0},{"x":"2021-07-12","y":0},{"x":"2021-07-13","y":0},{"x":"2021-07-14","y":0},{"x":"2021-07-15","y":0},{"x":"2021-07-16","y":0},{"x":"2021-07-17","y":0},{"x":"2021-07-18","y":0},{"x":"2021-07-19","y":0},{"x":"2021-07-20","y":0},{"x":"2021-07-21","y":0},{"x":"2021-07-22","y":0},{"x":"2021-07-23","y":"0.50"},{"x":"2021-07-24","y":0},{"x":"2021-07-25","y":0},{"x":"2021-07-26","y":0},{"x":"2021-07-27","y":0},{"x":"2021-07-28","y":"1.50"},{"x":"2021-07-29","y":0},{"x":"2021-07-30","y":0},{"x":"2021-07-31","y":0},{"x":"2021-08-01","y":0},{"x":"2021-08-02","y":0},{"x":"2021-08-03","y":0},{"x":"2021-08-04","y":0},{"x":"2021-08-05","y":0},{"x":"2021-08-06","y":0},{"x":"2021-08-07","y":"2.50"},{"x":"2021-08-08","y":0},{"x":"2021-08-09","y":0},{"x":"2021-08-10","y":0},{"x":"2021-08-11","y":0},{"x":"2021-08-12","y":0},{"x":"2021-08-13","y":0},{"x":"2021-08-14","y":0},{"x":"2021-08-15","y":0},{"x":"2021-08-16","y":0},{"x":"2021-08-17","y":0},{"x":"2021-08-18","y":0},{"x":"2021-08-19","y":0},{"x":"2021-08-20","y":0},{"x":"2021-08-21","y":0},{"x":"2021-08-22","y":0},{"x":"2021-08-23","y":0},{"x":"2021-08-24","y":0},{"x":"2021-08-25","y":0},{"x":"2021-08-26","y":0},{"x":"2021-08-27","y":0},{"x":"2021-08-28","y":0},{"x":"2021-08-29","y":0},{"x":"2021-08-30","y":0},{"x":"2021-08-31","y":0},{"x":"2021-09-01","y":"0.00"},{"x":"2021-09-02","y":0}]
+          }
+        ],
+        chart: {
+          type: 'bar',
+          height: 200,
+          stacked: true
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        legend: {
+          showForSingleSeries: true,
+          position: 'top',
+          horizontalAlign: 'left'
+        },
+        xaxis: {
+          type: 'datetime'
+        },
+      };
+      var chart = new ApexCharts(document.querySelector('#chart'), chartOptions);
+      chart.render();
+
+      // credit: https://tarekraafat.github.io/autoComplete.js/#/playground
+const autoCompleteJS = new autoComplete({
+  data: {
+    src: [{"title":"something I need help with","tags":["@prjd"],"state":"Blockers"},{"title":"Add search to the Carbon client","tags":["@hq"],"state":"In progress"},{"title":"showing a linkme example","tags":["@prjb"],"state":"In progress"},{"title":"decide 1:2 organization requirements","tags":["@prja","@woot"],"state":"In progress"},{"title":"work with so-and-so on such-and-such","tags":["@prja","@prjb"],"state":"In progress"},{"title":"storyboard feature 24 with design","tags":["@prjc","@f24"],"state":"In progress"},{"title":"edit whos-it's video Q","tags":["@prjb","@vidz"],"state":"In progress"},{"title":"document and do more with the daily support feature","tags":["@hq"],"state":"Backlog"},{"title":"pull the legend (and maybe the readme) into /doc endpoint","tags":["@hq"],"state":"Backlog"},{"title":"clean up /api data, fetch only what you need and push org logic to the client","tags":["@hq"],"state":"Backlog"},{"title":"get thing-a-ma-bob Info from SME-guru","tags":["@prja"],"state":"Backlog"},{"title":"add such-and-such CSS to project page","tags":["@prjb","@f24"],"state":"Backlog"},{"title":"document feature 24","tags":["@prjc","@f24"],"state":"Backlog"},{"title":"review the user guide about whats-it","tags":["@prjb"],"state":"Backlog"},{"title":"fix situation with UI weirdness","tags":["@prjb"],"state":"Backlog"},{"title":"write script for whos-it video P","tags":["@prjb","@vidz"],"state":"Backlog"},{"title":"take refresher course on XYZ.3","tags":["@edu","@xedu"],"state":"Backlog"},{"title":"make arrangements for that thing","tags":["@personal"],"state":"Backlog"},{"title":"fix problems with the doo-hicky","tags":["@prjb"],"state":"Backlog"},{"title":"revise thankful's document","tags":["@prjb"],"state":"Backlog"},{"title":"todo this","tags":[],"state":"Backlog"},{"title":"todo that","tags":[],"state":"Backlog"},{"title":"Thaw and cook the fish I caught","tags":[],"state":"Backlog"},{"title":"2021-09-01 - update readme with new features","tags":["@hq"],"state":"Archive"},{"title":"2021-08-31 - update the readme image","tags":["@hq"],"state":"Archive"},{"title":"2021-08-30 - mock data for gh-pages demo of react app","tags":["@hq"],"state":"Archive"},{"title":"2021-08-29 - improve doc - use routes","tags":[],"state":"Archive"},{"title":"2021-08-29 - add Carbon style","tags":["@hq"],"state":"Archive"},{"title":"2021-08-26 - poll server and reload on file change (webhooks too much work on server side)","tags":["@hq"],"state":"Archive"},{"title":"2021-08-23 - capture url in link and pop text out of title","tags":["@hq"],"state":"Archive"},{"title":"2021-08-23 - display link in archive (and anywhere else not exposed in tag/full view)","tags":["@hq"],"state":"Archive"},{"title":"2021-08-21 - link in archive too  with extra text after","tags":["@woot"],"state":"Archive"},{"title":"2021-08-21 - test to see how to provide extra tag/epic/category doc on the tag pages","tags":["@hq"],"state":"Archive"},{"title":"2021-08-21 - limit doc requests","tags":["@hq"],"state":"Archive"},{"title":"2021-08-21 - expose lastmodified for eventual client-based app","tags":["@hq"],"state":"Archive"},{"title":"2021-08-15 - create tags.ejs view using data from /tags","tags":["@hq"],"state":"Archive"},{"title":"2021-08-15 - implement getTags(:id) to display page","tags":["@hq"],"state":"Archive"},{"title":"2021-08-15 - edit index.ejs to display epic listing","tags":["@hq"],"state":"Archive"},{"title":"2021-08-15 - first simply provide all the things by category (tag)","tags":["@hq"],"state":"Archive"},{"title":"2021-08-09 - latest completed item eius est quiquia","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-08-09 - numquam quisquam quisquam est eius sed est","tags":["@prjc"],"state":"Archive"},{"title":"2021-08-07 - neque dolore dolor etincidunt etincidunt dolor","tags":["@prja"],"state":"Archive"},{"title":"2021-08-07 - sit tempora adipisci porro tempora quaerat","tags":["@prjc","@tools"],"state":"Archive"},{"title":"2021-08-06 - tempora tempora sit eius","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-31 - voluptatem tempora modi amet dolore","tags":["@admin"],"state":"Archive"},{"title":"2021-07-28 - magnam numquam consectetur etincidunt","tags":["@prjd"],"state":"Archive"},{"title":"2021-07-28 - sit modi est etincidunt porro quaerat ut sit","tags":["@tools"],"state":"Archive"},{"title":"2021-07-28 - amet porro porro sed quaerat modi","tags":["@tools"],"state":"Archive"},{"title":"2021-07-28 - porro etincidunt ipsum magnam","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-27 - etincidunt non eius etincidunt numquam magnam adipisci","tags":["@prja"],"state":"Archive"},{"title":"2021-07-25 - dolore porro ipsum voluptatem","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-25 - consectetur porro etincidunt adipisci dolor","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-24 - porro etincidunt dolorem quiquia ipsum consectetur porro","tags":["@prjd"],"state":"Archive"},{"title":"2021-07-23 - adipisci quaerat voluptatem quiquia porro","tags":["@prja"],"state":"Archive"},{"title":"2021-07-23 - sit adipisci est ut quiquia","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-23 - neque sed quisquam quisquam numquam modi","tags":["@prjc","@tools"],"state":"Archive"},{"title":"2021-07-22 - gotta get this done","tags":["@prja"],"state":"Archive"},{"title":"2021-07-22 - est quisquam eius modi dolor neque","tags":["@prjd"],"state":"Archive"},{"title":"2021-07-21 - non dolor quaerat sed quaerat labore magnam labore","tags":["@prjd"],"state":"Archive"},{"title":"2021-07-21 - quisquam eius dolore sit modi est amet","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-21 - quisquam tempora quisquam magnam dolore","tags":["@prjb"],"state":"Archive"},{"title":"2021-07-20 - ut labore velit dolorem","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-20 - est numquam ipsum etincidunt","tags":["@prja"],"state":"Archive"},{"title":"2021-07-19 - Restructure archive of books","tags":["@prja"],"state":"Archive"},{"title":"2021-07-18 - Paint Sistine Chapel","tags":["@woot","@personal"],"state":"Archive"},{"title":"2021-07-17 - quaerat neque quisquam sed sit neque ut ipsum","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-07-10 - Compose symphony","tags":["@personal","@woot"],"state":"Archive"},{"title":"2021-07-08 - clean up express/markdown","tags":["@prjd"],"state":"Archive"},{"title":"2021-07-06 - quisquam quiquia etincidunt quaerat est quaerat","tags":["@prjb"],"state":"Archive"},{"title":"2021-07-04 - adipisci magnam amet tempora porro aliquam eius tempora","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-03 - amet non quaerat dolore","tags":["@prjc"],"state":"Archive"},{"title":"2021-07-03 - YYZ prj - take off to the great white north","tags":["@prjb","@woot"],"state":"Archive"},{"title":"2021-07-02 - Prepare the sled","tags":["@prjb"],"state":"Archive"},{"title":"2021-07-02 - Prepare the dogs","tags":["@prjb"],"state":"Archive"},{"title":"2021-07-01 - dolorem quiquia non tempora quaerat","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-30 - dolorem labore voluptatem ipsum","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-29 - dolore non etincidunt non ut dolor","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-27 - ut consectetur quaerat eius est quiquia","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-06-27 - numquam quisquam quisquam est eius sed est","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-20 - quisquam ut numquam etincidunt velit","tags":["@prja"],"state":"Archive"},{"title":"2021-06-20 - tempora tempora sit eius","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-20 - neque dolore dolor etincidunt etincidunt dolor","tags":["@prja"],"state":"Archive"},{"title":"2021-06-20 - sit tempora adipisci porro tempora quaerat","tags":["@prjc","@tools"],"state":"Archive"},{"title":"2021-06-18 - voluptatem tempora modi amet dolore","tags":["@admin"],"state":"Archive"},{"title":"2021-06-15 - magnam numquam consectetur etincidunt","tags":["@prjd"],"state":"Archive"},{"title":"2021-06-15 - sit modi est etincidunt porro quaerat ut sit","tags":["@tools"],"state":"Archive"},{"title":"2021-06-15 - amet porro porro sed quaerat modi","tags":["@tools"],"state":"Archive"},{"title":"2021-06-15 - porro etincidunt ipsum magnam","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-14 - etincidunt non eius etincidunt numquam magnam adipisci","tags":["@prja"],"state":"Archive"},{"title":"2021-06-12 - dolore porro ipsum voluptatem","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-12 - consectetur porro etincidunt adipisci dolor","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-11 - porro etincidunt dolorem quiquia ipsum consectetur porro","tags":["@prjd"],"state":"Archive"},{"title":"2021-06-10 - adipisci quaerat voluptatem quiquia porro","tags":["@prja"],"state":"Archive"},{"title":"2021-06-10 - sit adipisci est ut quiquia","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-10 - neque sed quisquam quisquam numquam modi","tags":["@prjc","@tools"],"state":"Archive"},{"title":"2021-06-09 - today est quisquam eius modi dolor neque","tags":["@prjd"],"state":"Archive"},{"title":"2021-06-08 - today non dolor quaerat sed quaerat labore magnam labore","tags":["@prjd"],"state":"Archive"},{"title":"2021-06-08 - today quisquam eius dolore sit modi est amet","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-08 - today quisquam tempora quisquam magnam dolore","tags":["@prjb"],"state":"Archive"},{"title":"2021-06-07 - today ut labore velit dolorem","tags":["@prjc"],"state":"Archive"},{"title":"2021-06-07 - today est numquam ipsum etincidunt","tags":["@prja"],"state":"Archive"},{"title":"2021-06-04 - today quaerat neque quisquam sed sit neque ut ipsum","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-06-01 - magnam ipsum porro velit tempora neque velit tempora","tags":["@prja"],"state":"Archive"},{"title":"2021-06-01 - quiquia ut quisquam adipisci neque","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-31 - porro amet amet neque dolore voluptatem quisquam modi","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-31 - quiquia ut quaerat consectetur","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-05-29 - magnam numquam consectetur etincidunt","tags":["@prjd"],"state":"Archive"},{"title":"2021-05-29 - sit modi est etincidunt porro quaerat ut sit","tags":["@tools"],"state":"Archive"},{"title":"2021-05-29 - amet porro porro sed quaerat modi","tags":["@tools"],"state":"Archive"},{"title":"2021-05-29 - porro etincidunt ipsum magnam","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-28 - etincidunt non eius etincidunt numquam magnam adipisci","tags":["@prja"],"state":"Archive"},{"title":"2021-05-26 - dolore porro ipsum voluptatem","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-26 - consectetur porro etincidunt adipisci dolor","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-25 - porro etincidunt dolorem quiquia ipsum consectetur porro","tags":["@prjd"],"state":"Archive"},{"title":"2021-05-24 - adipisci quaerat voluptatem quiquia porro","tags":["@prja"],"state":"Archive"},{"title":"2021-05-24 - sit adipisci est ut quiquia","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-24 - neque sed quisquam quisquam numquam modi","tags":["@prjc","@tools"],"state":"Archive"},{"title":"2021-05-23 - est quisquam eius modi dolor neque","tags":["@prjd"],"state":"Archive"},{"title":"2021-05-22 - non dolor quaerat sed quaerat labore magnam labore","tags":["@prjd"],"state":"Archive"},{"title":"2021-05-22 - quisquam eius dolore sit modi est amet","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-22 - quisquam tempora quisquam magnam dolore","tags":["@prjb"],"state":"Archive"},{"title":"2021-05-21 - ut labore velit dolorem","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-21 - est numquam ipsum etincidunt","tags":["@prja"],"state":"Archive"},{"title":"2021-05-18 - close the catco / dogco merger","tags":["@woot","@prjc"],"state":"Archive"},{"title":"2021-05-18 - quaerat neque quisquam sed sit neque ut ipsum","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-05-15 - magnam ipsum porro velit tempora neque velit tempora","tags":["@prja"],"state":"Archive"},{"title":"2021-05-15 - quiquia ut quisquam adipisci neque","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-14 - porro amet amet neque dolore voluptatem quisquam modi","tags":["@prjc"],"state":"Archive"},{"title":"2021-05-14 - quiquia ut quaerat consectetur","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-05-12 - porro aliquam aliquam consectetur","tags":["@tools"],"state":"Archive"},{"title":"2021-05-12 - ut eius magnam consectetur","tags":["@prja"],"state":"Archive"},{"title":"2021-05-11 - porro est sit adipisci dolore","tags":["@tools"],"state":"Archive"},{"title":"2021-05-07 - quaerat amet non adipisci eius","tags":["@prjb"],"state":"Archive"},{"title":"2021-04-29 - neque modi modi dolore neque adipisci aliquam etincidunt","tags":["@prja"],"state":"Archive"},{"title":"2021-04-28 - magnam non est modi eius quiquia","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-28 - [4d starting 2021-04-22]: Write the Docs conference","tags":["@tools"],"state":"Archive"},{"title":"2021-04-22 - dolorem aliquam quisquam neque sed sit dolor quiquia","tags":["@prja"],"state":"Archive"},{"title":"2021-04-22 - sed quiquia numquam sed consectetur amet","tags":["@prja"],"state":"Archive"},{"title":"2021-04-21 - amet quisquam numquam eius etincidunt modi ipsum adipisci","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-20 - sed modi ipsum ut consectetur","tags":["@prja"],"state":"Archive"},{"title":"2021-04-20 - quaerat velit voluptatem velit non quiquia non","tags":["@tools"],"state":"Archive"},{"title":"2021-04-17 - ipsum non dolore quisquam labore amet dolore amet","tags":["@prja"],"state":"Archive"},{"title":"2021-04-17 - adipisci porro magnam labore ut quiquia tempora ipsum","tags":["@prja"],"state":"Archive"},{"title":"2021-04-16 - consectetur quaerat dolor dolor modi ipsum velit porro","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-14 - neque velit sit sit modi adipisci quiquia","tags":[],"state":"Archive"},{"title":"2021-04-14 - dolorem porro labore labore","tags":["@prjd"],"state":"Archive"},{"title":"2021-04-14 - labore tempora sit aliquam quaerat","tags":["@prjd"],"state":"Archive"},{"title":"2021-04-14 - dolore adipisci magnam ut sed ipsum tempora etincidunt","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-13 - amet magnam dolore non","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-12 - labore adipisci non est","tags":["@prja"],"state":"Archive"},{"title":"2021-04-12 - Host a party for real","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-11 - sed quiquia ipsum numquam dolor dolor","tags":["@prja"],"state":"Archive"},{"title":"2021-04-09 - ut aliquam neque quaerat ipsum","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-08 - labore ut ipsum voluptatem amet voluptatem quisquam","tags":["@prjc"],"state":"Archive"},{"title":"2021-04-08 - sit modi quaerat non tempora","tags":["@prja"],"state":"Archive"},{"title":"2021-04-05 - labore aliquam modi sit amet amet","tags":["@prjd"],"state":"Archive"},{"title":"2021-04-04 - dolorem quiquia porro etincidunt voluptatem numquam dolor consectetur","tags":["@prja"],"state":"Archive"},{"title":"2021-04-01 - Host a party","tags":["@prjc"],"state":"Archive"},{"title":"2021-03-31 - modi sed dolor dolor ut","tags":["@prjc"],"state":"Archive"},{"title":"2021-03-31 - dolor dolorem porro labore","tags":["@prjc"],"state":"Archive"},{"title":"2021-03-30 - sed etincidunt sed consectetur dolorem amet porro","tags":["@tools"],"state":"Archive"},{"title":"2021-03-26 - numquam quisquam voluptatem amet eius dolorem modi amet","tags":[],"state":"Archive"},{"title":"2021-03-25 - ut aliquam tempora quisquam","tags":["@prjc"],"state":"Archive"},{"title":"2021-03-25 - quaerat modi modi porro voluptatem","tags":["@prjd"],"state":"Archive"},{"title":"2021-03-25 - dolor velit quiquia modi etincidunt","tags":["@prja"],"state":"Archive"},{"title":"2021-03-25 - quiquia aliquam etincidunt non","tags":["@prjb"],"state":"Archive"},{"title":"2021-03-25 - amet etincidunt neque est numquam tempora amet aliquam","tags":["@prja"],"state":"Archive"},{"title":"2021-03-25 - amet tempora quisquam eius quisquam","tags":["@prjc"],"state":"Archive"},{"title":"2021-03-24 - tempora dolorem neque dolor sit magnam","tags":["@prja"],"state":"Archive"},{"title":"2021-03-23 - eius dolor dolore quaerat","tags":[],"state":"Archive"},{"title":"2021-03-17 - quaerat adipisci est dolor sed adipisci labore","tags":[],"state":"Archive"},{"title":"2021-03-16 - dolorem quiquia neque numquam est neque voluptatem labore","tags":["@prjc"],"state":"Archive"},{"title":"2021-03-16 - [2d starting 2021-03-12]: Vacation","tags":[],"state":"Archive"},{"title":"2021-03-09 - [2d starting 2021-03-05]: Vacation","tags":[],"state":"Archive"},{"title":"2021-03-04 - tempora tempora sed amet","tags":["@prjc"],"state":"Archive"},{"title":"2021-03-03 - ipsum magnam dolore magnam labore dolorem","tags":["@prja"],"state":"Archive"},{"title":"2021-03-02 - [1d starting 2021-03-01]: Vacation","tags":[],"state":"Archive"},{"title":"2021-02-25 - magnam sed amet non neque quaerat dolorem","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-24 - aliquam sed tempora sed modi","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-23 - sit tempora amet sit aliquam","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-22 - aliquam magnam tempora dolore quiquia sed dolor dolorem","tags":["@prja"],"state":"Archive"},{"title":"2021-02-21 - magnam consectetur dolorem porro velit numquam quisquam consectetur","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-16 - amet non quaerat dolore","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-15 - quisquam est quiquia eius","tags":[],"state":"Archive"},{"title":"2021-02-14 - test Ruby 2.6 / Jekyll 4","tags":["@prja"],"state":"Archive"},{"title":"2021-02-14 - dolorem quiquia non tempora quaerat","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-13 - dolorem labore voluptatem ipsum","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-12 - dolore non etincidunt non ut dolor","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-10 - Take Academind JS course","tags":["@edu"],"state":"Archive"},{"title":"2021-02-10 - ut consectetur quaerat eius est quiquia","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-02-10 - Investigate dark theme","tags":["@prja"],"state":"Archive"},{"title":"2021-02-10 - numquam quisquam quisquam est eius sed est","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-03 - quisquam ut numquam etincidunt velit","tags":["@prja"],"state":"Archive"},{"title":"2021-02-03 - tempora tempora sit eius","tags":["@prjc"],"state":"Archive"},{"title":"2021-02-03 - neque dolore dolor etincidunt etincidunt dolor","tags":["@prja"],"state":"Archive"},{"title":"2021-02-03 - sit tempora adipisci porro tempora quaerat","tags":["@prjc","@tools"],"state":"Archive"},{"title":"2021-02-01 - voluptatem tempora modi amet dolore","tags":["@admin"],"state":"Archive"},{"title":"2021-01-29 - magnam numquam consectetur etincidunt","tags":["@prjd"],"state":"Archive"},{"title":"2021-01-29 - sit modi est etincidunt porro quaerat ut sit","tags":["@tools"],"state":"Archive"},{"title":"2021-01-29 - amet porro porro sed quaerat modi","tags":["@tools"],"state":"Archive"},{"title":"2021-01-29 - porro etincidunt ipsum magnam","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-28 - etincidunt non eius etincidunt numquam magnam adipisci","tags":["@prja"],"state":"Archive"},{"title":"2021-01-26 - dolore porro ipsum voluptatem","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-26 - consectetur porro etincidunt adipisci dolor","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-25 - porro etincidunt dolorem quiquia ipsum consectetur porro","tags":["@prjd"],"state":"Archive"},{"title":"2021-01-24 - adipisci quaerat voluptatem quiquia porro","tags":["@prja"],"state":"Archive"},{"title":"2021-01-24 - sit adipisci est ut quiquia","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-24 - neque sed quisquam quisquam numquam modi","tags":["@prjc","@tools"],"state":"Archive"},{"title":"2021-01-23 - est quisquam eius modi dolor neque","tags":["@prjd"],"state":"Archive"},{"title":"2021-01-22 - non dolor quaerat sed quaerat labore magnam labore","tags":["@prjd"],"state":"Archive"},{"title":"2021-01-22 - quisquam eius dolore sit modi est amet","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-22 - quisquam tempora quisquam magnam dolore","tags":["@prjb"],"state":"Archive"},{"title":"2021-01-21 - ut labore velit dolorem","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-21 - est numquam ipsum etincidunt","tags":["@prja"],"state":"Archive"},{"title":"2021-01-18 - quaerat neque quisquam sed sit neque ut ipsum","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-01-15 - magnam ipsum porro velit tempora neque velit tempora","tags":["@prja"],"state":"Archive"},{"title":"2021-01-15 - quiquia ut quisquam adipisci neque","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-14 - porro amet amet neque dolore voluptatem quisquam modi","tags":["@prjc"],"state":"Archive"},{"title":"2021-01-14 - quiquia ut quaerat consectetur","tags":["@prjc","@prjb"],"state":"Archive"},{"title":"2021-01-12 - porro aliquam aliquam consectetur","tags":["@tools"],"state":"Archive"},{"title":"2021-01-12 - ut eius magnam consectetur","tags":["@prja"],"state":"Archive"},{"title":"2021-01-11 - porro est sit adipisci dolore","tags":["@tools"],"state":"Archive"},{"title":"2021-01-07 - quaerat amet non adipisci eius","tags":["@prjb"],"state":"Archive"}],
+    keys: ["title"],
+    cache: true,
+    filter: (list) => {
+      const filteredResults = Array.from(
+        new Set(list.map((value) => value.match))
+      ).map((k) => {
+        return list.find((value) => value.match === k);
+      });
+      return filteredResults;
+    },
+  },
+  placeHolder: "Search all tasks ...",
+  searchEngine: "loose",
+  resultsList: {
+    element: (list, data) => {
+      const info = document.createElement("p");
+      if (data.results.length > 0) {
+        info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+      } else {
+        info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+      }
+      list.prepend(info);
+    },
+    noResults: true,
+    maxResults: 20,
+    tabSelect: true,
+  },
+  resultItem: {
+    element: (item, data) => {
+      // Modify Results Item Style
+      item.style = "display: flex; flex-flow: column nowrap; justify-content: space-between;";
+      // Modify Results Item Content
+      item.innerHTML = `
+      <span style="font-size: 14px; font-weight: bold; color: rgb(92,92,92); padding: 0;">
+      ${data.value.tags.length > 0 ? data.value.tags.map( t => `<a href="/ejs/tags/${t.substring(1)}">${t}</a>`).join(' ') + ' &gt;' : ''}
+      ${data.value.state}
+      </span>
+      <span style="font-size: 12px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; padding: 3px 0 3px 9px;">
+        ${data.match}
+      </span>`;
+    },
+    highlight: true,
+  },
+  events: {
+    input: {
+      focus: () => {
+        if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+      },
+    },
+  },
+});
+
+autoCompleteJS.input.addEventListener("selection", function (event) {
+  const feedback = event.detail;
+  const selection = feedback.selection.value[feedback.selection.key];
+  document.querySelector(".selection").innerHTML = selection;
+  autoCompleteJS.input.value = selection;
+});
+
+
+    </script>
+  </body>
+</html>
