@@ -11,7 +11,7 @@ if (process.env.REACT_APP_DEMO === "true") {
 const data = fs.readFileSync("package.json", "utf-8");
 const packageJs = JSON.parse(data);
 if (process.env.REACT_APP_DEMO === "true") {
-  packageJs.homepage = "/build";
+  packageJs.homepage = "/hqtodo";
 } else {
   if (packageJs.hasOwnProperty("homepage")) delete packageJs.homepage;
 }
