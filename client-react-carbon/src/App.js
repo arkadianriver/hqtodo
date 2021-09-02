@@ -46,7 +46,7 @@ function App() {
   
   useInterval(async () => {
     makeRequest();
-  }, 2000);
+  }, 40000);
 
   if (isLoading) {
     return <Loading />;
