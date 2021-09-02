@@ -1,8 +1,7 @@
 export const makeMermaidText = (issues) => {
 
-  let text = `  gantt
+  let text = `gantt
   excludes weekends
-  dateFormat YYYY-MM-DDTHH:mm:ss
   todayMarker off
   `;
   

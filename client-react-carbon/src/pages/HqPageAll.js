@@ -51,7 +51,7 @@ const HqPageAll = (props) => {
             <div className="all-gantt-footnote">
               <p>Todos with issue numbers link to GitHub.</p>
             </div>
-            {props.data.issues.closed && (
+            {props.data.issues.closed && props.data.issues.closed.length > 0 && (
               <div className="all-closed-section">
                 <h2>Recently closed todos</h2>
                 <ul id="closed" className="all-closed-list">
@@ -61,7 +61,7 @@ const HqPageAll = (props) => {
                 </ul>
               </div>
             )}
-            {props.data.byweek && (
+            {props.data.byweek && props.data.byweek.length > 0 && (
               <div className="top-archive-section">
                 <h2 className="archivetitle">
                   <div>Archived todos</div>

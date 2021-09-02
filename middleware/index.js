@@ -525,26 +525,29 @@ exports.getSupport = () => {
       next();
     }
     // sort entries ascending
-    entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
-    res.locals.supportentries = entries;
-    // prepare data for flow chart
-    const earliest_date = res.locals.entries[res.locals.entries.length - 1].closed_on;
-    const chartdata = [{
-      x: earliest_date,
-      y: 0
-    }];
-    let spTotal = 0;
-    Array.from(entries).reverse().forEach( t => {
-      spTotal += _minutesToEst(t.lasted);
+    const chartdata = [];
+    if (entries.length > 0) {
+      entries.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
+      res.locals.supportentries = entries;
+      // prepare data for flow chart
+      const earliest_date = res.locals.entries[res.locals.entries.length - 1].closed_on;
       chartdata.push({
-        x: t.closed_on,
+        x: earliest_date,
+        y: 0
+      });
+      let spTotal = 0;
+      Array.from(entries).reverse().forEach( t => {
+        spTotal += _minutesToEst(t.lasted);
+        chartdata.push({
+          x: t.closed_on,
+          y: spTotal.toFixed(2)
+        });
+      });
+      chartdata.push({
+        x: moment().format('YYYY-MM-DD HH:mm'),
         y: spTotal.toFixed(2)
       });
-    });
-    chartdata.push({
-      x: moment().format('YYYY-MM-DD HH:mm'),
-      y: spTotal.toFixed(2)
-    })
+    }
     res.locals.supportChartdata = chartdata;
     next();
   }
@@ -899,7 +902,7 @@ function _addCSSClass(propName, className) {
     tagData.opensum = tagData.opensum.toFixed(2);
     // sort arrays before returning
     if (tagData.closed) tagData.closed.sort((a, b) => a.closed_on < b.closed_on ? -1 : 1);
-    if (tagData.archive) {
+    if (tagData.archive && tagData.archive.length > 0) {
       tagData.archive.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
       const dayOne = res.locals.entries[res.locals.entries.length - 1].closed_on.substr(0, 10);
       const chartdata = _chartdataFromTagArchive(tagData.archive, dayOne);
@@ -1026,6 +1029,7 @@ exports.getArchiveByWeek = () => {
 exports.renderIt = (endpoint) => {
   return (req, res, next) => {
     const chartdata = _chartdataFromFullArchive(res.locals.entries);
+    const rightNow = moment().utc().format();
     const data = {
       issues: res.locals.issues,
       byweek: res.locals.archivebyweek,
@@ -1037,9 +1041,9 @@ exports.renderIt = (endpoint) => {
       jsonsupportdata: JSON.stringify(res.locals.supportChartdata),
       jsonchartdata: JSON.stringify(chartdata),
       searchData: JSON.stringify(res.locals.searchData),
-      startdate: chartdata[0].x.substr(0,10),
+      startdate: chartdata.length > 0 ? chartdata[0].x.substr(0,10) : rightNow.substr(0,10),
       fileupdated: moment(req.app.locals.todoFileUpdated).utc().format(),
-      pageupdated: moment().utc().format(),
+      pageupdated: rightNow,
       whoami: WHOAMI,
       spperday: STORYPOINTSADAY,
       hrsperday: WH,
