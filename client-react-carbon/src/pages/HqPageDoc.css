@@ -4,6 +4,25 @@
   justify-content: left;
   align-items: baseline;
 }
+.doc-section-legend ul {
+  margin-top: 2.0rem;
+  margin-left: 16px;
+}
+.doc-tag {
+  margin-bottom: 2.0rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.doc-tag-item {
+  display: flex;
+  flex-flow: row wrap;
+}
+.doc-tag-item > div {
+  margin-left: -8px;
+  padding: 0 8px 0 8px;
+}
 .doc-section-routes ul {
   margin-top: 2.0rem;
   margin-left: 16px;
