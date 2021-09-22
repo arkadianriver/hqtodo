@@ -27,7 +27,7 @@ const HqPageTag = (props) => {
       <span>
         {taginfo.title}{" "}
         <span className="shortdesc-more">
-          (<a href={taginfo.link}>More info</a>)
+          (<a href={taginfo.link} target="_blank" rel="noopener noreferrer">More info</a>)
         </span>
       </span>
     ) : (
