@@ -111,10 +111,10 @@ describe('Integration:', function() {
   it('injectInterrupts() should insert when one day is available', function() {
     const testedFunction = mw.injectInterrupts();
     testedFunction(req, res, next);
-    expect(res.locals.issues.open.pending[2].link).to.equal("https://github.com/ragnoroct/linkme/issues/9");
+    expect(res.locals.issues.open.pending[0][2].link).to.equal("https://github.com/ragnoroct/linkme/issues/9");
   });
   it('injectInterrupts() should respect weekends', function() {
-    expect(res.locals.issues.open.pending[4].startdate).to.equal("2020-06-15T00:00:00");
+    expect(res.locals.issues.open.pending[0][4].startdate).to.equal("2020-06-15T00:00:00");
   });
   it('injectInterrupts() should provide closed items', function() {
     expect(res.locals.issues.closed[1].title).to.equal("take cat to the vet");

@@ -29,11 +29,11 @@ export const makeMermaidText = (issues) => {
   ` ).join('');
   }
 
-  if (issues.open.active.length > 0) {
+  if (issues.open.active.flat().length > 0) {
     text += `
   section In progress
   `;
-    text += issues.open.active.map(
+    text += issues.open.active.flat().map(
         (b) =>
           `${b.title.replace(/[:#]/, "-")} ${b["tagstring"]} :${b["color"]}k${
             b["number"]
@@ -41,11 +41,11 @@ export const makeMermaidText = (issues) => {
   ` ).join('');
   }
   
-  if (issues.open.pending.length > 0) {
+  if (issues.open.pending.flat().length > 0) {
     text += `
   section Backlog
   `;
-    text += issues.open.pending.map(
+    text += issues.open.pending.flat().map(
         (b) =>
           `${b.title.replace(/[:#]/, "-")} ${b["tagstring"]} :${b["color"]}k${
             b["number"]

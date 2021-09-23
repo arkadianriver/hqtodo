@@ -45,17 +45,17 @@
         include('partials/open_entry.ejs', {t: t} ); %> <%_ }); _%> <%_ } %>
       </ul>
 
-      <%_ if (tagdata.open.active && tagdata.open.active.length !== 0) { %>
+      <%_ if (tagdata.open.active && tagdata.open.active.flat().length !== 0) { %>
       <h3 class="open">In progress</h3>
       <ul id="active" style="list-style-type: none">
-        <%_ tagdata.open.active.forEach( t => { _%> <%-
+        <%_ tagdata.open.active.flat().forEach( t => { _%> <%-
         include('partials/open_entry.ejs', {t: t} ); %> <%_ }); _%> <%_ } %>
       </ul>
 
-      <%_ if (tagdata.open.pending && tagdata.open.pending.length !== 0) { %>
+      <%_ if (tagdata.open.pending && tagdata.open.pending.flat().length !== 0) { %>
       <h3 class="open">Backlog</h3>
       <ul id="pending" style="list-style-type: none">
-        <%_ tagdata.open.pending.forEach( t => { _%> <%-
+        <%_ tagdata.open.pending.flat().forEach( t => { _%> <%-
         include('partials/open_entry.ejs', {t: t} ); %> <%_ }); _%> <%_ } %>
       </ul>
 

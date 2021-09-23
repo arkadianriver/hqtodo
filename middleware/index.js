@@ -110,6 +110,11 @@ exports.parseRawTodos = () => {
       links: [],
       blockers: []
     }
+    issues.open.active[0] = [];
+    issues.open.pending[0] = [];
+    issues.interrupts[0] = [];
+    const owners = { default: 0 };
+    let owner_id = 0;
     // parse each line and push the data record to the right place in the structure
     for (let i = 0, j = 1; i < req.app.locals.rawTodos.length; i++) {
       // breaking up regex into 3 passes:
@@ -120,6 +125,18 @@ exports.parseRawTodos = () => {
       if (m) {
         const tags = m1 && m1.length ? m1.flat() : [];
         const isBlocker = tags.some(e => e.match(/^@blk/));
+        // init owner arrays (interrupts, open.active, and open.pending)
+        let owner = tags.find(e => e.match(/^@_/));
+        if (owner) {
+          if (!owners.hasOwnProperty(owner)) {
+            owners[owner] = ++owner_id;
+            issues.interrupts[owners[owner]] = [];
+            issues.open.active[owners[owner]] = [];
+            issues.open.pending[owners[owner]] = [];
+          }
+        } else {
+          owner = 'default';
+        }
         // skip Frozens
         if (m[2] && m[2] == '@low') continue;
         // quickly grab linkUrl if any
@@ -135,7 +152,7 @@ exports.parseRawTodos = () => {
         if (m4) {
           const numdays = parseInt(m4[1].slice(0, -1), 10);
           if (numdays === 0) {           // milestone
-            issues['milestones'].push({
+            issues.milestones.push({
               number: j,
               startdate: m4[2] + 'T00:00:00',
               enddate: m4[2],
@@ -148,7 +165,7 @@ exports.parseRawTodos = () => {
             const enddate = moment(m4[2])
               .businessAdd(numdays - 1, 'days')
               .format('YYYY-MM-DD');
-            issues['interrupts'].push({
+            issues.interrupts[owners[owner]].push({
               number: j,
               startdate: m4[2],
               enddate: enddate,
@@ -195,7 +212,7 @@ exports.parseRawTodos = () => {
             record.startdate = moment().format('YYYY-MM-DDTHH:mm:SS');
             issues.blockers.push(record);
           } else {
-            issues['open'][status].push(record);
+            issues.open[status][owners[owner]].push(record);
           }
         }
         j++;
@@ -203,7 +220,7 @@ exports.parseRawTodos = () => {
     }
     // sort milestones, interrupts, and closed before returning
     if (issues.milestones) issues.milestones.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
-    if (issues.interrupts) issues.interrupts.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
+    issues.interrupts.forEach(ary => ary.sort((a, b) => a.startdate < b.startdate ? -1 : 1));
     if (issues.blockers) issues.blockers.sort((a, b) => a.startdate < b.startdate ? -1 : 1);
     if (issues.closed) issues.closed.sort((a, b) => a.closed_on > b.closed_on ? -1 : 1);
     res.locals.issues = issues;
@@ -346,10 +363,10 @@ const _getRangeArray = (interruptArray) => {
  * @param {Array} todosOpen - input Array (of two arrays)
  * @returns {Array} - single array with both active and pending items with a new `pipeline` property.
  */
-const _copyTodos = (todosOpen) => {
+const _copyTodos = (todosActive, todosPending) => {
   const newTodos = [];
-  todosOpen.active.forEach( t => { t.pipeline = 'active'; newTodos.push(t); });
-  todosOpen.pending.forEach( t => { t.pipeline = 'pending'; newTodos.push(t); });
+  if (todosActive.length > 0) todosActive.forEach( t => { t.pipeline = 'active'; newTodos.push(t); });
+  if (todosPending.length > 0) todosPending.forEach( t => { t.pipeline = 'pending'; newTodos.push(t); });
   return newTodos;
 }
 
@@ -402,37 +419,37 @@ const _fillRanges = (rangeArray, todoArray) => {
  */
 exports.injectInterrupts = () => {
   return (req, res, next) => {
-    // make sure we have an array, even if empty, because the rest depends on its presence
-    if (!res.locals.issues['interrupts']) res.locals.issues.interrupts = [];
-    const todoRangeArray = _getRangeArray(res.locals.issues.interrupts);
-    const todoArray = _copyTodos(res.locals.issues.open);
-    const startDatedTodos = _fillRanges(todoRangeArray, todoArray);
-    const sortedMix = startDatedTodos
-      .concat(res.locals.issues.interrupts)
-      .sort( (a,b) => a.startdate < b.startdate ? -1 : 1);
-    delete res.locals.issues.interrupts;
-    res.locals.issues.open.active = [];
-    res.locals.issues.open.pending = [];
-    let active = true;
-    sortedMix.forEach( t => {
-      if (!t.hasOwnProperty('pipeline')) t.color = 'done, ';              // interrupts get done color
-      if (!t.hasOwnProperty('color')) t.color = t.link ? 'active, ' : ''; // non-crit GH links get active color
-      if (t.hasOwnProperty('pipeline')) { // it's a todo item
-        if (t.pipeline === 'active') {
-          active = true;
-          res.locals.issues.open.active.push(t);
-        } else {
-          active = false;
-          res.locals.issues.open.pending.push(t);
+    for (let i = 0; i < res.locals.issues.interrupts.length; i++) {
+      const todoRangeArray = _getRangeArray(res.locals.issues.interrupts[i]);
+      const todoArray = _copyTodos(res.locals.issues.open.active[i], res.locals.issues.open.pending[i]);
+      const startDatedTodos = _fillRanges(todoRangeArray, todoArray);
+      const sortedMix = startDatedTodos
+        .concat(res.locals.issues.interrupts[i])
+        .sort( (a,b) => a.startdate < b.startdate ? -1 : 1);
+      delete res.locals.issues.interrupts[i];
+      res.locals.issues.open.active[i] = [];
+      res.locals.issues.open.pending[i] = [];
+      let active = true;
+      sortedMix.forEach( t => {
+        if (!t.hasOwnProperty('pipeline')) t.color = 'done, ';              // interrupts get done color
+        if (!t.hasOwnProperty('color')) t.color = t.link ? 'active, ' : ''; // non-crit GH links get active color
+        if (t.hasOwnProperty('pipeline')) { // it's a todo item
+          if (t.pipeline === 'active') {
+            active = true;
+            res.locals.issues.open.active[i].push(t);
+          } else {
+            active = false;
+            res.locals.issues.open.pending[i].push(t);
+          }
+        } else {                            // it's an interrupt
+          if (active) {
+            res.locals.issues.open.active[i].push(t);
+          } else {
+            res.locals.issues.open.pending[i].push(t);
+          }
         }
-      } else {                            // it's an interrupt
-        if (active) {
-          res.locals.issues.open.active.push(t);
-        } else {
-          res.locals.issues.open.pending.push(t);
-        }
-      }
-    });
+      });
+    }
     next();
   }
 }
@@ -674,7 +691,7 @@ function _addCSSClass(propName, className) {
     }
     const tags = {};
     // grab tags from unsorted todos (and so on) ...
-    res.locals.issues.open.active.forEach( e => {
+    res.locals.issues.open.active.flat().forEach( e => {
       e.tagstring.split(/\s+/).forEach( tag => {
         if ( tag.length > 0) {
           const category = tag.slice(1); // remove '@'
@@ -714,7 +731,7 @@ function _addCSSClass(propName, className) {
       });
     });
     [ ...res.locals.issues.open.pending,
-      ...res.locals.issues.closed ].forEach( e => {
+      ...res.locals.issues.closed ].flat().forEach( e => {
       e.tagstring.split(/\s+/).forEach( tag => {
         if ( tag.length > 0) {
           const category = tag.slice(1); // remove '@'
@@ -780,13 +797,13 @@ function _addCSSClass(propName, className) {
       searchData.push({ title: e.title, tags: tagArray, state: "Blockers" });
     });    
     // grab active entries that have this tag
-    res.locals.issues.open.active.forEach( e => {
+    res.locals.issues.open.active.flat().forEach( e => {
       const tagArray = e.tagstring.split(/\s+/);
       if (tagArray[0].length === 0) tagArray.shift();
       searchData.push({ title: e.title, tags: tagArray, state: "In progress" });
     });
     // grab pending entries that have this tag
-    res.locals.issues.open.pending.forEach( e => {
+    res.locals.issues.open.pending.flat().forEach( e => {
       const tagArray = e.tagstring.split(/\s+/);
       if (tagArray[0].length === 0) tagArray.shift();
       searchData.push({ title: e.title, tags: tagArray, state: "Backlog" });
@@ -857,7 +874,7 @@ function _addCSSClass(propName, className) {
       }
     });    
     // grab active entries that have this tag
-    res.locals.issues.open.active.forEach( e => {
+    res.locals.issues.open.active.flat().forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
         const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {
@@ -870,7 +887,7 @@ function _addCSSClass(propName, className) {
       }
     });
     // grab pending entries that have this tag
-    res.locals.issues.open.pending.forEach( e => {
+    res.locals.issues.open.pending.flat().forEach( e => {
       if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
         const newE = {}; Object.assign(newE, e);
         if (e.hasOwnProperty('est')) {

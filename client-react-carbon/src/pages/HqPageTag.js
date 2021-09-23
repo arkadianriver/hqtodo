@@ -72,7 +72,7 @@ const HqPageTag = (props) => {
                 </ul>
               </div>
             )}
-            {tagData.open.active && tagData.open.active.length !== 0 && (
+            {tagData.open.active && tagData.open.active.flat().length !== 0 && (
               <div className="tag-section-progress">
                 <h3>In progress</h3>
                 <ul>
@@ -85,7 +85,7 @@ const HqPageTag = (props) => {
                 </ul>
               </div>
             )}
-            {tagData.open.pending && tagData.open.pending.length !== 0 && (
+            {tagData.open.pending && tagData.open.pending.flat().length !== 0 && (
               <div className="tag-section-backlog">
                 <h3>Backlog</h3>
                 <ul>

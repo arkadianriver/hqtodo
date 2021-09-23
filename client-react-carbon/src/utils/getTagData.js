@@ -72,7 +72,7 @@ export const getTagData = (data, tagname) => {
     }
   });
   // grab active entries that have this tag
-  data.issues.open.active.forEach((e) => {
+  data.issues.open.active.flat().forEach((e) => {
     if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
       const newE = {};
       Object.assign(newE, e);
@@ -86,7 +86,7 @@ export const getTagData = (data, tagname) => {
     }
   });
   // grab pending entries that have this tag
-  data.issues.open.pending.forEach((e) => {
+  data.issues.open.pending.flat().forEach((e) => {
     if (e.tagstring.split(/\s+/).includes(`@${tagname}`)) {
       const newE = {};
       Object.assign(newE, e);

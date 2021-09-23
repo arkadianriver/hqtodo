@@ -43,16 +43,16 @@
     <% }); -%>
     <% } -%>
 
-    <% if (issues.open.active.length) { -%>
+    <% if (issues.open.active.flat().length) { -%>
     section In Progress
-    <% issues.open.active.forEach( t => { -%>
+    <% issues.open.active.flat().forEach( t => { -%>
     <%- `${t.title.replace(/[:#]/,'-')}` %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
     <% }); -%>
     <% } -%>
 
-    <% if (issues.open.pending.length) { -%>
+    <% if (issues.open.pending.flat().length) { -%>
     section Backlog
-    <% issues.open.pending.forEach( t => { -%>
+    <% issues.open.pending.flat().forEach( t => { -%>
     <%- `${t.title.replace(/[:#]/,'-')}` %> <%= t['tagstring'] %> :<%= t['color'] %>k<%= t['number'] %>, <%= t['startdate'] %>, <%= t['est'] %>
     <% }); -%>
     <% } -%>
