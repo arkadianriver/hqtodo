@@ -1,7 +1,13 @@
 .hq-tag-box {
-  overflow-x: hidden;
+  overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.hq-tag-box::-webkit-scrollbar { /* webkit-chrome */
+  width: 0;
+  height: 0;
 }
 .hq-tag-tile {
   height: 3rem;

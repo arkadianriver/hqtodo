@@ -1,6 +1,9 @@
 .hq-header {
   position: relative;
 }
+.hq-header-name:hover {
+  cursor: pointer;
+}
 .hq-search {
   max-width: 304px;
 }

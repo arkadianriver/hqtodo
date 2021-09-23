@@ -16,7 +16,7 @@ const HqHeader = (props) => {
 
   return (
     <Header aria-label="hqTodo" className="hq-header">
-      <HeaderName prefix="hqTodo" onClick={() => linkHandler("/")}>
+      <HeaderName className="hq-header-name" prefix="hqTodo" onClick={() => linkHandler("/")}>
         {props.userName}
       </HeaderName>
       <HeaderGlobalBar>
