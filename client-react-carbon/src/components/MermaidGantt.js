@@ -33,6 +33,17 @@ const MermaidGantt = (props) => {
       gantt.innerHTML = svgraph;
       bindFunctions(gantt);
     }, gantt);
+    const chart = document.querySelector('#mermaid-svg');
+    const vbox = chart.getAttribute('viewBox').split(' ');
+    const hAdj = vbox[3] - 80;
+    const ticks = document.querySelectorAll('#mermaid-svg .tick');
+    ticks.forEach((elem) => {
+      const theLine = elem.firstElementChild;
+      const bottomText = elem.lastElementChild;
+      const topText = bottomText.cloneNode(true);
+      elem.insertBefore(topText, theLine);
+      topText.setAttribute('y', -hAdj);
+    });
   }, [props]);
 
   return <div id="ourgantt"></div>
