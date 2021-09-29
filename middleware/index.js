@@ -9,6 +9,7 @@ const WH = config.get('workHoursPerDay');
 const HOURADJUST = 24 / WH; // 24hr day / 8hr workday
 const STORYPOINTSADAY = config.get('storyPointsPerDay');
 const STORYPOINTFACTOR = STORYPOINTSADAY / 24;
+const MENULINKS = config.get('menuLinks');
 
 const A_DAY = moment.duration(1, 'd');
 
@@ -1030,7 +1031,8 @@ exports.getArchiveByWeek = () => {
       taginfo: res.locals.taginfo,
       tags: res.locals.tags,
       tagdata: res.locals.tagdata,
-      searchData: JSON.stringify(res.locals.searchData)
+      searchData: JSON.stringify(res.locals.searchData),
+      menuLinks: MENULINKS.filter( l => l.title !== "" )
     };
     switch(endpoint) {
       case 'api': res.json(data); break;
@@ -1064,7 +1066,8 @@ exports.renderIt = (endpoint) => {
       whoami: WHOAMI,
       spperday: STORYPOINTSADAY,
       hrsperday: WH,
-      spfactor: STORYPOINTFACTOR
+      spfactor: STORYPOINTFACTOR,
+      menuLinks: MENULINKS.filter( l => l.title !== "" )
     };
     switch(endpoint) {
       case 'api': res.json(data); break;

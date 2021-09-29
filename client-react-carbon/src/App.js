@@ -55,7 +55,7 @@ function App() {
   return (
     <div>
       <Headroom>
-        <HqHeader userName={data.whoami} />
+        <HqHeader userName={data.whoami} menuLinks={data.menuLinks} />
         <HqTagList tags={data.tags} />
       </Headroom>
       <Switch>

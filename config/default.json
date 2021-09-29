@@ -3,6 +3,16 @@
   "workHoursPerDay": 8,
   "storyPointsPerDay": 2,
   "todoFile": "TODO",
+  "menuLinks": [
+    {
+      "title": "Optional external link",
+      "link": "https://example.com"
+    },
+    {
+      "title": "",
+      "link": ""
+    }
+  ],
   "linkmeLinks": [
     {
       "pattern": "ghihq•(\\d+)",
