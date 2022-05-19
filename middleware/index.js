@@ -462,12 +462,9 @@ exports.injectInterrupts = () => {
  exports.getTodays = () => {
   return (req, res, next) => {
     let todays = "<pre>```\n";
-    const today = _getBizStart(moment(), true);
     res.locals.issues.open.active.flat().forEach( i => {
       if (i.tagstring.match(/\@_/)) return; // mine only @todo support :all param
-      if ( today.match(i.startdate.substr(0,10)) ) {
-        todays += `☐ ${i.title}\n`;
-      }
+      todays += `☐ ${i.title}\n`;
     });
     todays += "```</pre>";
     res.locals.todays = todays;
