@@ -70,11 +70,36 @@ doc.setRoute(
 doc.setRoute(
   router,
   "get",
+  "/todos/today",
+  "What you'll do today (for scrum)",
+  mw.parseRawTodos(),
+  mw.injectInterrupts(),
+  mw.getTodays(),
+  (req, res, next) => {
+    res.send(res.locals.todays);
+  }
+);
+
+doc.setRoute(
+  router,
+  "get",
   "/todos/archived",
   "Archived items, with metadata extracted",
   mw.getArchive(),
   (req, res, next) => {
     res.json(res.locals.entries);
+  }
+);
+
+doc.setRoute(
+  router,
+  "get",
+  "/todos/yesterday",
+  "What you did yesterday (for scrum)",
+  mw.getArchive(),
+  mw.getYesterdays(),
+  (req, res, next) => {
+    res.send(res.locals.yesterdays);
   }
 );
 

@@ -457,6 +457,26 @@ exports.injectInterrupts = () => {
 
 
 /**
+ * return data for scrum. Today's upcoming tasks
+ */
+ exports.getTodays = () => {
+  return (req, res, next) => {
+    let todays = "<pre>```\n";
+    const today = _getBizStart(moment(), true);
+    res.locals.issues.open.active.flat().forEach( i => {
+      if (i.tagstring.match(/\@_/)) return; // mine only @todo support :all param
+      if ( today.match(i.startdate.substr(0,10)) ) {
+        todays += `☐ ${i.title}\n`;
+      }
+    });
+    todays += "```</pre>";
+    res.locals.todays = todays;
+    next();
+  }
+}
+
+
+/**
  * Find minutes from a string of the form 'NdXhYmZs'
  * Rounds up the seconds
  */
@@ -604,6 +624,32 @@ exports.getArchive = () => {
     next();
   }
 }
+
+
+/**
+ * return data for scrum. Yesterday's completed tasks
+ * @TODO include weekend work on Monday's scrum (might use interval instead of match)
+ */
+ exports.getYesterdays = () => {
+  return (req, res, next) => {
+    let yesterdays = "<pre>```\n";
+    const yesterday = moment().prevBusinessDay().format('YYYY-MM-DD');
+    console.log(yesterday);
+    res.locals.entries.some( e => {
+      if ( e.tags.some(e => e.match(/\@_/)) === false ) {
+        if ( yesterday.match(e.closed_on.substr(0,10)) ) {
+          yesterdays += `✔ ${e.title}\n`;
+        } else {
+          return;
+        }  
+      }
+    });
+    yesterdays += "```</pre>";
+    res.locals.yesterdays = yesterdays;
+    next();
+  }
+}
+
 
 /**
  * return data for apexcharts from the provided archive entries
