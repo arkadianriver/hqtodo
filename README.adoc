@@ -26,7 +26,7 @@ His extension is awesome, and with this li'l hqTodo web app,
 all that information is summarized in an easily consumable report for you
 (and your team if you want).
 
-pass:[<a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><div align="center"><h3>View a sample</h3><img src="readme.gif"/></div></a>]
+pass:[<div align="center"><a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><h3>View a sample</h3><img src="readme.gif"/></a></div>]
 
 ////
 pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img src="readme3.png" width="600px"/><img src="readme2.png" width="600px"/></p>]
