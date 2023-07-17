@@ -6,3 +6,4 @@ export { default as HqTagList } from "./HqTagList";
 export { default as HqEntryOpen } from "./HqEntryOpen";
 export { default as HqEntryClosed } from "./HqEntryClosed";
 export { default as HqFooter } from "./HqFooter";
+export { default as SwaggerUIComp } from "./SwaggerUIComp";

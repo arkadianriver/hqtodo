@@ -1,0 +1,50 @@
+h3 {
+  margin-top: 2.0rem;
+  margin-bottom: 0.8rem;
+  padding-left: 0;
+  border-left: none;
+  color: #3b4151;
+  font-size: 1.75rem;
+  margin: 0 0 5px;
+  box-sizing: border-box;
+}
+.swagger-ui .info .title {
+  color: #161616;
+  font-family: "IBM Plex Sans";
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+.swagger-ui .wrapper {
+  box-sizing: border-box;
+  margin: 0;
+  max-width: 1460px;
+  padding: 0;
+  width: 100%;
+}
+.doc-title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: baseline;
+}
+.doc-section-legend ul {
+  margin-top: 2.0rem;
+  margin-left: 10px;
+}
+.doc-tag {
+  margin-bottom: 2.0rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.doc-tag-item {
+  display: flex;
+  flex-flow: row wrap;
+}
+.doc-tag-item > div {
+  margin-left: -8px;
+  padding: 0 8px 0 8px;
+}

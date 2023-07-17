@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import "carbon-components/css/carbon-components.min.css";
 import "./App.css";
 import { Loading } from "carbon-components-react";
-import { HqPageAll, HqPageTag, HqPageDoc } from "./pages";
+import { HqPageAll, HqPageTag, HqPageSwagger } from "./pages";
 import { HqFooter, HqHeader, HqTagList } from "./components";
 import { useInterval } from "./utils/useInterval";
 import Headroom from "react-headroom";
@@ -66,7 +66,7 @@ function App() {
           <HqPageTag data={data} />
         </Route>
         <Route path="/doc">
-          <HqPageDoc />
+          <HqPageSwagger />
         </Route>
       </Switch>
       <HqFooter
