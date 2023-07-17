@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/hqtodo/static/css/main.393ddd99.chunk.css",
-    "main.js": "/hqtodo/static/js/main.bff5aae6.chunk.js",
-    "main.js.map": "/hqtodo/static/js/main.bff5aae6.chunk.js.map",
-    "runtime-main.js": "/hqtodo/static/js/runtime-main.763754cd.js",
-    "runtime-main.js.map": "/hqtodo/static/js/runtime-main.763754cd.js.map",
-    "static/css/2.baa6baa6.chunk.css": "/hqtodo/static/css/2.baa6baa6.chunk.css",
-    "static/js/2.a060300e.chunk.js": "/hqtodo/static/js/2.a060300e.chunk.js",
-    "static/js/2.a060300e.chunk.js.map": "/hqtodo/static/js/2.a060300e.chunk.js.map",
-    "static/js/3.5b106d43.chunk.js": "/hqtodo/static/js/3.5b106d43.chunk.js",
-    "static/js/3.5b106d43.chunk.js.map": "/hqtodo/static/js/3.5b106d43.chunk.js.map",
+    "main.css": "/hqtodo/static/css/main.a4c174b6.chunk.css",
+    "main.js": "/hqtodo/static/js/main.474cb308.chunk.js",
+    "main.js.map": "/hqtodo/static/js/main.474cb308.chunk.js.map",
+    "runtime-main.js": "/hqtodo/static/js/runtime-main.b5e11daa.js",
+    "runtime-main.js.map": "/hqtodo/static/js/runtime-main.b5e11daa.js.map",
+    "static/css/2.2be759cb.chunk.css": "/hqtodo/static/css/2.2be759cb.chunk.css",
+    "static/js/2.9641f432.chunk.js": "/hqtodo/static/js/2.9641f432.chunk.js",
+    "static/js/2.9641f432.chunk.js.map": "/hqtodo/static/js/2.9641f432.chunk.js.map",
+    "static/js/3.fb1a42b5.chunk.js": "/hqtodo/static/js/3.fb1a42b5.chunk.js",
+    "static/js/3.fb1a42b5.chunk.js.map": "/hqtodo/static/js/3.fb1a42b5.chunk.js.map",
     "index.html": "/hqtodo/index.html",
-    "static/css/2.baa6baa6.chunk.css.map": "/hqtodo/static/css/2.baa6baa6.chunk.css.map",
-    "static/css/main.393ddd99.chunk.css.map": "/hqtodo/static/css/main.393ddd99.chunk.css.map",
-    "static/js/2.a060300e.chunk.js.LICENSE.txt": "/hqtodo/static/js/2.a060300e.chunk.js.LICENSE.txt"
+    "static/css/2.2be759cb.chunk.css.map": "/hqtodo/static/css/2.2be759cb.chunk.css.map",
+    "static/css/main.a4c174b6.chunk.css.map": "/hqtodo/static/css/main.a4c174b6.chunk.css.map",
+    "static/js/2.9641f432.chunk.js.LICENSE.txt": "/hqtodo/static/js/2.9641f432.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.763754cd.js",
-    "static/css/2.baa6baa6.chunk.css",
-    "static/js/2.a060300e.chunk.js",
-    "static/css/main.393ddd99.chunk.css",
-    "static/js/main.bff5aae6.chunk.js"
+    "static/js/runtime-main.b5e11daa.js",
+    "static/css/2.2be759cb.chunk.css",
+    "static/js/2.9641f432.chunk.js",
+    "static/css/main.a4c174b6.chunk.css",
+    "static/js/main.474cb308.chunk.js"
   ]
 }
