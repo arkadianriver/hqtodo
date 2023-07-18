@@ -712,7 +712,7 @@ paths:
         (server-side view rendering)
       parameters:
       - name: tagname
-        description: The tag name for which the view is displayed.
+        description: The tag name that you want information about.
         in: path
         schema:
           type: string
@@ -1132,7 +1132,7 @@ paths:
         from the data obtained by the single `/api` endpoint.
       parameters:
       - name: tagname
-        description: The tag name for which the data is retrieved.
+        description: The tag name that you want information about.
         in: path
         schema:
           type: string
