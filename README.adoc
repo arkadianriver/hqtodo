@@ -134,13 +134,13 @@ Syntax:
 ----
 
 * Priority tagging:
-** Items prefixed with `@today` are placed in order in the "`In Progress`" section.
-** Items with no priority label are listed in order in the "`Backlog`" section.
+** Items prefixed with `@today` are placed in order in the _In Progress_ section.
+** Items with no priority label are listed in order in the _Backlog_ section.
 ** Items prefixed with `@high` are colored red.
 ** Items prefixed with `@low` are not displayed. (This is your Icebox.)
 * The optional `@Nh` tag indicates your estimated N hours. No tag gets the default of 2 hours.
 * You can provide any number of `@custom` tags for your own custom filtering.
-  They're simply displayed with the title.
+  They're displayed with the title.
 * When you press kbd:[Super+D] to mark a task with a checkmark and a `@done` tag, it's listed
   in the "`Recently closed todos`" section of the web page.
 
