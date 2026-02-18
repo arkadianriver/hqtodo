@@ -3,26 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@carbon/themes": "^10.40.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "apexcharts": "^3.27.3",
-    "carbon-components": "^10.41.0",
-    "carbon-components-react": "^7.41.0",
-    "carbon-icons": "^7.0.7",
-    "luxon": "^2.0.2",
-    "mermaid": "~8.5.1",
-    "node-sass": "^6.0.1",
-    "react": "^17.0.2",
-    "react-apexcharts": "^1.3.9",
-    "react-dom": "^17.0.2",
-    "react-headroom": "^3.1.1",
-    "react-router-dom": "^5.2.0",
+    "@carbon/react": "^1.101.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "apexcharts": "^5.6.0",
+    "luxon": "^3.7.2",
+    "mermaid": "^11.12.3",
+    "node-sass": "^9.0.0",
+    "react": "^18.2.0",
+    "react-apexcharts": "^2.0.1",
+    "react-dom": "^18.2.0",
+    "react-headroom": "^3.2.1",
+    "react-router-dom": "^7.13.0",
     "react-router-hash-link": "^2.4.3",
-    "react-scripts": "4.0.3",
-    "swagger-ui": "4.13.0",
-    "web-vitals": "^1.0.1"
+    "react-scripts": "^5.0.1",
+    "swagger-ui": "^5.31.1",
+    "web-vitals": "^5.1.0"
   },
   "scripts": {
     "start": "node setupBuild.js && cross-env PORT=3001 REACT_APP_DEMO=false react-scripts start",
@@ -51,6 +48,6 @@
   },
   "proxy": "http://localhost:3000",
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^10.1.0"
   }
 }

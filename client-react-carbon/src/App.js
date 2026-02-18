@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "carbon-components/css/carbon-components.min.css";
 import "./App.css";
 import { Loading } from "carbon-components-react";
@@ -58,17 +58,11 @@ function App() {
         <HqHeader userName={data.whoami} menuLinks={data.menuLinks} />
         <HqTagList tags={data.tags} />
       </Headroom>
-      <Switch>
-        <Route path="/" exact>
-          <HqPageAll data={data} />
-        </Route>
-        <Route path="/tags/:tag">
-          <HqPageTag data={data} />
-        </Route>
-        <Route path="/doc">
-          <HqPageSwagger />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" exact element={<HqPageAll data={data} />} />
+        <Route path="/tags/:tag" element={<HqPageTag data={data} />} />
+        <Route path="/doc" element={<HqPageSwagger />} />
+      </Routes>
       <HqFooter
         pageUpdated={
           process.env.REACT_APP_DEMO !== "true" ? data.pageupdated : new Date().toISOString()

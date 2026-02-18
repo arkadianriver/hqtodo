@@ -1,6 +1,6 @@
 import React from "react";
 import "./HqTagList.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Tile, Tag } from "carbon-components-react";
 import { NextOutline24, PreviousOutline24 } from "@carbon/icons-react";
 
@@ -29,9 +29,9 @@ const HqTagList = (props) => {
     }, 60);
   }
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const clickHandler = (tag) => {
-    history.push(`/tags/${tag}`);
+    navigate(`/tags/${tag}`);
   };
 
   const getColor = (tagClass) => {

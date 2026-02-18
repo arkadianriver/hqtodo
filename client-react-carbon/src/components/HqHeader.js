@@ -10,20 +10,20 @@ import {
   Switcher,
   SwitcherItem,
 } from "carbon-components-react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { AppSwitcher20, Book20 } from "@carbon/icons-react";
 import { slugify } from "../utils/slugify";
 
 const HqHeader = (props) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const linkHandler = (path) => {
     if (path.substring(0, 4) === "http") {
       window.open(path);
     } else {
-      history.push(path);
+      navigate(path);
     }
     setIsExpanded(false);
   };
