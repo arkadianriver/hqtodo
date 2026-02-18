@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Row, Column, Content } from "carbon-components-react";
+import { Grid, Row, Column, Content } from "@carbon/react";
 import { HqEntryClosed, ApexchartsLine } from "../components";
 import { slugify } from "../utils/slugify";
 import MermaidGantt from "../components/MermaidGantt";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Row, Column, Content, Tag } from "carbon-components-react";
+import { Grid, Row, Column, Content, Tag } from "@carbon/react";
 import { SwaggerUIComp } from "../components";
 import "./HqPageSwagger.css";
 

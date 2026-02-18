@@ -1,5 +1,5 @@
 import "./HqFooter.css";
-import { Row, Column, Grid } from "carbon-components-react";
+import { Row, Column, Grid } from "@carbon/react";
 import { HashLink as Link } from "react-router-hash-link";
 
 const HqFooter = (props) => {

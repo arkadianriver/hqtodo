@@ -9,7 +9,7 @@ import {
   HeaderPanel,
   Switcher,
   SwitcherItem,
-} from "carbon-components-react";
+} from "@carbon/react";
 import { useNavigate } from "react-router-dom";
 import { AppSwitcher20, Book20 } from "@carbon/icons-react";
 import { slugify } from "../utils/slugify";

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "carbon-components/css/carbon-components.min.css";
 import "./App.css";
-import { Loading } from "carbon-components-react";
+import { Loading } from "@carbon/react";
 import { HqPageAll, HqPageTag, HqPageSwagger } from "./pages";
 import { HqFooter, HqHeader, HqTagList } from "./components";
 import { useInterval } from "./utils/useInterval";

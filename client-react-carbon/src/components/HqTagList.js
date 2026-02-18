@@ -1,7 +1,7 @@
 import React from "react";
 import "./HqTagList.css";
 import { useNavigate } from "react-router-dom";
-import { Tile, Tag } from "carbon-components-react";
+import { Tile, Tag } from "@carbon/react";
 import { NextOutline24, PreviousOutline24 } from "@carbon/icons-react";
 
 const HqTagList = (props) => {

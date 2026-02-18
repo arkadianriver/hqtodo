@@ -1,6 +1,6 @@
 import React from "react";
 import "./HqPageDoc.css";
-import { Loading, Grid, Row, Column, Content, Tag } from "carbon-components-react";
+import { Loading, Grid, Row, Column, Content, Tag } from "@carbon/react";
 import { slugify } from "../utils/slugify";
 import apiDocData from "../test/mock-doc-data";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./HqPageTag.css";
 import { useParams } from "react-router-dom";
-import { Loading, Grid, Row, Column, Content } from "carbon-components-react";
+import { Loading, Grid, Row, Column, Content } from "@carbon/react";
 import { ApexchartsBar, HqEntryOpen, HqEntryClosed } from "../components";
 import { slugify } from "../utils/slugify";
 import { getTagData } from "../utils/getTagData";
