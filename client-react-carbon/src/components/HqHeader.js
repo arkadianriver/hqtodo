@@ -11,7 +11,7 @@ import {
   SwitcherItem,
 } from "@carbon/react";
 import { useNavigate } from "react-router-dom";
-import { Switcher, Book } from "@carbon/react/icons";
+import { Apps, Book } from "@carbon/react/icons";
 import { slugify } from "../utils/slugify";
 
 const HqHeader = (props) => {
@@ -56,7 +56,7 @@ const HqHeader = (props) => {
             onClick={() => setIsExpanded(!isExpanded)}
             isActive={isExpanded}
           >
-            <Switcher size={20} />
+            <Apps size={20} />
           </HeaderGlobalAction>
         )}
       </HeaderGlobalBar>
