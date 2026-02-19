@@ -2,7 +2,7 @@ import React from "react";
 import "./HqTagList.css";
 import { useNavigate } from "react-router-dom";
 import { Tile, Tag } from "@carbon/react";
-import { NextOutline24, PreviousOutline24 } from "@carbon/icons-react";
+import { NextOutline, PreviousOutline } from "@carbon/icons-react";
 
 const HqTagList = (props) => {
   const prevClickHandler = () => {
@@ -52,7 +52,7 @@ const HqTagList = (props) => {
     <Tile className="hq-tag-tile">
       <div className="hq-tag-row">
         <div className="hq-tag-leftbttn" onClick={prevClickHandler}>
-          <PreviousOutline24 />
+          <PreviousOutline size={24} />
         </div>
         <div className="hq-tag-box">
           {props.tags &&
@@ -69,7 +69,7 @@ const HqTagList = (props) => {
             ))}
         </div>
         <div className="hq-tag-rightbttn" onClick={nextClickHandler}>
-          <NextOutline24 />
+          <NextOutline size={24} />
         </div>
       </div>
     </Tile>
