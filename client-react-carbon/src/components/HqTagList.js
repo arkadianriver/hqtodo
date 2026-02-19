@@ -2,7 +2,7 @@ import React from "react";
 import "./HqTagList.css";
 import { useNavigate } from "react-router-dom";
 import { Tile, Tag } from "@carbon/react";
-import { NextOutline, PreviousOutline } from "@carbon/icons-react";
+import { NextOutline, PreviousOutline } from "@carbon/react/icons";
 
 const HqTagList = (props) => {
   const prevClickHandler = () => {

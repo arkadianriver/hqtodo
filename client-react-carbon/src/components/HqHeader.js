@@ -11,7 +11,7 @@ import {
   SwitcherItem,
 } from "@carbon/react";
 import { useNavigate } from "react-router-dom";
-import { AppSwitcher, Book } from "@carbon/icons-react";
+import { AppSwitcher, Book } from "@carbon/react/icons";
 import { slugify } from "../utils/slugify";
 
 const HqHeader = (props) => {
