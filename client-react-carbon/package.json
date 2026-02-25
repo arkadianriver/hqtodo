@@ -24,7 +24,7 @@
   "scripts": {
     "start": "node setupBuild.js && VITE_DEMO=false vite",
     "build": "node setupBuild.js && vite build",
-    "demo-build": "VITE_DEMO=true node setupBuild.js && VITE_DEMO=true vite build && node cpBuildUp.js && node cleanupDemo.js"
+    "demo-build": "VITE_DEMO=true node setupBuild.js && VITE_DEMO=true vite build --base '/hqtodo/' && node cpBuildUp.js && node cleanupDemo.js"
   },
   "eslintConfig": {
     "extends": [
