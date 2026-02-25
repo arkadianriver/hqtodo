@@ -1,3 +1,7 @@
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex'
+);
+
 .app-head-spacer {
   display: block;
   z-index: 0;
@@ -6,7 +10,7 @@
 .app-breadcrumb {
   display: inline-flex;
 }
-.bx--breadcrumb {
+.cds--breadcrumb {
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.29;

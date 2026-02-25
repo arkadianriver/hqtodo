@@ -295,7 +295,7 @@ doc.setRoute(
 doc.setRoute(
   router,
   "get",
-  "*",
+  "/{*splat}",
   "All other routes handled by the client application.",
   (req, res) => {
     res.sendFile(

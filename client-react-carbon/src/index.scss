@@ -1,0 +1,11 @@
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex'
+);
+
+@use '@carbon/themes/scss/themes' as *;
+@use '@carbon/styles';
+
+:root {
+  @include styles.font-face;
+  @include themes.theme($g100);
+}

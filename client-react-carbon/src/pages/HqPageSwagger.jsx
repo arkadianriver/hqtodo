@@ -1,11 +1,11 @@
 import React from "react";
-import { Grid, Row, Column, Content, Tag } from "carbon-components-react";
-import { SwaggerUIComp } from "../components";
+import { Grid, Column, Content, Tag, Theme } from "@carbon/react";
+import SwaggerUI from "swagger-ui-react";
+import swaggerData from "/src/utils/swaggerData";
+import "swagger-ui-react/swagger-ui.css";
 import "./HqPageSwagger.css";
 
-
 const HqPageSwagger = () => {
-
   const colors = [
     {
       color: "red",
@@ -30,14 +30,17 @@ const HqPageSwagger = () => {
   ];
 
   return (
-    <Grid>
-      <Row>
-        <Column>
-        <Content className="doc-page-content">
+    <Theme theme="g10">
+      <Grid>
+        <Column lg={16} md={8} sm={4}>
+          <Content className="doc-page-content">
             <h1>Help</h1>
             <ul>
-              <li>To scroll through the tag list when viewed from a desktop browser,
-                use the arrow buttons or hold down Shift while scrolling the mouse wheel.</li>
+              <li>
+                To scroll through the tag list when viewed from a desktop
+                browser, use the arrow buttons or hold down Shift while
+                scrolling the mouse wheel.
+              </li>
             </ul>
             <h2 id="doc-legend">Tag color legend</h2>
             <div className="doc-section-legend">
@@ -45,20 +48,22 @@ const HqPageSwagger = () => {
                 {colors.map((c) => (
                   <li className="doc-tag" key={c.name}>
                     <div className="doc-tag-item">
-                      <Tag type={c.color} id={c.name} title={c.name}>
-                        <span>{c.name.replace('-', ' ')}</span>
-                      </Tag>
+                      <Theme theme="g90">
+                        <Tag type={c.color} id={c.name}>
+                          <span>{c.name.replace("-", " ")}</span>
+                        </Tag>
+                      </Theme>
                     </div>
                     <div className="doc-tag-description">{c.desc}</div>
                   </li>
                 ))}
               </ul>
             </div>
-            <SwaggerUIComp/>
+            <SwaggerUI spec={swaggerData} />
           </Content>
         </Column>
-      </Row>
-    </Grid>
+      </Grid>
+    </Theme>
   );
 };
 

@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 yarn.lock
-public/index.html
-public/404.html
+index.html
+404.html

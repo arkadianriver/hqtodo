@@ -1,16 +1,16 @@
 const fs = require("fs");
 
-if (process.env.REACT_APP_DEMO === "true") {
-  fs.copyFileSync("public/404_demo.html", "public/404.html");
-  fs.copyFileSync("public/index_demo.html", "public/index.html");
+if (process.env.VITE_DEMO === "true") {
+  fs.copyFileSync("404_demo.html", "404.html");
+  fs.copyFileSync("index_demo.html", "index.html");
 } else {
-  if (fs.existsSync("public/404.html")) fs.unlinkSync("public/404.html");
-  fs.copyFileSync("public/index_prod.html", "public/index.html");
+  if (fs.existsSync("404.html")) fs.unlinkSync("404.html");
+  fs.copyFileSync("index_prod.html", "index.html");
 }
 
 const data = fs.readFileSync("package.json", "utf-8");
 const packageJs = JSON.parse(data);
-if (process.env.REACT_APP_DEMO === "true") {
+if (process.env.VITE_DEMO === "true") {
   packageJs.homepage = "/hqtodo";
 } else {
   if (packageJs.hasOwnProperty("homepage")) delete packageJs.homepage;

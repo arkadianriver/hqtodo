@@ -20,7 +20,7 @@ jobs:
     - name: Set up
       uses: actions/setup-node@v1
       with:
-        node-version: 12.x
+        node-version: 24.x
     - name: Install and Test
       run: |
         npm ci

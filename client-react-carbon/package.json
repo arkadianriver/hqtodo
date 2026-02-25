@@ -3,33 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@carbon/themes": "^10.40.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "apexcharts": "^3.27.3",
-    "carbon-components": "^10.41.0",
-    "carbon-components-react": "^7.41.0",
-    "carbon-icons": "^7.0.7",
-    "luxon": "^2.0.2",
-    "mermaid": "~8.5.1",
-    "node-sass": "^6.0.1",
-    "react": "^17.0.2",
-    "react-apexcharts": "^1.3.9",
-    "react-dom": "^17.0.2",
-    "react-headroom": "^3.1.1",
-    "react-router-dom": "^5.2.0",
+    "@carbon/react": "^1.101.0",
+    "@carbon/themes": "^11.68.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "apexcharts": "^5.6.0",
+    "luxon": "^3.7.2",
+    "mermaid": "^11.12.3",
+    "react": "^18.2.0",
+    "react-apexcharts": "^2.0.1",
+    "react-dom": "^18.2.0",
+    "react-headroom": "^3.2.1",
+    "react-router": "^7.13.0",
     "react-router-hash-link": "^2.4.3",
-    "react-scripts": "4.0.3",
-    "swagger-ui": "4.13.0",
-    "web-vitals": "^1.0.1"
+    "sass": "^1.97.3",
+    "swagger-ui-react": "^5.31.2",
+    "web-vitals": "^5.1.0"
   },
   "scripts": {
-    "start": "node setupBuild.js && cross-env PORT=3001 REACT_APP_DEMO=false react-scripts start",
-    "build": "node setupBuild.js && react-scripts build",
-    "demo-build": "REACT_APP_DEMO=true node setupBuild.js && BUILD_PATH=../build REACT_APP_DEMO=true react-scripts build && node cleanupDemo.js",
-    "test": "node setupBuild.js && react-scripts test",
-    "eject": "node setupBuild.js && react-scripts eject"
+    "start": "node setupBuild.js && VITE_DEMO=false vite",
+    "build": "node setupBuild.js && vite build",
+    "demo-build": "VITE_DEMO=true node setupBuild.js && VITE_DEMO=true vite build && node cleanupDemo.js"
   },
   "eslintConfig": {
     "extends": [
@@ -37,20 +32,19 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "scarfSettings": {
+    "enabled": false
   },
   "proxy": "http://localhost:3000",
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "^7.3.1"
   }
 }

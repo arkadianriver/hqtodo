@@ -1,0 +1,80 @@
+import React from "react";
+import "./HqTagList.css";
+import { useNavigate } from "react-router";
+import { Tile, Tag, Theme } from "@carbon/react";
+import { NextOutline, PreviousOutline } from "@carbon/react/icons";
+
+const HqTagList = (props) => {
+  const prevClickHandler = () => {
+    slide("left");
+  };
+
+  const nextClickHandler = () => {
+    slide("right");
+  };
+
+  const slide = (direction) => {
+    const container = document.querySelector(".hq-tag-box");
+    let scrollCompleted = 0;
+    let slideVar = setInterval(() => {
+      if (direction === "left") {
+        container.scrollLeft -= 30;
+      } else {
+        container.scrollLeft += 30;
+      }
+      scrollCompleted += 10;
+      if (scrollCompleted >= 100) {
+        window.clearInterval(slideVar);
+      }
+    }, 60);
+  };
+
+  const navigate = useNavigate();
+  const clickHandler = (tag) => {
+    navigate(`/tags/${tag}`);
+  };
+
+  const getColor = (tagClass) => {
+    return tagClass.includes("hasblocker")
+      ? "red"
+      : tagClass.includes("hasactive")
+        ? "blue"
+        : tagClass.includes("hasclosed")
+          ? "green"
+          : "teal";
+  };
+
+  const milestoneClass = (tagClass) => {
+    return tagClass.includes("hasmilestone") ? "has-milestone" : "";
+  };
+
+  return (
+    <Theme theme="g90">
+      <Tile className="hq-tag-tile">
+        <div className="hq-tag-row">
+          <div className="hq-tag-leftbttn" onClick={prevClickHandler}>
+            <PreviousOutline size={24} />
+          </div>
+          <div className="hq-tag-box">
+            {props.tags &&
+              props.tags.map((t) => (
+                <Tag
+                  type={getColor(t.class)}
+                  key={t.tag}
+                  id={t.tag}
+                  onClick={() => clickHandler(t.tag)}
+                >
+                  <span className={milestoneClass(t.class)}>@{t.tag}</span>
+                </Tag>
+              ))}
+          </div>
+          <div className="hq-tag-rightbttn" onClick={nextClickHandler}>
+            <NextOutline size={24} />
+          </div>
+        </div>
+      </Tile>
+    </Theme>
+  );
+};
+
+export default HqTagList;
