@@ -1,15 +1,15 @@
-import React from "react";
-import { Grid, Row, Column, Content } from "@carbon/react";
-import { HqEntryClosed, ApexchartsLine } from "../components";
-import { slugify } from "../utils/slugify";
-import MermaidGantt from "../components/MermaidGantt";
+import { Grid, Column, Content, Theme } from "@carbon/react";
+import { HqEntryClosed, ApexchartsLine } from "/src/components";
+import { slugify } from "/src/utils/slugify";
+import MermaidGantt from "/src/components/MermaidGantt";
 import "./HqPageAll.css";
 
 const HqPageAll = (props) => {
+
   return (
-    <Grid>
-      <Row>
-        <Column>
+    <Theme theme="g10">
+      <Grid>
+        <Column lg={16} md={8} sm={4}>
           <Content className="all-page-content">
             <h1 className="all-title">
               <div>All activity</div>
@@ -45,22 +45,25 @@ const HqPageAll = (props) => {
                   )}
                 </div>
               ))}
-              {/* <div dangerouslySetInnerHTML={{ __html: svg }} /> */}
               <MermaidGantt issues={props.data.issues} />
             </div>
             <div className="all-gantt-footnote">
               <p>Todos with issue numbers link to GitHub.</p>
             </div>
-            {props.data.issues.closed && props.data.issues.closed.length > 0 && (
-              <div className="all-closed-section">
-                <h2>Recently closed todos</h2>
-                <ul id="closed" className="all-closed-list">
-                  {props.data.issues.closed.map((t, i) => (
-                    <HqEntryClosed key={`${i}-${slugify(t.title)}`} entry={t} />
-                  ))}
-                </ul>
-              </div>
-            )}
+            {props.data.issues.closed &&
+              props.data.issues.closed.length > 0 && (
+                <div className="all-closed-section">
+                  <h2>Recently closed todos</h2>
+                  <ul id="closed" className="all-closed-list">
+                    {props.data.issues.closed.map((t, i) => (
+                      <HqEntryClosed
+                        key={`${i}-${slugify(t.title)}`}
+                        entry={t}
+                      />
+                    ))}
+                  </ul>
+                </div>
+              )}
             {props.data.byweek && props.data.byweek.length > 0 && (
               <div className="top-archive-section">
                 <h2 className="archivetitle">
@@ -74,13 +77,13 @@ const HqPageAll = (props) => {
                 </h2>
                 <ApexchartsLine
                   jsonchartdata={
-                    process.env.REACT_APP_DEMO === "true"
+                    import.meta.env.VITE_DEMO === "true"
                       ? JSON.parse(props.data.jsonchartdata)
                       : props.data.jsonchartdata
                   }
                   hassupportdata={props.data.hassupportdata}
                   jsonsupportdata={
-                    process.env.REACT_APP_DEMO === "true"
+                    import.meta.env.VITE_DEMO === "true"
                       ? JSON.parse(props.data.jsonsupportdata)
                       : props.data.jsonsupportdata
                   }
@@ -112,8 +115,8 @@ const HqPageAll = (props) => {
             )}
           </Content>
         </Column>
-      </Row>
-    </Grid>
+      </Grid>
+    </Theme>
   );
 };
 

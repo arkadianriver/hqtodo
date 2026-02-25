@@ -1,7 +1,7 @@
 import React from "react";
 import "./HqTagList.css";
-import { useNavigate } from "react-router-dom";
-import { Tile, Tag } from "@carbon/react";
+import { useNavigate } from "react-router";
+import { Tile, Tag, Theme } from "@carbon/react";
 import { NextOutline, PreviousOutline } from "@carbon/react/icons";
 
 const HqTagList = (props) => {
@@ -27,7 +27,7 @@ const HqTagList = (props) => {
         window.clearInterval(slideVar);
       }
     }, 60);
-  }
+  };
 
   const navigate = useNavigate();
   const clickHandler = (tag) => {
@@ -38,10 +38,10 @@ const HqTagList = (props) => {
     return tagClass.includes("hasblocker")
       ? "red"
       : tagClass.includes("hasactive")
-      ? "blue"
-      : tagClass.includes("hasclosed")
-      ? "green"
-      : "teal";
+        ? "blue"
+        : tagClass.includes("hasclosed")
+          ? "green"
+          : "teal";
   };
 
   const milestoneClass = (tagClass) => {
@@ -49,30 +49,31 @@ const HqTagList = (props) => {
   };
 
   return (
-    <Tile className="hq-tag-tile">
-      <div className="hq-tag-row">
-        <div className="hq-tag-leftbttn" onClick={prevClickHandler}>
-          <PreviousOutline size={24} />
+    <Theme theme="g90">
+      <Tile className="hq-tag-tile">
+        <div className="hq-tag-row">
+          <div className="hq-tag-leftbttn" onClick={prevClickHandler}>
+            <PreviousOutline size={24} />
+          </div>
+          <div className="hq-tag-box">
+            {props.tags &&
+              props.tags.map((t) => (
+                <Tag
+                  type={getColor(t.class)}
+                  key={t.tag}
+                  id={t.tag}
+                  onClick={() => clickHandler(t.tag)}
+                >
+                  <span className={milestoneClass(t.class)}>@{t.tag}</span>
+                </Tag>
+              ))}
+          </div>
+          <div className="hq-tag-rightbttn" onClick={nextClickHandler}>
+            <NextOutline size={24} />
+          </div>
         </div>
-        <div className="hq-tag-box">
-          {props.tags &&
-            props.tags.map((t) => (
-              <Tag
-                type={getColor(t.class)}
-                key={t.tag}
-                id={t.tag}
-                title={t.tag}
-                onClick={() => clickHandler(t.tag)}
-              >
-                <span className={milestoneClass(t.class)}>@{t.tag}</span>
-              </Tag>
-            ))}
-        </div>
-        <div className="hq-tag-rightbttn" onClick={nextClickHandler}>
-          <NextOutline size={24} />
-        </div>
-      </div>
-    </Tile>
+      </Tile>
+    </Theme>
   );
 };
 

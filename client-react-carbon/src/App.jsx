@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import "./App.scss";
 import { Loading } from "@carbon/react";
-import { HqPageAll, HqPageTag, HqPageSwagger } from "./pages";
-import { HqFooter, HqHeader, HqTagList } from "./components";
-import { useInterval } from "./utils/useInterval";
+import { HqPageAll, HqPageTag, HqPageSwagger } from "/src/pages";
+import { HqFooter, HqHeader, HqTagList } from "/src/components";
+import { useInterval } from "/src/utils/useInterval";
 import Headroom from "react-headroom";
-import apiData from "./test/mock-api-data";
+import apiData from "/src/test/mock-api-data";
 
 function App() {
   
@@ -17,7 +17,7 @@ function App() {
     React.useState("1970-01-01");
 
   const makeRequest = () => {
-    if (process.env.REACT_APP_DEMO !== "true") {
+    if (import.meta.env.VITE_DEMO !== "true") {
       fetch("/todos/filelastupdated")
         .then((res) => res.json())
         .then((currentSourceTimestamp) => {
@@ -37,7 +37,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (process.env.REACT_APP_DEMO === "true") {
+    if (import.meta.env.VITE_DEMO === "true") {
       setData(apiData);
       setIsLoading(false);
     }
@@ -52,7 +52,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div>      
       <Headroom>
         <HqHeader userName={data.whoami} menuLinks={data.menuLinks} />
         <HqTagList tags={data.tags} />
@@ -64,7 +64,7 @@ function App() {
       </Routes>
       <HqFooter
         pageUpdated={
-          process.env.REACT_APP_DEMO !== "true" ? data.pageupdated : new Date().toISOString()
+          import.meta.env.VITE_DEMO !== "true" ? data.pageupdated : new Date().toISOString()
         }
         fileUpdated={data.fileupdated}
       />

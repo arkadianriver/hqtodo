@@ -1,10 +1,10 @@
 import React from "react";
 import "./HqPageTag.css";
-import { useParams } from "react-router-dom";
-import { Loading, Grid, Row, Column, Content } from "@carbon/react";
-import { ApexchartsBar, HqEntryOpen, HqEntryClosed } from "../components";
-import { slugify } from "../utils/slugify";
-import { getTagData } from "../utils/getTagData";
+import { useParams } from "react-router";
+import { Loading, Grid, Column, Content, Theme } from "@carbon/react";
+import { ApexchartsBar, HqEntryOpen, HqEntryClosed } from "/src/components";
+import { slugify } from "/src/utils/slugify";
+import { getTagData } from "/src/utils/getTagData";
 
 const HqPageTag = (props) => {
   const { tag } = useParams();
@@ -36,9 +36,9 @@ const HqPageTag = (props) => {
   };
 
   return (
+    <Theme theme="g10">
     <Grid>
-      <Row>
-        <Column>
+        <Column lg={16} md={8} sm={4}>
           <Content className="tag-page-content">
             <h1 className="tag-title">
               <div>@{tag}</div>
@@ -125,8 +125,8 @@ const HqPageTag = (props) => {
             )}
           </Content>
         </Column>
-      </Row>
     </Grid>
+    </Theme>
   );
 };
 

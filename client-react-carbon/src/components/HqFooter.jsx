@@ -1,5 +1,5 @@
 import "./HqFooter.css";
-import { Row, Column, Grid } from "@carbon/react";
+import { Row, Column, Grid, Theme } from "@carbon/react";
 import { HashLink as Link } from "react-router-hash-link";
 
 const HqFooter = (props) => {
@@ -14,19 +14,16 @@ const HqFooter = (props) => {
         {linktext}
       </a>
     ) : (
-      <Link
-        className="smaller-link"
-        to={href}
-      >
+      <Link className="smaller-link" to={href}>
         {linktext}
       </Link>
     );
   };
 
   return (
-    <Grid>
-      <Row>
-        <Column>
+    <Theme theme="g10">
+      <Grid>
+        <Column lg={16} md={8} sm={4}>
           <hr />
           <div className="hq-footer">
             <p>
@@ -50,8 +47,8 @@ const HqFooter = (props) => {
             </p>
           </div>
         </Column>
-      </Row>
-    </Grid>
+      </Grid>
+    </Theme>
   );
 };
 
