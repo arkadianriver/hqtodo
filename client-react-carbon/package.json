@@ -1,13 +1,10 @@
 {
   "name": "client-react-carbon",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@carbon/react": "^1.101.0",
     "@carbon/themes": "^11.68.0",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
     "apexcharts": "^5.6.0",
     "luxon": "^3.7.2",
     "mermaid": "^11.12.3",
@@ -18,8 +15,7 @@
     "react-router": "^7.13.0",
     "react-router-hash-link": "^2.4.3",
     "sass": "^1.97.3",
-    "swagger-ui-react": "^5.31.2",
-    "web-vitals": "^5.1.0"
+    "swagger-ui-react": "^5.31.2"
   },
   "scripts": {
     "start": "node setupBuild.js && VITE_DEMO=false vite",
@@ -37,14 +33,7 @@
   },
   "proxy": "http://localhost:3000",
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
     "vite": "^7.3.1"
   }
 }
