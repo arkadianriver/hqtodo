@@ -210,7 +210,7 @@ exports.parseRawTodos = () => {
           }
           if (isBlocker) {
             record.hover = _handleBlockers(tags);
-            record.startdate = moment().format('YYYY-MM-DDTHH:mm:SS');
+            record.startdate = moment().format('YYYY-MM-DDTHH:mm:ss');
             issues.blockers.push(record);
           } else {
             issues.open[status][owners[owner]].push(record);
