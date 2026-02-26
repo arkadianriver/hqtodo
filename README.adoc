@@ -53,7 +53,7 @@ The hqTodo app exposes those links, too.
 
 == Running the app
 
-*Prereq:* NodeJS v12 or higher.
+*Prereq:* NodeJS v24 or higher.
 
 . Set things up.
 .. Copy the `config/default.json` file to `config/production.json`
@@ -231,6 +231,29 @@ I personally link to pages published with link:https://dendron.so[Dendron],
 because I like to also use VS Code for my note taking,
 and Dendron has a cool feature where you can publish Notes to a web site.
 
+=== A support section
+
+Like interrupts, support questions disrupt your velocity, so you might want to
+keep track of them as well. To do so, Add a `Support:` project with todo items.
+For these items, use the TODO+ extension's time tracking feature:
+
+- kbd:[Super+S] to start the timer
+- kbd:[Super+D] to stop the timer and mark the item done
+
+When you archive your todos, the support items will have the following form,
+and the time you spent on them is graphed with a yellow line in the UI.
+
+[source,bash]
+----
+  ✔ ticket324: Help debug website3 @started(2023-08-20 15:46) @done(2023-08-20 16:46) @lasted(1h) @project(Support)
+  ✔ ticket323: Help debug website2 @started(2023-08-20 13:56) @done(2023-08-20 14:56) @lasted(1h) @project(Support)
+  ✔ ticket322: Help debug website1 @started(2023-08-19 10:56) @done(2023-08-19 11:26) @lasted(30m) @project(Support)
+----
+
+Items of that form are exposed with following endpoints as well:
+
+- `/todos/supportdata`
+- `/todos/supportondate/YYYY-MM-DD`
 
 == What's next?
 
