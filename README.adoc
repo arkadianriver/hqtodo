@@ -169,7 +169,7 @@ For the most part,
 link:https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus#usage[update your TODO file]
 as you normally would as described in the TODO+ Readme documentation.
 There are a few conventions to use for the app to work.
-link:TODO[See the sample `TODO` file]
+link:todo/TODO[See the sample `TODO` file]
 as an example.
 
 Everything in your TODO file is ignored except ...
