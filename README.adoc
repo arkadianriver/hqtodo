@@ -32,6 +32,14 @@ pass:[<p align="center"><a href="https://arkadianriver.github.io/hqtodo/" target
 pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img src="readme3.png" width="600px"/><img src="readme2.png" width="600px"/></p>]
 ////
 
+I have a complete picture of where I'm at, all from one launchpad,
+and with little mental effort because of the progressive disclosure model,
+from
+front page (active daily tasks) →
+optional task hyperlinks (to task details) →
+project pages (project-specific overview of tasks) →
+project details pages (how project tasks fulfill each project vision).
+
 == Features
 
 - Open items and their estimates are used to display a
@@ -51,7 +59,53 @@ link:https://marketplace.visualstudio.com/items?itemName=ragnoroct.linkme[Link M
 to include shortcuts to all those other resources in my Todo list.
 The hqTodo app exposes those links, too.
 
+
 == Running the app
+
+=== Option 1: Using Docker Compose (recommended)
+
+. Create your own TODO file anywhere on the file system the app can access,
+a local folder or in a shared Cloud or Network mounted folder.
+. Copy the `config/default.json` file to a `production.json` file anywhere the app can access,
+or leave it in the config folder.
+Update the JSON file with your information.
+(For information on setting the Linkme links, watch the video.)
+Don't change the `todoFile` setting in the production.json file when running in a container
+because `todo/TODO` is the path as referenced from inside the container.
+.  Copy `compose.sample.yml` to `compose.yml`, and in `compose.yml`, make the following changes:
++
+`port:`::
+Set the number before the colon to the port you want to use in the URL on your server. (Or leave the default of 3000.)
++
+`volumes:`::
+- Set the path before the colon to the folder where your `TODO` file lives.
+- Set the path before the colon to the folder where your `production.json` file lives (can be the same folder your TODO file is in).
+.  https://docs.docker.com/engine/install/::[Install Docker].
+.  Ensure Docker is set to run on system startup. For example, on Ubuntu run:
++
+[source, bash]
+----
+systemctl enable docker
+----
+. Run Docker Compose as follows to build the image and start a container in the background.
++
+[source, bash]
+----
+docker compose up -d
+----
++
+The `restart: always` setting in the compose file tells Docker
+to run the container on system startup.
+
+As you change your TODO file, the app re-reads it every 40 seconds.
+But, if you change anything in the config file,
+you'll need to restart the container:
+[source, bash]
+----
+docker compose restart
+----
+
+=== Option 2: Using NodeJS on your computer
 
 *Prereq:* NodeJS v24 or higher.
 
@@ -107,11 +161,11 @@ sudo systemctl enable hqtodo
 ----
 ////
 
-== Maintaining your todo file
+== Maintaining your TODO file
 
 For the most part,
 link:https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus#usage[update your TODO file]
-as you normally would.
+as you normally would as described in the TODO+ Readme documentation.
 There are a few conventions to use for the app to work.
 link:TODO[See the sample `TODO` file]
 as an example.

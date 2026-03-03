@@ -10,6 +10,7 @@ const doc = new expressDoc();
 
 // debug helpers
 const pp = (data) => "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+const clientpath = process.env.CLIENT_PATH ? process.env.CLIENT_PATH : 'client-react-carbon/build';
 
 /**
  * All the routes, which are currently for debugging purposes except the default
@@ -299,7 +300,7 @@ doc.setRoute(
   "All other routes handled by the client application.",
   (req, res) => {
     res.sendFile(
-      path.resolve(__dirname, "../client-react-carbon/build", "index.html")
+      path.resolve(__dirname, `../${clientpath}`, "index.html")
     );
   }
 );

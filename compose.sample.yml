@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./todo:/app/todo
+      - ./config:/app/config
+    restart: always

@@ -3,5 +3,6 @@
 case $1 in
   --debug) DEBUG=express:* npm start ;;
     --dev) DEBUG=hqtodo:* npm start ;;
+ --docker) CLIENT_PATH=build NODE_ENV=production npm start ;;
         *) NODE_ENV=production npm start ;;
 esac

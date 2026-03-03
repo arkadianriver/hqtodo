@@ -4,6 +4,7 @@
   "author": "Gary Faircloth",
   "scripts": {
     "start": "node ./bin/www",
+    "docker-start": "CLIENT_PATH=build NODE_ENV=production node ./bin/www",
     "test": "NODE_ENV=test mocha test/test*.js",
     "nyan": "NODE_ENV=test mocha -R nyan test/test*.js",
     "gh-pages": "cd client-react-carbon && npm run demo-build && cd .. && MY_ENV=gh-pages node ./bin/mkpage"
@@ -29,6 +30,7 @@
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "http-errors": "^2.0.1",
+    "lodash": "^4.17.23",
     "moment": "^2.30.1",
     "moment-business-days": "^1.2.0",
     "morgan": "^1.10.1"
@@ -38,7 +40,6 @@
   },
   "devDependencies": {
     "chai": "^6.2.2",
-    "lodash": "^4.17.23",
     "mocha": "^11.7.5",
     "sinon": "^21.0.1"
   }

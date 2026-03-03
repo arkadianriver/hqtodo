@@ -2,11 +2,19 @@
   "yourName": "<Your Name>",
   "workHoursPerDay": 8,
   "storyPointsPerDay": 2,
-  "todoFile": "TODO",
+  "todoFile": "todo/TODO",
   "menuLinks": [
     {
       "title": "Optional external link",
       "link": "https://example.com"
+    },
+    {
+      "title": "Doing Today",
+      "link": "http://localhost:3000/todos/today"
+    },
+    {
+      "title": "Done Yesterday",
+      "link": "http://localhost:3000/todos/yesterday"
     },
     {
       "title": "",

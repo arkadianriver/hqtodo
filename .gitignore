@@ -11,3 +11,5 @@ test/*
 !test/test.js
 /foo
 *.bak
+
+compose.yml
