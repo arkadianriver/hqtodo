@@ -40,6 +40,8 @@ optional task hyperlinks (to task details) →
 project pages (project-specific overview of tasks) →
 project details pages (how project tasks fulfill each project vision).
 
+toc::[]
+
 == Features
 
 - Open items and their estimates are used to display a
@@ -80,7 +82,7 @@ Set the number before the colon to the port you want to use in the URL on your s
 `volumes:`::
 - Set the path before the colon to the folder where your `TODO` file lives.
 - Set the path before the colon to the folder where your `production.json` file lives (can be the same folder your TODO file is in).
-.  https://docs.docker.com/engine/install/::[Install Docker].
+.  link:https://docs.docker.com/engine/install/[Install Docker].
 .  Ensure Docker is set to run on system startup. For example, on Ubuntu run:
 +
 [source, bash]
