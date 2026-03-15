@@ -4,7 +4,6 @@
   "author": "Gary Faircloth",
   "scripts": {
     "start": "node ./bin/www",
-    "docker-start": "CLIENT_PATH=build NODE_ENV=production node ./bin/www",
     "test": "NODE_ENV=test mocha test/test*.js",
     "nyan": "NODE_ENV=test mocha -R nyan test/test*.js",
     "gh-pages": "cd client-react-carbon && npm run demo-build && cd .. && MY_ENV=gh-pages node ./bin/mkpage"

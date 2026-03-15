@@ -9,10 +9,12 @@ RUN npm run build
 # Stage 2: Serve the app with Express
 FROM node:24-alpine
 WORKDIR /app
-COPY --from=build /app/build ./build
 COPY package.json package.json
-RUN npm install && rm -rf /app/client-react-carbon
+RUN npm install
 COPY ./ ./
+RUN rm -rf ./client-react-carbon && mkdir ./client-react-carbon
+COPY --from=build /app/build ./client-react-carbon/build
 EXPOSE 3000
-CMD ["npm", "run", "docker-start"]
+ENV NODE_ENV production
+CMD ["npm", "start"]
 
