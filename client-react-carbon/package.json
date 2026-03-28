@@ -15,7 +15,7 @@
     "react-router": "^7.13.0",
     "react-router-hash-link": "^2.4.3",
     "sass": "^1.97.3",
-    "swagger-ui-react": "^5.31.2"
+    "swagger-ui-react": "^5.32.1"
   },
   "scripts": {
     "start": "node setupBuild.js && VITE_DEMO=false vite",
