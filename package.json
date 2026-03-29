@@ -1,6 +1,6 @@
 {
   "name": "hqtodo",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Gary Faircloth",
   "scripts": {
     "start": "node ./bin/www",
