@@ -16,16 +16,23 @@ endif::[]
 pass:[<p align="center"><a href="https://github.com/arkadianriver/hqtodo/actions"><img src="https://github.com/arkadianriver/hqtodo/workflows/build/badge.svg" alt="build status"/></a></p> <!-- <img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/> -->]
 
 If you enjoy working from the keyboard (keyboard shortcuts, vim, Emacs Org mode)
-you might like hqTodo to present your complete agile workflow from one easily editable Todo list in VS Code.
-Rather than drag cards around and click and open various windows,
-use Fabio Spampinato's
+you might like Fabio Spampinato's VS Code
 link:https://github.com/fabiospampinato/vscode-todo-plus[TODO+ extension]
-to capture status, categories, and estimates as individual todo items in a text file,
-with keyboard shortcuts to prioritize and close issues.
-His extension is awesome.
+to capture todo items in a text file, with keyboard shortcuts to prioritize and close items.
+You can provide tags to each list item to indicate status, estimates, and categories.
+And because it's all in one central list, it's second nature to add items to it,
+ensuring you don't lose track of a thing.
+His extension is awesome!
 
-The li'l hqTodo web app in this repository further visualizes that todo information
-for you (and your team if you want).
+But you can get lost staring at one long list.
+The list is a very fast and efficient way to enter and edit information.
+But to grok and act on the tasks, I needed something more.
+
+That's why I created this li'l hqTodo web app.
+It further organizes the task information into manageable areas.
+It provides an easy visual for you (and your team if you want).
+The hqTodo app uses the provided tags to fit the information into an agile workflow.
+I've been using this method since about 2018 and much prefer it to dragging cards around.
 
 pass:[<p align="center"><a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><img src="readme.gif" alt="view a sample"/></a></p>]
 
