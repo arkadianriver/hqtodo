@@ -15,16 +15,17 @@ endif::[]
 
 pass:[<p align="center"><a href="https://github.com/arkadianriver/hqtodo/actions"><img src="https://github.com/arkadianriver/hqtodo/workflows/build/badge.svg" alt="build status"/></a></p> <!-- <img src="https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg" alt="Work in Progress"/> -->]
 
-If you love keyboard shortcuts and things like Org mode,
+If you enjoy working from the keyboard (keyboard shortcuts, vim, Emacs Org mode)
 you might like hqTodo to present your complete agile workflow from one easily editable Todo list in VS Code.
 Rather than drag cards around and click and open various windows,
 use Fabio Spampinato's
 link:https://github.com/fabiospampinato/vscode-todo-plus[TODO+ extension]
 to capture status, categories, and estimates as individual todo items in a text file,
 with keyboard shortcuts to prioritize and close issues.
-His extension is awesome, and with this li'l hqTodo web app,
-all that information is summarized in an easily consumable report for you
-(and your team if you want).
+His extension is awesome.
+
+The li'l hqTodo web app in this repository further visualizes that todo information
+for you (and your team if you want).
 
 pass:[<p align="center"><a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><img src="readme.gif" alt="view a sample"/></a></p>]
 
@@ -32,13 +33,18 @@ pass:[<p align="center"><a href="https://arkadianriver.github.io/hqtodo/" target
 pass:[<p>&nbsp;</p><p align="center"><img src="readme.png" width="600px"/><img src="readme3.png" width="600px"/><img src="readme2.png" width="600px"/></p>]
 ////
 
-I have a complete picture of where I'm at, all from one launchpad,
-and with little mental effort because of the progressive disclosure model,
-from
-front page (active daily tasks) →
-optional task hyperlinks (to task details) →
-project pages (project-specific overview of tasks) →
-project details pages (how project tasks fulfill each project vision).
+The app provides a complete picture of where you're at, all from one launchpad.
+Using progressive disclosure, it provides you information in consumable chunks:
+
+[verse]
+____
+From front page (ordered and categorized overview of all tasks)
+  to project pages (focus on project-specific tasks)
+    to project details pages (how project tasks fulfill each project vision)
+
+From front page
+  to optional task hyperlinks (to details elsewhere)
+____
 
 toc::[]
 
