@@ -32,7 +32,7 @@ That's why I created this li'l hqTodo web app.
 It further organizes the task information into manageable areas.
 It provides an easy visual for you (and your team if you want).
 The hqTodo app uses the provided tags to fit the information into an agile workflow.
-I've been using this method since about 2018 and much prefer it to dragging cards around.
+I've been using this method since about 2018 and much prefer it to dragging cards around a Kanban board.
 
 pass:[<p align="center"><a href="https://arkadianriver.github.io/hqtodo/" target="_blank"><img src="readme.gif" alt="view a sample"/></a></p>]
 
